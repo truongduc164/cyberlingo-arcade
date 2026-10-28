@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="CyberArcade" />
   <meta name="theme-color" content="#060b18" />
-  <title>CyberLingo Arcade PRO v3.0 — Top 10 Game Kinh Điển Học Tiếng Trung</title>
+  <title>CyberLingo Arcade PRO v4.0 — Top 10 Game Kinh Điển Lồng Tiếng Trung (AAA Retina + SRS)</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="icon-192.png" />
@@ -54,6 +54,40 @@
       background: linear-gradient(180deg, rgba(10, 18, 36, 0.96) 0%, rgba(5, 9, 20, 0.99) 100%);
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.75);
       overflow: hidden;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    #app-shell.fever-mode {
+      box-shadow: inset 0 0 28px rgba(250, 204, 21, 0.32), 0 0 42px rgba(56, 189, 248, 0.5);
+      outline: 2px solid rgba(250, 204, 21, 0.72);
+      outline-offset: -2px;
+    }
+
+    @keyframes calloutPop {
+      0% { transform: translate(-50%, 8px) scale(0.65); opacity: 0; }
+      22% { transform: translate(-50%, -6px) scale(1.1); opacity: 1; }
+      75% { transform: translate(-50%, -26px) scale(1.0); opacity: 1; }
+      100% { transform: translate(-50%, -44px) scale(0.94); opacity: 0; }
+    }
+
+    .floating-callout {
+      position: absolute;
+      top: 118px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 55;
+      pointer-events: none;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      color: #fef08a;
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.92), rgba(217, 119, 6, 0.92));
+      border: 1.5px solid #fde047;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.55);
+      white-space: nowrap;
+      animation: calloutPop 0.82s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     @keyframes screenShake {
@@ -118,6 +152,107 @@
       margin: 2px 0 0;
       font-size: 11.5px;
       color: var(--text-muted);
+    }
+
+    /* Streak, Daily Goal Ring & Quests Hub */
+    .streak-quest-card {
+      background: linear-gradient(145deg, rgba(20, 32, 58, 0.94), rgba(12, 19, 36, 0.97));
+      border: 1px solid rgba(56, 189, 248, 0.36);
+      border-radius: 15px;
+      padding: 8px 10px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 6px 18px rgba(0, 0, 0, 0.38);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .sq-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .streak-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      border-radius: 10px;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(251, 146, 60, 0.48);
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #fed7aa;
+    }
+
+    .goal-ring-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #d1fae5;
+    }
+
+    .goal-ring {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 0deg, rgba(255,255,255,0.12) 0deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .goal-ring-inner {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #0d1629;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nb-open-btn {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border: 1px solid rgba(196, 181, 253, 0.55);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 5px 9px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.38);
+    }
+
+    .quests-strip {
+      display: flex;
+      gap: 5px;
+      justify-content: space-between;
+    }
+
+    .quest-pill {
+      flex: 1;
+      text-align: center;
+      font-size: 9.8px;
+      font-weight: 800;
+      padding: 4px 4px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .quest-pill.done {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: rgba(52, 211, 153, 0.6);
+      color: #6ee7b7;
     }
 
     /* Rank & EXP Strip */
@@ -195,13 +330,13 @@
 
     .pill-btn {
       flex: 1;
-      min-width: 86px;
+      min-width: 74px;
       background: rgba(30, 41, 59, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #cbd5e1;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 7px;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 6px 5px;
       border-radius: 10px;
       cursor: pointer;
       text-align: center;
@@ -213,6 +348,12 @@
       color: #fff;
       border-color: #38bdf8;
       box-shadow: 0 3px 10px rgba(14, 165, 233, 0.4);
+    }
+
+    #src-srs.active {
+      background: linear-gradient(135deg, #e11d48, #d97706);
+      border-color: #fde047;
+      box-shadow: 0 3px 12px rgba(244, 63, 94, 0.45);
     }
 
     .daily-digest-line {
@@ -287,8 +428,8 @@
 
     .game-card {
       position: relative;
-      background: linear-gradient(160deg, rgba(20, 32, 58, 0.95), rgba(11, 18, 34, 0.96));
-      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      background: linear-gradient(160deg, rgba(22, 35, 64, 0.96), rgba(10, 17, 34, 0.98));
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
       border-radius: 17px;
       padding: 10px 10px;
       display: flex;
@@ -296,8 +437,8 @@
       justify-content: space-between;
       gap: 5px;
       cursor: pointer;
-      transition: transform 0.15s;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.16), 0 6px 16px rgba(0, 0, 0, 0.45);
       text-align: left;
     }
 
@@ -679,7 +820,7 @@
 
     .onet-tile {
       position: relative;
-      border-radius: 13px;
+      border-radius: 14px;
       padding: 5px 4px;
       display: flex;
       flex-direction: column;
@@ -690,6 +831,15 @@
       transition: transform 0.12s, box-shadow 0.15s, opacity 0.2s;
       overflow: hidden;
       word-break: break-word;
+      box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.42);
+    }
+
+    .tile-spk-dot {
+      position: absolute;
+      top: 3px;
+      right: 5px;
+      font-size: 9px;
+      opacity: 0.65;
     }
 
     .onet-tile.type-zh {
@@ -767,12 +917,39 @@
 
     .whac-speaker-card {
       text-align: center;
-      padding: 10px;
+      padding: 10px 12px;
       border-radius: 16px;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.18), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(245, 158, 11, 0.45);
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.22), rgba(15, 23, 42, 0.94));
+      border: 1.5px solid rgba(245, 158, 11, 0.52);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 6px 18px rgba(0, 0, 0, 0.4);
       cursor: pointer;
     }
+
+    @keyframes eqPulse {
+      0%, 100% { transform: scaleY(0.35); opacity: 0.65; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    .eq-bars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 15px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    .eq-bar {
+      width: 3.5px;
+      height: 14px;
+      border-radius: 99px;
+      background: linear-gradient(180deg, #fde047, #38bdf8);
+      animation: eqPulse 0.65s ease-in-out infinite;
+    }
+    .eq-bar:nth-child(2) { animation-delay: 0.12s; }
+    .eq-bar:nth-child(3) { animation-delay: 0.24s; }
+    .eq-bar:nth-child(4) { animation-delay: 0.16s; }
+    .eq-bar:nth-child(5) { animation-delay: 0.06s; }
 
     .whac-wave {
       font-size: 15px;
@@ -917,6 +1094,121 @@
       transform: scale(0.94);
     }
 
+    /* Pause Overlay & Flashcard Notebook Modal */
+    .hud-pause {
+      background: rgba(30, 41, 59, 0.92);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      color: #fde047;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 9px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #pause-overlay {
+      position: absolute;
+      inset: 8px;
+      z-index: 42;
+      border-radius: 18px;
+      background: rgba(6, 11, 24, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #modal-notebook {
+      position: absolute;
+      inset: 0;
+      z-index: 55;
+      background: rgba(4, 8, 18, 0.9);
+      backdrop-filter: blur(9px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .notebook-card {
+      width: 100%;
+      max-width: 390px;
+      max-height: 84dvh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(165deg, #111c35, #080e1d);
+      border: 1.5px solid rgba(168, 85, 247, 0.55);
+      border-radius: 22px;
+      padding: 15px 14px;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.8);
+    }
+
+    .nb-tabs {
+      display: flex;
+      gap: 6px;
+      margin: 8px 0 10px;
+    }
+
+    .nb-tab {
+      flex: 1;
+      padding: 6px 6px;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .nb-tab.active {
+      background: linear-gradient(135deg, #6d28d9, #2563eb);
+      border-color: #c084fc;
+      color: #fff;
+    }
+
+    .nb-body {
+      flex: 1;
+      min-height: 180px;
+      max-height: 52dvh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding-right: 2px;
+      margin-bottom: 12px;
+    }
+
+    .nb-flashcard {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 13px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .nb-speak-btn {
+      flex-shrink: 0;
+      background: rgba(14, 165, 233, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: #7dd3fc;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
     /* Result Modal */
     #modal-result {
       position: absolute;
@@ -1016,9 +1308,26 @@
     <!-- ================= ARCADE LOBBY ================= -->
     <section id="screen-lobby">
       <div class="lobby-header">
-        <div class="brand-pill">🏆 DEAN OPTIMIZE • TOP 10 DEFINITIVE v3.0</div>
+        <div class="brand-pill">🏆 DEAN OPTIMIZE • AAA RETINA + SMART SRS v4.0</div>
         <h1 class="lobby-title">TOP 10 GAME KINH ĐIỂN</h1>
-        <p class="lobby-sub">Tuyển Tập 10 Huyền Thoại Lồng Tiếng Trung Thực Chiến</p>
+        <p class="lobby-sub">Đồ Họa Retina Sắc Nét • Ôn Từ Hay Sai Tự Động • Giọng Bản Xứ</p>
+      </div>
+
+      <!-- Daily Streak, Goal Ring & Quests Hub -->
+      <div class="streak-quest-card">
+        <div class="sq-top-row">
+          <div class="streak-pill">🔥 <span id="ui-streak-num">1 ngày</span></div>
+          <div class="goal-ring-wrap">
+            <div class="goal-ring" id="ui-goal-ring"><div class="goal-ring-inner">🎯</div></div>
+            <span id="ui-goal-num">0/15 từ</span>
+          </div>
+          <button class="nb-open-btn" onclick="openNotebookModal('mistakes')">📖 Sổ Tay</button>
+        </div>
+        <div class="quests-strip" id="daily-quests-row">
+          <span class="quest-pill">⬜ 12 Từ (0/12)</span>
+          <span class="quest-pill">⬜ Fever x5 (1/5)</span>
+          <span class="quest-pill">⬜ 2 Trò (0/2)</span>
+        </div>
       </div>
 
       <!-- Player Rank & EXP -->
@@ -1035,13 +1344,14 @@
       <!-- Data Source & Live Sync -->
       <div class="control-box">
         <div class="box-label">
-          <span>📚 NGUỒN BÀI HỌC</span>
+          <span>📚 NGUỒN BÀI HỌC & SRS</span>
           <span class="live-badge" id="sync-status-badge"><span class="live-dot"></span> Tự động đồng bộ 17:30</span>
         </div>
         <div class="pill-row">
           <button class="pill-btn active" id="src-daily" onclick="setSourceMode('daily')">📅 Nhật Ký AI</button>
-          <button class="pill-btn" id="src-factory" onclick="setSourceMode('factory')">🏭 Kho Xưởng & QC</button>
-          <button class="pill-btn" id="src-all" onclick="setSourceMode('all')">🔥 Tất Cả (190+)</button>
+          <button class="pill-btn" id="src-factory" onclick="setSourceMode('factory')">🏭 Kho Xưởng</button>
+          <button class="pill-btn" id="src-all" onclick="setSourceMode('all')">🔥 Tất Cả</button>
+          <button class="pill-btn" id="src-srs" onclick="setSourceMode('srs')">🎯 Hay Sai (0)</button>
         </div>
         <div class="daily-digest-line" id="lobby-digest-line">
           Đang tải chủ đề bài học AI mới nhất...
@@ -1051,6 +1361,7 @@
           <button class="mini-chip on" id="chip-pace" onclick="cycleGamePace()">⚡ Nhịp: Chuẩn</button>
           <button class="mini-chip on" id="chip-pinyin" onclick="togglePinyin()">🔤 Pinyin: BẬT</button>
           <button class="mini-chip on" id="chip-speed" onclick="cycleVoiceSpeed()">🗣️ Đọc: 1.0x</button>
+          <button class="mini-chip" id="chip-bgm" onclick="toggleBgm()">🎵 Nhạc: TẮT</button>
           <button class="mini-chip" onclick="testLobbyVoice()">🔊 Loa</button>
         </div>
       </div>
@@ -1191,7 +1502,10 @@
           <span class="hud-combo" id="hud-combo">🔥 x1</span>
           <span class="hud-lives" id="hud-lives">❤️❤️❤️</span>
         </div>
-        <button class="hud-replay" onclick="replayCurrentPromptVoice()">🔊 Nghe</button>
+        <div style="display:flex;gap:5px;align-items:center;">
+          <button class="hud-pause" id="btn-pause" onclick="togglePauseGame()">⏸</button>
+          <button class="hud-replay" onclick="replayCurrentPromptVoice()">🔊</button>
+        </div>
       </div>
 
       <div class="mission-banner">
@@ -1207,6 +1521,17 @@
       </div>
 
       <div id="game-arena">
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" class="hidden">
+          <div style="font-size:34px;">⏸️</div>
+          <div style="font-size:18px;font-weight:900;color:#fde047;">ĐANG TẠM DỪNG</div>
+          <div style="font-size:12px;color:#cbd5e1;">Nghỉ tay chút xíu hoặc nghe lại phát âm đề bài!</div>
+          <div style="display:flex;gap:10px;width:100%;max-width:270px;margin-top:4px;">
+            <button class="btn-secondary" onclick="exitToLobby()">⬅ Về Sảnh</button>
+            <button class="btn-primary" onclick="togglePauseGame()">▶ Tiếp Tục</button>
+          </div>
+        </div>
+
         <!-- View 9: Gold Miner -->
         <div id="view-miner" class="canvas-view-full hidden">
           <canvas id="canvas-miner" class="canvas-fill"></canvas>
@@ -1265,7 +1590,12 @@
         <!-- View 2: Whac-A-Voice -->
         <div id="view-whac" class="hidden">
           <div class="whac-speaker-card" onclick="replayCurrentPromptVoice()">
-            <div class="whac-wave" id="whac-wave">🔊 Bấm để nghe lại phát âm</div>
+            <div class="whac-wave">
+              <span class="eq-bars" id="whac-eq">
+                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+              </span>
+              <span id="whac-wave">Đang phát giọng chuẩn... (Chạm nghe lại)</span>
+            </div>
             <div class="whac-reveal" id="whac-reveal">？？？ (Nghe tai đoán nghĩa)</div>
           </div>
           <div class="whac-grid" id="whac-grid"></div>
@@ -1308,11 +1638,35 @@
       </div>
     </div>
 
+    <!-- ================= FLASHCARD NOTEBOOK & SRS MODAL ================= -->
+    <div id="modal-notebook" class="hidden">
+      <div class="notebook-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:16px;font-weight:900;color:#fde047;">📖 Sổ Tay Từ Vựng & SRS</div>
+            <div style="font-size:10.5px;color:#94a3b8;" id="nb-count-badge">0 thuộc • 0 cần ôn</div>
+          </div>
+          <button class="hud-back" onclick="closeNotebookModal()">✖ Đóng</button>
+        </div>
+        <div class="nb-tabs">
+          <button class="nb-tab active" id="nbtab-mistakes" onclick="switchNotebookTab('mistakes')">🎯 Hay Sai</button>
+          <button class="nb-tab" id="nbtab-mastered" onclick="switchNotebookTab('mastered')">⭐ Đã Thuộc</button>
+          <button class="nb-tab" id="nbtab-all" onclick="switchNotebookTab('all')">📚 Kho Từ</button>
+        </div>
+        <div class="nb-body" id="notebook-list-body"></div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-secondary" onclick="closeNotebookModal()">Đóng</button>
+          <button class="btn-primary" onclick="closeNotebookModal(); setSourceMode('srs'); showToast('🎯 Đã bật Chế Độ Phục Thù Từ Hay Sai!');">🔥 Luyện Từ Sai</button>
+        </div>
+      </div>
+    </div>
+
     <div id="toast-box" class="toast-msg hidden"></div>
   </div>
 
   <script src="daily_timeline_data.js"></script>
   <script src="core_lingo_bank.js"></script>
+  <script src="arcade_core_v4.js"></script>
   <script>
     if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
       CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1345,6 +1699,8 @@
     let voiceSpeed = 1.0;
     let sourceMode = 'daily';
     let gamePace = 'normal'; // 'chill' | 'normal' | 'pro'
+    let bgmEnabled = false;
+    window.isGamePaused = false;
 
     function getSpeedFactor() {
       if (gamePace === 'chill') return 0.76;
@@ -1462,6 +1818,13 @@
         this.tone(660, 0.09, 'triangle', 0.15);
         setTimeout(() => this.tone(990, 0.18, 'triangle', 0.16), 70);
       }
+      sfxCombo(comboLevel = 1) {
+        const step = Math.min(10, Math.max(1, comboLevel)) - 1;
+        const scale = [523.25, 587.33, 659.25, 783.99, 880.0, 987.77, 1046.5, 1174.66, 1318.5, 1567.98];
+        const f1 = scale[step];
+        this.tone(f1, 0.085, 'triangle', 0.15);
+        setTimeout(() => this.tone(f1 * 1.25, 0.17, 'triangle', 0.16), 65);
+      }
       sfxFanfare() {
         [523, 659, 784, 1046].forEach((f, i) => {
           setTimeout(() => this.tone(f, 0.16, 'triangle', 0.16), i * 80);
@@ -1469,6 +1832,25 @@
       }
       sfxLaser() { this.tone(760, 0.055, 'sawtooth', 0.026, 260); }
       sfxWrong() { this.tone(190, 0.22, 'sawtooth', 0.14, 110); }
+
+      startBgm() {
+        this.stopBgm();
+        const notes = [261.63, 329.63, 392.0, 523.25, 392.0, 329.63, 293.66, 392.0];
+        let step = 0;
+        this._bgmTimer = setInterval(() => {
+          if (!bgmEnabled || window.isGamePaused || !activeGame) return;
+          if (!this.player.paused) return;
+          this.tone(notes[step % notes.length], 0.22, 'sine', 0.025);
+          step++;
+        }, 380);
+      }
+
+      stopBgm() {
+        if (this._bgmTimer) {
+          clearInterval(this._bgmTimer);
+          this._bgmTimer = null;
+        }
+      }
 
       speakChinese(zhText, audioRelPath) {
         this.unlock();
@@ -1551,6 +1933,30 @@
       const coreVocab = window.FULL_VOCAB_DATABASE || [];
       const coreDlgs = window.FACTORY_DIALOGUES || [];
 
+      const seen = new Set();
+      const mergedV = [];
+      for (const item of [...dailyVocab, ...coreVocab]) {
+        if (item && item.zh && !seen.has(item.zh)) {
+          seen.add(item.zh);
+          mergedV.push(item);
+        }
+      }
+      const mergedDlgs = [...dailyDlgs, ...coreDlgs];
+
+      if (sourceMode === 'srs') {
+        const srs = typeof getSrsStats === 'function' ? getSrsStats() : { mistakes: [] };
+        const pool = [...srs.mistakes];
+        const have = new Set(pool.map((x) => x.zh));
+        for (const item of mergedV) {
+          if (pool.length >= Math.max(12, srs.mistakes.length)) break;
+          if (!have.has(item.zh)) {
+            have.add(item.zh);
+            pool.push(item);
+          }
+        }
+        return { vocab: pool, dialogues: mergedDlgs };
+      }
+
       if (sourceMode === 'daily' && dailyVocab.length >= 9) {
         return {
           vocab: dailyVocab,
@@ -1560,22 +1966,19 @@
       if (sourceMode === 'factory') {
         return { vocab: coreVocab, dialogues: coreDlgs };
       }
-      const seen = new Set();
-      const mergedV = [];
-      for (const item of [...dailyVocab, ...coreVocab]) {
-        if (item && item.zh && !seen.has(item.zh)) {
-          seen.add(item.zh);
-          mergedV.push(item);
-        }
-      }
-      return { vocab: mergedV, dialogues: [...dailyDlgs, ...coreDlgs] };
+      return { vocab: mergedV, dialogues: mergedDlgs };
     }
 
     function updateLobbyDigest() {
       const el = document.getElementById('lobby-digest-line');
       const tl = getTimelineObj();
       const pools = getActivePools();
-      if (sourceMode === 'daily' && tl.days && tl.days.length > 0) {
+      const srs = typeof getSrsStats === 'function' ? getSrsStats() : { mistakes: [] };
+      if (sourceMode === 'srs') {
+        el.innerHTML = srs.mistakes.length > 0
+          ? `🎯 <b>Chế Độ Phục Thù SRS: ${srs.mistakes.length} Từ Hay Sai</b><br><span style="color:#fde68a">Hệ thống ưu tiên nhồi các từ bạn từng chọn nhầm vào cả 10 game để thuộc lòng ngay!</span>`
+          : `🎉 <b>Hiện có 0 từ sai tồn đọng!</b><br><span style="color:#94a3b8">Hệ thống tự động chọn lọc từ mới thông minh từ kho <b>${pools.vocab.length} từ</b> để bạn thử sức.</span>`;
+      } else if (sourceMode === 'daily' && tl.days && tl.days.length > 0) {
         const latest = tl.days[0];
         el.innerHTML = `✨ <b>${latest.label}: ${latest.topic_title || 'Bài học thực chiến'}</b><br>` +
           `<span style="color:#94a3b8">Đang nạp <b>${pools.vocab.length} từ vựng</b> & <b>${pools.dialogues.length} hội thoại</b> giọng đọc chuẩn cho trọn bộ Top 10 game.</span>`;
@@ -1588,11 +1991,23 @@
 
     function setSourceMode(mode) {
       sourceMode = mode;
-      ['daily', 'factory', 'all'].forEach((m) => {
-        document.getElementById('src-' + m).classList.toggle('active', m === mode);
+      ['daily', 'factory', 'all', 'srs'].forEach((m) => {
+        document.getElementById('src-' + m)?.classList.toggle('active', m === mode);
       });
       sound.sfxTap();
       updateLobbyDigest();
+    }
+
+    function toggleBgm() {
+      bgmEnabled = !bgmEnabled;
+      const chip = document.getElementById('chip-bgm');
+      if (chip) {
+        chip.textContent = bgmEnabled ? '🎵 Nhạc: BẬT' : '🎵 Nhạc: TẮT';
+        chip.classList.toggle('on', bgmEnabled);
+      }
+      sound.sfxTap();
+      if (bgmEnabled && activeGame) sound.startBgm();
+      else sound.stopBgm();
     }
 
     function togglePinyin() {
@@ -1635,6 +2050,7 @@
         if (el) el.textContent = `Kỷ lục: ${val}`;
       });
       refreshRankUI();
+      if (typeof renderStreakAndQuestsUI === 'function') renderStreakAndQuestsUI();
     }
 
     // =========================================================
@@ -1705,16 +2121,34 @@
       }
     }
 
+    function togglePauseGame() {
+      if (!activeGame) return;
+      window.isGamePaused = !window.isGamePaused;
+      sound.sfxTap();
+      document.getElementById('pause-overlay')?.classList.toggle('hidden', !window.isGamePaused);
+      const btn = document.getElementById('btn-pause');
+      if (btn) btn.textContent = window.isGamePaused ? '▶' : '⏸';
+    }
+
     function launchGame(mode) {
       sound.unlock();
       sound.sfxTap();
       stopAllActiveLoops();
+      window.isGamePaused = false;
+      document.getElementById('pause-overlay')?.classList.add('hidden');
+      const btnPause = document.getElementById('btn-pause');
+      if (btnPause) btnPause.textContent = '⏸';
+      document.getElementById('app-shell')?.classList.remove('fever-mode');
+
       activeGame = mode;
       score = 0;
       combo = 1;
       lives = 3;
       stageNum = 1;
       encounteredWords = [];
+
+      if (typeof incrementDailyProgress === 'function') incrementDailyProgress('game', mode);
+      if (bgmEnabled) sound.startBgm();
 
       document.getElementById('screen-lobby').classList.add('hidden');
       document.getElementById('modal-result').classList.add('hidden');
@@ -1743,15 +2177,24 @@
 
     function exitToLobby() {
       stopAllActiveLoops();
+      sound.stopBgm();
+      window.isGamePaused = false;
+      document.getElementById('pause-overlay')?.classList.add('hidden');
+      document.getElementById('app-shell')?.classList.remove('fever-mode');
       activeGame = null;
       document.getElementById('modal-result').classList.add('hidden');
       document.getElementById('screen-game').classList.add('hidden');
       document.getElementById('screen-lobby').classList.remove('hidden');
       refreshHighScoresUI();
+      updateLobbyDigest();
     }
 
     function triggerGameOver(titleText = '🏁 KẾT THÚC MÀN CHƠI') {
       stopAllActiveLoops();
+      sound.stopBgm();
+      window.isGamePaused = false;
+      document.getElementById('pause-overlay')?.classList.add('hidden');
+      document.getElementById('app-shell')?.classList.remove('fever-mode');
       const key = 'arcade_best_' + activeGame;
       const prevBest = parseInt(localStorage.getItem(key) || '0', 10);
       const best = Math.max(prevBest, score);
@@ -1802,7 +2245,9 @@
       document.getElementById('onet-hints').textContent = onetHintsLeft;
 
       const pools = getActivePools();
-      const picked = shuffleArr(pools.vocab).slice(0, 8);
+      const picked = typeof pickSmartVocabSubset === 'function'
+        ? pickSmartVocabSubset(pools.vocab, 8)
+        : shuffleArr(pools.vocab).slice(0, 8);
       const cards = [];
       picked.forEach((v, idx) => {
         const pairId = idx + 1;
@@ -1823,7 +2268,7 @@
       renderOnetGrid();
 
       setMissionBanner(
-        '🔗 PIKACHU NỐI TỪ ÂM THANH',
+        '🔗 PIKACHU NỐI TỪ TIA SÉT PLASMA',
         'Chạm 1 ô <b>Chữ Hán</b> & 1 ô <b>Nghĩa Việt</b> cùng cặp (≤ 3 đoạn gấp)!',
         '💡 Chạm vào bất kỳ ô nào đều đọc phát âm tiếng Trung chuẩn',
         true
@@ -1832,6 +2277,7 @@
 
       const totalT = onetTimeLeft;
       onetTimerId = setInterval(() => {
+        if (window.isGamePaused) return;
         onetTimeLeft -= 0.25;
         const pct = Math.max(0, (onetTimeLeft / totalT) * 100);
         document.getElementById('mission-timer-fill').style.width = pct + '%';
@@ -1949,12 +2395,12 @@
             div.className = 'onet-tile cleared';
           } else if (cell.kind === 'zh') {
             div.className = 'onet-tile type-zh';
-            div.innerHTML = `<div class="tile-zh-txt">${cell.vocab.zh}</div>` +
+            div.innerHTML = `<span class="tile-spk-dot">🔊</span><div class="tile-zh-txt">${cell.vocab.zh}</div>` +
               (showPinyin ? `<div class="tile-py-txt">${cell.vocab.pinyin || ''}</div>` : '');
             div.onclick = () => onOnetTileTap(r, c);
           } else {
             div.className = 'onet-tile type-vi';
-            div.innerHTML = `<div class="tile-vi-txt">${cell.vocab.vi}</div>`;
+            div.innerHTML = `<span class="tile-spk-dot">🔊</span><div class="tile-vi-txt">${cell.vocab.vi}</div>`;
             div.onclick = () => onOnetTileTap(r, c);
           }
           grid.appendChild(div);
@@ -1971,20 +2417,31 @@
       const offX = gridRect.left - wrapRect.left;
       const offY = gridRect.top - wrapRect.top;
 
-      const pts = path.map(([r, c]) => {
-        const x = offX + (c - 0.5) * cellW;
-        const y = offY + (r - 0.5) * cellH;
-        return `${Math.max(4, Math.min(wrapRect.width - 4, x))},${Math.max(4, Math.min(wrapRect.height - 4, y))}`;
-      }).join(' ');
+      const coords = path.map(([r, c]) => {
+        const x = Math.max(4, Math.min(wrapRect.width - 4, offX + (c - 0.5) * cellW));
+        const y = Math.max(4, Math.min(wrapRect.height - 4, offY + (r - 0.5) * cellH));
+        return [x, y];
+      });
+      const pts = coords.map(([x, y]) => `${x},${y}`).join(' ');
+      const [sx, sy] = coords[0];
+      const [ex, ey] = coords[coords.length - 1];
 
-      svg.innerHTML = `<polyline points="${pts}" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px #38bdf8)"/>`;
-      setTimeout(() => { svg.innerHTML = ''; }, 340);
+      svg.innerHTML = `
+        <polyline points="${pts}" fill="none" stroke="rgba(56, 189, 248, 0.36)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="${pts}" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="${pts}" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="${sx}" cy="${sy}" r="6" fill="#fde047"/>
+        <circle cx="${ex}" cy="${ey}" r="6" fill="#fde047"/>
+      `;
+      setTimeout(() => { svg.innerHTML = ''; }, 360);
     }
 
     function onOnetTileTap(r, c) {
+      if (window.isGamePaused) return;
       const cell = onetBoard[r][c];
       if (!cell) return;
 
+      hapticPulse(10);
       currentPromptAudio = { zh: cell.vocab.zh, audio: cell.vocab.audio };
       sound.speakChinese(cell.vocab.zh, cell.vocab.audio);
 
@@ -2011,18 +2468,23 @@
         const path = findOnetPath(onetSelected.r, onetSelected.c, r, c);
         if (path) {
           drawOnetLightning(path);
-          sound.sfxSuccess();
+          hapticPulse(22);
+          combo = Math.min(10, combo + 1);
+          incrementDailyProgress('combo', combo);
+          sound.sfxCombo(combo);
           recordLearnedWord(cell.vocab);
+          recordSrsOutcome(cell.vocab, true);
           onetBoard[onetSelected.r][onetSelected.c] = null;
           onetBoard[r][c] = null;
           onetPairsRemaining--;
-          score += Math.round(15 * combo * getScoreMultiplier());
+          const pts = Math.round(15 * combo * getScoreMultiplier());
+          score += pts;
           addArcadeXP(8);
-          combo = Math.min(10, combo + 1);
+          spawnComboBanner(combo, pts);
           onetSelected = null;
 
           setMissionBanner(
-            '✅ NỐI CHUẨN!',
+            '⚡ NỐI TIA SÉT CHUẨN!',
             `<span style="color:#38bdf8">${cell.vocab.zh}</span> (${cell.vocab.pinyin || ''}) = <span style="color:#6ee7b7">${cell.vocab.vi}</span>`,
             `Còn lại ${onetPairsRemaining} cặp trong màn ${stageNum}`,
             true
@@ -2048,7 +2510,10 @@
           showToast('⚠️ Bị chặn quá 3 đoạn gấp khúc!');
         }
       } else {
+        if (prevCell) recordSrsOutcome(prevCell.vocab, false);
+        recordSrsOutcome(cell.vocab, false);
         combo = 1;
+        spawnComboBanner(1, 0);
         sound.sfxWrong();
         updateHUD();
       }
@@ -2128,13 +2593,15 @@
       whacRoundLocked = false;
 
       const pools = getActivePools();
-      const candidates = shuffleArr(pools.vocab);
+      const candidates = typeof pickSmartVocabSubset === 'function'
+        ? pickSmartVocabSubset(pools.vocab, 6)
+        : shuffleArr(pools.vocab).slice(0, 6);
       whacTarget = candidates[0];
       const distractors = candidates.slice(1, 6);
       const options = shuffleArr([whacTarget, ...distractors]);
 
       currentPromptAudio = { zh: whacTarget.zh, audio: whacTarget.audio };
-      document.getElementById('whac-wave').textContent = '🔊 Đang phát giọng đọc... (Chạm nghe lại)';
+      document.getElementById('whac-wave').textContent = 'Đang phát giọng chuẩn... (Chạm nghe lại)';
       document.getElementById('whac-reveal').textContent = showPinyin
         ? `Gợi ý âm: ${whacTarget.pinyin || '？？？'}`
         : '？？？ (Nghe tai bắt nghĩa — Đã ẩn chữ!)';
@@ -2165,6 +2632,7 @@
       document.getElementById('mission-timer-fill').style.width = '100%';
 
       whacInterval = setInterval(() => {
+        if (window.isGamePaused) return;
         rem -= 0.1;
         document.getElementById('mission-timer-fill').style.width = Math.max(0, (rem / roundDur) * 100) + '%';
         if (rem <= 0) {
@@ -2175,20 +2643,25 @@
     }
 
     function onWhacHit(idx, opt) {
-      if (whacRoundLocked || !opt) return;
+      if (whacRoundLocked || !opt || window.isGamePaused) return;
       whacRoundLocked = true;
       clearInterval(whacInterval);
 
       const mole = document.getElementById(`mole-${idx}`);
       if (opt.zh === whacTarget.zh) {
+        hapticPulse(22);
         mole.classList.add('hit-ok');
-        document.getElementById(`mole-zh-${idx}`).textContent = `✅ ${whacTarget.zh}`;
+        document.getElementById(`mole-zh-${idx}`).textContent = `⚡🔨 ${whacTarget.zh}`;
         document.getElementById('whac-reveal').textContent = `🎯 ${whacTarget.zh} (${whacTarget.pinyin || ''}) = ${whacTarget.vi}`;
-        sound.sfxSuccess();
-        recordLearnedWord(whacTarget);
-        score += Math.round(15 * combo * getScoreMultiplier());
-        addArcadeXP(10);
         combo = Math.min(10, combo + 1);
+        incrementDailyProgress('combo', combo);
+        sound.sfxCombo(combo);
+        recordLearnedWord(whacTarget);
+        recordSrsOutcome(whacTarget, true);
+        const pts = Math.round(15 * combo * getScoreMultiplier());
+        score += pts;
+        addArcadeXP(10);
+        spawnComboBanner(combo, pts);
         if (score >= stageNum * 120) stageNum++;
         updateHUD();
         whacNextTimeout = setTimeout(() => {
@@ -2196,6 +2669,8 @@
           whacNextTimeout = setTimeout(nextWhacRound, 240);
         }, 850);
       } else {
+        hapticPulse(35);
+        recordSrsOutcome(opt, false);
         mole.classList.add('hit-bad');
         document.getElementById(`mole-zh-${idx}`).textContent = `❌ (${opt.zh})`;
         handleWhacMiss();
@@ -2206,7 +2681,9 @@
       whacRoundLocked = true;
       sound.sfxWrong();
       triggerScreenShake();
+      if (whacTarget) recordSrsOutcome(whacTarget, false);
       combo = 1;
+      spawnComboBanner(1, 0);
       lives--;
       updateHUD();
       document.getElementById('whac-reveal').textContent = `💡 Đáp án: ${whacTarget.zh} (${whacTarget.pinyin || ''}) = ${whacTarget.vi}`;
@@ -2251,6 +2728,7 @@
     let snakeSentenceObj = null;
     let snakeTickTimer = null;
     let snakePoolQueue = [];
+    let snakeEatenHistory = [];
 
     function splitChineseIntoChunks(zhStr) {
       const clean = (zhStr || '').replace(/[。！？!?]/g, '').trim();
@@ -2302,11 +2780,16 @@
     }
 
     function initSnakeGame() {
+      const cvs = document.getElementById('canvas-snake');
+      const sideW = Math.min(356, Math.max(296, Math.floor(cvs.parentElement.getBoundingClientRect().width - 6)));
+      setupRetinaCanvas(cvs, sideW, Math.round(sideW * 0.86));
+
       snakePoolQueue = buildSnakeSentencePool();
+      snakeEatenHistory = [];
       snakeBody = [
-        { x: 3, y: 4, label: '🐍' },
-        { x: 2, y: 4, label: '' },
-        { x: 1, y: 4, label: '' }
+        { x: 3, y: 4 },
+        { x: 2, y: 4 },
+        { x: 1, y: 4 }
       ];
       snakeDir = { x: 1, y: 0 };
       snakeNextDir = { x: 1, y: 0 };
@@ -2336,7 +2819,7 @@
       };
 
       const onKey = (e) => {
-        if (activeGame !== 'snake') return;
+        if (activeGame !== 'snake' || window.isGamePaused) return;
         if (e.key === 'ArrowUp' || e.key === 'w') snakeSteer(0, -1);
         else if (e.key === 'ArrowDown' || e.key === 's') snakeSteer(0, 1);
         else if (e.key === 'ArrowLeft' || e.key === 'a') snakeSteer(-1, 0);
@@ -2347,7 +2830,9 @@
     }
 
     function snakeSteer(dx, dy) {
+      if (window.isGamePaused) return;
       if (dx === -snakeDir.x && dy === -snakeDir.y) return;
+      hapticPulse(8);
       snakeNextDir = { x: dx, y: dy };
     }
 
@@ -2356,12 +2841,13 @@
       snakeSentenceObj = snakePoolQueue.pop();
       snakeChunks = snakeSentenceObj.chunks;
       snakeChunkIdx = 0;
+      snakeEatenHistory = [];
 
       currentPromptAudio = { zh: snakeSentenceObj.zh, audio: snakeSentenceObj.audio };
       sound.speakChinese(snakeSentenceObj.zh, snakeSentenceObj.audio);
 
       setMissionBanner(
-        '🐍 RẮN SĂN CỤM CÂU ĐÚNG THỨ TỰ',
+        '🐍 RẮN CYBER SĂN CỤM CÂU ĐÚNG THỨ TỰ',
         `🎯 "${snakeSentenceObj.vi}"`,
         showPinyin ? snakeSentenceObj.pinyin : 'Ăn lần lượt từng vế tiếng Trung từ trái sang phải!',
         false
@@ -2424,7 +2910,7 @@
     }
 
     function stepSnake() {
-      if (activeGame !== 'snake') return;
+      if (activeGame !== 'snake' || window.isGamePaused) return;
       snakeDir = { ...snakeNextDir };
       const head = snakeBody[0];
       const nx = (head.x + snakeDir.x + SNAKE_COLS) % SNAKE_COLS;
@@ -2434,22 +2920,29 @@
       if (hitOrbIdx >= 0) {
         const orb = snakeOrbs[hitOrbIdx];
         if (orb.isNext) {
-          sound.sfxSuccess();
-          snakeBody.unshift({ x: nx, y: ny, label: orb.text });
+          hapticPulse(20);
+          combo = Math.min(10, combo + 1);
+          incrementDailyProgress('combo', combo);
+          sound.sfxCombo(combo);
+          snakeEatenHistory.push(orb.text);
+          snakeBody.unshift({ x: nx, y: ny });
           if (snakeBody.length > 8) snakeBody.pop();
           snakeChunkIdx++;
-          score += Math.round(20 * combo * getScoreMultiplier());
+          const pts = Math.round(20 * combo * getScoreMultiplier());
+          score += pts;
           addArcadeXP(10);
-          combo = Math.min(10, combo + 1);
+          spawnComboBanner(combo, pts);
           updateHUD();
 
           if (snakeChunkIdx >= snakeChunks.length) {
-            recordLearnedWord({
+            const fullItem = {
               zh: snakeSentenceObj.zh,
               pinyin: snakeSentenceObj.pinyin,
               vi: snakeSentenceObj.vi,
               audio: snakeSentenceObj.audio
-            });
+            };
+            recordLearnedWord(fullItem);
+            recordSrsOutcome(fullItem, true);
             score += 35;
             addArcadeXP(15);
             stageNum++;
@@ -2467,9 +2960,12 @@
             spawnSnakeOrbs();
           }
         } else {
+          hapticPulse(35);
           sound.sfxWrong();
           triggerScreenShake();
+          if (snakeSentenceObj) recordSrsOutcome(snakeSentenceObj, false);
           combo = 1;
+          spawnComboBanner(1, 0);
           lives--;
           updateHUD();
           showToast(orb.isDecoy ? `💣 Nhầm từ nhiễu "${orb.text}"!` : `⚠️ Sai thứ tự! Ăn "${snakeChunks[snakeChunkIdx]}" trước!`);
@@ -2481,12 +2977,8 @@
           spawnSnakeOrbs();
         }
       } else {
-        const labels = snakeBody.map((s) => s.label);
-        snakeBody.unshift({ x: nx, y: ny, label: '🐍' });
+        snakeBody.unshift({ x: nx, y: ny });
         snakeBody.pop();
-        for (let i = 1; i < snakeBody.length; i++) {
-          snakeBody[i].label = labels[i] || '';
-        }
       }
       drawSnakeCanvas();
     }
@@ -2495,14 +2987,15 @@
       const cvs = document.getElementById('canvas-snake');
       if (!cvs) return;
       const ctx = cvs.getContext('2d');
-      const W = cvs.width;
-      const H = cvs.height;
+      const W = cvs._logicalW || cvs.width;
+      const H = cvs._logicalH || cvs.height;
       const cw = W / SNAKE_COLS;
       const ch = H / SNAKE_ROWS;
 
       ctx.clearRect(0, 0, W, H);
 
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+      // Cyber Circuit Grid
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.09)';
       ctx.lineWidth = 1;
       for (let c = 1; c < SNAKE_COLS; c++) {
         ctx.beginPath(); ctx.moveTo(c * cw, 0); ctx.lineTo(c * cw, H); ctx.stroke();
@@ -2511,41 +3004,70 @@
         ctx.beginPath(); ctx.moveTo(0, r * ch); ctx.lineTo(W, r * ch); ctx.stroke();
       }
 
+      // Snake Body Scales + Eaten Hanzi Inscription + Vector Cyber Head
       for (let i = snakeBody.length - 1; i >= 0; i--) {
         const seg = snakeBody[i];
+        const cx = seg.x * cw + cw / 2;
+        const cy = seg.y * ch + ch / 2;
         const px = seg.x * cw + 3;
         const py = seg.y * ch + 3;
-        ctx.fillStyle = i === 0 ? '#10b981' : 'rgba(16, 185, 129, 0.42)';
-        ctx.strokeStyle = i === 0 ? '#6ee7b7' : '#059669';
-        ctx.lineWidth = 1.5;
-        ctx.roundRect(px, py, cw - 6, ch - 6, 9);
-        ctx.fill();
-        ctx.stroke();
 
         if (i === 0) {
-          ctx.fillStyle = '#fff';
-          ctx.font = 'bold 16px sans-serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText('🐍', seg.x * cw + cw / 2, seg.y * ch + ch / 2 + 1);
+          // Forked Neon Tongue
+          ctx.save();
+          ctx.translate(cx, cy);
+          const ang = Math.atan2(snakeDir.y, snakeDir.x);
+          ctx.rotate(ang);
+          ctx.strokeStyle = '#fb7185';
+          ctx.lineWidth = 2.2;
+          ctx.beginPath();
+          ctx.moveTo(cw * 0.36, 0);
+          ctx.lineTo(cw * 0.56, 0);
+          ctx.lineTo(cw * 0.66, -4);
+          ctx.moveTo(cw * 0.56, 0);
+          ctx.lineTo(cw * 0.66, 4);
+          ctx.stroke();
+
+          // Glowing Cyber-Viper Head
+          drawBeveledBox(ctx, -cw / 2 + 2, -ch / 2 + 2, cw - 4, ch - 4, 10, '#34d399', '#059669', '#a7f3d0', 2);
+          ctx.fillStyle = '#fef08a';
+          ctx.beginPath();
+          ctx.arc(cw * 0.14, -ch * 0.18, 3.2, 0, Math.PI * 2);
+          ctx.arc(cw * 0.14, ch * 0.18, 3.2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#090d16';
+          ctx.beginPath();
+          ctx.arc(cw * 0.18, -ch * 0.18, 1.5, 0, Math.PI * 2);
+          ctx.arc(cw * 0.18, ch * 0.18, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        } else {
+          drawBeveledBox(ctx, px, py, cw - 6, ch - 6, 9, 'rgba(16, 185, 129, 0.72)', 'rgba(6, 95, 70, 0.85)', '#34d399', 1.4);
+          const eatenTxt = snakeEatenHistory[i - 1];
+          if (eatenTxt) {
+            ctx.fillStyle = '#fef9c3';
+            ctx.font = '800 10px "PingFang SC", "Microsoft YaHei", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(eatenTxt.slice(0, 2), cx, cy + 0.5);
+          }
         }
       }
 
+      // Beveled Phrase Orbs
       for (const orb of snakeOrbs) {
         const cx = orb.x * cw + cw / 2;
         const cy = orb.y * ch + ch / 2;
         ctx.font = '900 13.5px "PingFang SC", "Microsoft YaHei", sans-serif';
-        const tw = Math.max(cw - 2, ctx.measureText(orb.text).width + 14);
-        const th = 28;
+        const tw = Math.max(cw + 2, ctx.measureText(orb.text).width + 16);
+        const th = 29;
         const bx = Math.max(3, Math.min(W - tw - 3, cx - tw / 2));
         const by = cy - th / 2;
 
-        ctx.fillStyle = orb.isNext && showPinyin ? '#065f46' : (orb.isDecoy ? '#3b1736' : '#172554');
-        ctx.strokeStyle = orb.isNext && showPinyin ? '#fde047' : '#38bdf8';
-        ctx.lineWidth = 2;
-        ctx.roundRect(bx, by, tw, th, 9);
-        ctx.fill();
-        ctx.stroke();
+        const topCol = orb.isNext && showPinyin ? '#059669' : (orb.isDecoy ? '#701a75' : '#1e3a8a');
+        const botCol = orb.isNext && showPinyin ? '#064e3b' : (orb.isDecoy ? '#3b0764' : '#172554');
+        const brdCol = orb.isNext && showPinyin ? '#fde047' : (orb.isDecoy ? '#f472b6' : '#38bdf8');
+        drawBeveledBox(ctx, bx, by, tw, th, 9, topCol, botCol, brdCol, 2);
 
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
@@ -2555,36 +3077,40 @@
     }
 
     // =========================================================
-    // GAME 4: 👾 BẮN PHI THUYỀN ĐẤU BOSS (Galaga QC Shooter)
+    // GAME 10: 👾 BẮN PHI THUYỀN ĐẤU BOSS (Galaga QC Shooter v4.0 Retina)
     // =========================================================
     let galState = null;
     let galRafId = null;
 
     function initGalagaGame() {
       const cvs = document.getElementById('canvas-galaga');
-      const rect = cvs.parentElement.getBoundingClientRect();
-      cvs.width = Math.max(310, Math.floor(rect.width));
-      cvs.height = Math.max(320, Math.floor(rect.height));
+      const { W, H } = setupRetinaCanvas(cvs);
 
       galState = {
-        W: cvs.width,
-        H: cvs.height,
-        shipX: cvs.width / 2,
-        shipY: cvs.height - 42,
+        W,
+        H,
+        shipX: W / 2,
+        shipY: H - 44,
         bullets: [],
         targets: [],
         particles: [],
-        stars: Array.from({ length: 28 }, () => ({
-          x: Math.random() * cvs.width,
-          y: Math.random() * cvs.height,
-          s: 0.6 + Math.random() * 1.4
+        stars: Array.from({ length: 36 }, (_, idx) => ({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          s: idx % 3 === 0 ? 1.8 : 0.75,
+          sz: idx % 3 === 0 ? 2.4 : 1.5,
+          col: idx % 3 === 0 ? 'rgba(125, 211, 252, 0.8)' : 'rgba(226, 232, 240, 0.45)'
         })),
         fireCooldown: 0,
         waveNum: 0,
+        isBossWave: false,
+        bossPhase: 0,
+        targetVocabRef: null,
         waveTransition: false
       };
 
       const moveShip = (e) => {
+        if (!galState || window.isGamePaused) return;
         const r = cvs.getBoundingClientRect();
         const pt = e.touches ? e.touches[0] : e;
         galState.shipX = Math.max(28, Math.min(galState.W - 28, pt.clientX - r.left));
@@ -2593,7 +3119,7 @@
       cvs.onpointermove = (e) => { if (e.buttons || e.pointerType === 'touch') moveShip(e); };
 
       const onKey = (e) => {
-        if (activeGame !== 'galaga' || !galState) return;
+        if (activeGame !== 'galaga' || !galState || window.isGamePaused) return;
         if (e.key === 'ArrowLeft' || e.key === 'a') galState.shipX = Math.max(28, galState.shipX - 24);
         if (e.key === 'ArrowRight' || e.key === 'd') galState.shipX = Math.min(galState.W - 28, galState.shipX + 24);
       };
@@ -2618,11 +3144,13 @@
 
       const pools = getActivePools();
       const isBoss = (galState.waveNum % 3 === 0) && pools.dialogues.length > 0;
+      galState.isBossWave = isBoss;
       const spdMul = getSpeedFactor();
 
       if (isBoss) {
         const dlg = pools.dialogues[Math.floor(Math.random() * pools.dialogues.length)];
         currentPromptAudio = { zh: dlg.q_zh, audio: dlg.q_audio };
+        galState.targetVocabRef = { zh: dlg.correct_zh, pinyin: dlg.correct_pinyin || '', vi: dlg.correct_vi, audio: dlg.a_audio || '' };
         sound.speakChinese(dlg.q_zh, dlg.q_audio);
 
         setMissionBanner(
@@ -2647,10 +3175,10 @@
         leftRight.forEach((opt, i) => {
           galState.targets.push({
             x: i === 0 ? galState.W * 0.26 : galState.W * 0.74,
-            y: 58,
+            y: 78,
             w: podW,
             h: 82,
-            vy: (0.26 + Math.min(0.22, galState.waveNum * 0.02)) * spdMul,
+            vy: (0.25 + Math.min(0.22, galState.waveNum * 0.02)) * spdMul,
             hp: 6,
             maxHp: 6,
             zh: opt.zh,
@@ -2662,14 +3190,17 @@
           });
         });
       } else {
-        const picks = shuffleArr(pools.vocab).slice(0, 3);
+        const picks = typeof pickSmartVocabSubset === 'function'
+          ? pickSmartVocabSubset(pools.vocab, 3)
+          : shuffleArr(pools.vocab).slice(0, 3);
         const target = picks[0];
+        galState.targetVocabRef = target;
         currentPromptAudio = { zh: target.zh, audio: target.audio };
 
         setMissionBanner(
           '👾 BẮN HẠ TỪ VỰNG MỤC TIÊU',
           `🎯 Nghĩa: "<span style="color:#fde047">${target.vi}</span>"`,
-          'Kéo ngón tay trái/phải để lái tàu bắn trúng tấm khiên chữ Hán đúng!',
+          'Kéo ngón tay trái/phải để lái phi thuyền bắn trúng khiên Chữ Hán đúng!',
           false
         );
 
@@ -2678,9 +3209,9 @@
         ordered.forEach((v, i) => {
           galState.targets.push({
             x: laneW * (i + 0.5),
-            y: 42 + (i % 2) * 26,
-            w: Math.min(112, laneW - 8),
-            h: 54,
+            y: 44 + (i % 2) * 26,
+            w: Math.min(114, laneW - 8),
+            h: 56,
             vy: (0.48 + Math.min(0.45, galState.waveNum * 0.04)) * spdMul,
             hp: 3,
             maxHp: 3,
@@ -2726,36 +3257,89 @@
       return lines.slice(0, 3);
     }
 
+    function drawGalagaBossCruiser(ctx, S) {
+      const bx = S.W / 2 + Math.sin(S.bossPhase) * 26;
+      const by = 24;
+      ctx.save();
+      ctx.translate(bx, by);
+
+      // Armored Mothership Wings
+      ctx.fillStyle = '#581c87';
+      ctx.strokeStyle = '#e879f9';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(-64, 6);
+      ctx.lineTo(-26, -12);
+      ctx.lineTo(26, -12);
+      ctx.lineTo(64, 6);
+      ctx.lineTo(36, 16);
+      ctx.lineTo(-36, 16);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Glowing Boss Plasma Core
+      ctx.fillStyle = '#fde047';
+      ctx.beginPath();
+      ctx.arc(0, 2, 9, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('👹', 0, 2);
+      ctx.restore();
+    }
+
     function loopGalaga() {
       if (activeGame !== 'galaga' || !galState) return;
+      if (window.isGamePaused) {
+        galRafId = requestAnimationFrame(loopGalaga);
+        return;
+      }
       const cvs = document.getElementById('canvas-galaga');
       const ctx = cvs.getContext('2d');
       const S = galState;
+      S.bossPhase += 0.04;
 
       ctx.clearRect(0, 0, S.W, S.H);
 
-      ctx.fillStyle = 'rgba(186, 230, 253, 0.55)';
+      // Subtle Cosmic Nebula Aura
+      const neb = ctx.createRadialGradient(S.W * 0.5, S.H * 0.25, 10, S.W * 0.5, S.H * 0.25, S.W * 0.65);
+      neb.addColorStop(0, S.isBossWave ? 'rgba(168, 85, 247, 0.16)' : 'rgba(14, 165, 233, 0.12)');
+      neb.addColorStop(1, 'rgba(5, 8, 20, 0)');
+      ctx.fillStyle = neb;
+      ctx.fillRect(0, 0, S.W, S.H);
+
+      // 2-Layer Parallax Starfield
       for (const st of S.stars) {
         st.y += st.s;
         if (st.y > S.H) { st.y = 0; st.x = Math.random() * S.W; }
-        ctx.fillRect(st.x, st.y, 2, 2);
+        ctx.fillStyle = st.col;
+        ctx.fillRect(st.x, st.y, st.sz, st.sz);
+      }
+
+      if (S.isBossWave && !S.waveTransition) {
+        drawGalagaBossCruiser(ctx, S);
       }
 
       if (!S.waveTransition) {
         S.fireCooldown--;
         if (S.fireCooldown <= 0) {
           S.fireCooldown = 14;
-          S.bullets.push({ x: S.shipX - 9, y: S.shipY - 16 });
-          S.bullets.push({ x: S.shipX + 9, y: S.shipY - 16 });
+          S.bullets.push({ x: S.shipX - 10, y: S.shipY - 16 });
+          S.bullets.push({ x: S.shipX + 10, y: S.shipY - 16 });
           sound.sfxLaser();
         }
       }
 
-      ctx.fillStyle = '#38bdf8';
+      // Dual-Layer Plasma Laser Bolts
       for (let i = S.bullets.length - 1; i >= 0; i--) {
         const b = S.bullets[i];
-        b.y -= 8.5;
-        ctx.fillRect(b.x - 1.5, b.y, 3, 12);
+        b.y -= 8.8;
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.45)';
+        ctx.fillRect(b.x - 3, b.y - 1, 6, 14);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(b.x - 1.2, b.y, 2.4, 11);
         if (b.y < -15) S.bullets.splice(i, 1);
       }
 
@@ -2772,24 +3356,33 @@
             if (tg.hp <= 0 && !S.waveTransition) {
               if (tg.isCorrect) {
                 S.waveTransition = true;
-                sound.sfxSuccess();
+                hapticPulse(24);
+                combo = Math.min(10, combo + 1);
+                incrementDailyProgress('combo', combo);
+                sound.sfxCombo(combo);
                 sound.speakChinese(tg.zh, tg.audio);
                 recordLearnedWord(tg);
+                recordSrsOutcome(tg, true);
                 spawnBurst(tg.x, tg.y, '#34d399');
-                score += Math.round((tg.isBoss ? 50 : 25) * combo * getScoreMultiplier());
+                const pts = Math.round((tg.isBoss ? 50 : 25) * combo * getScoreMultiplier());
+                score += pts;
                 addArcadeXP(tg.isBoss ? 18 : 10);
-                combo = Math.min(10, combo + 1);
+                spawnComboBanner(combo, pts);
                 updateHUD();
                 showToast(`💥 Chuẩn xác: ${tg.zh}!`);
                 S.targets = [];
                 setTimeout(() => { if (activeGame === 'galaga') spawnGalagaWave(); }, 1050);
                 break;
               } else {
+                hapticPulse(35);
                 sound.sfxWrong();
                 triggerScreenShake();
+                if (S.targetVocabRef) recordSrsOutcome(S.targetVocabRef, false);
+                recordSrsOutcome(tg, false);
                 spawnBurst(tg.x, tg.y, '#f43f5e');
                 S.targets.splice(tIdx, 1);
                 combo = 1;
+                spawnComboBanner(1, 0);
                 lives--;
                 updateHUD();
                 showToast(`❌ Bắn nhầm "${tg.zh}" (${tg.vi})!`);
@@ -2807,9 +3400,12 @@
         if (tg.y + tg.h / 2 >= S.shipY - 10 && !S.waveTransition) {
           if (tg.isCorrect) {
             S.waveTransition = true;
+            hapticPulse(35);
             sound.sfxWrong();
             triggerScreenShake();
+            recordSrsOutcome(tg, false);
             combo = 1;
+            spawnComboBanner(1, 0);
             lives--;
             updateHUD();
             sound.speakChinese(tg.zh, tg.audio);
@@ -2829,17 +3425,18 @@
 
         const bx = tg.x - tg.w / 2;
         const by = tg.y - tg.h / 2;
-        ctx.fillStyle = tg.isBoss ? 'rgba(46, 16, 101, 0.92)' : 'rgba(15, 23, 42, 0.92)';
-        ctx.strokeStyle = tg.isBoss ? '#c084fc' : '#38bdf8';
-        ctx.lineWidth = 2;
-        ctx.roundRect(bx, by, tg.w, tg.h, 12);
-        ctx.fill();
-        ctx.stroke();
+        drawBeveledBox(
+          ctx, bx, by, tg.w, tg.h, 12,
+          tg.isBoss ? '#4c1d95' : '#0f2942',
+          tg.isBoss ? '#2e1065' : '#091526',
+          tg.isBoss ? '#e879f9' : '#38bdf8',
+          2
+        );
 
         const hpRatio = Math.max(0, tg.hp / tg.maxHp);
-        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillStyle = 'rgba(255,255,255,0.16)';
         ctx.fillRect(bx + 8, by + 5, tg.w - 16, 4);
-        ctx.fillStyle = tg.isBoss ? '#f472b6' : '#38bdf8';
+        ctx.fillStyle = tg.isBoss ? '#f472b6' : '#fde047';
         ctx.fillRect(bx + 8, by + 5, (tg.w - 16) * hpRatio, 4);
 
         ctx.fillStyle = '#ffffff';
@@ -2877,28 +3474,50 @@
       }
       ctx.globalAlpha = 1;
 
+      // Dual-Wing Vector Cyber Fighter + Cockpit Canopy + Twin Ion Thrusters
       const sx = S.shipX;
       const sy = S.shipY;
-      ctx.fillStyle = '#0ea5e9';
-      ctx.strokeStyle = '#bae6fd';
-      ctx.lineWidth = 2;
+      ctx.save();
+      ctx.translate(sx, sy);
+
+      // Twin ion thrusters
+      ctx.fillStyle = '#38bdf8';
+      [-8, 8].forEach((tx) => {
+        ctx.beginPath();
+        ctx.moveTo(tx - 3.5, 11);
+        ctx.lineTo(tx + 3.5, 11);
+        ctx.lineTo(tx, 21 + Math.random() * 6);
+        ctx.closePath();
+        ctx.fill();
+      });
+
+      // Swept Cyber Wings
+      const shipGrad = ctx.createLinearGradient(0, -22, 0, 14);
+      shipGrad.addColorStop(0, '#38bdf8');
+      shipGrad.addColorStop(1, '#1d4ed8');
+      ctx.fillStyle = shipGrad;
+      ctx.strokeStyle = '#e0f2fe';
+      ctx.lineWidth = 1.8;
       ctx.beginPath();
-      ctx.moveTo(sx, sy - 20);
-      ctx.lineTo(sx + 20, sy + 14);
-      ctx.lineTo(sx + 6, sy + 8);
-      ctx.lineTo(sx - 6, sy + 8);
-      ctx.lineTo(sx - 20, sy + 14);
+      ctx.moveTo(0, -22);
+      ctx.lineTo(8, -4);
+      ctx.lineTo(24, 12);
+      ctx.lineTo(10, 10);
+      ctx.lineTo(5, 14);
+      ctx.lineTo(-5, 14);
+      ctx.lineTo(-10, 10);
+      ctx.lineTo(-24, 12);
+      ctx.lineTo(-8, -4);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
 
+      // Golden Energy Cockpit
       ctx.fillStyle = '#fde047';
       ctx.beginPath();
-      ctx.moveTo(sx - 5, sy + 10);
-      ctx.lineTo(sx + 5, sy + 10);
-      ctx.lineTo(sx, sy + 20 + Math.random() * 5);
-      ctx.closePath();
+      ctx.ellipse(0, -4, 3.8, 7.5, 0, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
 
       ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
       ctx.font = '700 11px sans-serif';

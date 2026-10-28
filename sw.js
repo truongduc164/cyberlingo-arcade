@@ -1,9 +1,10 @@
-const CACHE_NAME = 'cyberlingo-arcade-v3.0.0-top10';
+const CACHE_NAME = 'cyberlingo-arcade-v4.0.0-aaa';
 const CORE_ASSETS = [
   './',
   './index.html',
   './core_lingo_bank.js',
   './daily_timeline_data.js',
+  './arcade_core_v4.js',
   './games_v2_extra.js',
   './games_v3_top10.js',
   './manifest.json',

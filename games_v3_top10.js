@@ -1,50 +1,55 @@
 // ============================================================================
-// CYBERLINGO ARCADE PRO v3.0 — FINAL 2 HALL-OF-FAME CLASSICS (COMPLETING TOP 10)
-// 9. Đào Vàng Tiếng Trung (Cyber Gold Miner)
-// 10. Bắn Trứng Khủng Long (Dynomite Bubble Shooter)
+// CYBERLINGO ARCADE PRO v4.0 — AAA RETINA EDITIONS OF GOLD MINER & DYNOMITE
+// 1. Đào Vàng Tiếng Trung (Faceted 24K Gold Nuggets, Strata, Winch Gear)
+// 2. Bắn Trứng Khủng Long (3D Glossy Eggs, Shockwave Rings, Bounce Crosshair)
 // Developed by DEAN OPTIMIZE
 // ============================================================================
 
 // =========================================================
-// GAME 9: ⛏️ ĐÀO VÀNG TIẾNG TRUNG (Cyber Gold Miner)
+// GAME 1: ⛏️ ĐÀO VÀNG TIẾNG TRUNG (Cyber Gold Miner v4.0)
 // =========================================================
 let minerState = null;
 let minerRafId = null;
 
 function initMinerGame() {
   const cvs = document.getElementById('canvas-miner');
-  const rect = cvs.parentElement.getBoundingClientRect();
-  cvs.width = Math.max(310, Math.floor(rect.width));
-  cvs.height = Math.max(330, Math.floor(rect.height));
+  const { W, H } = setupRetinaCanvas(cvs);
 
   minerState = {
-    W: cvs.width,
-    H: cvs.height,
-    originX: cvs.width / 2,
-    originY: 46,
+    W,
+    H,
+    originX: W / 2,
+    originY: 48,
     angle: 0,
     swingTime: 0,
-    phase: 'swing', // 'swing' | 'shoot' | 'reel' | 'retract'
+    gearRot: 0,
+    phase: 'swing',
     clawLen: 28,
     hookedItem: null,
     dynamiteCount: 3,
     nuggets: [],
     popups: [],
     sparks: [],
+    rings: [],
+    dust: Array.from({ length: 24 }, () => ({
+      x: Math.random() * W,
+      y: 84 + Math.random() * (H - 96),
+      r: 1 + Math.random() * 1.8,
+      a: 0.15 + Math.random() * 0.35
+    })),
     targetVocab: null,
     timeLeft: 65,
     maxTime: 65
   };
 
   cvs.onpointerdown = (e) => {
-    if (!minerState) return;
+    if (!minerState || window.isGamePaused) return;
     const r = cvs.getBoundingClientRect();
     const px = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
     const py = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
 
-    // Check Dynamite button tap (top-right corner) while reeling wrong rock
     if (minerState.phase === 'reel' && minerState.hookedItem && !minerState.hookedItem.isTarget) {
-      if (px > minerState.W - 108 && py < 56 && minerState.dynamiteCount > 0) {
+      if (px > minerState.W - 112 && py < 58 && minerState.dynamiteCount > 0) {
         useMinerDynamite();
         return;
       }
@@ -52,12 +57,13 @@ function initMinerGame() {
 
     if (minerState.phase === 'swing') {
       minerState.phase = 'shoot';
+      hapticPulse(12);
       sound.sfxTap();
     }
   };
 
   const onKey = (e) => {
-    if (activeGame !== 'miner' || !minerState) return;
+    if (activeGame !== 'miner' || !minerState || window.isGamePaused) return;
     if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 's') {
       if (minerState.phase === 'swing') {
         minerState.phase = 'shoot';
@@ -72,7 +78,7 @@ function initMinerGame() {
   window.addEventListener('keydown', onKey);
 
   const timerId = setInterval(() => {
-    if (!minerState || activeGame !== 'miner') return;
+    if (!minerState || activeGame !== 'miner' || window.isGamePaused) return;
     minerState.timeLeft -= 0.25;
     const pct = Math.max(0, (minerState.timeLeft / minerState.maxTime) * 100);
     document.getElementById('mission-timer-fill').style.width = pct + '%';
@@ -93,18 +99,31 @@ function initMinerGame() {
   loopMiner();
 }
 
+function makeNuggetPolygon(rad) {
+  const pts = [];
+  const sides = 8;
+  for (let i = 0; i < sides; i++) {
+    const a = (i / sides) * Math.PI * 2;
+    const jitter = 0.88 + ((i * 37) % 10) * 0.02;
+    pts.push({ x: Math.cos(a) * rad * jitter, y: Math.sin(a) * rad * 0.88 * jitter });
+  }
+  return pts;
+}
+
 function useMinerDynamite() {
   if (!minerState || !minerState.hookedItem) return;
   minerState.dynamiteCount--;
+  hapticPulse(30);
   const it = minerState.hookedItem;
   const hx = minerState.originX + Math.sin(minerState.angle) * minerState.clawLen;
   const hy = minerState.originY + Math.cos(minerState.angle) * minerState.clawLen;
-  for (let k = 0; k < 18; k++) {
+  minerState.rings.push({ x: hx, y: hy, r: 8, maxR: 58, color: '#f97316', life: 1.0 });
+  for (let k = 0; k < 20; k++) {
     minerState.sparks.push({
       x: hx, y: hy,
-      vx: (Math.random() - 0.5) * 6,
-      vy: (Math.random() - 0.5) * 6,
-      color: '#f97316',
+      vx: (Math.random() - 0.5) * 7,
+      vy: (Math.random() - 0.5) * 7,
+      color: k % 2 === 0 ? '#fde047' : '#f97316',
       life: 1.0
     });
   }
@@ -120,7 +139,7 @@ function spawnMinerStage() {
   S.nuggets = [];
 
   const pools = getActivePools();
-  const picks = shuffleArr(pools.vocab).slice(0, 5);
+  const picks = pickSmartVocabSubset(pools.vocab, 5);
   const target = picks[0];
   S.targetVocab = target;
   currentPromptAudio = { zh: target.zh, audio: target.audio };
@@ -128,19 +147,19 @@ function spawnMinerStage() {
 
   setMissionBanner(
     '⛏️ ĐÀO VÀNG CHỮ HÁN',
-    `🎯 Ngoạm cục vàng: "<span style="color:#fde047">${target.vi}</span>"`,
-    'Chạm màn hình thả ngoạm đúng góc — Ngoạm nhầm sẽ hóa Đá Nặng (bấm 🧨 để hủy)!',
+    `🎯 Kéo quặng vàng: "<span style="color:#fde047">${target.vi}</span>"`,
+    'Chạm màn hình phóng ngoạm — Kéo nhầm sẽ hóa Đá Nặng (bấm 🧨 để hủy)!',
     true
   );
 
   const placed = [];
   picks.forEach((v, idx) => {
-    const rad = 28 + (idx % 2) * 4;
+    const rad = 31 + (idx % 2) * 4;
     let bx = S.W * 0.5;
-    let by = S.H * 0.55;
-    for (let tries = 0; tries < 90; tries++) {
-      const tx = 44 + Math.random() * (S.W - 88);
-      const ty = 128 + Math.random() * (S.H - 175);
+    let by = S.H * 0.56;
+    for (let tries = 0; tries < 95; tries++) {
+      const tx = 48 + Math.random() * (S.W - 96);
+      const ty = 132 + Math.random() * (S.H - 180);
       if (!placed.some((p) => Math.hypot(p.x - tx, p.y - ty) < p.r + rad + 18)) {
         bx = tx; by = ty;
         break;
@@ -150,6 +169,7 @@ function spawnMinerStage() {
       x: bx,
       y: by,
       r: rad,
+      poly: makeNuggetPolygon(rad),
       vocab: v,
       isTarget: v.zh === target.zh,
       revealedWrong: false
@@ -159,97 +179,110 @@ function spawnMinerStage() {
   });
 }
 
-function pickNextMinerTarget() {
-  if (!minerState) return;
-  const S = minerState;
-  if (S.nuggets.length === 0) {
-    sound.sfxFanfare();
-    stageNum++;
-    S.dynamiteCount = Math.min(5, S.dynamiteCount + 1);
-    S.timeLeft = Math.min(S.maxTime, S.timeLeft + 12);
-    updateHUD();
-    showToast(`🎉 Đào sạch mỏ! Sang Mỏ ${stageNum} (+1 🧨)!`);
-    spawnMinerStage();
-    return;
-  }
-  // Ensure at least 3 nuggets so reading stays fun
-  if (S.nuggets.length < 3) {
-    spawnMinerStage();
-    return;
-  }
-  S.nuggets.forEach((n) => { n.isTarget = false; });
-  const chosen = S.nuggets[Math.floor(Math.random() * S.nuggets.length)];
-  chosen.isTarget = true;
-  S.targetVocab = chosen.vocab;
-  currentPromptAudio = { zh: chosen.vocab.zh, audio: chosen.vocab.audio };
-  sound.speakChinese(chosen.vocab.zh, chosen.vocab.audio);
-
-  setMissionBanner(
-    '⛏️ ĐÀO VÀNG CHỮ HÁN',
-    `🎯 Ngoạm cục vàng: "<span style="color:#fde047">${chosen.vocab.vi}</span>"`,
-    'Chạm màn hình thả ngoạm đúng góc — Ngoạm nhầm sẽ hóa Đá Nặng!',
-    true
-  );
-}
-
 function loopMiner() {
   if (activeGame !== 'miner' || !minerState) return;
+  if (window.isGamePaused) {
+    minerRafId = requestAnimationFrame(loopMiner);
+    return;
+  }
   const cvs = document.getElementById('canvas-miner');
   const ctx = cvs.getContext('2d');
   const S = minerState;
 
   ctx.clearRect(0, 0, S.W, S.H);
 
-  // Mine header sky vs underground earth
-  ctx.fillStyle = '#0f1f38';
-  ctx.fillRect(0, 0, S.W, 74);
-  ctx.fillStyle = '#1c150c';
-  ctx.fillRect(0, 74, S.W, S.H - 74);
-  ctx.strokeStyle = '#ca8a04';
-  ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(0, 74); ctx.lineTo(S.W, 74); ctx.stroke();
+  // Sky dome & 3-tier geological earth strata
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, 76);
+  skyGrad.addColorStop(0, '#0c1e3a');
+  skyGrad.addColorStop(1, '#172e54');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, S.W, 76);
 
-  // Miner rig icon
-  ctx.font = '26px sans-serif';
+  const earthGrad = ctx.createLinearGradient(0, 76, 0, S.H);
+  earthGrad.addColorStop(0, '#2a1c0e');
+  earthGrad.addColorStop(0.45, '#1f140a');
+  earthGrad.addColorStop(1, '#120b05');
+  ctx.fillStyle = earthGrad;
+  ctx.fillRect(0, 76, S.W, S.H - 76);
+
+  // Sparkling gold dust veins underground
+  for (const d of S.dust) {
+    ctx.fillStyle = `rgba(253, 224, 71, ${d.a})`;
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Surface rail beam
+  ctx.fillStyle = '#78350f';
+  ctx.fillRect(0, 72, S.W, 6);
+  ctx.strokeStyle = '#f59e0b';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, 72); ctx.lineTo(S.W, 72); ctx.stroke();
+
+  // Mechanical Winch Gear + Miner Cabin
+  ctx.save();
+  ctx.translate(S.originX, 42);
+  ctx.rotate(S.gearRot);
+  ctx.strokeStyle = '#64748b';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(0, 0, 16, 0, Math.PI * 2);
+  ctx.stroke();
+  for (let g = 0; g < 6; g++) {
+    const ga = (g / 6) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(ga) * 11, Math.sin(ga) * 11);
+    ctx.lineTo(Math.cos(ga) * 19, Math.sin(ga) * 19);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  ctx.font = '25px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('👷‍♂️', S.originX, 26);
+  ctx.fillText('👷‍♂️', S.originX, 24);
 
-  // Dynamite button (top right)
-  ctx.fillStyle = S.dynamiteCount > 0 ? 'rgba(185, 28, 28, 0.85)' : 'rgba(30, 41, 59, 0.6)';
-  ctx.strokeStyle = '#f87171';
-  ctx.lineWidth = 1.5;
-  ctx.roundRect(S.W - 102, 12, 92, 34, 10);
-  ctx.fill();
-  ctx.stroke();
+  // Dynamite Button
+  drawBeveledBox(
+    ctx,
+    S.W - 104, 12, 94, 34, 10,
+    S.dynamiteCount > 0 ? '#dc2626' : '#334155',
+    S.dynamiteCount > 0 ? '#991b1b' : '#1e293b',
+    S.dynamiteCount > 0 ? '#fca5a5' : '#475569'
+  );
   ctx.fillStyle = '#fff';
-  ctx.font = '800 12px sans-serif';
-  ctx.fillText(`🧨 Nổ đá (${S.dynamiteCount})`, S.W - 56, 29);
+  ctx.font = '800 11.5px sans-serif';
+  ctx.fillText(`🧨 Nổ đá (${S.dynamiteCount})`, S.W - 57, 29);
 
-  // Update Claw State Machine
+  // Claw State Machine
   const spdMul = getSpeedFactor();
   if (S.phase === 'swing') {
-    S.swingTime += 0.036 * spdMul;
+    S.swingTime += 0.035 * spdMul;
     S.angle = Math.sin(S.swingTime) * 1.18;
     S.clawLen = 28;
   } else if (S.phase === 'shoot') {
-    S.clawLen += 8.2 * spdMul;
+    S.clawLen += 8.4 * spdMul;
+    S.gearRot += 0.22;
     const hx = S.originX + Math.sin(S.angle) * S.clawLen;
     const hy = S.originY + Math.cos(S.angle) * S.clawLen;
 
-    // Check nugget hit
     for (let i = 0; i < S.nuggets.length; i++) {
       const n = S.nuggets[i];
-      if (Math.hypot(hx - n.x, hy - n.y) <= n.r + 8) {
+      if (Math.hypot(hx - n.x, hy - n.y) <= n.r + 7) {
         S.hookedItem = n;
         S.nuggets.splice(i, 1);
         S.phase = 'reel';
         if (n.isTarget) {
+          hapticPulse(18);
           sound.sfxTap();
         } else {
           n.revealedWrong = true;
+          hapticPulse(35);
+          recordSrsOutcome(S.targetVocab, false);
+          recordSrsOutcome(n.vocab, false);
           sound.sfxWrong();
-          showToast(`🪨 Đá nặng! "${n.vocab.zh}" = ${n.vocab.vi} (Bấm 🧨 để hủy!)`);
+          showToast(`🪨 Đá nặng! "${n.vocab.zh}" = ${n.vocab.vi} (Bấm 🧨 hủy!)`);
         }
         break;
       }
@@ -259,14 +292,16 @@ function loopMiner() {
       S.phase = 'retract';
     }
   } else if (S.phase === 'retract') {
-    S.clawLen -= 9.5 * spdMul;
+    S.clawLen -= 9.8 * spdMul;
+    S.gearRot -= 0.25;
     if (S.clawLen <= 28) {
       S.clawLen = 28;
       S.phase = 'swing';
     }
   } else if (S.phase === 'reel') {
-    const pullSpd = S.hookedItem && S.hookedItem.isTarget ? 6.2 : 1.65;
+    const pullSpd = S.hookedItem && S.hookedItem.isTarget ? 6.4 : 1.65;
     S.clawLen -= pullSpd * spdMul;
+    S.gearRot -= pullSpd * 0.05;
     if (S.clawLen <= 30) {
       const caught = S.hookedItem;
       S.hookedItem = null;
@@ -275,19 +310,25 @@ function loopMiner() {
 
       if (caught) {
         if (caught.isTarget) {
-          sound.sfxSuccess();
+          combo = Math.min(10, combo + 1);
+          incrementDailyProgress('combo', combo);
+          sound.sfxCombo(combo);
           sound.speakChinese(caught.vocab.zh, caught.vocab.audio);
           recordLearnedWord(caught.vocab);
+          recordSrsOutcome(caught.vocab, true);
           const pts = Math.round(30 * combo * getScoreMultiplier());
           score += pts;
           addArcadeXP(14);
-          combo = Math.min(10, combo + 1);
+          spawnComboBanner(combo, pts);
           S.timeLeft = Math.min(S.maxTime, S.timeLeft + 4);
+          S.rings.push({ x: S.originX, y: 58, r: 6, maxR: 50, color: '#fde047', life: 1.0 });
+          stageNum = 1 + Math.floor(score / 180);
           updateHUD();
-          S.popups.push({ x: S.originX, y: 66, txt: `💰 +$${pts} CHUẨN!`, color: '#fde047', life: 1.0 });
+          S.popups.push({ x: S.originX, y: 66, txt: `💰 +$${pts} VÀNG 24K!`, color: '#fde047', life: 1.0 });
           spawnMinerStage();
         } else {
           combo = 1;
+          spawnComboBanner(1, 0);
           lives--;
           updateHUD();
           if (lives <= 0) {
@@ -299,83 +340,134 @@ function loopMiner() {
     }
   }
 
-  // Draw Underground Gold Nuggets
-  const drawNugget = (n, cx, cy) => {
+  // Draw Faceted 24K Gold Nuggets
+  const drawFacetedNugget = (n, cx, cy) => {
     ctx.save();
     ctx.translate(cx, cy);
+
+    // Outer gold halo
+    if (!n.revealedWrong) {
+      ctx.beginPath();
+      ctx.arc(0, 0, n.r + 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(250, 204, 21, 0.14)';
+      ctx.fill();
+    }
+
     ctx.beginPath();
-    ctx.arc(0, 0, n.r, 0, Math.PI * 2);
+    n.poly.forEach((pt, idx) => {
+      if (idx === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    });
+    ctx.closePath();
+
     if (n.revealedWrong) {
-      ctx.fillStyle = '#475569';
+      const rGrad = ctx.createLinearGradient(-n.r, -n.r, n.r, n.r);
+      rGrad.addColorStop(0, '#64748b');
+      rGrad.addColorStop(1, '#334155');
+      ctx.fillStyle = rGrad;
       ctx.strokeStyle = '#94a3b8';
     } else {
-      const grad = ctx.createRadialGradient(-8, -8, 4, 0, 0, n.r);
-      grad.addColorStop(0, '#fef08a');
-      grad.addColorStop(0.6, '#eab308');
-      grad.addColorStop(1, '#a16207');
-      ctx.fillStyle = grad;
-      ctx.strokeStyle = '#fef9c3';
+      const gGrad = ctx.createRadialGradient(-n.r * 0.3, -n.r * 0.3, 3, 0, 0, n.r);
+      gGrad.addColorStop(0, '#fef9c3');
+      gGrad.addColorStop(0.45, '#facc15');
+      gGrad.addColorStop(1, '#b45309');
+      ctx.fillStyle = gGrad;
+      ctx.strokeStyle = '#fef08a';
     }
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.2;
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = n.revealedWrong ? '#f8fafc' : '#1e1b4b';
+    // Facet specular glint
+    if (!n.revealedWrong) {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.38)';
+      ctx.beginPath();
+      ctx.ellipse(-n.r * 0.28, -n.r * 0.32, n.r * 0.26, n.r * 0.12, -0.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Dark contrast pill behind Hanzi so Chinese strokes are ultra-legible!
+    const zh = n.vocab.zh;
+    ctx.font = zh.length >= 4 ? '900 13px "PingFang SC", "Microsoft YaHei", sans-serif' : '900 15px "PingFang SC", "Microsoft YaHei", sans-serif';
+    const pillW = Math.max(n.r * 1.45, ctx.measureText(zh).width + 12);
+    const pillH = showPinyin && n.vocab.pinyin ? 28 : 22;
+    ctx.fillStyle = 'rgba(10, 15, 28, 0.84)';
+    ctx.strokeStyle = n.revealedWrong ? '#fb7185' : 'rgba(253, 224, 71, 0.65)';
+    ctx.lineWidth = 1.2;
+    ctx.roundRect(-pillW / 2, -pillH / 2, pillW, pillH, 7);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    const zh = n.vocab.zh;
-    ctx.font = zh.length >= 4 ? '900 13px "PingFang SC", "Microsoft YaHei", sans-serif' : '900 15.5px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(zh, 0, showPinyin ? -4 : 1);
+    ctx.fillText(zh, 0, showPinyin && n.vocab.pinyin ? -4.5 : 0.5);
     if (showPinyin && n.vocab.pinyin) {
-      ctx.font = '800 8.5px sans-serif';
-      ctx.fillStyle = n.revealedWrong ? '#cbd5e1' : '#451a03';
-      ctx.fillText(n.vocab.pinyin.slice(0, 13), 0, 11);
+      ctx.font = '700 8.5px sans-serif';
+      ctx.fillStyle = '#fde68a';
+      ctx.fillText(n.vocab.pinyin.slice(0, 13), 0, 8.5);
     }
     ctx.restore();
   };
 
   for (const n of S.nuggets) {
-    drawNugget(n, n.x, n.y);
+    drawFacetedNugget(n, n.x, n.y);
   }
 
-  // Draw Aiming Laser (subtle short guide when swinging)
   const hx = S.originX + Math.sin(S.angle) * S.clawLen;
   const hy = S.originY + Math.cos(S.angle) * S.clawLen;
 
   if (S.phase === 'swing') {
-    ctx.strokeStyle = 'rgba(250, 204, 21, 0.25)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.32)';
     ctx.setLineDash([4, 5]);
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.6;
     ctx.beginPath();
     ctx.moveTo(hx, hy);
-    ctx.lineTo(S.originX + Math.sin(S.angle) * 155, S.originY + Math.cos(S.angle) * 155);
+    ctx.lineTo(S.originX + Math.sin(S.angle) * 165, S.originY + Math.cos(S.angle) * 165);
     ctx.stroke();
     ctx.setLineDash([]);
   }
 
-  // Draw Rope & Claw
-  ctx.strokeStyle = '#e2e8f0';
-  ctx.lineWidth = 2.5;
+  // Steel Cable
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 2.6;
   ctx.beginPath();
   ctx.moveTo(S.originX, S.originY);
   ctx.lineTo(hx, hy);
   ctx.stroke();
 
   if (S.hookedItem) {
-    drawNugget(S.hookedItem, hx + Math.sin(S.angle) * 18, hy + Math.cos(S.angle) * 18);
+    drawFacetedNugget(S.hookedItem, hx + Math.sin(S.angle) * 19, hy + Math.cos(S.angle) * 19);
   }
 
+  // Mechanical 2-Prong Grappling Claw
   ctx.save();
   ctx.translate(hx, hy);
   ctx.rotate(-S.angle);
   ctx.strokeStyle = '#38bdf8';
   ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.arc(0, 4, 9, Math.PI * 0.15, Math.PI * 0.85, true);
+  ctx.moveTo(-9, 10);
+  ctx.quadraticCurveTo(-12, 2, 0, -2);
+  ctx.quadraticCurveTo(12, 2, 9, 10);
   ctx.stroke();
+  ctx.fillStyle = '#fde047';
+  ctx.beginPath(); ctx.arc(0, 0, 4, 0, Math.PI * 2); ctx.fill();
   ctx.restore();
 
-  // Sparks & Popups
+  // Shockwave rings
+  for (let i = S.rings.length - 1; i >= 0; i--) {
+    const rg = S.rings[i];
+    rg.r += (rg.maxR - rg.r) * 0.18;
+    rg.life -= 0.06;
+    if (rg.life <= 0) { S.rings.splice(i, 1); continue; }
+    ctx.globalAlpha = rg.life;
+    ctx.strokeStyle = rg.color;
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(rg.x, rg.y, rg.r, 0, Math.PI * 2); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
   for (let i = S.sparks.length - 1; i >= 0; i--) {
     const sp = S.sparks[i];
     sp.x += sp.vx; sp.y += sp.vy; sp.life -= 0.05;
@@ -388,7 +480,7 @@ function loopMiner() {
 
   for (let i = S.popups.length - 1; i >= 0; i--) {
     const pp = S.popups[i];
-    pp.y -= 0.9; pp.life -= 0.025;
+    pp.y -= 0.95; pp.life -= 0.025;
     if (pp.life <= 0) { S.popups.splice(i, 1); continue; }
     ctx.globalAlpha = pp.life;
     ctx.fillStyle = pp.color;
@@ -398,57 +490,53 @@ function loopMiner() {
   }
   ctx.globalAlpha = 1;
 
-  ctx.fillStyle = 'rgba(253, 224, 71, 0.55)';
+  ctx.fillStyle = 'rgba(253, 224, 71, 0.58)';
   ctx.font = '700 11px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('👇 Chạm bất kỳ đâu trên màn hình để phóng ngoạm đào vàng!', S.W / 2, S.H - 8);
+  ctx.fillText('👇 Chạm bất kỳ đâu để phóng ngoạm kéo quặng vàng!', S.W / 2, S.H - 8);
 
   minerRafId = requestAnimationFrame(loopMiner);
 }
 
 // =========================================================
-// GAME 10: 🥚 BẮN TRỨNG ÂM THANH (Dynomite / Bubble Shooter)
+// GAME 2: 🥚 BẮN TRỨNG ÂM THANH (Dynomite Bubble Shooter v4.0)
 // =========================================================
 let bubState = null;
 let bubRafId = null;
 
 function initBubbleGame() {
   const cvs = document.getElementById('canvas-bubble');
-  const rect = cvs.parentElement.getBoundingClientRect();
-  cvs.width = Math.max(310, Math.floor(rect.width));
-  cvs.height = Math.max(330, Math.floor(rect.height));
+  const { W, H } = setupRetinaCanvas(cvs);
 
   bubState = {
-    W: cvs.width,
-    H: cvs.height,
-    cannonX: cvs.width / 2,
-    cannonY: cvs.height - 38,
-    aimAngle: -Math.PI / 2, // straight up
+    W,
+    H,
+    cannonX: W / 2,
+    cannonY: H - 40,
+    aimAngle: -Math.PI / 2,
     bubbles: [],
-    shot: null, // { x, y, vx, vy }
+    shot: null,
     sparks: [],
+    rings: [],
     targetVocab: null
   };
 
   const updateAim = (e) => {
-    if (!bubState) return;
+    if (!bubState || window.isGamePaused) return;
     const r = cvs.getBoundingClientRect();
     const px = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
     const py = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
     let ang = Math.atan2(py - bubState.cannonY, px - bubState.cannonX);
-    // Clamp upward cone (-162 deg to -18 deg)
     ang = Math.max(-Math.PI * 0.9, Math.min(-Math.PI * 0.1, ang));
     bubState.aimAngle = ang;
   };
 
-  cvs.onpointerdown = (e) => {
-    updateAim(e);
-  };
+  cvs.onpointerdown = updateAim;
   cvs.onpointermove = (e) => {
     if (e.buttons || e.pointerType === 'touch') updateAim(e);
   };
   cvs.onpointerup = () => {
-    fireBubbleShot();
+    if (!window.isGamePaused) fireBubbleShot();
   };
 
   cleanupFns.push(() => {
@@ -467,12 +555,18 @@ function spawnBubbleCluster() {
   S.shot = null;
 
   const pools = getActivePools();
-  const picks = shuffleArr(pools.vocab).slice(0, 10);
+  const picks = pickSmartVocabSubset(pools.vocab, 10);
   const cols = 4;
   const rad = Math.min(34, Math.floor((S.W - 36) / (cols * 2.15)));
   const spacingX = rad * 2 + 6;
   const spacingY = rad * 1.82;
-  const palette = ['#0284c7', '#7c3aed', '#059669', '#d97706', '#e11d48'];
+  const palette = [
+    ['#38bdf8', '#0369a1'],
+    ['#c084fc', '#6b21a8'],
+    ['#34d399', '#047857'],
+    ['#fbbf24', '#b45309'],
+    ['#fb7185', '#be123c']
+  ];
 
   let k = 0;
   for (let row = 0; row < 3; row++) {
@@ -481,12 +575,14 @@ function spawnBubbleCluster() {
     const startX = (S.W - rowWidth) / 2;
     for (let c = 0; c < rowCount; c++) {
       const v = picks[k % picks.length];
+      const pal = palette[(row + c) % palette.length];
       k++;
       S.bubbles.push({
         x: startX + c * spacingX,
         y: 42 + row * spacingY,
         r: rad,
-        color: palette[(row + c) % palette.length],
+        cTop: pal[0],
+        cBot: pal[1],
         vocab: v
       });
     }
@@ -501,7 +597,7 @@ function pickNextBubbleTarget() {
   if (S.bubbles.length === 0) {
     sound.sfxFanfare();
     stageNum++;
-    score += 70;
+    score += 75;
     addArcadeXP(22);
     updateHUD();
     showToast(`🎉 Nổ sạch giàn trứng! Qua Màn ${stageNum}!`);
@@ -509,7 +605,6 @@ function pickNextBubbleTarget() {
     return;
   }
 
-  // Prefer bottom-most accessible bubbles so player always has a clear shot!
   const sorted = [...S.bubbles].sort((a, b) => b.y - a.y);
   const frontLine = sorted.slice(0, Math.min(4, sorted.length));
   const chosen = frontLine[Math.floor(Math.random() * frontLine.length)].vocab;
@@ -519,8 +614,8 @@ function pickNextBubbleTarget() {
 
   setMissionBanner(
     '🥚 BẮN TRỨNG KHỦNG LONG ÂM THANH',
-    `🎯 Ngắm bắn trứng: "<span style="color:#fde047">${chosen.vi}</span>"`,
-    'Giữ & kéo để ngắm tia phản xạ tường, thả tay để phóng trứng!',
+    `🎯 Bắn nổ trứng: "<span style="color:#fde047">${chosen.vi}</span>"`,
+    'Giữ & kéo tia laser dội tường, thả tay để phóng trứng!',
     false
   );
 }
@@ -528,13 +623,14 @@ function pickNextBubbleTarget() {
 function fireBubbleShot() {
   if (!bubState || bubState.shot || !bubState.targetVocab) return;
   const S = bubState;
-  const spd = 10.5 * getSpeedFactor();
+  const spd = 11.2 * getSpeedFactor();
+  hapticPulse(14);
   S.shot = {
     x: S.cannonX,
     y: S.cannonY - 12,
     vx: Math.cos(S.aimAngle) * spd,
     vy: Math.sin(S.aimAngle) * spd,
-    r: 22
+    r: 20
   };
   sound.sfxLaser();
 }
@@ -545,45 +641,51 @@ function resolveBubbleHit(hitBubble) {
   const shotPos = { x: S.shot.x, y: S.shot.y };
   S.shot = null;
 
-  // Check if hitBubble or any immediate neighbor matches targetVocab!
   const blastRadius = (hitBubble ? hitBubble.r : 30) * 2.35;
   const matched = S.bubbles.filter(
     (b) => b.vocab.zh === S.targetVocab.zh && Math.hypot(b.x - shotPos.x, b.y - shotPos.y) <= blastRadius
   );
 
   if ((hitBubble && hitBubble.vocab.zh === S.targetVocab.zh) || matched.length > 0) {
-    // Cluster POP! Remove all bubbles of that zh + sparks!
     const targetZh = S.targetVocab.zh;
     const popped = S.bubbles.filter((b) => b.vocab.zh === targetZh);
     S.bubbles = S.bubbles.filter((b) => b.vocab.zh !== targetZh);
 
     popped.forEach((b) => {
-      for (let k = 0; k < 14; k++) {
+      S.rings.push({ x: b.x, y: b.y, r: 8, maxR: b.r * 2.1, color: '#fde047', life: 1.0 });
+      for (let k = 0; k < 15; k++) {
         S.sparks.push({
           x: b.x, y: b.y,
-          vx: (Math.random() - 0.5) * 6,
-          vy: (Math.random() - 0.5) * 6,
-          color: '#fde047',
+          vx: (Math.random() - 0.5) * 6.5,
+          vy: (Math.random() - 0.5) * 6.5,
+          color: k % 2 === 0 ? '#fde047' : '#38bdf8',
           life: 1.0
         });
       }
     });
 
-    sound.sfxSuccess();
+    hapticPulse(22);
+    combo = Math.min(10, combo + 1);
+    incrementDailyProgress('combo', combo);
+    sound.sfxCombo(combo);
     sound.speakChinese(S.targetVocab.zh, S.targetVocab.audio);
     recordLearnedWord(S.targetVocab);
+    recordSrsOutcome(S.targetVocab, true);
     const pts = Math.round(30 * combo * getScoreMultiplier());
     score += pts;
     addArcadeXP(12);
-    combo = Math.min(10, combo + 1);
+    spawnComboBanner(combo, pts);
     updateHUD();
     showToast(`🥚 NỔ GIÒN TAN: ${S.targetVocab.zh}!`);
     pickNextBubbleTarget();
   } else {
-    // Wrong shot -> Sticks as a penalty bubble & lowers ceiling pressure!
+    hapticPulse(35);
     sound.sfxWrong();
     triggerScreenShake();
+    recordSrsOutcome(S.targetVocab, false);
+    if (hitBubble) recordSrsOutcome(hitBubble.vocab, false);
     combo = 1;
+    spawnComboBanner(1, 0);
     lives--;
     updateHUD();
     const wrongInfo = hitBubble ? `"${hitBubble.vocab.zh}" = ${hitBubble.vocab.vi}` : 'Trượt mục tiêu!';
@@ -598,11 +700,12 @@ function resolveBubbleHit(hitBubble) {
       x: clampedX,
       y: clampedY,
       r,
-      color: '#475569',
+      cTop: '#64748b',
+      cBot: '#334155',
       vocab: extraVocab
     });
 
-    if (lives <= 0 || clampedY + r >= S.cannonY - 52) {
+    if (lives <= 0 || clampedY + r >= S.cannonY - 54) {
       triggerGameOver('🥚 GIÀN TRỨNG SẬP CHẠM PHÁO!');
       return;
     }
@@ -613,48 +716,94 @@ function resolveBubbleHit(hitBubble) {
 function drawBubbleAimRay(ctx, S) {
   let rx = S.cannonX;
   let ry = S.cannonY - 12;
-  let dx = Math.cos(S.aimAngle) * 10;
-  let dy = Math.sin(S.aimAngle) * 10;
+  let dx = Math.cos(S.aimAngle) * 9;
+  let dy = Math.sin(S.aimAngle) * 9;
+  let endX = rx, endY = ry;
 
-  ctx.fillStyle = 'rgba(253, 224, 71, 0.55)';
-  for (let step = 0; step < 26; step++) {
+  for (let step = 0; step < 34; step++) {
     rx += dx;
     ry += dy;
     if (rx < 18) { rx = 18; dx = -dx; }
     if (rx > S.W - 18) { rx = S.W - 18; dx = -dx; }
-    if (ry < 24) break;
+    endX = rx; endY = ry;
+    if (ry < 26) break;
     if (S.bubbles.some((b) => Math.hypot(b.x - rx, b.y - ry) < b.r)) break;
     if (step % 2 === 0) {
+      ctx.fillStyle = `rgba(253, 224, 71, ${0.7 - step * 0.015})`;
       ctx.beginPath();
-      ctx.arc(rx, ry, 2.6, 0, Math.PI * 2);
+      ctx.arc(rx, ry, 2.7, 0, Math.PI * 2);
       ctx.fill();
     }
   }
+
+  // Target impact crosshair glow
+  ctx.strokeStyle = '#fde047';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(endX, endY, 8, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+function drawGlossyEggBubble(ctx, b) {
+  ctx.save();
+  ctx.translate(b.x, b.y);
+  const grad = ctx.createRadialGradient(-b.r * 0.3, -b.r * 0.35, 3, 0, 0, b.r);
+  grad.addColorStop(0, b.cTop || '#38bdf8');
+  grad.addColorStop(1, b.cBot || '#0369a1');
+
+  ctx.beginPath();
+  ctx.arc(0, 0, b.r, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.72)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 3D Glass specular shine
+  ctx.beginPath();
+  ctx.ellipse(-b.r * 0.28, -b.r * 0.34, b.r * 0.3, b.r * 0.14, -0.45, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.36)';
+  ctx.fill();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const zh = b.vocab.zh;
+  ctx.font = zh.length >= 4 ? '900 12.5px "PingFang SC", "Microsoft YaHei", sans-serif' : '900 15px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.fillText(zh, 0, showPinyin ? -4 : 1);
+  if (showPinyin && b.vocab.pinyin) {
+    ctx.fillStyle = '#fef9c3';
+    ctx.font = '700 8.5px sans-serif';
+    ctx.fillText(b.vocab.pinyin.slice(0, 12), 0, 10);
+  }
+  ctx.restore();
 }
 
 function loopBubble() {
   if (activeGame !== 'bubble' || !bubState) return;
+  if (window.isGamePaused) {
+    bubRafId = requestAnimationFrame(loopBubble);
+    return;
+  }
   const cvs = document.getElementById('canvas-bubble');
   const ctx = cvs.getContext('2d');
   const S = bubState;
 
   ctx.clearRect(0, 0, S.W, S.H);
 
-  // Danger line above cannon
+  // Danger line
   ctx.strokeStyle = 'rgba(244, 63, 94, 0.35)';
   ctx.setLineDash([5, 5]);
   ctx.beginPath();
-  ctx.moveTo(0, S.cannonY - 52);
-  ctx.lineTo(S.W, S.cannonY - 52);
+  ctx.moveTo(0, S.cannonY - 54);
+  ctx.lineTo(S.W, S.cannonY - 54);
   ctx.stroke();
   ctx.setLineDash([]);
 
-  // Aiming trajectory
   if (!S.shot) {
     drawBubbleAimRay(ctx, S);
   }
 
-  // Update flying shot
   if (S.shot) {
     const sh = S.shot;
     sh.x += sh.vx;
@@ -672,49 +821,34 @@ function loopBubble() {
     if (collided || sh.y <= 32) {
       resolveBubbleHit(collided);
     } else {
+      const pGrad = ctx.createRadialGradient(sh.x - 5, sh.y - 5, 2, sh.x, sh.y, sh.r);
+      pGrad.addColorStop(0, '#ffffff');
+      pGrad.addColorStop(0.5, '#fde047');
+      pGrad.addColorStop(1, '#ea580c');
       ctx.beginPath();
       ctx.arc(sh.x, sh.y, sh.r, 0, Math.PI * 2);
-      ctx.fillStyle = '#fde047';
+      ctx.fillStyle = pGrad;
       ctx.fill();
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 2;
-      ctx.stroke();
     }
   }
 
-  // Draw Hanging Chinese Egg Bubbles
   for (const b of S.bubbles) {
-    ctx.save();
-    ctx.translate(b.x, b.y);
-    ctx.beginPath();
-    ctx.arc(0, 0, b.r, 0, Math.PI * 2);
-    ctx.fillStyle = b.color;
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,0.65)';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Gloss highlight
-    ctx.beginPath();
-    ctx.arc(-b.r * 0.3, -b.r * 0.3, b.r * 0.22, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255,255,255,0.28)';
-    ctx.fill();
-
-    ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const zh = b.vocab.zh;
-    ctx.font = zh.length >= 4 ? '900 12.5px "PingFang SC", "Microsoft YaHei", sans-serif' : '900 15px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(zh, 0, showPinyin ? -4 : 1);
-    if (showPinyin && b.vocab.pinyin) {
-      ctx.fillStyle = '#e0f2fe';
-      ctx.font = '700 8.5px sans-serif';
-      ctx.fillText(b.vocab.pinyin.slice(0, 12), 0, 10);
-    }
-    ctx.restore();
+    drawGlossyEggBubble(ctx, b);
   }
 
-  // Sparks
+  // Shockwave rings
+  for (let i = S.rings.length - 1; i >= 0; i--) {
+    const rg = S.rings[i];
+    rg.r += (rg.maxR - rg.r) * 0.2;
+    rg.life -= 0.06;
+    if (rg.life <= 0) { S.rings.splice(i, 1); continue; }
+    ctx.globalAlpha = rg.life;
+    ctx.strokeStyle = rg.color;
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(rg.x, rg.y, rg.r, 0, Math.PI * 2); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
   for (let i = S.sparks.length - 1; i >= 0; i--) {
     const sp = S.sparks[i];
     sp.x += sp.vx; sp.y += sp.vy; sp.life -= 0.05;
@@ -725,20 +859,15 @@ function loopBubble() {
   }
   ctx.globalAlpha = 1;
 
-  // Draw Dino Cannon at bottom
+  // Dino Cyber Cannon Turret
   ctx.save();
   ctx.translate(S.cannonX, S.cannonY);
   ctx.rotate(S.aimAngle + Math.PI / 2);
-  ctx.fillStyle = '#f59e0b';
-  ctx.strokeStyle = '#fef08a';
-  ctx.lineWidth = 2;
-  ctx.roundRect(-12, -30, 24, 32, 7);
-  ctx.fill();
-  ctx.stroke();
+  drawBeveledBox(ctx, -13, -32, 26, 34, 7, '#f59e0b', '#b45309', '#fef08a', 2);
   ctx.restore();
 
   ctx.beginPath();
-  ctx.arc(S.cannonX, S.cannonY, 20, 0, Math.PI * 2);
+  ctx.arc(S.cannonX, S.cannonY, 21, 0, Math.PI * 2);
   ctx.fillStyle = '#0284c7';
   ctx.fill();
   ctx.strokeStyle = '#7dd3fc';
@@ -749,10 +878,13 @@ function loopBubble() {
   ctx.textBaseline = 'middle';
   ctx.fillText('🦖', S.cannonX, S.cannonY + 1);
 
-  ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
-  ctx.font = '700 11px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('🎯 Chạm hoặc kéo tia ngắm vào quả trứng Chữ Hán đúng!', S.W / 2, S.H - 7);
+  // Loaded Meaning Tag right next to Cannon
+  if (S.targetVocab) {
+    const label = S.targetVocab.vi.slice(0, 22);
+    ctx.font = '800 11px sans-serif';
+    ctx.fillStyle = '#fde68a';
+    ctx.fillText(`Đạn: "${label}"`, S.W / 2, S.H - 8);
+  }
 
   bubRafId = requestAnimationFrame(loopBubble);
 }
