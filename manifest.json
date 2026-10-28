@@ -1,0 +1,25 @@
+{
+  "name": "CyberLingo Arcade PRO — 4 Game Kinh Điển Học Tiếng Trung",
+  "short_name": "CyberArcade",
+  "description": "4 Game Kinh Điển (Pikachu, Đập Chuột, Rắn Săn Câu, Bắn Tàu Galaga) lồng tiếng Trung thực chiến nhà xưởng & tự động cập nhật bài học AI mỗi ngày.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060b18",
+  "theme_color": "#060b18",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
