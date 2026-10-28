@@ -1,9 +1,10 @@
-const CACHE_NAME = 'cyberlingo-arcade-v1.0.0';
+const CACHE_NAME = 'cyberlingo-arcade-v2.0.0';
 const CORE_ASSETS = [
   './',
   './index.html',
   './core_lingo_bank.js',
   './daily_timeline_data.js',
+  './games_v2_extra.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -30,23 +31,7 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // Network-first for daily_timeline.json so daily 17:30 lessons always stay fresh
-  if (url.pathname.endsWith('daily_timeline.json')) {
-    event.respondWith(
-      fetch(req)
-        .then((res) => {
-          if (res && res.status === 200) {
-            const copy = res.clone();
-            caches.open(CACHE_NAME).then((c) => c.put(req, copy)).catch(() => {});
-          }
-          return res;
-        })
-        .catch(() => caches.match(req))
-    );
-    return;
-  }
-
-  // Cache-first for MP3 audio (supports offline replay after hearing once)
+  // Cache-first for MP3 audio (fast offline replay)
   if (url.pathname.endsWith('.mp3')) {
     event.respondWith(
       caches.open(CACHE_NAME).then(async (cache) => {
@@ -66,19 +51,16 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Stale-while-revalidate for app shell
+  // Network-first for HTML, JS, JSON so new game upgrades appear immediately!
   event.respondWith(
-    caches.match(req).then((cached) => {
-      const fetchPromise = fetch(req)
-        .then((netRes) => {
-          if (netRes && netRes.status === 200) {
-            const copy = netRes.clone();
-            caches.open(CACHE_NAME).then((c) => c.put(req, copy)).catch(() => {});
-          }
-          return netRes;
-        })
-        .catch(() => cached);
-      return cached || fetchPromise;
-    })
+    fetch(req)
+      .then((netRes) => {
+        if (netRes && netRes.status === 200) {
+          const copy = netRes.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(req, copy)).catch(() => {});
+        }
+        return netRes;
+      })
+      .catch(() => caches.match(req))
   );
 });

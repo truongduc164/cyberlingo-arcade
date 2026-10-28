@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="CyberArcade" />
   <meta name="theme-color" content="#060b18" />
-  <title>CyberLingo Arcade PRO — 4 Game Kinh Điển Học Tiếng Trung</title>
+  <title>CyberLingo Arcade PRO v2.0 — 8 Game Kinh Điển Học Tiếng Trung</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="icon-192.png" />
@@ -56,6 +56,18 @@
       overflow: hidden;
     }
 
+    @keyframes screenShake {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 3px); }
+      40% { transform: translate(5px, -3px); }
+      60% { transform: translate(-4px, -2px); }
+      80% { transform: translate(4px, 2px); }
+    }
+
+    .shake-fx {
+      animation: screenShake 0.28s ease;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -66,15 +78,15 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
-      padding: calc(env(safe-area-inset-top, 8px) + 10px) 14px calc(env(safe-area-inset-bottom, 12px) + 18px);
+      padding: calc(env(safe-area-inset-top, 8px) + 8px) 13px calc(env(safe-area-inset-bottom, 12px) + 20px);
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 10px;
     }
 
     .lobby-header {
       text-align: center;
-      padding: 6px 4px 2px;
+      padding: 4px 4px 0;
     }
 
     .brand-pill {
@@ -83,29 +95,61 @@
       gap: 6px;
       font-size: 10.5px;
       font-weight: 800;
-      letter-spacing: 0.8px;
-      color: var(--cyan);
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.35);
+      letter-spacing: 0.7px;
+      color: #fde047;
+      background: rgba(250, 204, 21, 0.12);
+      border: 1px solid rgba(250, 204, 21, 0.4);
       padding: 3px 10px;
       border-radius: 999px;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .lobby-title {
       margin: 0;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 900;
       letter-spacing: 0.4px;
-      background: linear-gradient(90deg, #38bdf8, #34d399, #fbbf24);
+      background: linear-gradient(90deg, #38bdf8, #34d399, #fbbf24, #f472b6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .lobby-sub {
-      margin: 3px 0 0;
-      font-size: 12px;
+      margin: 2px 0 0;
+      font-size: 11.5px;
       color: var(--text-muted);
+    }
+
+    /* Rank & EXP Strip */
+    .rank-bar-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      border-radius: 14px;
+      padding: 8px 11px;
+    }
+
+    .rank-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .xp-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .xp-fill {
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, #f59e0b, #fde047, #34d399);
+      transition: width 0.3s ease;
     }
 
     /* Source & Settings Panel */
@@ -113,7 +157,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
       border-radius: 16px;
-      padding: 10px 11px;
+      padding: 9px 11px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
     }
 
@@ -121,15 +165,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       color: #cbd5e1;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
 
     .live-badge {
       color: var(--emerald);
-      font-size: 10.5px;
+      font-size: 10px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -145,20 +189,20 @@
 
     .pill-row {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       flex-wrap: wrap;
     }
 
     .pill-btn {
       flex: 1;
-      min-width: 92px;
+      min-width: 86px;
       background: rgba(30, 41, 59, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #cbd5e1;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 7px 8px;
-      border-radius: 11px;
+      padding: 6px 7px;
+      border-radius: 10px;
       cursor: pointer;
       text-align: center;
       transition: all 0.15s;
@@ -168,28 +212,28 @@
       background: linear-gradient(135deg, #0284c7, #2563eb);
       color: #fff;
       border-color: #38bdf8;
-      box-shadow: 0 3px 12px rgba(14, 165, 233, 0.45);
+      box-shadow: 0 3px 10px rgba(14, 165, 233, 0.4);
     }
 
     .daily-digest-line {
-      margin-top: 7px;
-      padding: 6px 9px;
+      margin-top: 6px;
+      padding: 5px 9px;
       border-radius: 9px;
       background: rgba(16, 185, 129, 0.1);
       border-left: 3px solid var(--emerald);
-      font-size: 11px;
+      font-size: 10.5px;
       color: #d1fae5;
-      line-height: 1.4;
+      line-height: 1.38;
     }
 
     .settings-grid {
       display: flex;
-      gap: 7px;
+      gap: 5px;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin-top: 8px;
-      padding-top: 8px;
+      margin-top: 7px;
+      padding-top: 7px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -197,10 +241,10 @@
       background: rgba(30, 41, 59, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.14);
       color: #e2e8f0;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
-      padding: 5px 9px;
-      border-radius: 10px;
+      padding: 5px 8px;
+      border-radius: 9px;
       cursor: pointer;
     }
 
@@ -210,26 +254,50 @@
       background: rgba(16, 185, 129, 0.14);
     }
 
-    /* 4 Classic Game Cartridges */
+    /* Genre Filter */
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .filter-tab {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 6px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .filter-tab.active {
+      color: #fde047;
+      border-color: rgba(250, 204, 21, 0.55);
+      background: rgba(250, 204, 21, 0.1);
+    }
+
+    /* 8 Classic Game Cartridges */
     .arcade-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 9px;
     }
 
     .game-card {
       position: relative;
       background: linear-gradient(160deg, rgba(20, 32, 58, 0.95), rgba(11, 18, 34, 0.96));
-      border: 1.5px solid rgba(56, 189, 248, 0.3);
-      border-radius: 18px;
-      padding: 12px 11px;
+      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      border-radius: 17px;
+      padding: 10px 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 7px;
+      gap: 5px;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      transition: transform 0.15s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
       text-align: left;
     }
 
@@ -237,10 +305,28 @@
       transform: scale(0.97);
     }
 
-    .game-card.c-onet { border-color: rgba(56, 189, 248, 0.55); }
-    .game-card.c-whac { border-color: rgba(245, 158, 11, 0.55); }
-    .game-card.c-snake { border-color: rgba(16, 185, 129, 0.55); }
-    .game-card.c-galaga { border-color: rgba(168, 85, 247, 0.6); }
+    .new-ribbon {
+      position: absolute;
+      top: -6px;
+      right: 10px;
+      background: linear-gradient(90deg, #f43f5e, #f59e0b);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 99px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 2px 8px rgba(244, 63, 94, 0.6);
+    }
+
+    .game-card.c-ninja { border-color: rgba(244, 63, 94, 0.6); }
+    .game-card.c-tetris { border-color: rgba(56, 189, 248, 0.6); }
+    .game-card.c-pacman { border-color: rgba(250, 204, 21, 0.65); }
+    .game-card.c-arkanoid { border-color: rgba(16, 185, 129, 0.6); }
+    .game-card.c-onet { border-color: rgba(56, 189, 248, 0.45); }
+    .game-card.c-whac { border-color: rgba(245, 158, 11, 0.5); }
+    .game-card.c-snake { border-color: rgba(16, 185, 129, 0.5); }
+    .game-card.c-galaga { border-color: rgba(168, 85, 247, 0.55); }
 
     .gc-top {
       display: flex;
@@ -249,64 +335,68 @@
     }
 
     .gc-icon {
-      font-size: 27px;
+      font-size: 25px;
       line-height: 1;
     }
 
     .gc-best {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 99px;
       background: rgba(255, 255, 255, 0.08);
       color: #fde68a;
     }
 
     .gc-title {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 900;
       color: #fff;
       line-height: 1.2;
     }
 
     .gc-skill {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       color: var(--cyan);
     }
 
+    .c-ninja .gc-skill { color: #fda4af; }
+    .c-pacman .gc-skill { color: #fde047; }
+    .c-arkanoid .gc-skill, .c-snake .gc-skill { color: #34d399; }
     .c-whac .gc-skill { color: #fbbf24; }
-    .c-snake .gc-skill { color: #34d399; }
     .c-galaga .gc-skill { color: #c084fc; }
 
     .gc-desc {
-      font-size: 11px;
+      font-size: 10.5px;
       color: #94a3b8;
-      line-height: 1.35;
+      line-height: 1.32;
     }
 
     .gc-play-btn {
       margin-top: 2px;
-      padding: 6px 0;
-      border-radius: 10px;
-      font-size: 11.5px;
+      padding: 5px 0;
+      border-radius: 9px;
+      font-size: 11px;
       font-weight: 900;
       text-align: center;
       color: #fff;
       background: linear-gradient(135deg, #0284c7, #2563eb);
     }
 
+    .c-ninja .gc-play-btn { background: linear-gradient(135deg, #e11d48, #ea580c); }
+    .c-pacman .gc-play-btn { background: linear-gradient(135deg, #ca8a04, #d97706); }
+    .c-arkanoid .gc-play-btn, .c-snake .gc-play-btn { background: linear-gradient(135deg, #059669, #0d9488); }
     .c-whac .gc-play-btn { background: linear-gradient(135deg, #d97706, #ea580c); }
-    .c-snake .gc-play-btn { background: linear-gradient(135deg, #059669, #0d9488); }
     .c-galaga .gc-play-btn { background: linear-gradient(135deg, #7c3aed, #db2777); }
 
     .switch-bird-link {
       display: block;
       text-align: center;
       text-decoration: none;
-      padding: 10px 12px;
-      border-radius: 14px;
-      font-size: 12px;
+      padding: 9px 12px;
+      border-radius: 13px;
+      font-size: 11.5px;
       font-weight: 800;
       color: #bae6fd;
       background: rgba(14, 165, 233, 0.12);
@@ -373,19 +463,19 @@
     .mission-banner {
       flex-shrink: 0;
       margin: 6px 10px 4px;
-      padding: 8px 11px;
+      padding: 7px 11px;
       background: rgba(15, 23, 42, 0.94);
       border: 1.5px solid rgba(56, 189, 248, 0.4);
       border-radius: 14px;
-      min-height: 56px;
+      min-height: 52px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 3px;
+      gap: 2px;
     }
 
     .mission-sub {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       color: var(--cyan);
       display: flex;
@@ -394,14 +484,14 @@
     }
 
     .mission-main {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 900;
       color: #fff;
-      line-height: 1.28;
+      line-height: 1.25;
     }
 
     .mission-extra {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #fde68a;
       font-weight: 700;
     }
@@ -412,7 +502,7 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 99px;
       overflow: hidden;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .timer-fill {
@@ -432,7 +522,99 @@
       overflow: hidden;
     }
 
-    /* -------- MODE 1: PIKACHU ONET -------- */
+    /* Full Canvas Views (Ninja, Galaga, Arkanoid) */
+    .canvas-view-full {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      position: relative;
+    }
+
+    .canvas-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      touch-action: none;
+    }
+
+    #canvas-ninja {
+      background: radial-gradient(circle at 50% 35%, #1e1633 0%, #070b18 80%);
+      border: 1.5px solid rgba(244, 63, 94, 0.45);
+    }
+
+    #canvas-galaga {
+      background: radial-gradient(circle at 50% 25%, #131c38 0%, #050814 80%);
+      border: 1.5px solid rgba(168, 85, 247, 0.45);
+    }
+
+    #canvas-arkanoid {
+      background: radial-gradient(circle at 50% 20%, #0d2538 0%, #050914 80%);
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+    }
+
+    /* Tetris View */
+    #view-tetris {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-height: 0;
+    }
+
+    #canvas-tetris {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      background: #070d1c;
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      border-radius: 15px;
+      touch-action: none;
+    }
+
+    .tetris-controls {
+      flex-shrink: 0;
+      display: flex;
+      gap: 8px;
+    }
+
+    .tet-btn {
+      flex: 1;
+      padding: 9px 6px;
+      border-radius: 11px;
+      background: rgba(30, 41, 59, 0.95);
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .tet-btn.drop {
+      flex: 1.4;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      border-color: #fde047;
+    }
+
+    /* Pac-Man View */
+    #view-pacman {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      min-height: 0;
+    }
+
+    #canvas-pacman {
+      background: #050a18;
+      border: 2px solid rgba(250, 204, 21, 0.5);
+      border-radius: 16px;
+      touch-action: none;
+    }
+
+    /* Pikachu Onet */
     #view-onet {
       flex: 1;
       display: flex;
@@ -558,7 +740,7 @@
       to { transform: scale(1.05); }
     }
 
-    /* -------- MODE 2: WHAC-A-VOICE -------- */
+    /* Whac-A-Voice */
     #view-whac {
       flex: 1;
       display: flex;
@@ -577,15 +759,17 @@
     }
 
     .whac-wave {
-      font-size: 26px;
-      margin-bottom: 2px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #7dd3fc;
+      margin-bottom: 3px;
     }
 
     .whac-reveal {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 900;
       color: #fde68a;
-      min-height: 24px;
+      min-height: 22px;
     }
 
     .whac-grid {
@@ -594,7 +778,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: repeat(3, 1fr);
-      gap: 11px;
+      gap: 10px;
     }
 
     .whac-hole {
@@ -607,7 +791,7 @@
       display: flex;
       align-items: stretch;
       justify-content: center;
-      padding: 7px;
+      padding: 6px;
     }
 
     .whac-mole {
@@ -620,49 +804,29 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 6px 7px;
+      padding: 5px 7px;
       text-align: center;
       cursor: pointer;
       transform: translateY(115%);
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.15s, border-color 0.15s;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.15s;
     }
 
-    .whac-mole.up {
-      transform: translateY(0%);
-    }
-
+    .whac-mole.up { transform: translateY(0%); }
     .whac-mole.hit-ok {
       background: linear-gradient(165deg, #065f46, #047857);
       border-color: #34d399;
       transform: scale(1.04);
     }
-
     .whac-mole.hit-bad {
       background: linear-gradient(165deg, #881337, #9f1239);
       border-color: #fb7185;
     }
 
-    .mole-avatar {
-      font-size: 19px;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
+    .mole-avatar { font-size: 18px; line-height: 1; margin-bottom: 2px; }
+    .mole-vi { font-size: 12.5px; font-weight: 800; color: #f8fafc; line-height: 1.2; }
+    .mole-zh-sub { font-size: 11.5px; font-weight: 900; color: #fde047; margin-top: 2px; }
 
-    .mole-vi {
-      font-size: 13px;
-      font-weight: 800;
-      color: #f8fafc;
-      line-height: 1.22;
-    }
-
-    .mole-zh-sub {
-      font-size: 11.5px;
-      font-weight: 900;
-      color: #fde047;
-      margin-top: 2px;
-    }
-
-    /* -------- MODE 3: CYBER SNAKE GRAMMAR -------- */
+    /* Snake Grammar */
     #view-snake {
       flex: 1;
       display: flex;
@@ -685,7 +849,7 @@
     .slot-chip {
       padding: 3px 8px;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 900;
       background: rgba(30, 41, 59, 0.85);
       border: 1px dashed rgba(148, 163, 184, 0.4);
@@ -707,7 +871,6 @@
       background: #070d1c;
       border: 2px solid rgba(16, 185, 129, 0.45);
       border-radius: 16px;
-      box-shadow: 0 0 22px rgba(16, 185, 129, 0.15);
       touch-action: none;
     }
 
@@ -715,18 +878,17 @@
       flex-shrink: 0;
       display: grid;
       grid-template-columns: repeat(3, 56px);
-      grid-template-rows: repeat(2, 42px);
-      gap: 6px;
+      grid-template-rows: repeat(2, 40px);
+      gap: 5px;
       justify-content: center;
-      padding-bottom: 2px;
     }
 
     .dpad-btn {
       background: rgba(30, 41, 59, 0.92);
       border: 1.5px solid rgba(56, 189, 248, 0.4);
-      border-radius: 12px;
+      border-radius: 11px;
       color: #f8fafc;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 900;
       display: flex;
       align-items: center;
@@ -739,25 +901,7 @@
       transform: scale(0.94);
     }
 
-    /* -------- MODE 4: GALAGA QC SHOOTER -------- */
-    #view-galaga {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-      position: relative;
-    }
-
-    #canvas-galaga {
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 50% 25%, #131c38 0%, #050814 80%);
-      border: 1.5px solid rgba(168, 85, 247, 0.45);
-      border-radius: 16px;
-      touch-action: none;
-    }
-
-    /* ================= RESULT MODAL ================= */
+    /* Result Modal */
     #modal-result {
       position: absolute;
       inset: 0;
@@ -781,18 +925,8 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
     }
 
-    .res-title {
-      font-size: 21px;
-      font-weight: 900;
-      margin: 0 0 4px;
-      color: #fde047;
-    }
-
-    .res-score {
-      font-size: 14px;
-      color: #cbd5e1;
-      margin-bottom: 10px;
-    }
+    .res-title { font-size: 21px; font-weight: 900; margin: 0 0 4px; color: #fde047; }
+    .res-score { font-size: 14px; color: #cbd5e1; margin-bottom: 10px; }
 
     .learned-box {
       max-height: 175px;
@@ -817,11 +951,7 @@
 
     .learned-item:last-child { border-bottom: none; }
 
-    .res-actions {
-      display: flex;
-      gap: 8px;
-    }
-
+    .res-actions { display: flex; gap: 8px; }
     .btn-primary {
       flex: 1;
       padding: 11px 10px;
@@ -860,6 +990,7 @@
       border-radius: 99px;
       z-index: 60;
       pointer-events: none;
+      white-space: nowrap;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     }
   </style>
@@ -869,15 +1000,26 @@
     <!-- ================= ARCADE LOBBY ================= -->
     <section id="screen-lobby">
       <div class="lobby-header">
-        <div class="brand-pill">🕹️ DEAN OPTIMIZE • ARCADE LAB v1.0</div>
-        <h1 class="lobby-title">CYBERLINGO ARCADE</h1>
-        <p class="lobby-sub">4 Game Kinh Điển Lồng Tiếng Trung Thực Chiến</p>
+        <div class="brand-pill">🕹️ DEAN OPTIMIZE • SUPER ARCADE v2.0</div>
+        <h1 class="lobby-title">CYBERLINGO ARCADE 8-IN-1</h1>
+        <p class="lobby-sub">8 Game Kinh Điển Huyền Thoại Lồng Tiếng Trung Thực Chiến</p>
+      </div>
+
+      <!-- Player Rank & EXP -->
+      <div class="rank-bar-card">
+        <div class="rank-row">
+          <span id="rank-title" style="color:#fde047;">🎖️ Cấp 1: Tân Binh Xưởng</span>
+          <span id="rank-xp-txt" style="color:#94a3b8;">0 / 200 EXP</span>
+        </div>
+        <div class="xp-track">
+          <div class="xp-fill" id="rank-xp-fill"></div>
+        </div>
       </div>
 
       <!-- Data Source & Live Sync -->
       <div class="control-box">
         <div class="box-label">
-          <span>📚 NGUỒN BÀI HỌC TIẾNG TRUNG</span>
+          <span>📚 NGUỒN BÀI HỌC</span>
           <span class="live-badge" id="sync-status-badge"><span class="live-dot"></span> Tự động đồng bộ 17:30</span>
         </div>
         <div class="pill-row">
@@ -890,54 +1032,112 @@
         </div>
 
         <div class="settings-grid">
+          <button class="mini-chip on" id="chip-pace" onclick="cycleGamePace()">⚡ Nhịp: Chuẩn</button>
           <button class="mini-chip on" id="chip-pinyin" onclick="togglePinyin()">🔤 Pinyin: BẬT</button>
-          <button class="mini-chip on" id="chip-speed" onclick="cycleVoiceSpeed()">🗣️ Tốc độ: 1.0x</button>
-          <button class="mini-chip" onclick="testLobbyVoice()">🔊 Thử Loa</button>
+          <button class="mini-chip on" id="chip-speed" onclick="cycleVoiceSpeed()">🗣️ Đọc: 1.0x</button>
+          <button class="mini-chip" onclick="testLobbyVoice()">🔊 Loa</button>
         </div>
       </div>
 
-      <!-- 4 Classic Arcade Game Cartridges -->
+      <!-- Genre Filter -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" id="flt-all" onclick="filterGames('all')">🌟 Tất Cả (8)</button>
+        <button class="filter-tab" id="flt-action" onclick="filterGames('action')">🔥 Hành Động Cuốn</button>
+        <button class="filter-tab" id="flt-brain" onclick="filterGames('brain')">🧠 Ghép Từ & Trí Nhớ</button>
+      </div>
+
+      <!-- 8 Legendary Classic Cartridges -->
       <div class="arcade-grid">
-        <div class="game-card c-onet" onclick="launchGame('onet')">
+        <!-- NEW 4 BLOCKBUSTERS -->
+        <div class="game-card c-ninja" data-genre="action" onclick="launchGame('ninja')">
+          <span class="new-ribbon">HOT MỚI</span>
+          <div class="gc-top">
+            <span class="gc-icon">🥷</span>
+            <span class="gc-best" id="best-ninja">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">1. Chém Quả Âm Thanh</div>
+          <div class="gc-skill">⚔️ Fruit Ninja Phản Xạ</div>
+          <div class="gc-desc">Quẹt kiếm ánh sáng chém đôi quả Chữ Hán đúng trên không trung, né bom nổ!</div>
+          <div class="gc-play-btn">▶ CHÉM NGAY</div>
+        </div>
+
+        <div class="game-card c-tetris" data-genre="brain" onclick="launchGame('tetris')">
+          <span class="new-ribbon">HOT MỚI</span>
+          <div class="gc-top">
+            <span class="gc-icon">🧱</span>
+            <span class="gc-best" id="best-tetris">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">2. Xếp Gạch Từ Vựng</div>
+          <div class="gc-skill">💥 Tetris Thả Khối Nổ Hàng</div>
+          <div class="gc-desc">Điều hướng viên gạch Chữ Hán rơi trúng cột nghĩa Việt để nổ hàng & phá đá cản!</div>
+          <div class="gc-play-btn">▶ XẾP NGAY</div>
+        </div>
+
+        <div class="game-card c-pacman" data-genre="action" onclick="launchGame('pacman')">
+          <span class="new-ribbon">HOT MỚI</span>
+          <div class="gc-top">
+            <span class="gc-icon">👻</span>
+            <span class="gc-best" id="best-pacman">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">3. Pac-Man Săn Chữ</div>
+          <div class="gc-skill">🍒 Mê Cung Né Ma QC</div>
+          <div class="gc-desc">Lượn mê cung ăn ngọc Chữ Hán mục tiêu để hóa Siêu Cấp nuốt ngược Ma QC!</div>
+          <div class="gc-play-btn">▶ SĂN NGAY</div>
+        </div>
+
+        <div class="game-card c-arkanoid" data-genre="action" onclick="launchGame('arkanoid')">
+          <span class="new-ribbon">HOT MỚI</span>
+          <div class="gc-top">
+            <span class="gc-icon">🏐</span>
+            <span class="gc-best" id="best-arkanoid">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">4. Phá Gạch Arkanoid</div>
+          <div class="gc-skill">🏓 Đỡ Bóng Nảy Hứng Nghĩa</div>
+          <div class="gc-desc">Kéo thanh trượt nảy bóng phá vỡ tường gạch Chữ Hán & hứng viên nang nghĩa!</div>
+          <div class="gc-play-btn">▶ PHÁ NGAY</div>
+        </div>
+
+        <!-- ORIGINAL 4 CLASSICS -->
+        <div class="game-card c-onet" data-genre="brain" onclick="launchGame('onet')">
           <div class="gc-top">
             <span class="gc-icon">🔗</span>
             <span class="gc-best" id="best-onet">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">1. Pikachu Nối Từ</div>
-          <div class="gc-skill">⚡ Nhớ Mặt Chữ Hán</div>
+          <div class="gc-title">5. Pikachu Nối Từ</div>
+          <div class="gc-skill">⚡ Onet Nhớ Mặt Chữ</div>
           <div class="gc-desc">Chạm ô nghe phát âm, nối cặp Chữ Hán ↔ Nghĩa Việt tối đa 3 đoạn gấp khúc.</div>
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
         </div>
 
-        <div class="game-card c-whac" onclick="launchGame('whac')">
+        <div class="game-card c-whac" data-genre="action" onclick="launchGame('whac')">
           <div class="gc-top">
             <span class="gc-icon">🔨</span>
             <span class="gc-best" id="best-whac">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">2. Đập Chuột Nghe Ý</div>
-          <div class="gc-skill">🎧 Luyện Nghe 100%</div>
+          <div class="gc-title">6. Đập Chuột Nghe Ý</div>
+          <div class="gc-skill">🎧 Luyện Tai Nghe 100%</div>
           <div class="gc-desc">Ẩn mặt chữ, nghe giọng bản xứ đọc rồi đập trúng nghĩa tiếng Việt trong chớp mắt!</div>
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
         </div>
 
-        <div class="game-card c-snake" onclick="launchGame('snake')">
+        <div class="game-card c-snake" data-genre="brain" onclick="launchGame('snake')">
           <div class="gc-top">
             <span class="gc-icon">🐍</span>
             <span class="gc-best" id="best-snake">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">3. Rắn Săn Ghép Câu</div>
-          <div class="gc-skill">🧩 Chuẩn Ngữ Pháp</div>
+          <div class="gc-title">7. Rắn Săn Ghép Câu</div>
+          <div class="gc-skill">🧩 Snake Chuẩn Ngữ Pháp</div>
           <div class="gc-desc">Lái rắn săn đúng thứ tự từng cụm từ để lắp thành câu giao tiếp nhà xưởng.</div>
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
         </div>
 
-        <div class="game-card c-galaga" onclick="launchGame('galaga')">
+        <div class="game-card c-galaga" data-genre="action" onclick="launchGame('galaga')">
           <div class="gc-top">
             <span class="gc-icon">👾</span>
             <span class="gc-best" id="best-galaga">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">4. Bắn Tàu Đấu Boss</div>
-          <div class="gc-skill">🚀 Phản Xạ Hội Thoại</div>
+          <div class="gc-title">8. Bắn Tàu Đấu Boss</div>
+          <div class="gc-skill">🚀 Galaga Đối Đáp QC</div>
           <div class="gc-desc">Kéo phi thuyền bắn hạ từ đúng & đấu Boss Xưởng Trưởng hỏi đáp thực tế!</div>
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
         </div>
@@ -973,6 +1173,39 @@
       </div>
 
       <div id="game-arena">
+        <!-- View 5: Fruit Ninja -->
+        <div id="view-ninja" class="canvas-view-full hidden">
+          <canvas id="canvas-ninja" class="canvas-fill"></canvas>
+        </div>
+
+        <!-- View 6: Tetris -->
+        <div id="view-tetris" class="hidden">
+          <canvas id="canvas-tetris"></canvas>
+          <div class="tetris-controls">
+            <button class="tet-btn" onpointerdown="tetrisAction('left')">◀ Trái</button>
+            <button class="tet-btn drop" onpointerdown="tetrisAction('drop')">⬇ THẢ NHANH</button>
+            <button class="tet-btn" onpointerdown="tetrisAction('right')">Phải ▶</button>
+          </div>
+        </div>
+
+        <!-- View 7: Pac-Man -->
+        <div id="view-pacman" class="hidden">
+          <canvas id="canvas-pacman" width="333" height="297"></canvas>
+          <div class="dpad-wrap">
+            <div></div>
+            <button class="dpad-btn" onpointerdown="pacSteer(0, -1)">▲</button>
+            <div></div>
+            <button class="dpad-btn" onpointerdown="pacSteer(-1, 0)">◀</button>
+            <button class="dpad-btn" onpointerdown="pacSteer(0, 1)">▼</button>
+            <button class="dpad-btn" onpointerdown="pacSteer(1, 0)">▶</button>
+          </div>
+        </div>
+
+        <!-- View 8: Arkanoid -->
+        <div id="view-arkanoid" class="canvas-view-full hidden">
+          <canvas id="canvas-arkanoid" class="canvas-fill"></canvas>
+        </div>
+
         <!-- View 1: Pikachu Onet -->
         <div id="view-onet" class="hidden">
           <div class="onet-toolbar">
@@ -997,7 +1230,7 @@
         <!-- View 3: Cyber Snake Grammar -->
         <div id="view-snake" class="hidden">
           <div class="snake-slots" id="snake-slots"></div>
-          <canvas id="canvas-snake" width="342" height="304"></canvas>
+          <canvas id="canvas-snake" width="342" height="296"></canvas>
           <div class="dpad-wrap">
             <div></div>
             <button class="dpad-btn" onpointerdown="snakeSteer(0, -1)">▲</button>
@@ -1009,8 +1242,8 @@
         </div>
 
         <!-- View 4: Galaga QC Shooter -->
-        <div id="view-galaga" class="hidden">
-          <canvas id="canvas-galaga"></canvas>
+        <div id="view-galaga" class="canvas-view-full hidden">
+          <canvas id="canvas-galaga" class="canvas-fill"></canvas>
         </div>
       </div>
     </section>
@@ -1037,7 +1270,6 @@
   <script src="daily_timeline_data.js"></script>
   <script src="core_lingo_bank.js"></script>
   <script>
-    // Polyfill roundRect for older mobile WebViews
     if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
       CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
         const rad = typeof r === 'number' ? r : (Array.isArray(r) ? r[0] : 8);
@@ -1055,17 +1287,81 @@
 
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js').then((reg) => reg.update().catch(() => {})).catch(() => {});
       });
     }
 
     // =========================================================
-    // 1. AUDIO & VOICE ENGINE (Shared CDN + WebAudio Synthesizer)
+    // 1. AUDIO, PACE, & PLAYER PROGRESSION ENGINE
     // =========================================================
     const CYBERBIRD_CDN_BASE = 'https://truongduc164.github.io/cyberbird-lingo/';
+    const ALL_GAME_IDS = ['ninja', 'tetris', 'pacman', 'arkanoid', 'onet', 'whac', 'snake', 'galaga'];
+
     let showPinyin = true;
     let voiceSpeed = 1.0;
-    let sourceMode = 'daily'; // 'daily' | 'factory' | 'all'
+    let sourceMode = 'daily';
+    let gamePace = 'normal'; // 'chill' | 'normal' | 'pro'
+
+    function getSpeedFactor() {
+      if (gamePace === 'chill') return 0.76;
+      if (gamePace === 'pro') return 1.26;
+      return 1.0;
+    }
+
+    function getScoreMultiplier() {
+      if (gamePace === 'pro') return 1.5;
+      return 1.0;
+    }
+
+    function cycleGamePace() {
+      const order = ['chill', 'normal', 'pro'];
+      gamePace = order[(order.indexOf(gamePace) + 1) % order.length];
+      const labels = { chill: '🌱 Nhịp: Thư Giãn', normal: '⚡ Nhịp: Chuẩn', pro: '🔥 Nhịp: Cao Thủ' };
+      document.getElementById('chip-pace').textContent = labels[gamePace];
+      sound.sfxTap();
+    }
+
+    function filterGames(genre) {
+      ['all', 'action', 'brain'].forEach((g) => {
+        document.getElementById('flt-' + g).classList.toggle('active', g === genre);
+      });
+      document.querySelectorAll('.game-card').forEach((card) => {
+        if (genre === 'all' || card.dataset.genre === genre) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      sound.sfxTap();
+    }
+
+    function addArcadeXP(amount) {
+      const cur = parseInt(localStorage.getItem('arcade_total_xp') || '0', 10) + amount;
+      try { localStorage.setItem('arcade_total_xp', String(cur)); } catch (e) {}
+    }
+
+    function refreshRankUI() {
+      const xp = parseInt(localStorage.getItem('arcade_total_xp') || '0', 10);
+      const ranks = [
+        { min: 0, max: 200, name: '🎖️ Cấp 1: Tân Binh Xưởng' },
+        { min: 200, max: 600, name: '🥈 Cấp 2: Kỹ Sư Phản Xạ' },
+        { min: 600, max: 1400, name: '🥇 Cấp 3: Tổ Trưởng Tinh Anh' },
+        { min: 1400, max: 3000, name: '💎 Cấp 4: Giám Đốc Kỹ Thuật' },
+        { min: 3000, max: 99999, name: '👑 Cấp 5: Đại Sư Tiếng Trung' }
+      ];
+      const rk = ranks.find((r) => xp < r.max) || ranks[ranks.length - 1];
+      const pct = Math.min(100, Math.max(6, ((xp - rk.min) / (rk.max - rk.min)) * 100));
+      document.getElementById('rank-title').textContent = rk.name;
+      document.getElementById('rank-xp-txt').textContent = `${xp} / ${rk.max} EXP`;
+      document.getElementById('rank-xp-fill').style.width = pct + '%';
+    }
+
+    function triggerScreenShake() {
+      const shell = document.getElementById('app-shell');
+      shell.classList.remove('shake-fx');
+      void shell.offsetWidth;
+      shell.classList.add('shake-fx');
+    }
 
     class ArcadeSoundEngine {
       constructor() {
@@ -1127,7 +1423,7 @@
           setTimeout(() => this.tone(f, 0.16, 'triangle', 0.16), i * 80);
         });
       }
-      sfxLaser() { this.tone(760, 0.055, 'sawtooth', 0.028, 260); }
+      sfxLaser() { this.tone(760, 0.055, 'sawtooth', 0.026, 260); }
       sfxWrong() { this.tone(190, 0.22, 'sawtooth', 0.14, 110); }
 
       speakChinese(zhText, audioRelPath) {
@@ -1211,7 +1507,7 @@
       const coreVocab = window.FULL_VOCAB_DATABASE || [];
       const coreDlgs = window.FACTORY_DIALOGUES || [];
 
-      if (sourceMode === 'daily' && dailyVocab.length >= 8) {
+      if (sourceMode === 'daily' && dailyVocab.length >= 9) {
         return {
           vocab: dailyVocab,
           dialogues: dailyDlgs.length > 0 ? dailyDlgs : coreDlgs
@@ -1220,7 +1516,6 @@
       if (sourceMode === 'factory') {
         return { vocab: coreVocab, dialogues: coreDlgs };
       }
-      // Deduplicate combined pool by zh
       const seen = new Set();
       const mergedV = [];
       for (const item of [...dailyVocab, ...coreVocab]) {
@@ -1239,7 +1534,7 @@
       if (sourceMode === 'daily' && tl.days && tl.days.length > 0) {
         const latest = tl.days[0];
         el.innerHTML = `✨ <b>${latest.label}: ${latest.topic_title || 'Bài học thực chiến'}</b><br>` +
-          `<span style="color:#94a3b8">Kho nhật ký đang có <b>${pools.vocab.length} từ vựng</b> & <b>${pools.dialogues.length} hội thoại</b> có giọng đọc chuẩn.</span>`;
+          `<span style="color:#94a3b8">Đang nạp <b>${pools.vocab.length} từ vựng</b> & <b>${pools.dialogues.length} hội thoại</b> giọng đọc chuẩn cho cả 8 game.</span>`;
       } else if (sourceMode === 'factory') {
         el.innerHTML = `🏭 <b>Kho Chuẩn Nhà Xưởng & Tự Động Hóa</b><br><span style="color:#94a3b8">Gồm <b>${pools.vocab.length} từ chuyên ngành</b> (QC, Điện PLC, Sản xuất, Văn phòng) & <b>${pools.dialogues.length} tình huống</b>.</span>`;
       } else {
@@ -1259,7 +1554,7 @@
     function togglePinyin() {
       showPinyin = !showPinyin;
       const chip = document.getElementById('chip-pinyin');
-      chip.textContent = showPinyin ? '🔤 Pinyin: BẬT' : '🔤 Pinyin: ẨN (Nhớ chữ)';
+      chip.textContent = showPinyin ? '🔤 Pinyin: BẬT' : '🔤 Pinyin: ẨN';
       chip.classList.toggle('on', showPinyin);
       sound.sfxTap();
     }
@@ -1268,7 +1563,7 @@
       const speeds = [0.8, 1.0, 1.15];
       const idx = (speeds.indexOf(voiceSpeed) + 1) % speeds.length;
       voiceSpeed = speeds[idx];
-      document.getElementById('chip-speed').textContent = `🗣️ Tốc độ: ${voiceSpeed}x`;
+      document.getElementById('chip-speed').textContent = `🗣️ Đọc: ${voiceSpeed}x`;
       sound.sfxTap();
     }
 
@@ -1290,17 +1585,18 @@
     }
 
     function refreshHighScoresUI() {
-      ['onet', 'whac', 'snake', 'galaga'].forEach((g) => {
+      ALL_GAME_IDS.forEach((g) => {
         const val = parseInt(localStorage.getItem('arcade_best_' + g) || '0', 10);
         const el = document.getElementById('best-' + g);
         if (el) el.textContent = `Kỷ lục: ${val}`;
       });
+      refreshRankUI();
     }
 
     // =========================================================
     // 3. SHARED GAME SESSION CONTROLLER
     // =========================================================
-    let activeGame = null; // 'onet' | 'whac' | 'snake' | 'galaga'
+    let activeGame = null;
     let score = 0;
     let combo = 1;
     let lives = 3;
@@ -1333,7 +1629,9 @@
     function updateHUD() {
       document.getElementById('hud-score').textContent = `🏆 ${score}`;
       document.getElementById('hud-combo').textContent = `🔥 x${combo}`;
-      document.getElementById('hud-lives').textContent = lives > 0 ? '❤️'.repeat(lives) : '💔';
+      document.getElementById('hud-lives').textContent = activeGame === 'tetris'
+        ? '🧱x5'
+        : (lives > 0 ? '❤️'.repeat(lives) : '💔');
       document.getElementById('mission-stage').textContent = `Màn ${stageNum}`;
     }
 
@@ -1378,12 +1676,16 @@
       document.getElementById('modal-result').classList.add('hidden');
       document.getElementById('screen-game').classList.remove('hidden');
 
-      ['onet', 'whac', 'snake', 'galaga'].forEach((m) => {
+      ALL_GAME_IDS.forEach((m) => {
         document.getElementById('view-' + m).classList.toggle('hidden', m !== mode);
       });
 
       updateHUD();
-      if (mode === 'onet') initOnetGame();
+      if (mode === 'ninja') initNinjaGame();
+      else if (mode === 'tetris') initTetrisGame();
+      else if (mode === 'pacman') initPacmanGame();
+      else if (mode === 'arkanoid') initArkanoidGame();
+      else if (mode === 'onet') initOnetGame();
       else if (mode === 'whac') initWhacGame();
       else if (mode === 'snake') initSnakeGame();
       else if (mode === 'galaga') initGalagaGame();
@@ -1414,7 +1716,7 @@
 
       const box = document.getElementById('res-learned');
       box.innerHTML = '';
-      const list = encounteredWords.slice(-12).reverse();
+      const list = encounteredWords.slice(-14).reverse();
       if (list.length === 0) {
         box.innerHTML = '<div style="color:#94a3b8;font-size:12px;text-align:center;">Chưa có từ nào trong lượt này.</div>';
       } else {
@@ -1434,7 +1736,7 @@
     // =========================================================
     const ONET_ROWS = 4;
     const ONET_COLS = 4;
-    let onetBoard = []; // 6x6 padded matrix (1..4 x 1..4 active)
+    let onetBoard = [];
     let onetSelected = null;
     let onetHintsLeft = 3;
     let onetPairsRemaining = 0;
@@ -1450,7 +1752,7 @@
     function startOnetStage() {
       clearInterval(onetTimerId);
       onetSelected = null;
-      onetTimeLeft = Math.max(55, 95 - (stageNum - 1) * 5);
+      onetTimeLeft = Math.round(Math.max(55, 95 - (stageNum - 1) * 5) / getSpeedFactor());
       document.getElementById('onet-hints').textContent = onetHintsLeft;
 
       const pools = getActivePools();
@@ -1522,16 +1824,13 @@
 
     function findOnetPath(r1, c1, r2, c2) {
       if (r1 === r2 && c1 === c2) return null;
-      // 0 turns
       if (clearLineOnet(r1, c1, r2, c2)) return [[r1, c1], [r2, c2]];
-      // 1 turn
       if (isOnetEmpty(r1, c2) && clearLineOnet(r1, c1, r1, c2) && clearLineOnet(r1, c2, r2, c2)) {
         return [[r1, c1], [r1, c2], [r2, c2]];
       }
       if (isOnetEmpty(r2, c1) && clearLineOnet(r1, c1, r2, c1) && clearLineOnet(r2, c1, r2, c2)) {
         return [[r1, c1], [r2, c1], [r2, c2]];
       }
-      // 2 turns via row k
       for (let r = 0; r <= ONET_ROWS + 1; r++) {
         if (r === r1 || r === r2) continue;
         if (isOnetEmpty(r, c1) && isOnetEmpty(r, c2) &&
@@ -1539,7 +1838,6 @@
           return [[r1, c1], [r, c1], [r, c2], [r2, c2]];
         }
       }
-      // 2 turns via col k
       for (let c = 0; c <= ONET_COLS + 1; c++) {
         if (c === c1 || c === c2) continue;
         if (isOnetEmpty(r1, c) && isOnetEmpty(r2, c) &&
@@ -1672,8 +1970,9 @@
           onetBoard[onetSelected.r][onetSelected.c] = null;
           onetBoard[r][c] = null;
           onetPairsRemaining--;
-          score += 15 * combo;
-          combo = Math.min(8, combo + 1);
+          score += Math.round(15 * combo * getScoreMultiplier());
+          addArcadeXP(8);
+          combo = Math.min(10, combo + 1);
           onetSelected = null;
 
           setMissionBanner(
@@ -1690,6 +1989,7 @@
               sound.sfxFanfare();
               stageNum++;
               score += 50;
+              addArcadeXP(20);
               showToast(`🎉 Qua Màn ${stageNum}! Thưởng +50 điểm!`);
               startOnetStage();
             } else {
@@ -1814,7 +2114,7 @@
 
       sound.speakChinese(whacTarget.zh, whacTarget.audio);
 
-      const roundDur = Math.max(3.6, 6.2 - Math.floor(score / 120) * 0.4);
+      const roundDur = Math.max(3.4, (6.2 - Math.floor(score / 120) * 0.35) / getSpeedFactor());
       let rem = roundDur;
       document.getElementById('mission-timer-fill').style.width = '100%';
 
@@ -1823,7 +2123,7 @@
         document.getElementById('mission-timer-fill').style.width = Math.max(0, (rem / roundDur) * 100) + '%';
         if (rem <= 0) {
           clearInterval(whacInterval);
-          handleWhacMiss(-1, options);
+          handleWhacMiss();
         }
       }, 100);
     }
@@ -1840,8 +2140,9 @@
         document.getElementById('whac-reveal').textContent = `🎯 ${whacTarget.zh} (${whacTarget.pinyin || ''}) = ${whacTarget.vi}`;
         sound.sfxSuccess();
         recordLearnedWord(whacTarget);
-        score += 15 * combo;
-        combo = Math.min(8, combo + 1);
+        score += Math.round(15 * combo * getScoreMultiplier());
+        addArcadeXP(10);
+        combo = Math.min(10, combo + 1);
         if (score >= stageNum * 120) stageNum++;
         updateHUD();
         whacNextTimeout = setTimeout(() => {
@@ -1851,13 +2152,14 @@
       } else {
         mole.classList.add('hit-bad');
         document.getElementById(`mole-zh-${idx}`).textContent = `❌ (${opt.zh})`;
-        handleWhacMiss(idx, null);
+        handleWhacMiss();
       }
     }
 
     function handleWhacMiss() {
       whacRoundLocked = true;
       sound.sfxWrong();
+      triggerScreenShake();
       combo = 1;
       lives--;
       updateHUD();
@@ -1899,9 +2201,10 @@
     let snakeNextDir = { x: 1, y: 0 };
     let snakeChunks = [];
     let snakeChunkIdx = 0;
-    let snakeOrbs = []; // { x, y, text, isNext, isDecoy, seqIdx }
+    let snakeOrbs = [];
     let snakeSentenceObj = null;
     let snakeTickTimer = null;
+    let snakePoolQueue = [];
 
     function splitChineseIntoChunks(zhStr) {
       const clean = (zhStr || '').replace(/[。！？!?]/g, '').trim();
@@ -1952,8 +2255,6 @@
       return shuffleArr(out);
     }
 
-    let snakePoolQueue = [];
-
     function initSnakeGame() {
       snakePoolQueue = buildSnakeSentencePool();
       snakeBody = [
@@ -1968,19 +2269,18 @@
       loadNextSnakeSentence();
 
       clearInterval(snakeTickTimer);
-      snakeTickTimer = setInterval(stepSnake, 285);
+      snakeTickTimer = setInterval(stepSnake, Math.round(285 / getSpeedFactor()));
       cleanupFns.push(() => clearInterval(snakeTickTimer));
     }
 
     function setupSnakeControls() {
       const cvs = document.getElementById('canvas-snake');
       let sx = 0, sy = 0;
-      const onStart = (e) => {
+      cvs.onpointerdown = (e) => {
         const pt = e.touches ? e.touches[0] : e;
-        sx = pt.clientX;
-        sy = pt.clientY;
+        sx = pt.clientX; sy = pt.clientY;
       };
-      const onEnd = (e) => {
+      cvs.onpointerup = (e) => {
         const pt = e.changedTouches ? e.changedTouches[0] : e;
         const dx = pt.clientX - sx;
         const dy = pt.clientY - sy;
@@ -1988,8 +2288,6 @@
         if (Math.abs(dx) > Math.abs(dy)) snakeSteer(dx > 0 ? 1 : -1, 0);
         else snakeSteer(0, dy > 0 ? 1 : -1);
       };
-      cvs.onpointerdown = onStart;
-      cvs.onpointerup = onEnd;
 
       const onKey = (e) => {
         if (activeGame !== 'snake') return;
@@ -2064,17 +2362,14 @@
         return { x: 4, y: 2 };
       };
 
-      // 1. Target next chunk
       const p1 = pickSpot();
       snakeOrbs.push({ x: p1.x, y: p1.y, text: snakeChunks[snakeChunkIdx], isNext: true, isDecoy: false });
 
-      // 2. Later chunk if available
       if (snakeChunkIdx + 1 < snakeChunks.length) {
         const p2 = pickSpot();
         snakeOrbs.push({ x: p2.x, y: p2.y, text: snakeChunks[snakeChunkIdx + 1], isNext: false, isDecoy: false });
       }
 
-      // 3. One vocab distractor orb
       const pools = getActivePools();
       const randDecoy = pools.vocab[Math.floor(Math.random() * pools.vocab.length)];
       const decoyTxt = (randDecoy && !snakeChunks.includes(randDecoy.zh)) ? randDecoy.zh : '随便混装';
@@ -2097,12 +2392,12 @@
           snakeBody.unshift({ x: nx, y: ny, label: orb.text });
           if (snakeBody.length > 8) snakeBody.pop();
           snakeChunkIdx++;
-          score += 20 * combo;
-          combo = Math.min(8, combo + 1);
+          score += Math.round(20 * combo * getScoreMultiplier());
+          addArcadeXP(10);
+          combo = Math.min(10, combo + 1);
           updateHUD();
 
           if (snakeChunkIdx >= snakeChunks.length) {
-            // Completed whole sentence!
             recordLearnedWord({
               zh: snakeSentenceObj.zh,
               pinyin: snakeSentenceObj.pinyin,
@@ -2110,6 +2405,7 @@
               audio: snakeSentenceObj.audio
             });
             score += 35;
+            addArcadeXP(15);
             stageNum++;
             updateHUD();
             renderSnakeSlots();
@@ -2125,12 +2421,12 @@
             spawnSnakeOrbs();
           }
         } else {
-          // Ate wrong order or decoy orb
           sound.sfxWrong();
+          triggerScreenShake();
           combo = 1;
           lives--;
           updateHUD();
-          showToast(orb.isDecoy ? `💣 Nhầm từ nhiễu "${orb.text}"!` : `⚠️ Sai thứ tự! Hãy ăn "${snakeChunks[snakeChunkIdx]}" trước!`);
+          showToast(orb.isDecoy ? `💣 Nhầm từ nhiễu "${orb.text}"!` : `⚠️ Sai thứ tự! Ăn "${snakeChunks[snakeChunkIdx]}" trước!`);
           snakeOrbs.splice(hitOrbIdx, 1);
           if (lives <= 0) {
             triggerGameOver('🐍 RẮN HẾT TIM!');
@@ -2139,7 +2435,6 @@
           spawnSnakeOrbs();
         }
       } else {
-        // Normal movement (preserve labels along body)
         const labels = snakeBody.map((s) => s.label);
         snakeBody.unshift({ x: nx, y: ny, label: '🐍' });
         snakeBody.pop();
@@ -2161,7 +2456,6 @@
 
       ctx.clearRect(0, 0, W, H);
 
-      // Subtle cyber grid
       ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
       ctx.lineWidth = 1;
       for (let c = 1; c < SNAKE_COLS; c++) {
@@ -2171,7 +2465,6 @@
         ctx.beginPath(); ctx.moveTo(0, r * ch); ctx.lineTo(W, r * ch); ctx.stroke();
       }
 
-      // Draw Snake body
       for (let i = snakeBody.length - 1; i >= 0; i--) {
         const seg = snakeBody[i];
         const px = seg.x * cw + 3;
@@ -2192,7 +2485,6 @@
         }
       }
 
-      // Draw Phrase Orbs (pill badges so Chinese characters are crisp & readable)
       for (const orb of snakeOrbs) {
         const cx = orb.x * cw + cw / 2;
         const cy = orb.y * ch + ch / 2;
@@ -2202,12 +2494,8 @@
         const bx = Math.max(3, Math.min(W - tw - 3, cx - tw / 2));
         const by = cy - th / 2;
 
-        ctx.fillStyle = orb.isNext && showPinyin
-          ? '#065f46'
-          : (orb.isDecoy ? '#3b1736' : '#172554');
-        ctx.strokeStyle = orb.isNext && showPinyin
-          ? '#fde047'
-          : '#38bdf8';
+        ctx.fillStyle = orb.isNext && showPinyin ? '#065f46' : (orb.isDecoy ? '#3b1736' : '#172554');
+        ctx.strokeStyle = orb.isNext && showPinyin ? '#fde047' : '#38bdf8';
         ctx.lineWidth = 2;
         ctx.roundRect(bx, by, tw, th, 9);
         ctx.fill();
@@ -2284,6 +2572,7 @@
 
       const pools = getActivePools();
       const isBoss = (galState.waveNum % 3 === 0) && pools.dialogues.length > 0;
+      const spdMul = getSpeedFactor();
 
       if (isBoss) {
         const dlg = pools.dialogues[Math.floor(Math.random() * pools.dialogues.length)];
@@ -2315,7 +2604,7 @@
             y: 58,
             w: podW,
             h: 82,
-            vy: 0.26 + Math.min(0.22, galState.waveNum * 0.02),
+            vy: (0.26 + Math.min(0.22, galState.waveNum * 0.02)) * spdMul,
             hp: 6,
             maxHp: 6,
             zh: opt.zh,
@@ -2346,7 +2635,7 @@
             y: 42 + (i % 2) * 26,
             w: Math.min(112, laneW - 8),
             h: 54,
-            vy: 0.48 + Math.min(0.45, galState.waveNum * 0.04),
+            vy: (0.48 + Math.min(0.45, galState.waveNum * 0.04)) * spdMul,
             hp: 3,
             maxHp: 3,
             zh: v.zh,
@@ -2399,7 +2688,6 @@
 
       ctx.clearRect(0, 0, S.W, S.H);
 
-      // Starfield
       ctx.fillStyle = 'rgba(186, 230, 253, 0.55)';
       for (const st of S.stars) {
         st.y += st.s;
@@ -2407,7 +2695,6 @@
         ctx.fillRect(st.x, st.y, 2, 2);
       }
 
-      // Auto-fire twin lasers
       if (!S.waveTransition) {
         S.fireCooldown--;
         if (S.fireCooldown <= 0) {
@@ -2418,7 +2705,6 @@
         }
       }
 
-      // Update & draw bullets
       ctx.fillStyle = '#38bdf8';
       for (let i = S.bullets.length - 1; i >= 0; i--) {
         const b = S.bullets[i];
@@ -2427,12 +2713,10 @@
         if (b.y < -15) S.bullets.splice(i, 1);
       }
 
-      // Update & draw targets
       for (let tIdx = S.targets.length - 1; tIdx >= 0; tIdx--) {
         const tg = S.targets[tIdx];
         if (!S.waveTransition) tg.y += tg.vy;
 
-        // Check bullet collisions
         for (let bIdx = S.bullets.length - 1; bIdx >= 0; bIdx--) {
           const b = S.bullets[bIdx];
           if (Math.abs(b.x - tg.x) < tg.w / 2 && Math.abs(b.y - tg.y) < tg.h / 2) {
@@ -2446,16 +2730,17 @@
                 sound.speakChinese(tg.zh, tg.audio);
                 recordLearnedWord(tg);
                 spawnBurst(tg.x, tg.y, '#34d399');
-                score += (tg.isBoss ? 50 : 25) * combo;
-                combo = Math.min(8, combo + 1);
+                score += Math.round((tg.isBoss ? 50 : 25) * combo * getScoreMultiplier());
+                addArcadeXP(tg.isBoss ? 18 : 10);
+                combo = Math.min(10, combo + 1);
                 updateHUD();
                 showToast(`💥 Chuẩn xác: ${tg.zh}!`);
                 S.targets = [];
                 setTimeout(() => { if (activeGame === 'galaga') spawnGalagaWave(); }, 1050);
                 break;
               } else {
-                // Shot wrong shield down
                 sound.sfxWrong();
+                triggerScreenShake();
                 spawnBurst(tg.x, tg.y, '#f43f5e');
                 S.targets.splice(tIdx, 1);
                 combo = 1;
@@ -2473,11 +2758,11 @@
         }
         if (!S.targets[tIdx]) continue;
 
-        // Check bottom breach
         if (tg.y + tg.h / 2 >= S.shipY - 10 && !S.waveTransition) {
           if (tg.isCorrect) {
             S.waveTransition = true;
             sound.sfxWrong();
+            triggerScreenShake();
             combo = 1;
             lives--;
             updateHUD();
@@ -2496,7 +2781,6 @@
           }
         }
 
-        // Draw shield box
         const bx = tg.x - tg.w / 2;
         const by = tg.y - tg.h / 2;
         ctx.fillStyle = tg.isBoss ? 'rgba(46, 16, 101, 0.92)' : 'rgba(15, 23, 42, 0.92)';
@@ -2506,14 +2790,12 @@
         ctx.fill();
         ctx.stroke();
 
-        // HP bar
         const hpRatio = Math.max(0, tg.hp / tg.maxHp);
         ctx.fillStyle = 'rgba(255,255,255,0.15)';
         ctx.fillRect(bx + 8, by + 5, tg.w - 16, 4);
         ctx.fillStyle = tg.isBoss ? '#f472b6' : '#38bdf8';
         ctx.fillRect(bx + 8, by + 5, (tg.w - 16) * hpRatio, 4);
 
-        // Text inside shield
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -2534,7 +2816,6 @@
         }
       }
 
-      // Particles
       for (let i = S.particles.length - 1; i >= 0; i--) {
         const p = S.particles[i];
         p.x += p.vx;
@@ -2550,7 +2831,6 @@
       }
       ctx.globalAlpha = 1;
 
-      // Draw Player Cyber Fighter
       const sx = S.shipX;
       const sy = S.shipY;
       ctx.fillStyle = '#0ea5e9';
@@ -2566,7 +2846,6 @@
       ctx.fill();
       ctx.stroke();
 
-      // Engine thruster glow
       ctx.fillStyle = '#fde047';
       ctx.beginPath();
       ctx.moveTo(sx - 5, sy + 10);
@@ -2575,7 +2854,6 @@
       ctx.closePath();
       ctx.fill();
 
-      // Drag guide hint at very bottom
       ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
       ctx.font = '700 11px sans-serif';
       ctx.textAlign = 'center';
@@ -2583,8 +2861,9 @@
 
       galRafId = requestAnimationFrame(loopGalaga);
     }
-
-    // Boot Lobby
+  </script>
+  <script src="games_v2_extra.js"></script>
+  <script>
     refreshHighScoresUI();
     updateLobbyDigest();
     syncLiveDailyLesson();
