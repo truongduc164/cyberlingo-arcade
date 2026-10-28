@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cyberlingo-arcade-v2.0.0';
+const CACHE_NAME = 'cyberlingo-arcade-v3.0.0-top10';
 const CORE_ASSETS = [
   './',
   './index.html',
   './core_lingo_bank.js',
   './daily_timeline_data.js',
   './games_v2_extra.js',
+  './games_v3_top10.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -31,7 +32,6 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // Cache-first for MP3 audio (fast offline replay)
   if (url.pathname.endsWith('.mp3')) {
     event.respondWith(
       caches.open(CACHE_NAME).then(async (cache) => {
@@ -51,7 +51,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Network-first for HTML, JS, JSON so new game upgrades appear immediately!
   event.respondWith(
     fetch(req)
       .then((netRes) => {

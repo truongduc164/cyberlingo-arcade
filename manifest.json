@@ -1,7 +1,7 @@
 {
-  "name": "CyberLingo Arcade PRO v2.0 — 8 Game Kinh Điển Học Tiếng Trung",
-  "short_name": "CyberArcade",
-  "description": "8 Game Kinh Điển Huyền Thoại (Fruit Ninja, Tetris, Pac-Man, Arkanoid, Pikachu, Đập Chuột, Rắn Săn Câu, Galaga) lồng tiếng Trung thực chiến nhà xưởng.",
+  "name": "CyberLingo Arcade PRO v3.0 — Top 10 Game Kinh Điển Học Tiếng Trung",
+  "short_name": "Top10Arcade",
+  "description": "Trọn bộ Top 10 Game Kinh Điển Huyền Thoại (Đào Vàng, Bắn Trứng, Fruit Ninja, Tetris, Pac-Man, Pikachu, Rắn Săn Câu, Đập Chuột, Arkanoid, Galaga) lồng tiếng Trung thực chiến.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

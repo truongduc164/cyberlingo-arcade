@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="CyberArcade" />
   <meta name="theme-color" content="#060b18" />
-  <title>CyberLingo Arcade PRO v2.0 — 8 Game Kinh Điển Học Tiếng Trung</title>
+  <title>CyberLingo Arcade PRO v3.0 — Top 10 Game Kinh Điển Học Tiếng Trung</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="icon-192.png" />
@@ -319,6 +319,8 @@
       box-shadow: 0 2px 8px rgba(244, 63, 94, 0.6);
     }
 
+    .game-card.c-miner { border-color: rgba(250, 204, 21, 0.72); }
+    .game-card.c-bubble { border-color: rgba(249, 115, 22, 0.68); }
     .game-card.c-ninja { border-color: rgba(244, 63, 94, 0.6); }
     .game-card.c-tetris { border-color: rgba(56, 189, 248, 0.6); }
     .game-card.c-pacman { border-color: rgba(250, 204, 21, 0.65); }
@@ -361,6 +363,8 @@
       color: var(--cyan);
     }
 
+    .c-miner .gc-skill { color: #fde047; }
+    .c-bubble .gc-skill { color: #fdba74; }
     .c-ninja .gc-skill { color: #fda4af; }
     .c-pacman .gc-skill { color: #fde047; }
     .c-arkanoid .gc-skill, .c-snake .gc-skill { color: #34d399; }
@@ -384,6 +388,8 @@
       background: linear-gradient(135deg, #0284c7, #2563eb);
     }
 
+    .c-miner .gc-play-btn { background: linear-gradient(135deg, #ca8a04, #b45309); }
+    .c-bubble .gc-play-btn { background: linear-gradient(135deg, #ea580c, #db2777); }
     .c-ninja .gc-play-btn { background: linear-gradient(135deg, #e11d48, #ea580c); }
     .c-pacman .gc-play-btn { background: linear-gradient(135deg, #ca8a04, #d97706); }
     .c-arkanoid .gc-play-btn, .c-snake .gc-play-btn { background: linear-gradient(135deg, #059669, #0d9488); }
@@ -551,6 +557,16 @@
     #canvas-arkanoid {
       background: radial-gradient(circle at 50% 20%, #0d2538 0%, #050914 80%);
       border: 1.5px solid rgba(16, 185, 129, 0.45);
+    }
+
+    #canvas-miner {
+      background: #1c150c;
+      border: 1.5px solid rgba(250, 204, 21, 0.55);
+    }
+
+    #canvas-bubble {
+      background: radial-gradient(circle at 50% 15%, #1d1638 0%, #060916 80%);
+      border: 1.5px solid rgba(249, 115, 22, 0.5);
     }
 
     /* Tetris View */
@@ -1000,9 +1016,9 @@
     <!-- ================= ARCADE LOBBY ================= -->
     <section id="screen-lobby">
       <div class="lobby-header">
-        <div class="brand-pill">🕹️ DEAN OPTIMIZE • SUPER ARCADE v2.0</div>
-        <h1 class="lobby-title">CYBERLINGO ARCADE 8-IN-1</h1>
-        <p class="lobby-sub">8 Game Kinh Điển Huyền Thoại Lồng Tiếng Trung Thực Chiến</p>
+        <div class="brand-pill">🏆 DEAN OPTIMIZE • TOP 10 DEFINITIVE v3.0</div>
+        <h1 class="lobby-title">TOP 10 GAME KINH ĐIỂN</h1>
+        <p class="lobby-sub">Tuyển Tập 10 Huyền Thoại Lồng Tiếng Trung Thực Chiến</p>
       </div>
 
       <!-- Player Rank & EXP -->
@@ -1041,82 +1057,78 @@
 
       <!-- Genre Filter -->
       <div class="filter-tabs">
-        <button class="filter-tab active" id="flt-all" onclick="filterGames('all')">🌟 Tất Cả (8)</button>
-        <button class="filter-tab" id="flt-action" onclick="filterGames('action')">🔥 Hành Động Cuốn</button>
-        <button class="filter-tab" id="flt-brain" onclick="filterGames('brain')">🧠 Ghép Từ & Trí Nhớ</button>
+        <button class="filter-tab active" id="flt-all" onclick="filterGames('all')">🏆 Top 10 Đầy Đủ</button>
+        <button class="filter-tab" id="flt-action" onclick="filterGames('action')">🔥 Phản Xạ Hành Động</button>
+        <button class="filter-tab" id="flt-brain" onclick="filterGames('brain')">🧠 Ngắm Bắn & Ghép Từ</button>
       </div>
 
-      <!-- 8 Legendary Classic Cartridges -->
+      <!-- Top 10 Definitive Classic Cartridges -->
       <div class="arcade-grid">
-        <!-- NEW 4 BLOCKBUSTERS -->
+        <div class="game-card c-miner" data-genre="brain" onclick="launchGame('miner')">
+          <span class="new-ribbon">TOP #1 MỚI</span>
+          <div class="gc-top">
+            <span class="gc-icon">⛏️</span>
+            <span class="gc-best" id="best-miner">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">1. Đào Vàng Chữ Hán</div>
+          <div class="gc-skill">💰 Gold Miner Kinh Điển</div>
+          <div class="gc-desc">Canh góc phóng ngoạm kéo quặng vàng Chữ Hán đúng, ném pháo 🧨 nổ đá sai!</div>
+          <div class="gc-play-btn">▶ ĐÀO VÀNG</div>
+        </div>
+
+        <div class="game-card c-bubble" data-genre="brain" onclick="launchGame('bubble')">
+          <span class="new-ribbon">TOP #2 MỚI</span>
+          <div class="gc-top">
+            <span class="gc-icon">🥚</span>
+            <span class="gc-best" id="best-bubble">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">2. Bắn Trứng Âm Thanh</div>
+          <div class="gc-skill">🦖 Dynomite Bắn Bóng</div>
+          <div class="gc-desc">Kéo tia ngắm dội tường bắn nổ chùm trứng Chữ Hán khớp nghĩa trước khi sập trần!</div>
+          <div class="gc-play-btn">▶ BẮN TRỨNG</div>
+        </div>
+
         <div class="game-card c-ninja" data-genre="action" onclick="launchGame('ninja')">
-          <span class="new-ribbon">HOT MỚI</span>
           <div class="gc-top">
             <span class="gc-icon">🥷</span>
             <span class="gc-best" id="best-ninja">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">1. Chém Quả Âm Thanh</div>
+          <div class="gc-title">3. Chém Quả Âm Thanh</div>
           <div class="gc-skill">⚔️ Fruit Ninja Phản Xạ</div>
           <div class="gc-desc">Quẹt kiếm ánh sáng chém đôi quả Chữ Hán đúng trên không trung, né bom nổ!</div>
           <div class="gc-play-btn">▶ CHÉM NGAY</div>
         </div>
 
         <div class="game-card c-tetris" data-genre="brain" onclick="launchGame('tetris')">
-          <span class="new-ribbon">HOT MỚI</span>
           <div class="gc-top">
             <span class="gc-icon">🧱</span>
             <span class="gc-best" id="best-tetris">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">2. Xếp Gạch Từ Vựng</div>
+          <div class="gc-title">4. Xếp Gạch Từ Vựng</div>
           <div class="gc-skill">💥 Tetris Thả Khối Nổ Hàng</div>
           <div class="gc-desc">Điều hướng viên gạch Chữ Hán rơi trúng cột nghĩa Việt để nổ hàng & phá đá cản!</div>
           <div class="gc-play-btn">▶ XẾP NGAY</div>
         </div>
 
         <div class="game-card c-pacman" data-genre="action" onclick="launchGame('pacman')">
-          <span class="new-ribbon">HOT MỚI</span>
           <div class="gc-top">
             <span class="gc-icon">👻</span>
             <span class="gc-best" id="best-pacman">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">3. Pac-Man Săn Chữ</div>
+          <div class="gc-title">5. Pac-Man Săn Chữ</div>
           <div class="gc-skill">🍒 Mê Cung Né Ma QC</div>
           <div class="gc-desc">Lượn mê cung ăn ngọc Chữ Hán mục tiêu để hóa Siêu Cấp nuốt ngược Ma QC!</div>
           <div class="gc-play-btn">▶ SĂN NGAY</div>
         </div>
 
-        <div class="game-card c-arkanoid" data-genre="action" onclick="launchGame('arkanoid')">
-          <span class="new-ribbon">HOT MỚI</span>
-          <div class="gc-top">
-            <span class="gc-icon">🏐</span>
-            <span class="gc-best" id="best-arkanoid">Kỷ lục: 0</span>
-          </div>
-          <div class="gc-title">4. Phá Gạch Arkanoid</div>
-          <div class="gc-skill">🏓 Đỡ Bóng Nảy Hứng Nghĩa</div>
-          <div class="gc-desc">Kéo thanh trượt nảy bóng phá vỡ tường gạch Chữ Hán & hứng viên nang nghĩa!</div>
-          <div class="gc-play-btn">▶ PHÁ NGAY</div>
-        </div>
-
-        <!-- ORIGINAL 4 CLASSICS -->
         <div class="game-card c-onet" data-genre="brain" onclick="launchGame('onet')">
           <div class="gc-top">
             <span class="gc-icon">🔗</span>
             <span class="gc-best" id="best-onet">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">5. Pikachu Nối Từ</div>
+          <div class="gc-title">6. Pikachu Nối Từ</div>
           <div class="gc-skill">⚡ Onet Nhớ Mặt Chữ</div>
           <div class="gc-desc">Chạm ô nghe phát âm, nối cặp Chữ Hán ↔ Nghĩa Việt tối đa 3 đoạn gấp khúc.</div>
-          <div class="gc-play-btn">▶ CHƠI NGAY</div>
-        </div>
-
-        <div class="game-card c-whac" data-genre="action" onclick="launchGame('whac')">
-          <div class="gc-top">
-            <span class="gc-icon">🔨</span>
-            <span class="gc-best" id="best-whac">Kỷ lục: 0</span>
-          </div>
-          <div class="gc-title">6. Đập Chuột Nghe Ý</div>
-          <div class="gc-skill">🎧 Luyện Tai Nghe 100%</div>
-          <div class="gc-desc">Ẩn mặt chữ, nghe giọng bản xứ đọc rồi đập trúng nghĩa tiếng Việt trong chớp mắt!</div>
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
         </div>
 
@@ -1131,12 +1143,34 @@
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
         </div>
 
+        <div class="game-card c-whac" data-genre="action" onclick="launchGame('whac')">
+          <div class="gc-top">
+            <span class="gc-icon">🔨</span>
+            <span class="gc-best" id="best-whac">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">8. Đập Chuột Nghe Ý</div>
+          <div class="gc-skill">🎧 Luyện Tai Nghe 100%</div>
+          <div class="gc-desc">Ẩn mặt chữ, nghe giọng bản xứ đọc rồi đập trúng nghĩa tiếng Việt trong chớp mắt!</div>
+          <div class="gc-play-btn">▶ CHƠI NGAY</div>
+        </div>
+
+        <div class="game-card c-arkanoid" data-genre="action" onclick="launchGame('arkanoid')">
+          <div class="gc-top">
+            <span class="gc-icon">🏐</span>
+            <span class="gc-best" id="best-arkanoid">Kỷ lục: 0</span>
+          </div>
+          <div class="gc-title">9. Phá Gạch Arkanoid</div>
+          <div class="gc-skill">🏓 Đỡ Bóng Nảy Hứng Nghĩa</div>
+          <div class="gc-desc">Kéo thanh trượt nảy bóng phá vỡ tường gạch Chữ Hán & hứng viên nang nghĩa!</div>
+          <div class="gc-play-btn">▶ PHÁ NGAY</div>
+        </div>
+
         <div class="game-card c-galaga" data-genre="action" onclick="launchGame('galaga')">
           <div class="gc-top">
             <span class="gc-icon">👾</span>
             <span class="gc-best" id="best-galaga">Kỷ lục: 0</span>
           </div>
-          <div class="gc-title">8. Bắn Tàu Đấu Boss</div>
+          <div class="gc-title">10. Bắn Tàu Đấu Boss</div>
           <div class="gc-skill">🚀 Galaga Đối Đáp QC</div>
           <div class="gc-desc">Kéo phi thuyền bắn hạ từ đúng & đấu Boss Xưởng Trưởng hỏi đáp thực tế!</div>
           <div class="gc-play-btn">▶ CHƠI NGAY</div>
@@ -1173,6 +1207,16 @@
       </div>
 
       <div id="game-arena">
+        <!-- View 9: Gold Miner -->
+        <div id="view-miner" class="canvas-view-full hidden">
+          <canvas id="canvas-miner" class="canvas-fill"></canvas>
+        </div>
+
+        <!-- View 10: Dynomite Bubble Shooter -->
+        <div id="view-bubble" class="canvas-view-full hidden">
+          <canvas id="canvas-bubble" class="canvas-fill"></canvas>
+        </div>
+
         <!-- View 5: Fruit Ninja -->
         <div id="view-ninja" class="canvas-view-full hidden">
           <canvas id="canvas-ninja" class="canvas-fill"></canvas>
@@ -1295,7 +1339,7 @@
     // 1. AUDIO, PACE, & PLAYER PROGRESSION ENGINE
     // =========================================================
     const CYBERBIRD_CDN_BASE = 'https://truongduc164.github.io/cyberbird-lingo/';
-    const ALL_GAME_IDS = ['ninja', 'tetris', 'pacman', 'arkanoid', 'onet', 'whac', 'snake', 'galaga'];
+    const ALL_GAME_IDS = ['miner', 'bubble', 'ninja', 'tetris', 'pacman', 'arkanoid', 'onet', 'whac', 'snake', 'galaga'];
 
     let showPinyin = true;
     let voiceSpeed = 1.0;
@@ -1534,7 +1578,7 @@
       if (sourceMode === 'daily' && tl.days && tl.days.length > 0) {
         const latest = tl.days[0];
         el.innerHTML = `✨ <b>${latest.label}: ${latest.topic_title || 'Bài học thực chiến'}</b><br>` +
-          `<span style="color:#94a3b8">Đang nạp <b>${pools.vocab.length} từ vựng</b> & <b>${pools.dialogues.length} hội thoại</b> giọng đọc chuẩn cho cả 8 game.</span>`;
+          `<span style="color:#94a3b8">Đang nạp <b>${pools.vocab.length} từ vựng</b> & <b>${pools.dialogues.length} hội thoại</b> giọng đọc chuẩn cho trọn bộ Top 10 game.</span>`;
       } else if (sourceMode === 'factory') {
         el.innerHTML = `🏭 <b>Kho Chuẩn Nhà Xưởng & Tự Động Hóa</b><br><span style="color:#94a3b8">Gồm <b>${pools.vocab.length} từ chuyên ngành</b> (QC, Điện PLC, Sản xuất, Văn phòng) & <b>${pools.dialogues.length} tình huống</b>.</span>`;
       } else {
@@ -1681,7 +1725,9 @@
       });
 
       updateHUD();
-      if (mode === 'ninja') initNinjaGame();
+      if (mode === 'miner') initMinerGame();
+      else if (mode === 'bubble') initBubbleGame();
+      else if (mode === 'ninja') initNinjaGame();
       else if (mode === 'tetris') initTetrisGame();
       else if (mode === 'pacman') initPacmanGame();
       else if (mode === 'arkanoid') initArkanoidGame();
@@ -2863,6 +2909,7 @@
     }
   </script>
   <script src="games_v2_extra.js"></script>
+  <script src="games_v3_top10.js"></script>
   <script>
     refreshHighScoresUI();
     updateLobbyDigest();
