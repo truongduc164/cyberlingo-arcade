@@ -295,7 +295,7 @@ function renderStreakAndQuestsUI() {
     qBox.innerHTML = `
       <span class="quest-pill ${q1 ? 'done' : ''}">${q1 ? '✅' : '⬜'} 12 Từ (${Math.min(12, meta.wordsToday)}/12)</span>
       <span class="quest-pill ${q2 ? 'done' : ''}">${q2 ? '✅' : '⬜'} Fever x5 (${Math.min(5, meta.maxComboToday)}/5)</span>
-      <span class="quest-pill ${q3 ? 'done' : ''}">${q3 ? '✅' : '⬜'} 2 Trò (${Math.min(2, meta.gamesPlayedToday.length)}/2)</span>
+      <span class="quest-pill ${q3 ? 'done' : ''}">${q3 ? '✅' : '⬜'} 2 Trò (${Math.min(2, (meta.gamesPlayedToday || []).length)}/2)</span>
     `;
   }
 }

@@ -1,4 +1,5 @@
-const CACHE_NAME = 'cyberlingo-arcade-v4.1.0-streak';
+const CACHE_PREFIX = 'cyberlingo-arcade-';
+const CACHE_NAME = CACHE_PREFIX + 'v4.1.1-streak';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -17,14 +18,26 @@ const CORE_ASSETS = [
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS).catch(() => {}))
+    caches.open(CACHE_NAME).then((cache) =>
+      // Do NOT swallow failures silently: a partial precache must be visible
+      // in the console, otherwise the app can ship with an empty offline cache.
+      cache.addAll(CORE_ASSETS).catch((err) => {
+        console.warn('[SW] Precache incomplete:', err);
+      })
+    )
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      // Only evict OUR old versions. This origin also hosts other PWAs
+      // (e.g. cyberbird-lingo), whose caches must survive our activation.
+      Promise.all(
+        keys
+          .filter((k) => k.startsWith(CACHE_PREFIX) && k !== CACHE_NAME)
+          .map((k) => caches.delete(k))
+      )
     ).then(() => self.clients.claim())
   );
 });

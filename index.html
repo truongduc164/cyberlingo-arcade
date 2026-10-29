@@ -2264,10 +2264,12 @@
       let k = 0;
       for (let r = 1; r <= ONET_ROWS; r++) {
         for (let c = 1; c <= ONET_COLS; c++) {
-          onetBoard[r][c] = shuffled[k++];
+          onetBoard[r][c] = shuffled[k++] || null;
         }
       }
-      onetPairsRemaining = 8;
+      // Derive from what was actually dealt: pickSmartVocabSubset can return
+      // fewer than 8 words, and a hard-coded 8 would make the stage unwinnable.
+      onetPairsRemaining = picked.length;
       ensureOnetHasValidMove();
       renderOnetGrid();
 
@@ -2496,6 +2498,9 @@
           updateHUD();
 
           setTimeout(() => {
+            // Guard: if the player already left Onet, this timer must not
+            // restart a stage or fire a game-over over the lobby.
+            if (activeGame !== 'onet') return;
             renderOnetGrid();
             if (onetPairsRemaining <= 0) {
               sound.sfxFanfare();
