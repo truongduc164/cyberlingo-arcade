@@ -1,0 +1,3112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌐 DEAN OS — Trung tâm chỉ huy Dean Mesh</title>
+<style>
+:root{--bg:#070b14;--card:#101726;--line:#1c2740;--neon:#00e5ff;--violet:#7c4dff;--gold:#ffc400;--red:#ff5252;--green:#00e676;--txt:#e8ecf5;--dim:#8b93a8}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:var(--bg);color:var(--txt);min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+header{text-align:center;padding:26px 0 10px}
+h1{font-size:1.9rem;background:linear-gradient(90deg,var(--neon),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--dim);font-size:.85rem;margin-top:4px}
+.pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--green);margin-right:6px;animation:p 1.6s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.25}}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+.tab{padding:9px 18px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--dim);cursor:pointer;font-size:.9rem}
+.tab.on{color:#000;background:linear-gradient(90deg,var(--neon),var(--gold));font-weight:700;border:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{font-size:.95rem;color:var(--neon);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+.row:last-child{border:none}
+.dim{color:var(--dim)} .g{color:var(--green)} .y{color:var(--gold)} .r{color:var(--red)}
+.bar{height:8px;background:#0a0f1c;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--neon),var(--gold))}
+.sp{display:flex;justify-content:space-between;align-items:center;background:#0d1424;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+.sp b{color:var(--gold)}
+.entry{border-left:3px solid var(--violet);padding:8px 12px;margin-bottom:10px;background:#0d1424;border-radius:0 10px 10px 0;font-size:.88rem}
+.entry .t{color:var(--dim);font-size:.75rem}
+.trans{background:#0d1424;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;font-size:.88rem}
+.trans .vi{color:var(--gold);font-style:italic}
+footer{text-align:center;color:var(--dim);font-size:.75rem;padding:24px}
+a{color:var(--neon)}
+</style>
+
+<script id="embedded-feed-data" type="application/json">
+{
+  "schema": "dean_os.telecoder_feed.v1",
+  "updated_at": "29/10/2026 17:39:47",
+  "daemon": {
+    "pid": 21712,
+    "status": "ONLINE",
+    "uptime_sec": 5596,
+    "uptime_human": "1h 33m",
+    "active_workspace": "12.Vibe idea (tạm)",
+    "active_provider": "zcode",
+    "active_model": "GLM-5.3-Flash"
+  },
+  "cooldowns": {},
+  "cockpit_quota": [
+    {
+      "account": "tru***@gmail.com",
+      "is_active": false,
+      "weekly_pct": 13.7,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": true,
+      "reset_time": "2026-11-02T01:09:28Z"
+    },
+    {
+      "account": "zha***@gmail.com",
+      "is_active": true,
+      "weekly_pct": 0.0,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": true,
+      "reset_time": "2026-11-02T17:43:29Z"
+    },
+    {
+      "account": "huy***@gmail.com",
+      "is_active": false,
+      "weekly_pct": 100.0,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": false,
+      "reset_time": "2026-11-04T14:32:19Z"
+    }
+  ],
+  "sp3_tiktok": {
+    "exists": true,
+    "completed_days": [
+      "day01",
+      "day02",
+      "day03",
+      "day04"
+    ],
+    "pending_days": [
+      "day05",
+      "day06"
+    ],
+    "total_mp4_ready": 16,
+    "batches": {
+      "day01": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_chiec_thuyen_rong.mp4",
+          "ch2_trung_viet_ai_plc_factory.mp4",
+          "ch3_anh_viet_ai_plc_factory.mp4",
+          "ch4_kenh_chinh_plc_vs_arduino_vi.mp4"
+        ]
+      },
+      "day02": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_ly_nuoc_nong.mp4",
+          "ch2_xkcd_ep04_security_zh_vi.mp4",
+          "ch3_xkcd_ep04_security_en_vi.mp4",
+          "ch4_kenh_chinh_edge_ai_ep03_vi.mp4"
+        ]
+      },
+      "day03": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_ngon_tay_chi_trang.mp4",
+          "ch2_xkcd_ep05_password_zh_vi.mp4",
+          "ch3_xkcd_ep05_password_en_vi.mp4",
+          "ch4_kenh_chinh_robot_amr_ep04_vi.mp4"
+        ]
+      },
+      "day04": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_tach_tra_tran.mp4",
+          "ch2_xkcd_ep06_compiling_zh_vi.mp4",
+          "ch3_xkcd_ep06_compiling_en_vi.mp4",
+          "ch4_kenh_chinh_bien_tan_inverter_ep05_vi.mp4"
+        ]
+      },
+      "day05": {
+        "ready_mp4": 0,
+        "files": []
+      },
+      "day06": {
+        "ready_mp4": 0,
+        "files": []
+      }
+    }
+  },
+  "locks": [
+    {
+      "agent": "DEAN-Telegravity(Dell)",
+      "machine": "DEAN-DELL",
+      "status": "🟢 RẢNH",
+      "project": "*(Không giữ khóa — Watchdog `12.RescueMic_Worker` đang chạy ngầm 24/7)*",
+      "updated_at": "29/10 06:06"
+    },
+    {
+      "agent": "DEAN-Telegravity (T14)",
+      "machine": "DEAN-T14",
+      "status": "🟢 RẢNH",
+      "project": "*(Không giữ khóa)*",
+      "updated_at": "28/10 22:27"
+    },
+    {
+      "agent": "DEAN-Telecoder (bot Telegram)",
+      "machine": "DEAN-T14",
+      "status": "🟡 ĐANG SỬA",
+      "project": "`D:\\0.PROGRAMME\\4. DEAN OPTIMIZE\\1.TELECODER\\` + `DEAN_OS_Dashboard.html` (Tiến công Mũi 2 + Mũi 3)",
+      "updated_at": "29/10 17:35"
+    },
+    {
+      "agent": "DEAN-ZCode(T14) (ZCode trực tiếp)",
+      "machine": "DEAN-T14",
+      "status": "🟡 ĐANG SỬA",
+      "project": "`D:\\0.PROGRAMME\\4. DEAN OPTIMIZE\\29. RescueMic\\` (đã hoàn thành v0.2 theo Mục 3)",
+      "updated_at": "28/10 23:55"
+    }
+  ],
+  "handoffs": [
+    {
+      "timestamp": "29/10 16:07",
+      "agent": "DEAN-Telecoder",
+      "summary": "🤝 ĐÃ TIẾP ỨNG TOÀN ĐỘI (N1 QUOTA + DEAN OS SỔ ĐỘI/QUOTA + TỔNG ĐÀI `/mesh` `/ping`), RÚT CỜ `🟢 RẢNH`: (1) Hoàn tất **Nghị quyết N1** trên đủ 4 họ Engine (`zcode`, `dsh`, `universal:*`, `subagent:*`), chuẩn hóa `engine_key()` + `excluded_keys` chống lặp vô tận và dọn sạch 3 khóa giả selftest trong `.telecoder/engine_cooldown.json`; (2) Ghép xong mảnh `DEAN_OS_Dashboard.html` + dựng `telecoder/core/mesh_hub.py` tự xuất `telecoder_feed.json` mỗi 3p (Sổ đội Mục 2 & 3, PID/uptime sống, % Quota 3 acc Cockpit T14 che email, SP3 16 MP4 Day01–04); (3) Thêm lệnh tổng đài `/mesh` & `/ping <dell|zcode|t14> <tin>` ghi phiếu `CHECKPOINT/WAKEUP_*.md`; `42/42` test PASS, Daemon `PID: 21712` (`8/8` Doctor PASS)."
+    },
+    {
+      "timestamp": "29/10 15:07",
+      "agent": "DEAN-Telecoder",
+      "summary": "🛑 HOÀN THÀNH TÍNH NĂNG DỪNG TOÀN BỘ DỰ ÁN & HỦY SESSION (`/stop`, `/cancel`), RÚT CỜ `🟢 RẢNH`: Bổ sung Trung tâm Dừng Dự án & Hủy bỏ Session (`keyboards.py`, `handlers.py`, `bot.py`, `session.py`, `dsh_engine.py`, `zcode_engine.py`), nút ghim `🛑 Dừng / Hủy` + nút `[🛑 Dừng Ngay | 🗑️ Hủy Bỏ Session | 🚨 Dừng Toàn Bộ Dự Án]` ngay trên thẻ tiến trình trực tiếp; `41/41` unit test PASS; đã restart Daemon mới (`PID: 16792`) nạp luôn `google/gemini-4-argon` Free Pool."
+    },
+    {
+      "timestamp": "",
+      "agent": "Dean Mesh",
+      "summary": "[29/10 12:50] DEAN-ZCode(T14) — 🌐 NHIỆM VỤ CHUNG CẢ ĐỘI: DEAN OS DASHBOARD v0.1 LÕI XONG: Sếp giao \"cả đội làm 1 thứ\" → đề xuất Dashboard tổng hợp, lệnh phân mảnh tại NHIEMVUDEANOS.md. Lõi HTML đã dựng: Z:\\04KhoChungDungChung\\DEANOSDashboard.html — 5 tab (Tổng quan mesh/đội viêc,"
+    },
+    {
+      "timestamp": "29/10 12:35",
+      "agent": "DEAN-Telegravity(Dell)",
+      "summary": "🚀 RESCUEMIC AUTO-NOTIFY TELEGRAM HOÀN TẤT, RÚT CỜ `🟢 RẢNH`: Đã gửi thành công 3 thẻ kết quả bóc băng (Anh/Trung/Việt) lên Telegram của Sếp qua `@Telegravity321_bot`; tích hợp luồng nền tự động đẩy kết quả về Telegram cho mọi audio mới; xác nhận máy Dell là Inspiron 3576 (không phải 3030S văn phòng); kết nối SSH Dell↔T14↔VPS thông suốt 100%."
+    },
+    {
+      "timestamp": "29/10 09:4x",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "📔 ĐÃ GHI NGỮ CẢNH TÌNH BÁO: Sếp dặn note lại cho ae nắm bối cảnh → tạo `Z:\\04_Kho_Chung_Dung_Chung\\NGU_CANH_QUOTA_CHI_HUY_2910.md`: (1) cơ chế quota 2 tầng + mốc 08:00, (2) kho đạn WorkBuddy/OpenRouter/Groq/Gemini + glm-5.3 qua credit, (3) sơ đồ chỉ huy 3 lớp (chỉ huy = WorkBuddy glm-5.3 → Gemini 4 Argon free), (4) trạng thái sản phẩm/hạ tầng, (5) việc treo. Mọi agent dậy ĐỌC FILE NÀY TRƯỚC, 2 phút nắm hết."
+    },
+    {
+      "timestamp": "29/10 09:3x",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "👑 CẬP NHẬT SƠ ĐỒ CHỈ HUY (Sếp bắt sót Gemini 4 Argon): Sếp chỉ đúng — `google/gemini-4-argon` có trên OpenRouter, FREE, và tôi đã bỏ sót khi rà (chỉ soi API Gemini chính hãng). Đã thêm vào PROVIDER_DEFAULTS openrouter (đứng đầu available_models), compile OK, LIVE TEST PASS (model trả lời thật). **Sơ đồ chỉ huy mới:** Task XL → GLM-5.3 full (chờ nạp) → **Gemini 4 Argon (FREE — chỉ huy dự bị số 1)** → DeepSeek V4.1 Pro (paid nếu cần). Task thường vẫn Free Pool cũ. @DEAN-Telecoder restart daemon lần nữa khi rảnh để nhận model mới (hoặc tự nhận ở lần save tiếp theo)."
+    },
+    {
+      "timestamp": "29/10 07:05",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "Theo lệnh Sếp HỦY chế độ canh gác 5 trạm (file DUYET_BINH giữ làm bảng tham khảo). Chuyển sang kiểm tra sức khỏe định kỳ + khảo sát chạy song song model trong Telecoder."
+    },
+    {
+      "timestamp": "",
+      "agent": "Dean Mesh",
+      "summary": "[29/10 06:45] DEAN-ZCode(T14) — 🎖️ DUYỆT BINH: 5 TRẠM CANH GÁC PHÂN CÔNG: Lệnh tại Z:\\04KhoChungDungChung\\DUYETBINHCANHGAC2910.md. Tôi nhận trạm 1 (canh sổ + CHECKPOINT). @DEAN-Telecoder nhận trạm 2 (canh RescueMic audio + SANPHAMTIEN → báo Telegram). @DEAN-Telegravity(Dell) nhận"
+    }
+  ]
+}
+</script>
+<script id="embedded-catalog-data" type="application/json">
+{
+  "updated_at": "2026-10-29 14:11:32",
+  "items": [
+    {
+      "id": "Bản ghi mới 11",
+      "audio_file": "Bản ghi mới 11.m4a",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 13:57:37",
+      "duration_sec": 1288.9,
+      "language": "zh",
+      "language_label": "🇨🇳 Tiếng Trung",
+      "language_confidence_pct": 89.9,
+      "full_text": "一人一碗 一人一碗 一碗一碗 只要一碗就好了 半碼都給他 半碼他等性開 等性開 一碗一碗 我們那個10 12月29號將去 我出改之後 他不太 他沒有 他沒有 他有我們男孩 對他 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 现在你得过这个时候啦 你10月份那样的 你就来这么10月份 点了十米子就不服了 结果第一个要搞得好 第二个大约 我们这个礼拜搞定了 你上个礼拜大约我们这个礼拜搞定了 这样不行了 你还搞下个礼拜 怎么下个礼拜几 搞下礼拜三 你怎么了 你又几个礼拜六 我又几个礼拜七 你又几个礼拜六 我又几个礼拜四 你又几个礼拜五 你都几个礼拜六 有那个手动的机灵啊 他懂 有问他的干嘛 他接样品 接样品 鞋儿 他现在要问鞋儿 啊 接着你 你真的是废话 这段时间你搞昂贫过年的嘛 还接着时间 是吧 十四的牛肚子大了嘛 牛肚子大了嘛 你看闪电的25号浮波的各位 你赶紧去 25 你多去一条二里 可以换个行业上换行的 你先去换电的 你先去换电的 你换一条1499档店 你先捡一条下去嘛 你不去一条跟我说 闪电的这就搞定了 你这个法体真的都会 你这闪电的11、25号 说不过银5也没有关系 但是来说你不一定要影响 影响浮波就好了 你现在11月25号不过的展现 你还刚刚开始动 你说过去的吗 我还以为你10月的展现都搞完了 你要早点 你要早点 真的要早点 我给你讲 我那天我上网你的东西 我就跟你说 你要早到11月20号 你现在离一个礼拜 离一个礼拜 我跟你讲 人家早到12的时候就 你现在病难 今天这几天又下了很多病难 你们看到吗 我就给你赛前过 我还给你赛三部分 就是你给你二十月份赛嘛 所以说你在说不要搞了12月时候了 你先把你这玩家说 他后面的人 后面总当忙忙 到后面这说 你先把自己搞完 你先把11月份出过的 先拿一遍 看一下你还得到底有多少遍的 你看到小伙伴确认一下嘛 那怎么搞的 很死等的 这几块新的 各位有阳明 有阳明没有啊 哎呀,我给你说你签一点点,你签一点点,说我,我不找你,可以吧? 我不找你,你现在把11月份计单,你赶紧给我算,我给你点,我给你点,你点不了,知道吗? 所以,下个年呢,这个11月5号能不能找你? 啊,而且哦,你自己给你,我给你这个,你找个11月7号,如果你真的找不完的话,我也没办法 你自己给你,你答应我的时间,你按照这个,你把它找完,知道吗? 你都答應了答應了 你要到那個兩點都說不到 說不到你又不期待說 這個閃電的不是一樣的 你自己要更緊 還缺了第一的 你自己現在答應了11月3號 對不對 對你11月3號 閃電的11月7號 還有史密斯的 史密斯的地方 史密斯的地方 你除了帶網頁的幾個網版 還缺人的之外 還有其他的收尾也要把它收掉 你不能每一盤都欠 自己要更緊的 都怪 沒關係 沒關係 沒關係 有吗 我吃了 我吃了 接着那个阿玉 史密斯的帽子赶快点 明天可能就走了 抓紧时 不管是 就是史密斯的 史密斯的要抓紧时间 明天可能就要走了 要抓緊時間 看了旁邊書庫",
+      "full_vi_translation": "Mỗi người một bát Mỗi người một bát từng bát một Chỉ cần một bát là được Cho anh ta một nửa kích thước Nửa kích thước, anh chờ đợi tình dục bình đẳng mở từng bát một 10 của chúng tôi Đi vào ngày 29 tháng 12 Sau khi tôi thay đổi Anh ấy không hoàn toàn anh ấy đã không anh ấy đã không anh ấy có chúng tôi, các chàng trai với anh ấy anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không Bây giờ bạn phải vượt qua điều này Bạn đã như thế này vào tháng Mười. Bạn sẽ như thế này vào tháng 10. Sau khi gọi 10 mét gạo, tôi không hài lòng. Kết quả là phần đầu tiên sẽ được thực hiện tốt và phần thứ hai sẽ được thực hiện khoảng Chúng tôi đã hoàn thành nó trong tuần này Bạn đã hoàn thành nó vào tuần trước hoặc tuần này. Điều này sẽ không hoạt động nữa Bạn vẫn muốn quyết định vào tuần tới? Tuần tới sẽ là ngày gì? Làm điều đó vào thứ Tư tới Có chuyện gì với bạn vậy Bạn có bao nhiêu thứ bảy? Còn bao nhiêu tuần nữa cho tôi? Bạn có bao nhiêu thứ bảy? Tôi còn vài ngày thứ Năm nữa Bạn có bao nhiêu ngày thứ Sáu? Bạn có bao nhiêu thứ bảy? Bạn có sự thông minh thủ công đó không? Anh ấy hiểu Tại sao bạn lại hỏi anh ấy? Anh ấy lấy mẫu Nhận mẫu giày Bây giờ anh ấy muốn hỏi về giày À, theo bạn Bạn thật là nhảm nhí Bạn có đang sống trong cảnh nghèo khó trong dịp Tết Nguyên đán không? Còn nhiều thời gian nữa Phải? Bụng bò mười bốn tuổi có to không? Bụng bò có to không? Hãy nhìn làn sóng nổi của Tia chớp vào ngày 25. Bạn đi nhanh lên 25 Bạn đi một hoặc hai dặm nữa Bạn có thể thay đổi nghề nghiệp sang ngành khác Bạn đi thay pin trước đi Bạn đi thay pin trước đi Đến cửa hàng 1499 Tại sao bạn không chọn một cái trước? Tại sao bạn không nói với tôi điều gì đó? Tia sét đã xong Pháp thân của bạn thực sự biết cách làm điều đó Bạn sét số 11 và 25 Không nói được Bạc 5 cũng không sao Nhưng bạn không cần phải tác động Sẽ tốt hơn nếu nó ảnh hưởng đến sóng nổi Bạn không thể hiển thị nó bây giờ vào ngày 25 tháng 11 Bạn vừa mới bắt đầu di chuyển Bạn đã kể cho tôi nghe về quá khứ chưa? Tôi tưởng bạn đã hoàn thành bài thuyết trình vào tháng 10. Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm. Hãy để tôi kể cho bạn nghe về ngày tôi lướt đồ của bạn Tôi đã nói rồi, bạn phải đến sớm nhất là vào ngày 20 tháng 11 Bây giờ bạn còn một tuần nữa. Một tuần xa anh. Để tôi nói cho bạn biết, khi mọi người đến sớm nhất là 12 giờ Bây giờ bạn đang gặp rắc rối. Những ngày này bạn đã gặp rất nhiều rắc rối. bạn có thấy không Tôi sẽ đưa nó cho bạn trước trận đấu Tôi sẽ cho bạn ba phần Chính bạn là người mang đến cho bạn cuộc thi vào tháng 12 Vì vậy, bạn đang nói không làm điều đó cho đến tháng 12 Bạn nói về bản thân với tư cách là một người chơi trước người đứng sau anh ta Luôn bận rộn sau này Hãy nói về chuyện này sau Hãy hoàn thành bản thân mình trước Trước tiên bạn nên đặt những cái đã được phát hành vào tháng 11 Lấy nó trước Xem bạn phải làm điều đó bao nhiêu lần nữa Bạn đã gặp bạn tôi và xác nhận điều đó chưa? Chuyện gì đã xảy ra thế? Rất chờ đợi Những mảnh mới này Ai cũng có Dương Minh Có Dương Minh không? Ồ, tôi đã nói với bạn rằng bạn ký một chút, bạn ký một chút, nói cho tôi biết, tôi sẽ không tìm bạn, được không? Nếu tôi không tìm bạn thì hiện tại bạn đang tính toán hóa đơn cho tháng 11. Bạn có thể nhanh chóng tính toán chúng cho tôi. Tôi sẽ cho bạn một số điểm. Tôi sẽ cho bạn một số điểm. Bạn không thể nhận bất kỳ đơn đặt hàng nào. Bạn hiểu không? Vậy năm sau tôi có thể gặp bạn vào ngày 5 tháng 11 được không? À, mà bạn tự đưa cho mình, tôi cho bạn cái này, bạn tìm ngày 7 tháng 11, nếu thật sự tìm không hết thì tôi cũng nhịn được Bạn đưa nó cho chính mình, bạn đã hứa với tôi thời gian, bạn làm theo điều này, bạn tìm thấy nó, bạn biết không? Bạn đã hứa rồi, bạn đã hứa rồi và bạn không thể nói bất cứ điều gì cho đến thời điểm đó. Tôi không thể nói với bạn và tôi không mong đợi để nói với bạn Tia sét này không giống nhau. Bạn phải chặt chẽ hơn. Vẫn thiếu cái đầu tiên Bây giờ bạn đã đồng ý đến ngày 3 tháng 11 phải không? Ngày 3 tháng 11 dành cho bạn, ngày 7 tháng 11 dành cho Tia chớp Và của Smith Địa điểm của Smith Địa điểm của Smith Ngoài một số phiên bản web có trang web, bạn Ngoài việc thiếu người Có những công việc hoàn thiện khác cũng cần phải được bỏ đi. Bạn không thể nợ mọi trận đấu Tất cả là lỗi của tôi nếu tôi muốn nó chặt chẽ hơn Không sao Không sao Không sao Có cái nào không tôi đã ăn tôi đã ăn Rồi Ayu đó Mũ của Smith, hãy nhanh lên. Tôi có thể rời đi vào ngày mai Khi bạn nhanh lên Dù thế nào đi chăng nữa Đó là của Smith Smith cần phải nhanh lên Tôi có thể rời đi vào ngày mai nhanh lên Tôi nhìn vào thư viện bên cạnh nó",
+      "highlights": [
+        "12月",
+        "10月",
+        "25号",
+        "11月",
+        "20号",
+        "今天",
+        "确认",
+        "5号",
+        "7号",
+        "明天",
+        "29 tháng",
+        "thứ hai"
+      ],
+      "segments": [
+        {
+          "start": 40.52,
+          "end": 41.92,
+          "time_str": "00:41 → 00:42",
+          "text": "一人一碗",
+          "vi_translation": "Mỗi người một bát"
+        },
+        {
+          "start": 41.92,
+          "end": 43.38,
+          "time_str": "00:42 → 00:43",
+          "text": "一人一碗",
+          "vi_translation": "Mỗi người một bát"
+        },
+        {
+          "start": 43.38,
+          "end": 45.22,
+          "time_str": "00:43 → 00:45",
+          "text": "一碗一碗",
+          "vi_translation": "từng bát một"
+        },
+        {
+          "start": 45.22,
+          "end": 46.38,
+          "time_str": "00:45 → 00:46",
+          "text": "只要一碗就好了",
+          "vi_translation": "Chỉ cần một bát là được"
+        },
+        {
+          "start": 46.38,
+          "end": 47.5,
+          "time_str": "00:46 → 00:48",
+          "text": "半碼都給他",
+          "vi_translation": "Cho anh ta một nửa kích thước"
+        },
+        {
+          "start": 49.09,
+          "end": 50.53,
+          "time_str": "00:49 → 00:51",
+          "text": "半碼他等性開",
+          "vi_translation": "Nửa kích thước, anh chờ đợi tình dục"
+        },
+        {
+          "start": 50.53,
+          "end": 51.53,
+          "time_str": "00:51 → 00:52",
+          "text": "等性開",
+          "vi_translation": "bình đẳng mở"
+        },
+        {
+          "start": 51.53,
+          "end": 52.33,
+          "time_str": "00:52 → 00:52",
+          "text": "一碗一碗",
+          "vi_translation": "từng bát một"
+        },
+        {
+          "start": 52.33,
+          "end": 71.75,
+          "time_str": "00:52 → 01:12",
+          "text": "我們那個10",
+          "vi_translation": "10 của chúng tôi"
+        },
+        {
+          "start": 71.75,
+          "end": 72.99,
+          "time_str": "01:12 → 01:13",
+          "text": "12月29號將去",
+          "vi_translation": "Đi vào ngày 29 tháng 12"
+        },
+        {
+          "start": 72.99,
+          "end": 73.75,
+          "time_str": "01:13 → 01:14",
+          "text": "我出改之後",
+          "vi_translation": "Sau khi tôi thay đổi"
+        },
+        {
+          "start": 73.75,
+          "end": 74.75,
+          "time_str": "01:14 → 01:15",
+          "text": "他不太",
+          "vi_translation": "Anh ấy không hoàn toàn"
+        },
+        {
+          "start": 74.75,
+          "end": 76.68,
+          "time_str": "01:15 → 01:17",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 76.68,
+          "end": 77.48,
+          "time_str": "01:17 → 01:17",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 77.48,
+          "end": 78.84,
+          "time_str": "01:17 → 01:19",
+          "text": "他有我們男孩",
+          "vi_translation": "anh ấy có chúng tôi, các chàng trai"
+        },
+        {
+          "start": 78.84,
+          "end": 79.48,
+          "time_str": "01:19 → 01:19",
+          "text": "對他",
+          "vi_translation": "với anh ấy"
+        },
+        {
+          "start": 79.48,
+          "end": 79.96,
+          "time_str": "01:19 → 01:20",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 79.96,
+          "end": 80.84,
+          "time_str": "01:20 → 01:21",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 80.84,
+          "end": 82.04,
+          "time_str": "01:21 → 01:22",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 82.04,
+          "end": 82.84,
+          "time_str": "01:22 → 01:23",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 82.84,
+          "end": 85.47,
+          "time_str": "01:23 → 01:25",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 85.47,
+          "end": 86.47,
+          "time_str": "01:25 → 01:26",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 86.47,
+          "end": 87.47,
+          "time_str": "01:26 → 01:27",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 87.47,
+          "end": 89.69,
+          "time_str": "01:27 → 01:30",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 89.69,
+          "end": 90.69,
+          "time_str": "01:30 → 01:31",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 90.69,
+          "end": 91.69,
+          "time_str": "01:31 → 01:32",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 91.69,
+          "end": 92.69,
+          "time_str": "01:32 → 01:33",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 415.89,
+          "end": 417.89,
+          "time_str": "06:56 → 06:58",
+          "text": "现在你得过这个时候啦",
+          "vi_translation": "Bây giờ bạn phải vượt qua điều này"
+        },
+        {
+          "start": 417.89,
+          "end": 419.97,
+          "time_str": "06:58 → 07:00",
+          "text": "你10月份那样的 你就来这么10月份",
+          "vi_translation": "Bạn đã như thế này vào tháng Mười. Bạn sẽ như thế này vào tháng 10."
+        },
+        {
+          "start": 419.97,
+          "end": 421.53,
+          "time_str": "07:00 → 07:02",
+          "text": "点了十米子就不服了",
+          "vi_translation": "Sau khi gọi 10 mét gạo, tôi không hài lòng."
+        },
+        {
+          "start": 421.53,
+          "end": 429.54,
+          "time_str": "07:02 → 07:10",
+          "text": "结果第一个要搞得好 第二个大约",
+          "vi_translation": "Kết quả là phần đầu tiên sẽ được thực hiện tốt và phần thứ hai sẽ được thực hiện khoảng"
+        },
+        {
+          "start": 429.54,
+          "end": 431.26,
+          "time_str": "07:10 → 07:11",
+          "text": "我们这个礼拜搞定了",
+          "vi_translation": "Chúng tôi đã hoàn thành nó trong tuần này"
+        },
+        {
+          "start": 431.26,
+          "end": 434.74,
+          "time_str": "07:11 → 07:15",
+          "text": "你上个礼拜大约我们这个礼拜搞定了",
+          "vi_translation": "Bạn đã hoàn thành nó vào tuần trước hoặc tuần này."
+        },
+        {
+          "start": 434.74,
+          "end": 449.13,
+          "time_str": "07:15 → 07:29",
+          "text": "这样不行了",
+          "vi_translation": "Điều này sẽ không hoạt động nữa"
+        },
+        {
+          "start": 449.13,
+          "end": 451.43,
+          "time_str": "07:29 → 07:31",
+          "text": "你还搞下个礼拜 怎么下个礼拜几",
+          "vi_translation": "Bạn vẫn muốn quyết định vào tuần tới? Tuần tới sẽ là ngày gì?"
+        },
+        {
+          "start": 451.43,
+          "end": 453.74,
+          "time_str": "07:31 → 07:34",
+          "text": "搞下礼拜三",
+          "vi_translation": "Làm điều đó vào thứ Tư tới"
+        },
+        {
+          "start": 453.74,
+          "end": 462.0,
+          "time_str": "07:34 → 07:42",
+          "text": "你怎么了",
+          "vi_translation": "Có chuyện gì với bạn vậy"
+        },
+        {
+          "start": 462.0,
+          "end": 464.0,
+          "time_str": "07:42 → 07:44",
+          "text": "你又几个礼拜六",
+          "vi_translation": "Bạn có bao nhiêu thứ bảy?"
+        },
+        {
+          "start": 464.0,
+          "end": 467.56,
+          "time_str": "07:44 → 07:48",
+          "text": "我又几个礼拜七",
+          "vi_translation": "Còn bao nhiêu tuần nữa cho tôi?"
+        },
+        {
+          "start": 467.56,
+          "end": 469.0,
+          "time_str": "07:48 → 07:49",
+          "text": "你又几个礼拜六",
+          "vi_translation": "Bạn có bao nhiêu thứ bảy?"
+        },
+        {
+          "start": 469.0,
+          "end": 485.29,
+          "time_str": "07:49 → 08:05",
+          "text": "我又几个礼拜四",
+          "vi_translation": "Tôi còn vài ngày thứ Năm nữa"
+        },
+        {
+          "start": 485.29,
+          "end": 486.93,
+          "time_str": "08:05 → 08:07",
+          "text": "你又几个礼拜五",
+          "vi_translation": "Bạn có bao nhiêu ngày thứ Sáu?"
+        },
+        {
+          "start": 486.93,
+          "end": 492.94,
+          "time_str": "08:07 → 08:13",
+          "text": "你都几个礼拜六",
+          "vi_translation": "Bạn có bao nhiêu thứ bảy?"
+        },
+        {
+          "start": 605.82,
+          "end": 607.82,
+          "time_str": "10:06 → 10:08",
+          "text": "有那个手动的机灵啊",
+          "vi_translation": "Bạn có sự thông minh thủ công đó không?"
+        },
+        {
+          "start": 607.82,
+          "end": 614.87,
+          "time_str": "10:08 → 10:15",
+          "text": "他懂",
+          "vi_translation": "Anh ấy hiểu"
+        },
+        {
+          "start": 614.87,
+          "end": 617.93,
+          "time_str": "10:15 → 10:18",
+          "text": "有问他的干嘛",
+          "vi_translation": "Tại sao bạn lại hỏi anh ấy?"
+        },
+        {
+          "start": 628.93,
+          "end": 630.93,
+          "time_str": "10:29 → 10:31",
+          "text": "他接样品",
+          "vi_translation": "Anh ấy lấy mẫu"
+        },
+        {
+          "start": 630.93,
+          "end": 633.22,
+          "time_str": "10:31 → 10:33",
+          "text": "接样品 鞋儿",
+          "vi_translation": "Nhận mẫu giày"
+        },
+        {
+          "start": 633.22,
+          "end": 635.22,
+          "time_str": "10:33 → 10:35",
+          "text": "他现在要问鞋儿",
+          "vi_translation": "Bây giờ anh ấy muốn hỏi về giày"
+        },
+        {
+          "start": 635.22,
+          "end": 637.22,
+          "time_str": "10:35 → 10:37",
+          "text": "啊 接着你",
+          "vi_translation": "À, theo bạn"
+        },
+        {
+          "start": 637.22,
+          "end": 638.22,
+          "time_str": "10:37 → 10:38",
+          "text": "你真的是废话",
+          "vi_translation": "Bạn thật là nhảm nhí"
+        },
+        {
+          "start": 638.22,
+          "end": 640.22,
+          "time_str": "10:38 → 10:40",
+          "text": "这段时间你搞昂贫过年的嘛",
+          "vi_translation": "Bạn có đang sống trong cảnh nghèo khó trong dịp Tết Nguyên đán không?"
+        },
+        {
+          "start": 640.22,
+          "end": 642.53,
+          "time_str": "10:40 → 10:43",
+          "text": "还接着时间",
+          "vi_translation": "Còn nhiều thời gian nữa"
+        },
+        {
+          "start": 642.53,
+          "end": 643.37,
+          "time_str": "10:43 → 10:43",
+          "text": "是吧",
+          "vi_translation": "Phải?"
+        },
+        {
+          "start": 643.37,
+          "end": 648.47,
+          "time_str": "10:43 → 10:48",
+          "text": "十四的牛肚子大了嘛",
+          "vi_translation": "Bụng bò mười bốn tuổi có to không?"
+        },
+        {
+          "start": 648.47,
+          "end": 651.63,
+          "time_str": "10:48 → 10:52",
+          "text": "牛肚子大了嘛",
+          "vi_translation": "Bụng bò có to không?"
+        },
+        {
+          "start": 651.63,
+          "end": 654.27,
+          "time_str": "10:52 → 10:54",
+          "text": "你看闪电的25号浮波的各位",
+          "vi_translation": "Hãy nhìn làn sóng nổi của Tia chớp vào ngày 25."
+        },
+        {
+          "start": 654.27,
+          "end": 655.46,
+          "time_str": "10:54 → 10:55",
+          "text": "你赶紧去",
+          "vi_translation": "Bạn đi nhanh lên"
+        },
+        {
+          "start": 655.46,
+          "end": 656.34,
+          "time_str": "10:55 → 10:56",
+          "text": "25",
+          "vi_translation": "25"
+        },
+        {
+          "start": 656.34,
+          "end": 665.98,
+          "time_str": "10:56 → 11:06",
+          "text": "你多去一条二里",
+          "vi_translation": "Bạn đi một hoặc hai dặm nữa"
+        },
+        {
+          "start": 665.98,
+          "end": 668.1,
+          "time_str": "11:06 → 11:08",
+          "text": "可以换个行业上换行的",
+          "vi_translation": "Bạn có thể thay đổi nghề nghiệp sang ngành khác"
+        },
+        {
+          "start": 668.1,
+          "end": 676.56,
+          "time_str": "11:08 → 11:17",
+          "text": "你先去换电的",
+          "vi_translation": "Bạn đi thay pin trước đi"
+        },
+        {
+          "start": 676.56,
+          "end": 677.36,
+          "time_str": "11:17 → 11:17",
+          "text": "你先去换电的",
+          "vi_translation": "Bạn đi thay pin trước đi"
+        },
+        {
+          "start": 677.36,
+          "end": 681.02,
+          "time_str": "11:17 → 11:21",
+          "text": "你换一条1499档店",
+          "vi_translation": "Đến cửa hàng 1499"
+        },
+        {
+          "start": 681.02,
+          "end": 686.42,
+          "time_str": "11:21 → 11:26",
+          "text": "你先捡一条下去嘛",
+          "vi_translation": "Tại sao bạn không chọn một cái trước?"
+        },
+        {
+          "start": 686.42,
+          "end": 687.7,
+          "time_str": "11:26 → 11:28",
+          "text": "你不去一条跟我说",
+          "vi_translation": "Tại sao bạn không nói với tôi điều gì đó?"
+        },
+        {
+          "start": 687.7,
+          "end": 689.88,
+          "time_str": "11:28 → 11:30",
+          "text": "闪电的这就搞定了",
+          "vi_translation": "Tia sét đã xong"
+        },
+        {
+          "start": 689.88,
+          "end": 691.2,
+          "time_str": "11:30 → 11:31",
+          "text": "你这个法体真的都会",
+          "vi_translation": "Pháp thân của bạn thực sự biết cách làm điều đó"
+        },
+        {
+          "start": 691.2,
+          "end": 692.96,
+          "time_str": "11:31 → 11:33",
+          "text": "你这闪电的11、25号",
+          "vi_translation": "Bạn sét số 11 và 25"
+        },
+        {
+          "start": 692.96,
+          "end": 696.9,
+          "time_str": "11:33 → 11:37",
+          "text": "说不过银5也没有关系",
+          "vi_translation": "Không nói được Bạc 5 cũng không sao"
+        },
+        {
+          "start": 696.9,
+          "end": 698.7,
+          "time_str": "11:37 → 11:39",
+          "text": "但是来说你不一定要影响",
+          "vi_translation": "Nhưng bạn không cần phải tác động"
+        },
+        {
+          "start": 698.7,
+          "end": 699.98,
+          "time_str": "11:39 → 11:40",
+          "text": "影响浮波就好了",
+          "vi_translation": "Sẽ tốt hơn nếu nó ảnh hưởng đến sóng nổi"
+        },
+        {
+          "start": 699.98,
+          "end": 702.14,
+          "time_str": "11:40 → 11:42",
+          "text": "你现在11月25号不过的展现",
+          "vi_translation": "Bạn không thể hiển thị nó bây giờ vào ngày 25 tháng 11"
+        },
+        {
+          "start": 702.14,
+          "end": 703.98,
+          "time_str": "11:42 → 11:44",
+          "text": "你还刚刚开始动",
+          "vi_translation": "Bạn vừa mới bắt đầu di chuyển"
+        },
+        {
+          "start": 703.98,
+          "end": 706.09,
+          "time_str": "11:44 → 11:46",
+          "text": "你说过去的吗",
+          "vi_translation": "Bạn đã kể cho tôi nghe về quá khứ chưa?"
+        },
+        {
+          "start": 709.43,
+          "end": 715.4,
+          "time_str": "11:49 → 11:55",
+          "text": "我还以为你10月的展现都搞完了",
+          "vi_translation": "Tôi tưởng bạn đã hoàn thành bài thuyết trình vào tháng 10."
+        },
+        {
+          "start": 715.4,
+          "end": 717.4,
+          "time_str": "11:55 → 11:57",
+          "text": "你要早点 你要早点 真的要早点",
+          "vi_translation": "Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm."
+        },
+        {
+          "start": 717.4,
+          "end": 719.96,
+          "time_str": "11:57 → 12:00",
+          "text": "我给你讲 我那天我上网你的东西",
+          "vi_translation": "Hãy để tôi kể cho bạn nghe về ngày tôi lướt đồ của bạn"
+        },
+        {
+          "start": 719.96,
+          "end": 722.52,
+          "time_str": "12:00 → 12:03",
+          "text": "我就跟你说 你要早到11月20号",
+          "vi_translation": "Tôi đã nói rồi, bạn phải đến sớm nhất là vào ngày 20 tháng 11"
+        },
+        {
+          "start": 722.52,
+          "end": 724.32,
+          "time_str": "12:03 → 12:04",
+          "text": "你现在离一个礼拜 离一个礼拜",
+          "vi_translation": "Bây giờ bạn còn một tuần nữa. Một tuần xa anh."
+        },
+        {
+          "start": 724.32,
+          "end": 727.96,
+          "time_str": "12:04 → 12:08",
+          "text": "我跟你讲 人家早到12的时候就",
+          "vi_translation": "Để tôi nói cho bạn biết, khi mọi người đến sớm nhất là 12 giờ"
+        },
+        {
+          "start": 727.96,
+          "end": 734.07,
+          "time_str": "12:08 → 12:14",
+          "text": "你现在病难 今天这几天又下了很多病难",
+          "vi_translation": "Bây giờ bạn đang gặp rắc rối. Những ngày này bạn đã gặp rất nhiều rắc rối."
+        },
+        {
+          "start": 734.07,
+          "end": 735.31,
+          "time_str": "12:14 → 12:15",
+          "text": "你们看到吗",
+          "vi_translation": "bạn có thấy không"
+        },
+        {
+          "start": 735.31,
+          "end": 739.91,
+          "time_str": "12:15 → 12:20",
+          "text": "我就给你赛前过",
+          "vi_translation": "Tôi sẽ đưa nó cho bạn trước trận đấu"
+        },
+        {
+          "start": 739.91,
+          "end": 741.51,
+          "time_str": "12:20 → 12:22",
+          "text": "我还给你赛三部分",
+          "vi_translation": "Tôi sẽ cho bạn ba phần"
+        },
+        {
+          "start": 741.51,
+          "end": 743.91,
+          "time_str": "12:22 → 12:24",
+          "text": "就是你给你二十月份赛嘛",
+          "vi_translation": "Chính bạn là người mang đến cho bạn cuộc thi vào tháng 12"
+        },
+        {
+          "start": 744.51,
+          "end": 746.91,
+          "time_str": "12:25 → 12:27",
+          "text": "所以说你在说不要搞了12月时候了",
+          "vi_translation": "Vì vậy, bạn đang nói không làm điều đó cho đến tháng 12"
+        },
+        {
+          "start": 746.91,
+          "end": 755.34,
+          "time_str": "12:27 → 12:35",
+          "text": "你先把你这玩家说",
+          "vi_translation": "Bạn nói về bản thân với tư cách là một người chơi trước"
+        },
+        {
+          "start": 755.34,
+          "end": 756.14,
+          "time_str": "12:35 → 12:36",
+          "text": "他后面的人",
+          "vi_translation": "người đứng sau anh ta"
+        },
+        {
+          "start": 756.14,
+          "end": 757.34,
+          "time_str": "12:36 → 12:37",
+          "text": "后面总当忙忙",
+          "vi_translation": "Luôn bận rộn sau này"
+        },
+        {
+          "start": 757.34,
+          "end": 758.73,
+          "time_str": "12:37 → 12:39",
+          "text": "到后面这说",
+          "vi_translation": "Hãy nói về chuyện này sau"
+        },
+        {
+          "start": 758.73,
+          "end": 760.13,
+          "time_str": "12:39 → 12:40",
+          "text": "你先把自己搞完",
+          "vi_translation": "Hãy hoàn thành bản thân mình trước"
+        },
+        {
+          "start": 760.33,
+          "end": 769.53,
+          "time_str": "12:40 → 12:50",
+          "text": "你先把11月份出过的",
+          "vi_translation": "Trước tiên bạn nên đặt những cái đã được phát hành vào tháng 11"
+        },
+        {
+          "start": 769.53,
+          "end": 770.53,
+          "time_str": "12:50 → 12:51",
+          "text": "先拿一遍",
+          "vi_translation": "Lấy nó trước"
+        },
+        {
+          "start": 770.53,
+          "end": 772.33,
+          "time_str": "12:51 → 12:52",
+          "text": "看一下你还得到底有多少遍的",
+          "vi_translation": "Xem bạn phải làm điều đó bao nhiêu lần nữa"
+        },
+        {
+          "start": 782.9,
+          "end": 784.5,
+          "time_str": "13:03 → 13:04",
+          "text": "你看到小伙伴确认一下嘛",
+          "vi_translation": "Bạn đã gặp bạn tôi và xác nhận điều đó chưa?"
+        },
+        {
+          "start": 784.5,
+          "end": 785.3,
+          "time_str": "13:04 → 13:05",
+          "text": "那怎么搞的",
+          "vi_translation": "Chuyện gì đã xảy ra thế?"
+        },
+        {
+          "start": 785.3,
+          "end": 786.1,
+          "time_str": "13:05 → 13:06",
+          "text": "很死等的",
+          "vi_translation": "Rất chờ đợi"
+        },
+        {
+          "start": 786.1,
+          "end": 805.26,
+          "time_str": "13:06 → 13:25",
+          "text": "这几块新的",
+          "vi_translation": "Những mảnh mới này"
+        },
+        {
+          "start": 805.26,
+          "end": 809.5,
+          "time_str": "13:25 → 13:30",
+          "text": "各位有阳明",
+          "vi_translation": "Ai cũng có Dương Minh"
+        },
+        {
+          "start": 809.5,
+          "end": 810.5,
+          "time_str": "13:30 → 13:30",
+          "text": "有阳明没有啊",
+          "vi_translation": "Có Dương Minh không?"
+        },
+        {
+          "start": 810.5,
+          "end": 825.53,
+          "time_str": "13:30 → 13:46",
+          "text": "哎呀,我给你说你签一点点,你签一点点,说我,我不找你,可以吧?",
+          "vi_translation": "Ồ, tôi đã nói với bạn rằng bạn ký một chút, bạn ký một chút, nói cho tôi biết, tôi sẽ không tìm bạn, được không?"
+        },
+        {
+          "start": 825.53,
+          "end": 833.14,
+          "time_str": "13:46 → 13:53",
+          "text": "我不找你,你现在把11月份计单,你赶紧给我算,我给你点,我给你点,你点不了,知道吗?",
+          "vi_translation": "Nếu tôi không tìm bạn thì hiện tại bạn đang tính toán hóa đơn cho tháng 11. Bạn có thể nhanh chóng tính toán chúng cho tôi. Tôi sẽ cho bạn một số điểm. Tôi sẽ cho bạn một số điểm. Bạn không thể nhận bất kỳ đơn đặt hàng nào. Bạn hiểu không?"
+        },
+        {
+          "start": 833.14,
+          "end": 839.44,
+          "time_str": "13:53 → 13:59",
+          "text": "所以,下个年呢,这个11月5号能不能找你?",
+          "vi_translation": "Vậy năm sau tôi có thể gặp bạn vào ngày 5 tháng 11 được không?"
+        },
+        {
+          "start": 839.44,
+          "end": 860.14,
+          "time_str": "13:59 → 14:20",
+          "text": "啊,而且哦,你自己给你,我给你这个,你找个11月7号,如果你真的找不完的话,我也没办法",
+          "vi_translation": "À, mà bạn tự đưa cho mình, tôi cho bạn cái này, bạn tìm ngày 7 tháng 11, nếu thật sự tìm không hết thì tôi cũng nhịn được"
+        },
+        {
+          "start": 860.14,
+          "end": 864.14,
+          "time_str": "14:20 → 14:24",
+          "text": "你自己给你,你答应我的时间,你按照这个,你把它找完,知道吗?",
+          "vi_translation": "Bạn đưa nó cho chính mình, bạn đã hứa với tôi thời gian, bạn làm theo điều này, bạn tìm thấy nó, bạn biết không?"
+        },
+        {
+          "start": 864.14,
+          "end": 866.26,
+          "time_str": "14:24 → 14:26",
+          "text": "你都答應了答應了 你要到那個兩點都說不到",
+          "vi_translation": "Bạn đã hứa rồi, bạn đã hứa rồi và bạn không thể nói bất cứ điều gì cho đến thời điểm đó."
+        },
+        {
+          "start": 866.26,
+          "end": 879.08,
+          "time_str": "14:26 → 14:39",
+          "text": "說不到你又不期待說",
+          "vi_translation": "Tôi không thể nói với bạn và tôi không mong đợi để nói với bạn"
+        },
+        {
+          "start": 879.08,
+          "end": 881.4,
+          "time_str": "14:39 → 14:41",
+          "text": "這個閃電的不是一樣的 你自己要更緊",
+          "vi_translation": "Tia sét này không giống nhau. Bạn phải chặt chẽ hơn."
+        },
+        {
+          "start": 881.4,
+          "end": 882.72,
+          "time_str": "14:41 → 14:43",
+          "text": "還缺了第一的",
+          "vi_translation": "Vẫn thiếu cái đầu tiên"
+        },
+        {
+          "start": 882.72,
+          "end": 885.88,
+          "time_str": "14:43 → 14:46",
+          "text": "你自己現在答應了11月3號 對不對",
+          "vi_translation": "Bây giờ bạn đã đồng ý đến ngày 3 tháng 11 phải không?"
+        },
+        {
+          "start": 885.88,
+          "end": 895.99,
+          "time_str": "14:46 → 14:56",
+          "text": "對你11月3號 閃電的11月7號",
+          "vi_translation": "Ngày 3 tháng 11 dành cho bạn, ngày 7 tháng 11 dành cho Tia chớp"
+        },
+        {
+          "start": 895.99,
+          "end": 897.55,
+          "time_str": "14:56 → 14:58",
+          "text": "還有史密斯的",
+          "vi_translation": "Và của Smith"
+        },
+        {
+          "start": 897.55,
+          "end": 899.71,
+          "time_str": "14:58 → 15:00",
+          "text": "史密斯的地方 史密斯的地方",
+          "vi_translation": "Địa điểm của Smith Địa điểm của Smith"
+        },
+        {
+          "start": 899.71,
+          "end": 901.63,
+          "time_str": "15:00 → 15:02",
+          "text": "你除了帶網頁的幾個網版",
+          "vi_translation": "Ngoài một số phiên bản web có trang web, bạn"
+        },
+        {
+          "start": 901.63,
+          "end": 902.99,
+          "time_str": "15:02 → 15:03",
+          "text": "還缺人的之外",
+          "vi_translation": "Ngoài việc thiếu người"
+        },
+        {
+          "start": 902.99,
+          "end": 904.83,
+          "time_str": "15:03 → 15:05",
+          "text": "還有其他的收尾也要把它收掉",
+          "vi_translation": "Có những công việc hoàn thiện khác cũng cần phải được bỏ đi."
+        },
+        {
+          "start": 904.83,
+          "end": 912.84,
+          "time_str": "15:05 → 15:13",
+          "text": "你不能每一盤都欠",
+          "vi_translation": "Bạn không thể nợ mọi trận đấu"
+        },
+        {
+          "start": 912.84,
+          "end": 1041.04,
+          "time_str": "15:13 → 17:21",
+          "text": "自己要更緊的 都怪",
+          "vi_translation": "Tất cả là lỗi của tôi nếu tôi muốn nó chặt chẽ hơn"
+        },
+        {
+          "start": 1041.04,
+          "end": 1059.88,
+          "time_str": "17:21 → 17:40",
+          "text": "沒關係 沒關係 沒關係",
+          "vi_translation": "Không sao Không sao Không sao"
+        },
+        {
+          "start": 1059.88,
+          "end": 1061.2,
+          "time_str": "17:40 → 17:41",
+          "text": "有吗",
+          "vi_translation": "Có cái nào không"
+        },
+        {
+          "start": 1061.2,
+          "end": 1065.78,
+          "time_str": "17:41 → 17:46",
+          "text": "我吃了",
+          "vi_translation": "tôi đã ăn"
+        },
+        {
+          "start": 1066.78,
+          "end": 1076.65,
+          "time_str": "17:47 → 17:57",
+          "text": "我吃了",
+          "vi_translation": "tôi đã ăn"
+        },
+        {
+          "start": 1111.09,
+          "end": 1113.09,
+          "time_str": "18:31 → 18:33",
+          "text": "接着那个阿玉",
+          "vi_translation": "Rồi Ayu đó"
+        },
+        {
+          "start": 1113.09,
+          "end": 1115.09,
+          "time_str": "18:33 → 18:35",
+          "text": "史密斯的帽子赶快点",
+          "vi_translation": "Mũ của Smith, hãy nhanh lên."
+        },
+        {
+          "start": 1115.09,
+          "end": 1117.09,
+          "time_str": "18:35 → 18:37",
+          "text": "明天可能就走了",
+          "vi_translation": "Tôi có thể rời đi vào ngày mai"
+        },
+        {
+          "start": 1117.09,
+          "end": 1120.88,
+          "time_str": "18:37 → 18:41",
+          "text": "抓紧时",
+          "vi_translation": "Khi bạn nhanh lên"
+        },
+        {
+          "start": 1120.88,
+          "end": 1128.77,
+          "time_str": "18:41 → 18:49",
+          "text": "不管是",
+          "vi_translation": "Dù thế nào đi chăng nữa"
+        },
+        {
+          "start": 1128.77,
+          "end": 1131.5,
+          "time_str": "18:49 → 18:52",
+          "text": "就是史密斯的",
+          "vi_translation": "Đó là của Smith"
+        },
+        {
+          "start": 1131.5,
+          "end": 1134.5,
+          "time_str": "18:52 → 18:54",
+          "text": "史密斯的要抓紧时间",
+          "vi_translation": "Smith cần phải nhanh lên"
+        },
+        {
+          "start": 1134.5,
+          "end": 1140.79,
+          "time_str": "18:54 → 19:01",
+          "text": "明天可能就要走了",
+          "vi_translation": "Tôi có thể rời đi vào ngày mai"
+        },
+        {
+          "start": 1140.79,
+          "end": 1142.79,
+          "time_str": "19:01 → 19:03",
+          "text": "要抓緊時間",
+          "vi_translation": "nhanh lên"
+        },
+        {
+          "start": 1142.79,
+          "end": 1144.79,
+          "time_str": "19:03 → 19:05",
+          "text": "看了旁邊書庫",
+          "vi_translation": "Tôi nhìn vào thư viện bên cạnh nó"
+        }
+      ],
+      "processed_in_sec": 737.35,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "Bản ghi mới 9",
+      "audio_file": "Bản ghi mới 9.m4a",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 13:26:02",
+      "duration_sec": 71.8,
+      "language": "zh",
+      "language_label": "🇨🇳 Tiếng Trung",
+      "language_confidence_pct": 93.4,
+      "full_text": "我们这边有买过的其他颜色是你们自己买的哦 不要等于又没生母 这以后他们的生母为什么来都没有 过来就难得有合作的那个新买 虽然那不是我们这边买的 我们是不是要不注入到我们 但这边在我们新闻当中的新设置 就不是过来的吧",
+      "full_vi_translation": "Các màu khác chúng tôi mua ở đây các bạn tự mua nhé. Không có nghĩa là bạn không có mẹ ruột Tại sao mẹ ruột của họ không đến sau chuyện này? Thật hiếm khi có người hợp tác khi tôi đến đây. Mặc dù đó không phải là thứ chúng tôi mua ở đây Chúng ta có nên tiêm nó vào Nhưng đây là cài đặt mới trong tin tức của chúng tôi Cậu không đến đây phải không?",
+      "highlights": [],
+      "segments": [
+        {
+          "start": 1.81,
+          "end": 6.59,
+          "time_str": "00:02 → 00:07",
+          "text": "我们这边有买过的其他颜色是你们自己买的哦",
+          "vi_translation": "Các màu khác chúng tôi mua ở đây các bạn tự mua nhé."
+        },
+        {
+          "start": 6.59,
+          "end": 8.59,
+          "time_str": "00:07 → 00:09",
+          "text": "不要等于又没生母",
+          "vi_translation": "Không có nghĩa là bạn không có mẹ ruột"
+        },
+        {
+          "start": 8.59,
+          "end": 12.84,
+          "time_str": "00:09 → 00:13",
+          "text": "这以后他们的生母为什么来都没有",
+          "vi_translation": "Tại sao mẹ ruột của họ không đến sau chuyện này?"
+        },
+        {
+          "start": 12.84,
+          "end": 18.7,
+          "time_str": "00:13 → 00:19",
+          "text": "过来就难得有合作的那个新买",
+          "vi_translation": "Thật hiếm khi có người hợp tác khi tôi đến đây."
+        },
+        {
+          "start": 18.7,
+          "end": 20.4,
+          "time_str": "00:19 → 00:20",
+          "text": "虽然那不是我们这边买的",
+          "vi_translation": "Mặc dù đó không phải là thứ chúng tôi mua ở đây"
+        },
+        {
+          "start": 20.4,
+          "end": 22.2,
+          "time_str": "00:20 → 00:22",
+          "text": "我们是不是要不注入到我们",
+          "vi_translation": "Chúng ta có nên tiêm nó vào"
+        },
+        {
+          "start": 22.2,
+          "end": 26.31,
+          "time_str": "00:22 → 00:26",
+          "text": "但这边在我们新闻当中的新设置",
+          "vi_translation": "Nhưng đây là cài đặt mới trong tin tức của chúng tôi"
+        },
+        {
+          "start": 26.31,
+          "end": 28.31,
+          "time_str": "00:26 → 00:28",
+          "text": "就不是过来的吧",
+          "vi_translation": "Cậu không đến đây phải không?"
+        }
+      ],
+      "processed_in_sec": 32.14,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "Bản ghi mới 13",
+      "audio_file": "Bản ghi mới 13.m4a",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 12:31:05",
+      "duration_sec": 52.9,
+      "language": "vi",
+      "language_label": "🇻🇳 Tiếng Việt",
+      "language_confidence_pct": 91.9,
+      "full_text": "Mời rửa của mày thành niên Nói chơi, chơi thì nóng dơ, sợ dơ, bây giờ xong rồi làm lối hình trường như ảm biệt, còn ảm biệt, nắng lưu, bổ từng hay đắng đó Chơi, chơi thì... Có 1 năm giờ thế quá Bả, bả chơi rồi Hả bả chơi Bây giờ mai đi làm lại hình kiệt Bịt vô hốc nguyền Rồi mình đang chơi cái chị đồ quả đu rồi Đó, cái chị đồ cưng bất đấy",
+      "full_vi_translation": "",
+      "highlights": [],
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 2.51,
+          "time_str": "00:00 → 00:03",
+          "text": "Mời rửa của mày thành niên",
+          "vi_translation": ""
+        },
+        {
+          "start": 2.51,
+          "end": 7.51,
+          "time_str": "00:03 → 00:08",
+          "text": "Nói chơi, chơi thì nóng dơ, sợ dơ, bây giờ xong rồi làm lối hình trường như",
+          "vi_translation": ""
+        },
+        {
+          "start": 7.51,
+          "end": 11.51,
+          "time_str": "00:08 → 00:12",
+          "text": "ảm biệt, còn ảm biệt, nắng lưu, bổ từng hay đắng đó",
+          "vi_translation": ""
+        },
+        {
+          "start": 13.51,
+          "end": 16.31,
+          "time_str": "00:14 → 00:16",
+          "text": "Chơi, chơi thì...",
+          "vi_translation": ""
+        },
+        {
+          "start": 16.31,
+          "end": 18.44,
+          "time_str": "00:16 → 00:18",
+          "text": "Có 1 năm giờ thế quá",
+          "vi_translation": ""
+        },
+        {
+          "start": 18.44,
+          "end": 20.44,
+          "time_str": "00:18 → 00:20",
+          "text": "Bả, bả chơi rồi",
+          "vi_translation": ""
+        },
+        {
+          "start": 20.44,
+          "end": 21.44,
+          "time_str": "00:20 → 00:21",
+          "text": "Hả bả chơi",
+          "vi_translation": ""
+        },
+        {
+          "start": 21.44,
+          "end": 33.55,
+          "time_str": "00:21 → 00:34",
+          "text": "Bây giờ mai đi làm lại hình kiệt",
+          "vi_translation": ""
+        },
+        {
+          "start": 33.55,
+          "end": 34.71,
+          "time_str": "00:34 → 00:35",
+          "text": "Bịt vô hốc nguyền",
+          "vi_translation": ""
+        },
+        {
+          "start": 34.71,
+          "end": 36.71,
+          "time_str": "00:35 → 00:37",
+          "text": "Rồi mình đang chơi cái chị đồ quả đu rồi",
+          "vi_translation": ""
+        },
+        {
+          "start": 36.71,
+          "end": 38.71,
+          "time_str": "00:37 → 00:39",
+          "text": "Đó, cái chị đồ cưng bất đấy",
+          "vi_translation": ""
+        }
+      ],
+      "processed_in_sec": 48.92,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "en_zh_bilingual",
+      "audio_file": "en_zh_bilingual.mp3",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 09:13:27",
+      "duration_sec": 54.6,
+      "language": "en",
+      "language_label": "🇬🇧 Tiếng Anh",
+      "language_confidence_pct": 99.8,
+      "full_text": "Today I attended the introduction meeting for the new SHK-1 safety helmet product. SHK-1. After the meeting, I went to check the EPS bulging defect on SMI-14. SMI-14 EPS. Then I assisted Mr. Tuesday with the impact test experiment. We carefully recorded the test process and results. In the afternoon, I worked overtime to inspect the rubber sealing strips on motorcycle helmets. Because it was their first time doing this task, the inspection speed was quite slow. He and Neonai only managed to check three cartons in one and a half hours. In the factory, quality inspection requires great attention and patience. Although today's workload was heavy, I gained a lot of practical experience. After finishing all tasks, I went home to rest.",
+      "full_vi_translation": "Hôm nay tôi tham dự buổi họp giới thiệu dòng sản phẩm nón bảo hộ an toàn mới SHK-1. Sau buổi họp, tôi đi kiểm tra lỗi phồng rộp xốp EPS trên mẫu SMI-14. Kế đó, tôi hỗ trợ Mr. Tuesday thực hiện thử nghiệm va đập (Impact Test); hai chúng tôi đã cẩn thận ghi nhận toàn bộ quy trình và số liệu đo đạc. Buổi chiều, tôi tăng ca để kiểm tra gioăng cao su viền nón bảo hiểm xe máy. Vì là lần đầu làm công đoạn này nên tốc độ kiểm tra khá chậm — anh ấy cùng Neonai chỉ kiểm tra được 3 thùng hàng trong vòng 1 tiếng rưỡi. Ở môi trường nhà máy, công tác kiểm định chất lượng (QC) luôn đòi hỏi sự tập trung cao độ và tính kiên trì. Dù khối lượng công việc hôm nay khá nặng nhưng tôi đã học hỏi được rất nhiều kinh nghiệm thực chiến. Hoàn thành xong toàn bộ công việc, tôi về nhà nghỉ ngơi.",
+      "ai_refined": true,
+      "ai_model": "Google Antigravity / Gemini",
+      "ai_summary": [
+        "Họp triển khai dòng nón bảo hộ an toàn mới SHK-1",
+        "Kiểm tra lỗi phồng rộp xốp EPS trên mẫu khuôn SMI-14",
+        "Hỗ trợ chuyên gia Mr. Tuesday thực hiện thử nghiệm va đập (Impact Test)",
+        "Tăng ca kiểm tra gioăng cao su viền mũ bảo hiểm xe máy cùng Neonai (năng suất 3 thùng / 1.5 giờ)"
+      ],
+      "highlights": [
+        "SHK-1",
+        "SMI-14 EPS",
+        "Mr. Tuesday",
+        "impact test",
+        "gioăng cao su",
+        "Neonai",
+        "3 thùng / 1.5 giờ",
+        "QC / KCS"
+      ],
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.96,
+          "time_str": "00:00 → 00:05",
+          "text": "Today I attended the introduction meeting for the new SHK-1 safety helmet product.",
+          "vi_translation": "Hôm nay tôi tham dự buổi họp triển khai dòng sản phẩm nón bảo hộ an toàn mới SHK-1."
+        },
+        {
+          "start": 5.92,
+          "end": 12.59,
+          "time_str": "00:06 → 00:13",
+          "text": "SHK-1. After the meeting, I went to check the EPS bulging defect on SMI-14.",
+          "vi_translation": "SHK-1. Sau buổi họp, tôi đi kiểm tra lỗi phồng rộp lớp xốp EPS trên mẫu SMI-14."
+        },
+        {
+          "start": 13.6,
+          "end": 19.3,
+          "time_str": "00:14 → 00:19",
+          "text": "SMI-14 EPS. Then I assisted Mr. Tuesday with the impact test experiment.",
+          "vi_translation": "SMI-14 EPS. Sau đó tôi hỗ trợ Mr. Tuesday tiến hành thử nghiệm va đập (Impact Test)."
+        },
+        {
+          "start": 20.22,
+          "end": 23.1,
+          "time_str": "00:20 → 00:23",
+          "text": "We carefully recorded the test process and results.",
+          "vi_translation": "Hai chúng tôi đã cẩn thận ghi nhận toàn bộ quy trình và kết quả đo đạc."
+        },
+        {
+          "start": 24.03,
+          "end": 29.31,
+          "time_str": "00:24 → 00:29",
+          "text": "In the afternoon, I worked overtime to inspect the rubber sealing strips on motorcycle helmets.",
+          "vi_translation": "Vào buổi chiều, tôi tăng ca để kiểm tra gioăng cao su viền mũ bảo hiểm xe máy."
+        },
+        {
+          "start": 29.31,
+          "end": 35.57,
+          "time_str": "00:29 → 00:36",
+          "text": "Because it was their first time doing this task, the inspection speed was quite slow.",
+          "vi_translation": "Do đây là lần đầu tiên họ làm công đoạn này nên tốc độ kiểm tra còn khá chậm."
+        },
+        {
+          "start": 35.57,
+          "end": 40.66,
+          "time_str": "00:36 → 00:41",
+          "text": "He and Neonai only managed to check three cartons in one and a half hours.",
+          "vi_translation": "Anh ấy cùng Neonai chỉ mới kiểm tra xong được 3 thùng hàng trong suốt 1 tiếng rưỡi."
+        },
+        {
+          "start": 40.66,
+          "end": 45.79,
+          "time_str": "00:41 → 00:46",
+          "text": "In the factory, quality inspection requires great attention and patience.",
+          "vi_translation": "Tại xưởng sản xuất, công tác kiểm định chất lượng (QC) luôn đòi hỏi sự tập trung cao độ và tính kiên trì."
+        },
+        {
+          "start": 45.79,
+          "end": 50.98,
+          "time_str": "00:46 → 00:51",
+          "text": "Although today's workload was heavy, I gained a lot of practical experience.",
+          "vi_translation": "Dù khối lượng công việc hôm nay khá nặng nhưng tôi đã tích lũy được rất nhiều kinh nghiệm thực tế."
+        },
+        {
+          "start": 50.98,
+          "end": 53.98,
+          "time_str": "00:51 → 00:54",
+          "text": "After finishing all tasks, I went home to rest.",
+          "vi_translation": "Sau khi hoàn thành mọi việc, tôi trở về nhà nghỉ ngơi."
+        }
+      ],
+      "processed_in_sec": 52.33,
+      "processed_by": "DEAN-DELL (faster-whisper + Antigravity AI Engine)"
+    },
+    {
+      "id": "tep_20261029_061157_39155",
+      "audio_file": "tep_20261029_061157_39155.oga",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 06:11:59",
+      "duration_sec": 2.7,
+      "language": "vi",
+      "language_label": "🇻🇳 Tiếng Việt",
+      "language_confidence_pct": 46.6,
+      "full_text": "1, 2, 3",
+      "full_vi_translation": "",
+      "highlights": [],
+      "segments": [
+        {
+          "start": 0.78,
+          "end": 2.78,
+          "time_str": "00:01 → 00:03",
+          "text": "1, 2, 3",
+          "vi_translation": ""
+        }
+      ],
+      "processed_in_sec": 11.83,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "2026-10-29_seg000_demo_zh",
+      "audio_file": "2026-10-29_seg000_demo_zh.wav",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 00:20:36",
+      "duration_sec": 8.3,
+      "language": "zh",
+      "language_label": "🇨🇳 Tiếng Trung",
+      "language_confidence_pct": 99.5,
+      "full_text": "明天下午三点开会,请确认15号之前把库存报告发给我。",
+      "full_vi_translation": "Chiều mai ba giờ sẽ có cuộc họp. Vui lòng đảm bảo gửi cho tôi báo cáo tồn kho trước ngày 15.",
+      "highlights": [
+        "明天",
+        "下午",
+        "确认",
+        "15号",
+        "发给",
+        "họp",
+        "gửi",
+        "báo cáo"
+      ],
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 7.64,
+          "time_str": "00:00 → 00:08",
+          "text": "明天下午三点开会,请确认15号之前把库存报告发给我。",
+          "vi_translation": "Chiều mai ba giờ sẽ có cuộc họp. Vui lòng đảm bảo gửi cho tôi báo cáo tồn kho trước ngày 15."
+        }
+      ],
+      "processed_in_sec": 179.0,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    }
+  ]
+}
+</script>
+<script>
+// Fallback to embedded data if fetch fails
+window.FALLBACK_FEED = {
+  "schema": "dean_os.telecoder_feed.v1",
+  "updated_at": "29/10/2026 17:39:47",
+  "daemon": {
+    "pid": 21712,
+    "status": "ONLINE",
+    "uptime_sec": 5596,
+    "uptime_human": "1h 33m",
+    "active_workspace": "12.Vibe idea (tạm)",
+    "active_provider": "zcode",
+    "active_model": "GLM-5.3-Flash"
+  },
+  "cooldowns": {},
+  "cockpit_quota": [
+    {
+      "account": "tru***@gmail.com",
+      "is_active": false,
+      "weekly_pct": 13.7,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": true,
+      "reset_time": "2026-11-02T01:09:28Z"
+    },
+    {
+      "account": "zha***@gmail.com",
+      "is_active": true,
+      "weekly_pct": 0.0,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": true,
+      "reset_time": "2026-11-02T17:43:29Z"
+    },
+    {
+      "account": "huy***@gmail.com",
+      "is_active": false,
+      "weekly_pct": 100.0,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": false,
+      "reset_time": "2026-11-04T14:32:19Z"
+    }
+  ],
+  "sp3_tiktok": {
+    "exists": true,
+    "completed_days": [
+      "day01",
+      "day02",
+      "day03",
+      "day04"
+    ],
+    "pending_days": [
+      "day05",
+      "day06"
+    ],
+    "total_mp4_ready": 16,
+    "batches": {
+      "day01": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_chiec_thuyen_rong.mp4",
+          "ch2_trung_viet_ai_plc_factory.mp4",
+          "ch3_anh_viet_ai_plc_factory.mp4",
+          "ch4_kenh_chinh_plc_vs_arduino_vi.mp4"
+        ]
+      },
+      "day02": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_ly_nuoc_nong.mp4",
+          "ch2_xkcd_ep04_security_zh_vi.mp4",
+          "ch3_xkcd_ep04_security_en_vi.mp4",
+          "ch4_kenh_chinh_edge_ai_ep03_vi.mp4"
+        ]
+      },
+      "day03": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_ngon_tay_chi_trang.mp4",
+          "ch2_xkcd_ep05_password_zh_vi.mp4",
+          "ch3_xkcd_ep05_password_en_vi.mp4",
+          "ch4_kenh_chinh_robot_amr_ep04_vi.mp4"
+        ]
+      },
+      "day04": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_tach_tra_tran.mp4",
+          "ch2_xkcd_ep06_compiling_zh_vi.mp4",
+          "ch3_xkcd_ep06_compiling_en_vi.mp4",
+          "ch4_kenh_chinh_bien_tan_inverter_ep05_vi.mp4"
+        ]
+      },
+      "day05": {
+        "ready_mp4": 0,
+        "files": []
+      },
+      "day06": {
+        "ready_mp4": 0,
+        "files": []
+      }
+    }
+  },
+  "locks": [
+    {
+      "agent": "DEAN-Telegravity(Dell)",
+      "machine": "DEAN-DELL",
+      "status": "🟢 RẢNH",
+      "project": "*(Không giữ khóa — Watchdog `12.RescueMic_Worker` đang chạy ngầm 24/7)*",
+      "updated_at": "29/10 06:06"
+    },
+    {
+      "agent": "DEAN-Telegravity (T14)",
+      "machine": "DEAN-T14",
+      "status": "🟢 RẢNH",
+      "project": "*(Không giữ khóa)*",
+      "updated_at": "28/10 22:27"
+    },
+    {
+      "agent": "DEAN-Telecoder (bot Telegram)",
+      "machine": "DEAN-T14",
+      "status": "🟡 ĐANG SỬA",
+      "project": "`D:\\0.PROGRAMME\\4. DEAN OPTIMIZE\\1.TELECODER\\` + `DEAN_OS_Dashboard.html` (Tiến công Mũi 2 + Mũi 3)",
+      "updated_at": "29/10 17:35"
+    },
+    {
+      "agent": "DEAN-ZCode(T14) (ZCode trực tiếp)",
+      "machine": "DEAN-T14",
+      "status": "🟡 ĐANG SỬA",
+      "project": "`D:\\0.PROGRAMME\\4. DEAN OPTIMIZE\\29. RescueMic\\` (đã hoàn thành v0.2 theo Mục 3)",
+      "updated_at": "28/10 23:55"
+    }
+  ],
+  "handoffs": [
+    {
+      "timestamp": "29/10 16:07",
+      "agent": "DEAN-Telecoder",
+      "summary": "🤝 ĐÃ TIẾP ỨNG TOÀN ĐỘI (N1 QUOTA + DEAN OS SỔ ĐỘI/QUOTA + TỔNG ĐÀI `/mesh` `/ping`), RÚT CỜ `🟢 RẢNH`: (1) Hoàn tất **Nghị quyết N1** trên đủ 4 họ Engine (`zcode`, `dsh`, `universal:*`, `subagent:*`), chuẩn hóa `engine_key()` + `excluded_keys` chống lặp vô tận và dọn sạch 3 khóa giả selftest trong `.telecoder/engine_cooldown.json`; (2) Ghép xong mảnh `DEAN_OS_Dashboard.html` + dựng `telecoder/core/mesh_hub.py` tự xuất `telecoder_feed.json` mỗi 3p (Sổ đội Mục 2 & 3, PID/uptime sống, % Quota 3 acc Cockpit T14 che email, SP3 16 MP4 Day01–04); (3) Thêm lệnh tổng đài `/mesh` & `/ping <dell|zcode|t14> <tin>` ghi phiếu `CHECKPOINT/WAKEUP_*.md`; `42/42` test PASS, Daemon `PID: 21712` (`8/8` Doctor PASS)."
+    },
+    {
+      "timestamp": "29/10 15:07",
+      "agent": "DEAN-Telecoder",
+      "summary": "🛑 HOÀN THÀNH TÍNH NĂNG DỪNG TOÀN BỘ DỰ ÁN & HỦY SESSION (`/stop`, `/cancel`), RÚT CỜ `🟢 RẢNH`: Bổ sung Trung tâm Dừng Dự án & Hủy bỏ Session (`keyboards.py`, `handlers.py`, `bot.py`, `session.py`, `dsh_engine.py`, `zcode_engine.py`), nút ghim `🛑 Dừng / Hủy` + nút `[🛑 Dừng Ngay | 🗑️ Hủy Bỏ Session | 🚨 Dừng Toàn Bộ Dự Án]` ngay trên thẻ tiến trình trực tiếp; `41/41` unit test PASS; đã restart Daemon mới (`PID: 16792`) nạp luôn `google/gemini-4-argon` Free Pool."
+    },
+    {
+      "timestamp": "",
+      "agent": "Dean Mesh",
+      "summary": "[29/10 12:50] DEAN-ZCode(T14) — 🌐 NHIỆM VỤ CHUNG CẢ ĐỘI: DEAN OS DASHBOARD v0.1 LÕI XONG: Sếp giao \"cả đội làm 1 thứ\" → đề xuất Dashboard tổng hợp, lệnh phân mảnh tại NHIEMVUDEANOS.md. Lõi HTML đã dựng: Z:\\04KhoChungDungChung\\DEANOSDashboard.html — 5 tab (Tổng quan mesh/đội viêc,"
+    },
+    {
+      "timestamp": "29/10 12:35",
+      "agent": "DEAN-Telegravity(Dell)",
+      "summary": "🚀 RESCUEMIC AUTO-NOTIFY TELEGRAM HOÀN TẤT, RÚT CỜ `🟢 RẢNH`: Đã gửi thành công 3 thẻ kết quả bóc băng (Anh/Trung/Việt) lên Telegram của Sếp qua `@Telegravity321_bot`; tích hợp luồng nền tự động đẩy kết quả về Telegram cho mọi audio mới; xác nhận máy Dell là Inspiron 3576 (không phải 3030S văn phòng); kết nối SSH Dell↔T14↔VPS thông suốt 100%."
+    },
+    {
+      "timestamp": "29/10 09:4x",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "📔 ĐÃ GHI NGỮ CẢNH TÌNH BÁO: Sếp dặn note lại cho ae nắm bối cảnh → tạo `Z:\\04_Kho_Chung_Dung_Chung\\NGU_CANH_QUOTA_CHI_HUY_2910.md`: (1) cơ chế quota 2 tầng + mốc 08:00, (2) kho đạn WorkBuddy/OpenRouter/Groq/Gemini + glm-5.3 qua credit, (3) sơ đồ chỉ huy 3 lớp (chỉ huy = WorkBuddy glm-5.3 → Gemini 4 Argon free), (4) trạng thái sản phẩm/hạ tầng, (5) việc treo. Mọi agent dậy ĐỌC FILE NÀY TRƯỚC, 2 phút nắm hết."
+    },
+    {
+      "timestamp": "29/10 09:3x",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "👑 CẬP NHẬT SƠ ĐỒ CHỈ HUY (Sếp bắt sót Gemini 4 Argon): Sếp chỉ đúng — `google/gemini-4-argon` có trên OpenRouter, FREE, và tôi đã bỏ sót khi rà (chỉ soi API Gemini chính hãng). Đã thêm vào PROVIDER_DEFAULTS openrouter (đứng đầu available_models), compile OK, LIVE TEST PASS (model trả lời thật). **Sơ đồ chỉ huy mới:** Task XL → GLM-5.3 full (chờ nạp) → **Gemini 4 Argon (FREE — chỉ huy dự bị số 1)** → DeepSeek V4.1 Pro (paid nếu cần). Task thường vẫn Free Pool cũ. @DEAN-Telecoder restart daemon lần nữa khi rảnh để nhận model mới (hoặc tự nhận ở lần save tiếp theo)."
+    },
+    {
+      "timestamp": "29/10 07:05",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "Theo lệnh Sếp HỦY chế độ canh gác 5 trạm (file DUYET_BINH giữ làm bảng tham khảo). Chuyển sang kiểm tra sức khỏe định kỳ + khảo sát chạy song song model trong Telecoder."
+    },
+    {
+      "timestamp": "",
+      "agent": "Dean Mesh",
+      "summary": "[29/10 06:45] DEAN-ZCode(T14) — 🎖️ DUYỆT BINH: 5 TRẠM CANH GÁC PHÂN CÔNG: Lệnh tại Z:\\04KhoChungDungChung\\DUYETBINHCANHGAC2910.md. Tôi nhận trạm 1 (canh sổ + CHECKPOINT). @DEAN-Telecoder nhận trạm 2 (canh RescueMic audio + SANPHAMTIEN → báo Telegram). @DEAN-Telegravity(Dell) nhận"
+    }
+  ]
+};
+window.FALLBACK_CATALOG = {
+  "updated_at": "2026-10-29 14:11:32",
+  "items": [
+    {
+      "id": "Bản ghi mới 11",
+      "audio_file": "Bản ghi mới 11.m4a",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 13:57:37",
+      "duration_sec": 1288.9,
+      "language": "zh",
+      "language_label": "🇨🇳 Tiếng Trung",
+      "language_confidence_pct": 89.9,
+      "full_text": "一人一碗 一人一碗 一碗一碗 只要一碗就好了 半碼都給他 半碼他等性開 等性開 一碗一碗 我們那個10 12月29號將去 我出改之後 他不太 他沒有 他沒有 他有我們男孩 對他 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 他沒有 现在你得过这个时候啦 你10月份那样的 你就来这么10月份 点了十米子就不服了 结果第一个要搞得好 第二个大约 我们这个礼拜搞定了 你上个礼拜大约我们这个礼拜搞定了 这样不行了 你还搞下个礼拜 怎么下个礼拜几 搞下礼拜三 你怎么了 你又几个礼拜六 我又几个礼拜七 你又几个礼拜六 我又几个礼拜四 你又几个礼拜五 你都几个礼拜六 有那个手动的机灵啊 他懂 有问他的干嘛 他接样品 接样品 鞋儿 他现在要问鞋儿 啊 接着你 你真的是废话 这段时间你搞昂贫过年的嘛 还接着时间 是吧 十四的牛肚子大了嘛 牛肚子大了嘛 你看闪电的25号浮波的各位 你赶紧去 25 你多去一条二里 可以换个行业上换行的 你先去换电的 你先去换电的 你换一条1499档店 你先捡一条下去嘛 你不去一条跟我说 闪电的这就搞定了 你这个法体真的都会 你这闪电的11、25号 说不过银5也没有关系 但是来说你不一定要影响 影响浮波就好了 你现在11月25号不过的展现 你还刚刚开始动 你说过去的吗 我还以为你10月的展现都搞完了 你要早点 你要早点 真的要早点 我给你讲 我那天我上网你的东西 我就跟你说 你要早到11月20号 你现在离一个礼拜 离一个礼拜 我跟你讲 人家早到12的时候就 你现在病难 今天这几天又下了很多病难 你们看到吗 我就给你赛前过 我还给你赛三部分 就是你给你二十月份赛嘛 所以说你在说不要搞了12月时候了 你先把你这玩家说 他后面的人 后面总当忙忙 到后面这说 你先把自己搞完 你先把11月份出过的 先拿一遍 看一下你还得到底有多少遍的 你看到小伙伴确认一下嘛 那怎么搞的 很死等的 这几块新的 各位有阳明 有阳明没有啊 哎呀,我给你说你签一点点,你签一点点,说我,我不找你,可以吧? 我不找你,你现在把11月份计单,你赶紧给我算,我给你点,我给你点,你点不了,知道吗? 所以,下个年呢,这个11月5号能不能找你? 啊,而且哦,你自己给你,我给你这个,你找个11月7号,如果你真的找不完的话,我也没办法 你自己给你,你答应我的时间,你按照这个,你把它找完,知道吗? 你都答應了答應了 你要到那個兩點都說不到 說不到你又不期待說 這個閃電的不是一樣的 你自己要更緊 還缺了第一的 你自己現在答應了11月3號 對不對 對你11月3號 閃電的11月7號 還有史密斯的 史密斯的地方 史密斯的地方 你除了帶網頁的幾個網版 還缺人的之外 還有其他的收尾也要把它收掉 你不能每一盤都欠 自己要更緊的 都怪 沒關係 沒關係 沒關係 有吗 我吃了 我吃了 接着那个阿玉 史密斯的帽子赶快点 明天可能就走了 抓紧时 不管是 就是史密斯的 史密斯的要抓紧时间 明天可能就要走了 要抓緊時間 看了旁邊書庫",
+      "full_vi_translation": "Mỗi người một bát Mỗi người một bát từng bát một Chỉ cần một bát là được Cho anh ta một nửa kích thước Nửa kích thước, anh chờ đợi tình dục bình đẳng mở từng bát một 10 của chúng tôi Đi vào ngày 29 tháng 12 Sau khi tôi thay đổi Anh ấy không hoàn toàn anh ấy đã không anh ấy đã không anh ấy có chúng tôi, các chàng trai với anh ấy anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không anh ấy đã không Bây giờ bạn phải vượt qua điều này Bạn đã như thế này vào tháng Mười. Bạn sẽ như thế này vào tháng 10. Sau khi gọi 10 mét gạo, tôi không hài lòng. Kết quả là phần đầu tiên sẽ được thực hiện tốt và phần thứ hai sẽ được thực hiện khoảng Chúng tôi đã hoàn thành nó trong tuần này Bạn đã hoàn thành nó vào tuần trước hoặc tuần này. Điều này sẽ không hoạt động nữa Bạn vẫn muốn quyết định vào tuần tới? Tuần tới sẽ là ngày gì? Làm điều đó vào thứ Tư tới Có chuyện gì với bạn vậy Bạn có bao nhiêu thứ bảy? Còn bao nhiêu tuần nữa cho tôi? Bạn có bao nhiêu thứ bảy? Tôi còn vài ngày thứ Năm nữa Bạn có bao nhiêu ngày thứ Sáu? Bạn có bao nhiêu thứ bảy? Bạn có sự thông minh thủ công đó không? Anh ấy hiểu Tại sao bạn lại hỏi anh ấy? Anh ấy lấy mẫu Nhận mẫu giày Bây giờ anh ấy muốn hỏi về giày À, theo bạn Bạn thật là nhảm nhí Bạn có đang sống trong cảnh nghèo khó trong dịp Tết Nguyên đán không? Còn nhiều thời gian nữa Phải? Bụng bò mười bốn tuổi có to không? Bụng bò có to không? Hãy nhìn làn sóng nổi của Tia chớp vào ngày 25. Bạn đi nhanh lên 25 Bạn đi một hoặc hai dặm nữa Bạn có thể thay đổi nghề nghiệp sang ngành khác Bạn đi thay pin trước đi Bạn đi thay pin trước đi Đến cửa hàng 1499 Tại sao bạn không chọn một cái trước? Tại sao bạn không nói với tôi điều gì đó? Tia sét đã xong Pháp thân của bạn thực sự biết cách làm điều đó Bạn sét số 11 và 25 Không nói được Bạc 5 cũng không sao Nhưng bạn không cần phải tác động Sẽ tốt hơn nếu nó ảnh hưởng đến sóng nổi Bạn không thể hiển thị nó bây giờ vào ngày 25 tháng 11 Bạn vừa mới bắt đầu di chuyển Bạn đã kể cho tôi nghe về quá khứ chưa? Tôi tưởng bạn đã hoàn thành bài thuyết trình vào tháng 10. Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm. Hãy để tôi kể cho bạn nghe về ngày tôi lướt đồ của bạn Tôi đã nói rồi, bạn phải đến sớm nhất là vào ngày 20 tháng 11 Bây giờ bạn còn một tuần nữa. Một tuần xa anh. Để tôi nói cho bạn biết, khi mọi người đến sớm nhất là 12 giờ Bây giờ bạn đang gặp rắc rối. Những ngày này bạn đã gặp rất nhiều rắc rối. bạn có thấy không Tôi sẽ đưa nó cho bạn trước trận đấu Tôi sẽ cho bạn ba phần Chính bạn là người mang đến cho bạn cuộc thi vào tháng 12 Vì vậy, bạn đang nói không làm điều đó cho đến tháng 12 Bạn nói về bản thân với tư cách là một người chơi trước người đứng sau anh ta Luôn bận rộn sau này Hãy nói về chuyện này sau Hãy hoàn thành bản thân mình trước Trước tiên bạn nên đặt những cái đã được phát hành vào tháng 11 Lấy nó trước Xem bạn phải làm điều đó bao nhiêu lần nữa Bạn đã gặp bạn tôi và xác nhận điều đó chưa? Chuyện gì đã xảy ra thế? Rất chờ đợi Những mảnh mới này Ai cũng có Dương Minh Có Dương Minh không? Ồ, tôi đã nói với bạn rằng bạn ký một chút, bạn ký một chút, nói cho tôi biết, tôi sẽ không tìm bạn, được không? Nếu tôi không tìm bạn thì hiện tại bạn đang tính toán hóa đơn cho tháng 11. Bạn có thể nhanh chóng tính toán chúng cho tôi. Tôi sẽ cho bạn một số điểm. Tôi sẽ cho bạn một số điểm. Bạn không thể nhận bất kỳ đơn đặt hàng nào. Bạn hiểu không? Vậy năm sau tôi có thể gặp bạn vào ngày 5 tháng 11 được không? À, mà bạn tự đưa cho mình, tôi cho bạn cái này, bạn tìm ngày 7 tháng 11, nếu thật sự tìm không hết thì tôi cũng nhịn được Bạn đưa nó cho chính mình, bạn đã hứa với tôi thời gian, bạn làm theo điều này, bạn tìm thấy nó, bạn biết không? Bạn đã hứa rồi, bạn đã hứa rồi và bạn không thể nói bất cứ điều gì cho đến thời điểm đó. Tôi không thể nói với bạn và tôi không mong đợi để nói với bạn Tia sét này không giống nhau. Bạn phải chặt chẽ hơn. Vẫn thiếu cái đầu tiên Bây giờ bạn đã đồng ý đến ngày 3 tháng 11 phải không? Ngày 3 tháng 11 dành cho bạn, ngày 7 tháng 11 dành cho Tia chớp Và của Smith Địa điểm của Smith Địa điểm của Smith Ngoài một số phiên bản web có trang web, bạn Ngoài việc thiếu người Có những công việc hoàn thiện khác cũng cần phải được bỏ đi. Bạn không thể nợ mọi trận đấu Tất cả là lỗi của tôi nếu tôi muốn nó chặt chẽ hơn Không sao Không sao Không sao Có cái nào không tôi đã ăn tôi đã ăn Rồi Ayu đó Mũ của Smith, hãy nhanh lên. Tôi có thể rời đi vào ngày mai Khi bạn nhanh lên Dù thế nào đi chăng nữa Đó là của Smith Smith cần phải nhanh lên Tôi có thể rời đi vào ngày mai nhanh lên Tôi nhìn vào thư viện bên cạnh nó",
+      "highlights": [
+        "12月",
+        "10月",
+        "25号",
+        "11月",
+        "20号",
+        "今天",
+        "确认",
+        "5号",
+        "7号",
+        "明天",
+        "29 tháng",
+        "thứ hai"
+      ],
+      "segments": [
+        {
+          "start": 40.52,
+          "end": 41.92,
+          "time_str": "00:41 → 00:42",
+          "text": "一人一碗",
+          "vi_translation": "Mỗi người một bát"
+        },
+        {
+          "start": 41.92,
+          "end": 43.38,
+          "time_str": "00:42 → 00:43",
+          "text": "一人一碗",
+          "vi_translation": "Mỗi người một bát"
+        },
+        {
+          "start": 43.38,
+          "end": 45.22,
+          "time_str": "00:43 → 00:45",
+          "text": "一碗一碗",
+          "vi_translation": "từng bát một"
+        },
+        {
+          "start": 45.22,
+          "end": 46.38,
+          "time_str": "00:45 → 00:46",
+          "text": "只要一碗就好了",
+          "vi_translation": "Chỉ cần một bát là được"
+        },
+        {
+          "start": 46.38,
+          "end": 47.5,
+          "time_str": "00:46 → 00:48",
+          "text": "半碼都給他",
+          "vi_translation": "Cho anh ta một nửa kích thước"
+        },
+        {
+          "start": 49.09,
+          "end": 50.53,
+          "time_str": "00:49 → 00:51",
+          "text": "半碼他等性開",
+          "vi_translation": "Nửa kích thước, anh chờ đợi tình dục"
+        },
+        {
+          "start": 50.53,
+          "end": 51.53,
+          "time_str": "00:51 → 00:52",
+          "text": "等性開",
+          "vi_translation": "bình đẳng mở"
+        },
+        {
+          "start": 51.53,
+          "end": 52.33,
+          "time_str": "00:52 → 00:52",
+          "text": "一碗一碗",
+          "vi_translation": "từng bát một"
+        },
+        {
+          "start": 52.33,
+          "end": 71.75,
+          "time_str": "00:52 → 01:12",
+          "text": "我們那個10",
+          "vi_translation": "10 của chúng tôi"
+        },
+        {
+          "start": 71.75,
+          "end": 72.99,
+          "time_str": "01:12 → 01:13",
+          "text": "12月29號將去",
+          "vi_translation": "Đi vào ngày 29 tháng 12"
+        },
+        {
+          "start": 72.99,
+          "end": 73.75,
+          "time_str": "01:13 → 01:14",
+          "text": "我出改之後",
+          "vi_translation": "Sau khi tôi thay đổi"
+        },
+        {
+          "start": 73.75,
+          "end": 74.75,
+          "time_str": "01:14 → 01:15",
+          "text": "他不太",
+          "vi_translation": "Anh ấy không hoàn toàn"
+        },
+        {
+          "start": 74.75,
+          "end": 76.68,
+          "time_str": "01:15 → 01:17",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 76.68,
+          "end": 77.48,
+          "time_str": "01:17 → 01:17",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 77.48,
+          "end": 78.84,
+          "time_str": "01:17 → 01:19",
+          "text": "他有我們男孩",
+          "vi_translation": "anh ấy có chúng tôi, các chàng trai"
+        },
+        {
+          "start": 78.84,
+          "end": 79.48,
+          "time_str": "01:19 → 01:19",
+          "text": "對他",
+          "vi_translation": "với anh ấy"
+        },
+        {
+          "start": 79.48,
+          "end": 79.96,
+          "time_str": "01:19 → 01:20",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 79.96,
+          "end": 80.84,
+          "time_str": "01:20 → 01:21",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 80.84,
+          "end": 82.04,
+          "time_str": "01:21 → 01:22",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 82.04,
+          "end": 82.84,
+          "time_str": "01:22 → 01:23",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 82.84,
+          "end": 85.47,
+          "time_str": "01:23 → 01:25",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 85.47,
+          "end": 86.47,
+          "time_str": "01:25 → 01:26",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 86.47,
+          "end": 87.47,
+          "time_str": "01:26 → 01:27",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 87.47,
+          "end": 89.69,
+          "time_str": "01:27 → 01:30",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 89.69,
+          "end": 90.69,
+          "time_str": "01:30 → 01:31",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 90.69,
+          "end": 91.69,
+          "time_str": "01:31 → 01:32",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 91.69,
+          "end": 92.69,
+          "time_str": "01:32 → 01:33",
+          "text": "他沒有",
+          "vi_translation": "anh ấy đã không"
+        },
+        {
+          "start": 415.89,
+          "end": 417.89,
+          "time_str": "06:56 → 06:58",
+          "text": "现在你得过这个时候啦",
+          "vi_translation": "Bây giờ bạn phải vượt qua điều này"
+        },
+        {
+          "start": 417.89,
+          "end": 419.97,
+          "time_str": "06:58 → 07:00",
+          "text": "你10月份那样的 你就来这么10月份",
+          "vi_translation": "Bạn đã như thế này vào tháng Mười. Bạn sẽ như thế này vào tháng 10."
+        },
+        {
+          "start": 419.97,
+          "end": 421.53,
+          "time_str": "07:00 → 07:02",
+          "text": "点了十米子就不服了",
+          "vi_translation": "Sau khi gọi 10 mét gạo, tôi không hài lòng."
+        },
+        {
+          "start": 421.53,
+          "end": 429.54,
+          "time_str": "07:02 → 07:10",
+          "text": "结果第一个要搞得好 第二个大约",
+          "vi_translation": "Kết quả là phần đầu tiên sẽ được thực hiện tốt và phần thứ hai sẽ được thực hiện khoảng"
+        },
+        {
+          "start": 429.54,
+          "end": 431.26,
+          "time_str": "07:10 → 07:11",
+          "text": "我们这个礼拜搞定了",
+          "vi_translation": "Chúng tôi đã hoàn thành nó trong tuần này"
+        },
+        {
+          "start": 431.26,
+          "end": 434.74,
+          "time_str": "07:11 → 07:15",
+          "text": "你上个礼拜大约我们这个礼拜搞定了",
+          "vi_translation": "Bạn đã hoàn thành nó vào tuần trước hoặc tuần này."
+        },
+        {
+          "start": 434.74,
+          "end": 449.13,
+          "time_str": "07:15 → 07:29",
+          "text": "这样不行了",
+          "vi_translation": "Điều này sẽ không hoạt động nữa"
+        },
+        {
+          "start": 449.13,
+          "end": 451.43,
+          "time_str": "07:29 → 07:31",
+          "text": "你还搞下个礼拜 怎么下个礼拜几",
+          "vi_translation": "Bạn vẫn muốn quyết định vào tuần tới? Tuần tới sẽ là ngày gì?"
+        },
+        {
+          "start": 451.43,
+          "end": 453.74,
+          "time_str": "07:31 → 07:34",
+          "text": "搞下礼拜三",
+          "vi_translation": "Làm điều đó vào thứ Tư tới"
+        },
+        {
+          "start": 453.74,
+          "end": 462.0,
+          "time_str": "07:34 → 07:42",
+          "text": "你怎么了",
+          "vi_translation": "Có chuyện gì với bạn vậy"
+        },
+        {
+          "start": 462.0,
+          "end": 464.0,
+          "time_str": "07:42 → 07:44",
+          "text": "你又几个礼拜六",
+          "vi_translation": "Bạn có bao nhiêu thứ bảy?"
+        },
+        {
+          "start": 464.0,
+          "end": 467.56,
+          "time_str": "07:44 → 07:48",
+          "text": "我又几个礼拜七",
+          "vi_translation": "Còn bao nhiêu tuần nữa cho tôi?"
+        },
+        {
+          "start": 467.56,
+          "end": 469.0,
+          "time_str": "07:48 → 07:49",
+          "text": "你又几个礼拜六",
+          "vi_translation": "Bạn có bao nhiêu thứ bảy?"
+        },
+        {
+          "start": 469.0,
+          "end": 485.29,
+          "time_str": "07:49 → 08:05",
+          "text": "我又几个礼拜四",
+          "vi_translation": "Tôi còn vài ngày thứ Năm nữa"
+        },
+        {
+          "start": 485.29,
+          "end": 486.93,
+          "time_str": "08:05 → 08:07",
+          "text": "你又几个礼拜五",
+          "vi_translation": "Bạn có bao nhiêu ngày thứ Sáu?"
+        },
+        {
+          "start": 486.93,
+          "end": 492.94,
+          "time_str": "08:07 → 08:13",
+          "text": "你都几个礼拜六",
+          "vi_translation": "Bạn có bao nhiêu thứ bảy?"
+        },
+        {
+          "start": 605.82,
+          "end": 607.82,
+          "time_str": "10:06 → 10:08",
+          "text": "有那个手动的机灵啊",
+          "vi_translation": "Bạn có sự thông minh thủ công đó không?"
+        },
+        {
+          "start": 607.82,
+          "end": 614.87,
+          "time_str": "10:08 → 10:15",
+          "text": "他懂",
+          "vi_translation": "Anh ấy hiểu"
+        },
+        {
+          "start": 614.87,
+          "end": 617.93,
+          "time_str": "10:15 → 10:18",
+          "text": "有问他的干嘛",
+          "vi_translation": "Tại sao bạn lại hỏi anh ấy?"
+        },
+        {
+          "start": 628.93,
+          "end": 630.93,
+          "time_str": "10:29 → 10:31",
+          "text": "他接样品",
+          "vi_translation": "Anh ấy lấy mẫu"
+        },
+        {
+          "start": 630.93,
+          "end": 633.22,
+          "time_str": "10:31 → 10:33",
+          "text": "接样品 鞋儿",
+          "vi_translation": "Nhận mẫu giày"
+        },
+        {
+          "start": 633.22,
+          "end": 635.22,
+          "time_str": "10:33 → 10:35",
+          "text": "他现在要问鞋儿",
+          "vi_translation": "Bây giờ anh ấy muốn hỏi về giày"
+        },
+        {
+          "start": 635.22,
+          "end": 637.22,
+          "time_str": "10:35 → 10:37",
+          "text": "啊 接着你",
+          "vi_translation": "À, theo bạn"
+        },
+        {
+          "start": 637.22,
+          "end": 638.22,
+          "time_str": "10:37 → 10:38",
+          "text": "你真的是废话",
+          "vi_translation": "Bạn thật là nhảm nhí"
+        },
+        {
+          "start": 638.22,
+          "end": 640.22,
+          "time_str": "10:38 → 10:40",
+          "text": "这段时间你搞昂贫过年的嘛",
+          "vi_translation": "Bạn có đang sống trong cảnh nghèo khó trong dịp Tết Nguyên đán không?"
+        },
+        {
+          "start": 640.22,
+          "end": 642.53,
+          "time_str": "10:40 → 10:43",
+          "text": "还接着时间",
+          "vi_translation": "Còn nhiều thời gian nữa"
+        },
+        {
+          "start": 642.53,
+          "end": 643.37,
+          "time_str": "10:43 → 10:43",
+          "text": "是吧",
+          "vi_translation": "Phải?"
+        },
+        {
+          "start": 643.37,
+          "end": 648.47,
+          "time_str": "10:43 → 10:48",
+          "text": "十四的牛肚子大了嘛",
+          "vi_translation": "Bụng bò mười bốn tuổi có to không?"
+        },
+        {
+          "start": 648.47,
+          "end": 651.63,
+          "time_str": "10:48 → 10:52",
+          "text": "牛肚子大了嘛",
+          "vi_translation": "Bụng bò có to không?"
+        },
+        {
+          "start": 651.63,
+          "end": 654.27,
+          "time_str": "10:52 → 10:54",
+          "text": "你看闪电的25号浮波的各位",
+          "vi_translation": "Hãy nhìn làn sóng nổi của Tia chớp vào ngày 25."
+        },
+        {
+          "start": 654.27,
+          "end": 655.46,
+          "time_str": "10:54 → 10:55",
+          "text": "你赶紧去",
+          "vi_translation": "Bạn đi nhanh lên"
+        },
+        {
+          "start": 655.46,
+          "end": 656.34,
+          "time_str": "10:55 → 10:56",
+          "text": "25",
+          "vi_translation": "25"
+        },
+        {
+          "start": 656.34,
+          "end": 665.98,
+          "time_str": "10:56 → 11:06",
+          "text": "你多去一条二里",
+          "vi_translation": "Bạn đi một hoặc hai dặm nữa"
+        },
+        {
+          "start": 665.98,
+          "end": 668.1,
+          "time_str": "11:06 → 11:08",
+          "text": "可以换个行业上换行的",
+          "vi_translation": "Bạn có thể thay đổi nghề nghiệp sang ngành khác"
+        },
+        {
+          "start": 668.1,
+          "end": 676.56,
+          "time_str": "11:08 → 11:17",
+          "text": "你先去换电的",
+          "vi_translation": "Bạn đi thay pin trước đi"
+        },
+        {
+          "start": 676.56,
+          "end": 677.36,
+          "time_str": "11:17 → 11:17",
+          "text": "你先去换电的",
+          "vi_translation": "Bạn đi thay pin trước đi"
+        },
+        {
+          "start": 677.36,
+          "end": 681.02,
+          "time_str": "11:17 → 11:21",
+          "text": "你换一条1499档店",
+          "vi_translation": "Đến cửa hàng 1499"
+        },
+        {
+          "start": 681.02,
+          "end": 686.42,
+          "time_str": "11:21 → 11:26",
+          "text": "你先捡一条下去嘛",
+          "vi_translation": "Tại sao bạn không chọn một cái trước?"
+        },
+        {
+          "start": 686.42,
+          "end": 687.7,
+          "time_str": "11:26 → 11:28",
+          "text": "你不去一条跟我说",
+          "vi_translation": "Tại sao bạn không nói với tôi điều gì đó?"
+        },
+        {
+          "start": 687.7,
+          "end": 689.88,
+          "time_str": "11:28 → 11:30",
+          "text": "闪电的这就搞定了",
+          "vi_translation": "Tia sét đã xong"
+        },
+        {
+          "start": 689.88,
+          "end": 691.2,
+          "time_str": "11:30 → 11:31",
+          "text": "你这个法体真的都会",
+          "vi_translation": "Pháp thân của bạn thực sự biết cách làm điều đó"
+        },
+        {
+          "start": 691.2,
+          "end": 692.96,
+          "time_str": "11:31 → 11:33",
+          "text": "你这闪电的11、25号",
+          "vi_translation": "Bạn sét số 11 và 25"
+        },
+        {
+          "start": 692.96,
+          "end": 696.9,
+          "time_str": "11:33 → 11:37",
+          "text": "说不过银5也没有关系",
+          "vi_translation": "Không nói được Bạc 5 cũng không sao"
+        },
+        {
+          "start": 696.9,
+          "end": 698.7,
+          "time_str": "11:37 → 11:39",
+          "text": "但是来说你不一定要影响",
+          "vi_translation": "Nhưng bạn không cần phải tác động"
+        },
+        {
+          "start": 698.7,
+          "end": 699.98,
+          "time_str": "11:39 → 11:40",
+          "text": "影响浮波就好了",
+          "vi_translation": "Sẽ tốt hơn nếu nó ảnh hưởng đến sóng nổi"
+        },
+        {
+          "start": 699.98,
+          "end": 702.14,
+          "time_str": "11:40 → 11:42",
+          "text": "你现在11月25号不过的展现",
+          "vi_translation": "Bạn không thể hiển thị nó bây giờ vào ngày 25 tháng 11"
+        },
+        {
+          "start": 702.14,
+          "end": 703.98,
+          "time_str": "11:42 → 11:44",
+          "text": "你还刚刚开始动",
+          "vi_translation": "Bạn vừa mới bắt đầu di chuyển"
+        },
+        {
+          "start": 703.98,
+          "end": 706.09,
+          "time_str": "11:44 → 11:46",
+          "text": "你说过去的吗",
+          "vi_translation": "Bạn đã kể cho tôi nghe về quá khứ chưa?"
+        },
+        {
+          "start": 709.43,
+          "end": 715.4,
+          "time_str": "11:49 → 11:55",
+          "text": "我还以为你10月的展现都搞完了",
+          "vi_translation": "Tôi tưởng bạn đã hoàn thành bài thuyết trình vào tháng 10."
+        },
+        {
+          "start": 715.4,
+          "end": 717.4,
+          "time_str": "11:55 → 11:57",
+          "text": "你要早点 你要早点 真的要早点",
+          "vi_translation": "Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm. Bạn phải đến sớm."
+        },
+        {
+          "start": 717.4,
+          "end": 719.96,
+          "time_str": "11:57 → 12:00",
+          "text": "我给你讲 我那天我上网你的东西",
+          "vi_translation": "Hãy để tôi kể cho bạn nghe về ngày tôi lướt đồ của bạn"
+        },
+        {
+          "start": 719.96,
+          "end": 722.52,
+          "time_str": "12:00 → 12:03",
+          "text": "我就跟你说 你要早到11月20号",
+          "vi_translation": "Tôi đã nói rồi, bạn phải đến sớm nhất là vào ngày 20 tháng 11"
+        },
+        {
+          "start": 722.52,
+          "end": 724.32,
+          "time_str": "12:03 → 12:04",
+          "text": "你现在离一个礼拜 离一个礼拜",
+          "vi_translation": "Bây giờ bạn còn một tuần nữa. Một tuần xa anh."
+        },
+        {
+          "start": 724.32,
+          "end": 727.96,
+          "time_str": "12:04 → 12:08",
+          "text": "我跟你讲 人家早到12的时候就",
+          "vi_translation": "Để tôi nói cho bạn biết, khi mọi người đến sớm nhất là 12 giờ"
+        },
+        {
+          "start": 727.96,
+          "end": 734.07,
+          "time_str": "12:08 → 12:14",
+          "text": "你现在病难 今天这几天又下了很多病难",
+          "vi_translation": "Bây giờ bạn đang gặp rắc rối. Những ngày này bạn đã gặp rất nhiều rắc rối."
+        },
+        {
+          "start": 734.07,
+          "end": 735.31,
+          "time_str": "12:14 → 12:15",
+          "text": "你们看到吗",
+          "vi_translation": "bạn có thấy không"
+        },
+        {
+          "start": 735.31,
+          "end": 739.91,
+          "time_str": "12:15 → 12:20",
+          "text": "我就给你赛前过",
+          "vi_translation": "Tôi sẽ đưa nó cho bạn trước trận đấu"
+        },
+        {
+          "start": 739.91,
+          "end": 741.51,
+          "time_str": "12:20 → 12:22",
+          "text": "我还给你赛三部分",
+          "vi_translation": "Tôi sẽ cho bạn ba phần"
+        },
+        {
+          "start": 741.51,
+          "end": 743.91,
+          "time_str": "12:22 → 12:24",
+          "text": "就是你给你二十月份赛嘛",
+          "vi_translation": "Chính bạn là người mang đến cho bạn cuộc thi vào tháng 12"
+        },
+        {
+          "start": 744.51,
+          "end": 746.91,
+          "time_str": "12:25 → 12:27",
+          "text": "所以说你在说不要搞了12月时候了",
+          "vi_translation": "Vì vậy, bạn đang nói không làm điều đó cho đến tháng 12"
+        },
+        {
+          "start": 746.91,
+          "end": 755.34,
+          "time_str": "12:27 → 12:35",
+          "text": "你先把你这玩家说",
+          "vi_translation": "Bạn nói về bản thân với tư cách là một người chơi trước"
+        },
+        {
+          "start": 755.34,
+          "end": 756.14,
+          "time_str": "12:35 → 12:36",
+          "text": "他后面的人",
+          "vi_translation": "người đứng sau anh ta"
+        },
+        {
+          "start": 756.14,
+          "end": 757.34,
+          "time_str": "12:36 → 12:37",
+          "text": "后面总当忙忙",
+          "vi_translation": "Luôn bận rộn sau này"
+        },
+        {
+          "start": 757.34,
+          "end": 758.73,
+          "time_str": "12:37 → 12:39",
+          "text": "到后面这说",
+          "vi_translation": "Hãy nói về chuyện này sau"
+        },
+        {
+          "start": 758.73,
+          "end": 760.13,
+          "time_str": "12:39 → 12:40",
+          "text": "你先把自己搞完",
+          "vi_translation": "Hãy hoàn thành bản thân mình trước"
+        },
+        {
+          "start": 760.33,
+          "end": 769.53,
+          "time_str": "12:40 → 12:50",
+          "text": "你先把11月份出过的",
+          "vi_translation": "Trước tiên bạn nên đặt những cái đã được phát hành vào tháng 11"
+        },
+        {
+          "start": 769.53,
+          "end": 770.53,
+          "time_str": "12:50 → 12:51",
+          "text": "先拿一遍",
+          "vi_translation": "Lấy nó trước"
+        },
+        {
+          "start": 770.53,
+          "end": 772.33,
+          "time_str": "12:51 → 12:52",
+          "text": "看一下你还得到底有多少遍的",
+          "vi_translation": "Xem bạn phải làm điều đó bao nhiêu lần nữa"
+        },
+        {
+          "start": 782.9,
+          "end": 784.5,
+          "time_str": "13:03 → 13:04",
+          "text": "你看到小伙伴确认一下嘛",
+          "vi_translation": "Bạn đã gặp bạn tôi và xác nhận điều đó chưa?"
+        },
+        {
+          "start": 784.5,
+          "end": 785.3,
+          "time_str": "13:04 → 13:05",
+          "text": "那怎么搞的",
+          "vi_translation": "Chuyện gì đã xảy ra thế?"
+        },
+        {
+          "start": 785.3,
+          "end": 786.1,
+          "time_str": "13:05 → 13:06",
+          "text": "很死等的",
+          "vi_translation": "Rất chờ đợi"
+        },
+        {
+          "start": 786.1,
+          "end": 805.26,
+          "time_str": "13:06 → 13:25",
+          "text": "这几块新的",
+          "vi_translation": "Những mảnh mới này"
+        },
+        {
+          "start": 805.26,
+          "end": 809.5,
+          "time_str": "13:25 → 13:30",
+          "text": "各位有阳明",
+          "vi_translation": "Ai cũng có Dương Minh"
+        },
+        {
+          "start": 809.5,
+          "end": 810.5,
+          "time_str": "13:30 → 13:30",
+          "text": "有阳明没有啊",
+          "vi_translation": "Có Dương Minh không?"
+        },
+        {
+          "start": 810.5,
+          "end": 825.53,
+          "time_str": "13:30 → 13:46",
+          "text": "哎呀,我给你说你签一点点,你签一点点,说我,我不找你,可以吧?",
+          "vi_translation": "Ồ, tôi đã nói với bạn rằng bạn ký một chút, bạn ký một chút, nói cho tôi biết, tôi sẽ không tìm bạn, được không?"
+        },
+        {
+          "start": 825.53,
+          "end": 833.14,
+          "time_str": "13:46 → 13:53",
+          "text": "我不找你,你现在把11月份计单,你赶紧给我算,我给你点,我给你点,你点不了,知道吗?",
+          "vi_translation": "Nếu tôi không tìm bạn thì hiện tại bạn đang tính toán hóa đơn cho tháng 11. Bạn có thể nhanh chóng tính toán chúng cho tôi. Tôi sẽ cho bạn một số điểm. Tôi sẽ cho bạn một số điểm. Bạn không thể nhận bất kỳ đơn đặt hàng nào. Bạn hiểu không?"
+        },
+        {
+          "start": 833.14,
+          "end": 839.44,
+          "time_str": "13:53 → 13:59",
+          "text": "所以,下个年呢,这个11月5号能不能找你?",
+          "vi_translation": "Vậy năm sau tôi có thể gặp bạn vào ngày 5 tháng 11 được không?"
+        },
+        {
+          "start": 839.44,
+          "end": 860.14,
+          "time_str": "13:59 → 14:20",
+          "text": "啊,而且哦,你自己给你,我给你这个,你找个11月7号,如果你真的找不完的话,我也没办法",
+          "vi_translation": "À, mà bạn tự đưa cho mình, tôi cho bạn cái này, bạn tìm ngày 7 tháng 11, nếu thật sự tìm không hết thì tôi cũng nhịn được"
+        },
+        {
+          "start": 860.14,
+          "end": 864.14,
+          "time_str": "14:20 → 14:24",
+          "text": "你自己给你,你答应我的时间,你按照这个,你把它找完,知道吗?",
+          "vi_translation": "Bạn đưa nó cho chính mình, bạn đã hứa với tôi thời gian, bạn làm theo điều này, bạn tìm thấy nó, bạn biết không?"
+        },
+        {
+          "start": 864.14,
+          "end": 866.26,
+          "time_str": "14:24 → 14:26",
+          "text": "你都答應了答應了 你要到那個兩點都說不到",
+          "vi_translation": "Bạn đã hứa rồi, bạn đã hứa rồi và bạn không thể nói bất cứ điều gì cho đến thời điểm đó."
+        },
+        {
+          "start": 866.26,
+          "end": 879.08,
+          "time_str": "14:26 → 14:39",
+          "text": "說不到你又不期待說",
+          "vi_translation": "Tôi không thể nói với bạn và tôi không mong đợi để nói với bạn"
+        },
+        {
+          "start": 879.08,
+          "end": 881.4,
+          "time_str": "14:39 → 14:41",
+          "text": "這個閃電的不是一樣的 你自己要更緊",
+          "vi_translation": "Tia sét này không giống nhau. Bạn phải chặt chẽ hơn."
+        },
+        {
+          "start": 881.4,
+          "end": 882.72,
+          "time_str": "14:41 → 14:43",
+          "text": "還缺了第一的",
+          "vi_translation": "Vẫn thiếu cái đầu tiên"
+        },
+        {
+          "start": 882.72,
+          "end": 885.88,
+          "time_str": "14:43 → 14:46",
+          "text": "你自己現在答應了11月3號 對不對",
+          "vi_translation": "Bây giờ bạn đã đồng ý đến ngày 3 tháng 11 phải không?"
+        },
+        {
+          "start": 885.88,
+          "end": 895.99,
+          "time_str": "14:46 → 14:56",
+          "text": "對你11月3號 閃電的11月7號",
+          "vi_translation": "Ngày 3 tháng 11 dành cho bạn, ngày 7 tháng 11 dành cho Tia chớp"
+        },
+        {
+          "start": 895.99,
+          "end": 897.55,
+          "time_str": "14:56 → 14:58",
+          "text": "還有史密斯的",
+          "vi_translation": "Và của Smith"
+        },
+        {
+          "start": 897.55,
+          "end": 899.71,
+          "time_str": "14:58 → 15:00",
+          "text": "史密斯的地方 史密斯的地方",
+          "vi_translation": "Địa điểm của Smith Địa điểm của Smith"
+        },
+        {
+          "start": 899.71,
+          "end": 901.63,
+          "time_str": "15:00 → 15:02",
+          "text": "你除了帶網頁的幾個網版",
+          "vi_translation": "Ngoài một số phiên bản web có trang web, bạn"
+        },
+        {
+          "start": 901.63,
+          "end": 902.99,
+          "time_str": "15:02 → 15:03",
+          "text": "還缺人的之外",
+          "vi_translation": "Ngoài việc thiếu người"
+        },
+        {
+          "start": 902.99,
+          "end": 904.83,
+          "time_str": "15:03 → 15:05",
+          "text": "還有其他的收尾也要把它收掉",
+          "vi_translation": "Có những công việc hoàn thiện khác cũng cần phải được bỏ đi."
+        },
+        {
+          "start": 904.83,
+          "end": 912.84,
+          "time_str": "15:05 → 15:13",
+          "text": "你不能每一盤都欠",
+          "vi_translation": "Bạn không thể nợ mọi trận đấu"
+        },
+        {
+          "start": 912.84,
+          "end": 1041.04,
+          "time_str": "15:13 → 17:21",
+          "text": "自己要更緊的 都怪",
+          "vi_translation": "Tất cả là lỗi của tôi nếu tôi muốn nó chặt chẽ hơn"
+        },
+        {
+          "start": 1041.04,
+          "end": 1059.88,
+          "time_str": "17:21 → 17:40",
+          "text": "沒關係 沒關係 沒關係",
+          "vi_translation": "Không sao Không sao Không sao"
+        },
+        {
+          "start": 1059.88,
+          "end": 1061.2,
+          "time_str": "17:40 → 17:41",
+          "text": "有吗",
+          "vi_translation": "Có cái nào không"
+        },
+        {
+          "start": 1061.2,
+          "end": 1065.78,
+          "time_str": "17:41 → 17:46",
+          "text": "我吃了",
+          "vi_translation": "tôi đã ăn"
+        },
+        {
+          "start": 1066.78,
+          "end": 1076.65,
+          "time_str": "17:47 → 17:57",
+          "text": "我吃了",
+          "vi_translation": "tôi đã ăn"
+        },
+        {
+          "start": 1111.09,
+          "end": 1113.09,
+          "time_str": "18:31 → 18:33",
+          "text": "接着那个阿玉",
+          "vi_translation": "Rồi Ayu đó"
+        },
+        {
+          "start": 1113.09,
+          "end": 1115.09,
+          "time_str": "18:33 → 18:35",
+          "text": "史密斯的帽子赶快点",
+          "vi_translation": "Mũ của Smith, hãy nhanh lên."
+        },
+        {
+          "start": 1115.09,
+          "end": 1117.09,
+          "time_str": "18:35 → 18:37",
+          "text": "明天可能就走了",
+          "vi_translation": "Tôi có thể rời đi vào ngày mai"
+        },
+        {
+          "start": 1117.09,
+          "end": 1120.88,
+          "time_str": "18:37 → 18:41",
+          "text": "抓紧时",
+          "vi_translation": "Khi bạn nhanh lên"
+        },
+        {
+          "start": 1120.88,
+          "end": 1128.77,
+          "time_str": "18:41 → 18:49",
+          "text": "不管是",
+          "vi_translation": "Dù thế nào đi chăng nữa"
+        },
+        {
+          "start": 1128.77,
+          "end": 1131.5,
+          "time_str": "18:49 → 18:52",
+          "text": "就是史密斯的",
+          "vi_translation": "Đó là của Smith"
+        },
+        {
+          "start": 1131.5,
+          "end": 1134.5,
+          "time_str": "18:52 → 18:54",
+          "text": "史密斯的要抓紧时间",
+          "vi_translation": "Smith cần phải nhanh lên"
+        },
+        {
+          "start": 1134.5,
+          "end": 1140.79,
+          "time_str": "18:54 → 19:01",
+          "text": "明天可能就要走了",
+          "vi_translation": "Tôi có thể rời đi vào ngày mai"
+        },
+        {
+          "start": 1140.79,
+          "end": 1142.79,
+          "time_str": "19:01 → 19:03",
+          "text": "要抓緊時間",
+          "vi_translation": "nhanh lên"
+        },
+        {
+          "start": 1142.79,
+          "end": 1144.79,
+          "time_str": "19:03 → 19:05",
+          "text": "看了旁邊書庫",
+          "vi_translation": "Tôi nhìn vào thư viện bên cạnh nó"
+        }
+      ],
+      "processed_in_sec": 737.35,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "Bản ghi mới 9",
+      "audio_file": "Bản ghi mới 9.m4a",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 13:26:02",
+      "duration_sec": 71.8,
+      "language": "zh",
+      "language_label": "🇨🇳 Tiếng Trung",
+      "language_confidence_pct": 93.4,
+      "full_text": "我们这边有买过的其他颜色是你们自己买的哦 不要等于又没生母 这以后他们的生母为什么来都没有 过来就难得有合作的那个新买 虽然那不是我们这边买的 我们是不是要不注入到我们 但这边在我们新闻当中的新设置 就不是过来的吧",
+      "full_vi_translation": "Các màu khác chúng tôi mua ở đây các bạn tự mua nhé. Không có nghĩa là bạn không có mẹ ruột Tại sao mẹ ruột của họ không đến sau chuyện này? Thật hiếm khi có người hợp tác khi tôi đến đây. Mặc dù đó không phải là thứ chúng tôi mua ở đây Chúng ta có nên tiêm nó vào Nhưng đây là cài đặt mới trong tin tức của chúng tôi Cậu không đến đây phải không?",
+      "highlights": [],
+      "segments": [
+        {
+          "start": 1.81,
+          "end": 6.59,
+          "time_str": "00:02 → 00:07",
+          "text": "我们这边有买过的其他颜色是你们自己买的哦",
+          "vi_translation": "Các màu khác chúng tôi mua ở đây các bạn tự mua nhé."
+        },
+        {
+          "start": 6.59,
+          "end": 8.59,
+          "time_str": "00:07 → 00:09",
+          "text": "不要等于又没生母",
+          "vi_translation": "Không có nghĩa là bạn không có mẹ ruột"
+        },
+        {
+          "start": 8.59,
+          "end": 12.84,
+          "time_str": "00:09 → 00:13",
+          "text": "这以后他们的生母为什么来都没有",
+          "vi_translation": "Tại sao mẹ ruột của họ không đến sau chuyện này?"
+        },
+        {
+          "start": 12.84,
+          "end": 18.7,
+          "time_str": "00:13 → 00:19",
+          "text": "过来就难得有合作的那个新买",
+          "vi_translation": "Thật hiếm khi có người hợp tác khi tôi đến đây."
+        },
+        {
+          "start": 18.7,
+          "end": 20.4,
+          "time_str": "00:19 → 00:20",
+          "text": "虽然那不是我们这边买的",
+          "vi_translation": "Mặc dù đó không phải là thứ chúng tôi mua ở đây"
+        },
+        {
+          "start": 20.4,
+          "end": 22.2,
+          "time_str": "00:20 → 00:22",
+          "text": "我们是不是要不注入到我们",
+          "vi_translation": "Chúng ta có nên tiêm nó vào"
+        },
+        {
+          "start": 22.2,
+          "end": 26.31,
+          "time_str": "00:22 → 00:26",
+          "text": "但这边在我们新闻当中的新设置",
+          "vi_translation": "Nhưng đây là cài đặt mới trong tin tức của chúng tôi"
+        },
+        {
+          "start": 26.31,
+          "end": 28.31,
+          "time_str": "00:26 → 00:28",
+          "text": "就不是过来的吧",
+          "vi_translation": "Cậu không đến đây phải không?"
+        }
+      ],
+      "processed_in_sec": 32.14,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "Bản ghi mới 13",
+      "audio_file": "Bản ghi mới 13.m4a",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 12:31:05",
+      "duration_sec": 52.9,
+      "language": "vi",
+      "language_label": "🇻🇳 Tiếng Việt",
+      "language_confidence_pct": 91.9,
+      "full_text": "Mời rửa của mày thành niên Nói chơi, chơi thì nóng dơ, sợ dơ, bây giờ xong rồi làm lối hình trường như ảm biệt, còn ảm biệt, nắng lưu, bổ từng hay đắng đó Chơi, chơi thì... Có 1 năm giờ thế quá Bả, bả chơi rồi Hả bả chơi Bây giờ mai đi làm lại hình kiệt Bịt vô hốc nguyền Rồi mình đang chơi cái chị đồ quả đu rồi Đó, cái chị đồ cưng bất đấy",
+      "full_vi_translation": "",
+      "highlights": [],
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 2.51,
+          "time_str": "00:00 → 00:03",
+          "text": "Mời rửa của mày thành niên",
+          "vi_translation": ""
+        },
+        {
+          "start": 2.51,
+          "end": 7.51,
+          "time_str": "00:03 → 00:08",
+          "text": "Nói chơi, chơi thì nóng dơ, sợ dơ, bây giờ xong rồi làm lối hình trường như",
+          "vi_translation": ""
+        },
+        {
+          "start": 7.51,
+          "end": 11.51,
+          "time_str": "00:08 → 00:12",
+          "text": "ảm biệt, còn ảm biệt, nắng lưu, bổ từng hay đắng đó",
+          "vi_translation": ""
+        },
+        {
+          "start": 13.51,
+          "end": 16.31,
+          "time_str": "00:14 → 00:16",
+          "text": "Chơi, chơi thì...",
+          "vi_translation": ""
+        },
+        {
+          "start": 16.31,
+          "end": 18.44,
+          "time_str": "00:16 → 00:18",
+          "text": "Có 1 năm giờ thế quá",
+          "vi_translation": ""
+        },
+        {
+          "start": 18.44,
+          "end": 20.44,
+          "time_str": "00:18 → 00:20",
+          "text": "Bả, bả chơi rồi",
+          "vi_translation": ""
+        },
+        {
+          "start": 20.44,
+          "end": 21.44,
+          "time_str": "00:20 → 00:21",
+          "text": "Hả bả chơi",
+          "vi_translation": ""
+        },
+        {
+          "start": 21.44,
+          "end": 33.55,
+          "time_str": "00:21 → 00:34",
+          "text": "Bây giờ mai đi làm lại hình kiệt",
+          "vi_translation": ""
+        },
+        {
+          "start": 33.55,
+          "end": 34.71,
+          "time_str": "00:34 → 00:35",
+          "text": "Bịt vô hốc nguyền",
+          "vi_translation": ""
+        },
+        {
+          "start": 34.71,
+          "end": 36.71,
+          "time_str": "00:35 → 00:37",
+          "text": "Rồi mình đang chơi cái chị đồ quả đu rồi",
+          "vi_translation": ""
+        },
+        {
+          "start": 36.71,
+          "end": 38.71,
+          "time_str": "00:37 → 00:39",
+          "text": "Đó, cái chị đồ cưng bất đấy",
+          "vi_translation": ""
+        }
+      ],
+      "processed_in_sec": 48.92,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "en_zh_bilingual",
+      "audio_file": "en_zh_bilingual.mp3",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 09:13:27",
+      "duration_sec": 54.6,
+      "language": "en",
+      "language_label": "🇬🇧 Tiếng Anh",
+      "language_confidence_pct": 99.8,
+      "full_text": "Today I attended the introduction meeting for the new SHK-1 safety helmet product. SHK-1. After the meeting, I went to check the EPS bulging defect on SMI-14. SMI-14 EPS. Then I assisted Mr. Tuesday with the impact test experiment. We carefully recorded the test process and results. In the afternoon, I worked overtime to inspect the rubber sealing strips on motorcycle helmets. Because it was their first time doing this task, the inspection speed was quite slow. He and Neonai only managed to check three cartons in one and a half hours. In the factory, quality inspection requires great attention and patience. Although today's workload was heavy, I gained a lot of practical experience. After finishing all tasks, I went home to rest.",
+      "full_vi_translation": "Hôm nay tôi tham dự buổi họp giới thiệu dòng sản phẩm nón bảo hộ an toàn mới SHK-1. Sau buổi họp, tôi đi kiểm tra lỗi phồng rộp xốp EPS trên mẫu SMI-14. Kế đó, tôi hỗ trợ Mr. Tuesday thực hiện thử nghiệm va đập (Impact Test); hai chúng tôi đã cẩn thận ghi nhận toàn bộ quy trình và số liệu đo đạc. Buổi chiều, tôi tăng ca để kiểm tra gioăng cao su viền nón bảo hiểm xe máy. Vì là lần đầu làm công đoạn này nên tốc độ kiểm tra khá chậm — anh ấy cùng Neonai chỉ kiểm tra được 3 thùng hàng trong vòng 1 tiếng rưỡi. Ở môi trường nhà máy, công tác kiểm định chất lượng (QC) luôn đòi hỏi sự tập trung cao độ và tính kiên trì. Dù khối lượng công việc hôm nay khá nặng nhưng tôi đã học hỏi được rất nhiều kinh nghiệm thực chiến. Hoàn thành xong toàn bộ công việc, tôi về nhà nghỉ ngơi.",
+      "ai_refined": true,
+      "ai_model": "Google Antigravity / Gemini",
+      "ai_summary": [
+        "Họp triển khai dòng nón bảo hộ an toàn mới SHK-1",
+        "Kiểm tra lỗi phồng rộp xốp EPS trên mẫu khuôn SMI-14",
+        "Hỗ trợ chuyên gia Mr. Tuesday thực hiện thử nghiệm va đập (Impact Test)",
+        "Tăng ca kiểm tra gioăng cao su viền mũ bảo hiểm xe máy cùng Neonai (năng suất 3 thùng / 1.5 giờ)"
+      ],
+      "highlights": [
+        "SHK-1",
+        "SMI-14 EPS",
+        "Mr. Tuesday",
+        "impact test",
+        "gioăng cao su",
+        "Neonai",
+        "3 thùng / 1.5 giờ",
+        "QC / KCS"
+      ],
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.96,
+          "time_str": "00:00 → 00:05",
+          "text": "Today I attended the introduction meeting for the new SHK-1 safety helmet product.",
+          "vi_translation": "Hôm nay tôi tham dự buổi họp triển khai dòng sản phẩm nón bảo hộ an toàn mới SHK-1."
+        },
+        {
+          "start": 5.92,
+          "end": 12.59,
+          "time_str": "00:06 → 00:13",
+          "text": "SHK-1. After the meeting, I went to check the EPS bulging defect on SMI-14.",
+          "vi_translation": "SHK-1. Sau buổi họp, tôi đi kiểm tra lỗi phồng rộp lớp xốp EPS trên mẫu SMI-14."
+        },
+        {
+          "start": 13.6,
+          "end": 19.3,
+          "time_str": "00:14 → 00:19",
+          "text": "SMI-14 EPS. Then I assisted Mr. Tuesday with the impact test experiment.",
+          "vi_translation": "SMI-14 EPS. Sau đó tôi hỗ trợ Mr. Tuesday tiến hành thử nghiệm va đập (Impact Test)."
+        },
+        {
+          "start": 20.22,
+          "end": 23.1,
+          "time_str": "00:20 → 00:23",
+          "text": "We carefully recorded the test process and results.",
+          "vi_translation": "Hai chúng tôi đã cẩn thận ghi nhận toàn bộ quy trình và kết quả đo đạc."
+        },
+        {
+          "start": 24.03,
+          "end": 29.31,
+          "time_str": "00:24 → 00:29",
+          "text": "In the afternoon, I worked overtime to inspect the rubber sealing strips on motorcycle helmets.",
+          "vi_translation": "Vào buổi chiều, tôi tăng ca để kiểm tra gioăng cao su viền mũ bảo hiểm xe máy."
+        },
+        {
+          "start": 29.31,
+          "end": 35.57,
+          "time_str": "00:29 → 00:36",
+          "text": "Because it was their first time doing this task, the inspection speed was quite slow.",
+          "vi_translation": "Do đây là lần đầu tiên họ làm công đoạn này nên tốc độ kiểm tra còn khá chậm."
+        },
+        {
+          "start": 35.57,
+          "end": 40.66,
+          "time_str": "00:36 → 00:41",
+          "text": "He and Neonai only managed to check three cartons in one and a half hours.",
+          "vi_translation": "Anh ấy cùng Neonai chỉ mới kiểm tra xong được 3 thùng hàng trong suốt 1 tiếng rưỡi."
+        },
+        {
+          "start": 40.66,
+          "end": 45.79,
+          "time_str": "00:41 → 00:46",
+          "text": "In the factory, quality inspection requires great attention and patience.",
+          "vi_translation": "Tại xưởng sản xuất, công tác kiểm định chất lượng (QC) luôn đòi hỏi sự tập trung cao độ và tính kiên trì."
+        },
+        {
+          "start": 45.79,
+          "end": 50.98,
+          "time_str": "00:46 → 00:51",
+          "text": "Although today's workload was heavy, I gained a lot of practical experience.",
+          "vi_translation": "Dù khối lượng công việc hôm nay khá nặng nhưng tôi đã tích lũy được rất nhiều kinh nghiệm thực tế."
+        },
+        {
+          "start": 50.98,
+          "end": 53.98,
+          "time_str": "00:51 → 00:54",
+          "text": "After finishing all tasks, I went home to rest.",
+          "vi_translation": "Sau khi hoàn thành mọi việc, tôi trở về nhà nghỉ ngơi."
+        }
+      ],
+      "processed_in_sec": 52.33,
+      "processed_by": "DEAN-DELL (faster-whisper + Antigravity AI Engine)"
+    },
+    {
+      "id": "tep_20261029_061157_39155",
+      "audio_file": "tep_20261029_061157_39155.oga",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 06:11:59",
+      "duration_sec": 2.7,
+      "language": "vi",
+      "language_label": "🇻🇳 Tiếng Việt",
+      "language_confidence_pct": 46.6,
+      "full_text": "1, 2, 3",
+      "full_vi_translation": "",
+      "highlights": [],
+      "segments": [
+        {
+          "start": 0.78,
+          "end": 2.78,
+          "time_str": "00:01 → 00:03",
+          "text": "1, 2, 3",
+          "vi_translation": ""
+        }
+      ],
+      "processed_in_sec": 11.83,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    },
+    {
+      "id": "2026-10-29_seg000_demo_zh",
+      "audio_file": "2026-10-29_seg000_demo_zh.wav",
+      "date": "2026-10-29",
+      "recorded_at": "2026-10-29 00:20:36",
+      "duration_sec": 8.3,
+      "language": "zh",
+      "language_label": "🇨🇳 Tiếng Trung",
+      "language_confidence_pct": 99.5,
+      "full_text": "明天下午三点开会,请确认15号之前把库存报告发给我。",
+      "full_vi_translation": "Chiều mai ba giờ sẽ có cuộc họp. Vui lòng đảm bảo gửi cho tôi báo cáo tồn kho trước ngày 15.",
+      "highlights": [
+        "明天",
+        "下午",
+        "确认",
+        "15号",
+        "发给",
+        "họp",
+        "gửi",
+        "báo cáo"
+      ],
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 7.64,
+          "time_str": "00:00 → 00:08",
+          "text": "明天下午三点开会,请确认15号之前把库存报告发给我。",
+          "vi_translation": "Chiều mai ba giờ sẽ có cuộc họp. Vui lòng đảm bảo gửi cho tôi báo cáo tồn kho trước ngày 15."
+        }
+      ],
+      "processed_in_sec": 179.0,
+      "processed_by": "DEAN-DELL (faster-whisper)"
+    }
+  ]
+};
+</script>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1><span class="pulse"></span>DEAN OS</h1>
+  <div class="sub">TRUNG TÂM CHỈ HUY DEAN MESH · 3 MÁY · BIỆT ĐỘI AGENT 24/7</div>
+</header>
+
+<div class="tabs">
+  <button class="tab on" onclick="t(0,this)">🛰️ Tổng quan</button>
+  <button class="tab" onclick="t(1,this)">🔋 Quota</button>
+  <button class="tab" onclick="t(2,this)">🎧 RescueMic</button>
+  <button class="tab" onclick="t(3,this)">🛒 Sản phẩm</button>
+  <button class="tab" onclick="t(4,this)">📓 Sổ đội</button>
+</div>
+
+<div id="v0"><div class="grid">
+  <div class="card"><h3>🛰️ MESH 3 NÚT</h3>
+    <div class="row"><span>DEAN-T14 (Tổng đài ZCode/Telecoder)</span><span class="g">● ONLINE</span></div>
+    <div class="row"><span>DEAN-DELL (Worker 24/7)</span><span class="g">● ONLINE</span></div>
+    <div class="row"><span>dean-gg-track (VPS · kho Z:)</span><span class="g">● ONLINE</span></div>
+    <div class="row"><span>Tailscale</span><span class="g">MESH OK</span></div>
+  </div>
+  <div class="card"><h3>👥 BIỆT ĐỘI</h3>
+    <div class="row"><span>DEAN-ZCode(T14) — GLM-5.3-Flash</span><span class="g">TRỰC</span></div>
+    <div class="row"><span>DEAN-Telecoder — tổng đài TG</span><span class="g" id="tc-daemon">ONLINE</span></div>
+    <div class="row"><span>DEAN-Telegravity(Dell)</span><span class="y">THEO PHIÊN</span></div>
+    <div class="row"><span>RescueMic Worker (Dell)</span><span class="g">NGHE 24/7</span></div>
+    <div class="row"><span>Dean 007 (VPS)</span><span class="g">KHO 24/7</span></div>
+  </div>
+  <div class="card"><h3>⚡ VIỆC ĐANG CHẠY</h3>
+    <div class="row"><span>SP1 DeanKit</span><span class="g">XONG — chờ Gumroad</span></div>
+    <div class="row"><span>SP2 Lingo Arcade</span><span class="g">XONG — landing xong</span></div>
+    <div class="row"><span>SP3 TikTok 4-Channels</span><span class="g" id="sp3-row">Day01–04 XONG (16 MP4)</span></div>
+    <div class="row"><span>SP4 Pricing &amp; Legal</span><span class="y">ZCode soạn</span></div>
+    <div class="row"><span>Cầu chì N1 + Tổng đài /mesh</span><span class="g">XONG 100%</span></div>
+  </div>
+</div></div>
+
+<div id="v1" style="display:none"><div class="grid">
+  <div class="card"><h3>🔋 SỐ DƯ QUOTA &amp; COCKPIT (LIVE T14)</h3><div id="quota"><p class="dim">Đang tải telecoder_feed.json…</p></div>
+    <p class="dim" style="margin-top:10px;font-size:.78rem">Tự động cập nhật từ <code>telecoder_feed.json</code> mỗi 3 phút · Cảnh báo đỏ khi dưới 15%</p></div>
+  <div class="card"><h3>🛡️ CẦU CHÌ XOAY ENGINE (N1 ĐỦ 4 LỚP)</h3>
+    <div class="row"><span>Chỉ huy: WorkBuddy glm-5.3 (credit)</span><span class="g">SẴN SÀNG</span></div>
+    <div class="row"><span>Phó chỉ huy: Gemini 4 Argon (free)</span><span class="g">LIVE TEST PASS</span></div>
+    <div class="row"><span>Sống lưng: DeepSeek flash / hy3</span><span class="g">RATE 0đ</span></div>
+    <div class="row"><span>Thợ: OpenRouter pool / Groq</span><span class="g">HTTP 200</span></div>
+    <div id="cd-box" style="margin-top:8px;font-size:.82rem" class="dim"></div></div>
+</div></div>
+
+<div id="v2" style="display:none"><div class="grid">
+  <div class="card" style="grid-column:1/-1"><h3>🎧 RESCUEMIC — KHO CỨU HỘI THOẠI <span class="dim">(đọc catalog.json thật)</span></h3><div id="rm"><p class="dim">Đang đọc kho…</p></div></div>
+</div></div>
+
+<div id="v3" style="display:none"><div class="card"><h3>🛒 SẢN PHẨM SẴN BÁN &amp; PIPELINE DÒNG TIỀN</h3>
+  <div class="sp"><span>🚀 <b>DeanKit</b> — AI Agent Team Starter Kit<br><span class="dim"><a href="SAN_PHAM_TIEN/SP1_DeanKit/landing/index.html">Mở Landing Page</a> · kit thật từ Dean Mesh</span></span><span class="y">$29 / $79</span></div>
+  <div class="sp"><span>🎮 <b>Lingo Arcade</b> — PWA Template học từ vựng<br><span class="dim"><a href="SAN_PHAM_TIEN/SP2_CyberLingo_Template/landing/index.html">Mở Landing Page</a> · đổi chủ đề 10 phút, demo chơi thử</span></span><span class="y">$19 / $39</span></div>
+  <div class="sp"><span>🎬 <b>SP3: TikTok 4-Channels Content Factory</b><br><span class="dim" id="sp3-detail">Đã xuất xưởng 16 video .mp4 chuẩn 1080×1920 (Day 01 → Day 04), sẵn sàng render tiếp Day 05–06</span></span><span class="g">16 MP4 READY</span></div>
+  <p class="dim" style="margin-top:12px">Chờ Sếp tạo Gumroad → thay link tại đây. Checklist: <a href="SAN_PHAM_TIEN/SP1_DeanKit/CHECKLIST_RA_MAT.md">SP1</a> · <a href="SAN_PHAM_TIEN/SP2_CyberLingo_Template/CHECKLIST_RA_MAT.md">SP2</a></p>
+</div></div>
+
+<div id="v4" style="display:none"><div class="grid">
+  <div class="card" style="grid-column:1/-1"><h3>🚦 BẢNG CẮM CỜ TRỰC CHIẾN (MỤC 2)</h3><div id="locks"><p class="dim">Đang tải…</p></div></div>
+  <div class="card" style="grid-column:1/-1"><h3>📓 SỔ ĐỘI — NHẬT KÝ BÀN GIAO MỚI NHẤT <span class="dim" id="feed-ts"></span></h3><div id="jr"><p class="dim">Đang tải telecoder_feed.json…</p></div>
+    <p class="dim" style="margin-top:8px;font-size:.8rem">Xem toàn văn: <a href="BAN_GIAO_AGENT.md">BAN_GIAO_AGENT.md</a></p></div>
+</div></div>
+
+<footer>DEAN OS v0.2 · Lõi: DEAN-ZCode(T14) · Feed Sổ đội &amp; Quota N1/N2: DEAN-Telecoder · Worker: DEAN-Telegravity(Dell) · Kho: Dean 007 (100.77.193.96)</footer>
+</div>
+
+<script>
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function t(i,btn){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+for(let k=0;k<5;k++)document.getElementById('v'+k).style.display=k===i?'':'none';}
+// 1. RescueMic catalog — đọc file JSON thật nằm cạnh dashboard
+fetch('RescueMic/transcript/catalog.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  const el=document.getElementById('rm');const items=(d.items||[]).slice(-5).reverse();
+  el.innerHTML=items.map(i=>`<div class="trans">
+    <b>${esc(i.recorded_at||i.date)}</b> · ${esc(i.language_label||i.language)} (tin cậy ${esc(i.language_confidence_pct||'?')}%) · ${esc(i.duration_sec)}s
+    <div style="margin-top:6px">${esc(i.full_text||'')}</div>
+    <div class="vi">↳ ${esc(i.full_vi_translation||'')}</div></div>`).join('')||'<p class="dim">Kho trống</p>';
+}).catch(()=>{document.getElementById('rm').innerHTML='<p class="dim">Chưa đọc được catalog (mở qua http://100.77.193.96 để fetch hoạt động)</p>'});
+
+// 2. Telecoder Live Feed — Sổ đội Mục 2 & Mục 3 + Daemon PID/Uptime + Quota Cockpit + SP3
+fetch('telecoder_feed.json?t='+Date.now()).then(r=>r.json()).then(f=>{
+  if(f.daemon){
+    const d=f.daemon;
+    document.getElementById('tc-daemon').textContent=`PID ${d.pid} · ${d.uptime_human||'ONLINE'}`;
+  }
+  if(f.updated_at){
+    document.getElementById('feed-ts').textContent=`(cập nhật ${f.updated_at})`;
+  }
+  if(f.sp3_tiktok && f.sp3_tiktok.exists){
+    const s=f.sp3_tiktok;
+    const days=(s.completed_days||[]).join(', ')||'day01–04';
+    document.getElementById('sp3-row').textContent=`${s.total_mp4_ready} MP4 (${days})`;
+    document.getElementById('sp3-detail').textContent=`Đã xuất xưởng ${s.total_mp4_ready} video .mp4 chuẩn 1080×1920 (${days}), chờ lệnh chạy tiếp ${(s.pending_days||[]).join(', ')||'lô mới'}`;
+  }
+  const qEl=document.getElementById('quota');
+  const qs=f.cockpit_quota||[];
+  if(qs.length){
+    qEl.innerHTML=qs.map(q=>{
+      const pct=Number(q.weekly_pct||0);
+      const cls=pct<15?'r':(pct<40?'y':'g');
+      const star=q.is_active?'⭐ ':'';
+      const warn=q.low_quota_alert?' · 🚨 SẮP CẠN (<15%)':'';
+      return `<div style="margin-bottom:10px">
+        <div class="row" style="border:none;padding:2px 0"><span>${star}<code>${esc(q.account)}</code></span><span class="${cls}"><b>${pct}%</b> tuần (5h: ${Number(q.five_hour_pct||0)}%)${warn}</span></div>
+        <div class="bar"><i style="width:${Math.max(2,Math.min(100,pct))}%;${pct<15?'background:var(--red)':''}"></i></div>
+      </div>`;
+    }).join('');
+  }else{
+    qEl.innerHTML='<p class="dim">Chưa có cache Cockpit trên máy.</p>';
+  }
+  const cds=f.cooldowns||{};
+  const cdKeys=Object.keys(cds);
+  document.getElementById('cd-box').innerHTML=cdKeys.length
+    ? '⚠️ Cooldown đang đóng băng: '+cdKeys.map(k=>`<code>${esc(k)} (${cds[k]}p)</code>`).join(', ')
+    : '🟢 0 engine bị đóng băng — toàn bộ đội hình sẵn sàng xoay tức thì.';
+  const locks=f.locks||[];
+  document.getElementById('locks').innerHTML=locks.map(l=>`<div class="row">
+    <span><b>${esc(l.agent)}</b> <span class="dim">(${esc(l.machine)})</span></span>
+    <span>${esc(l.status)} · <span class="dim">${esc((l.project||'').slice(0,70))} (${esc(l.updated_at)})</span></span>
+  </div>`).join('')||'<p class="dim">Chưa có dữ liệu khóa.</p>';
+  const hs=f.handoffs||[];
+  document.getElementById('jr').innerHTML=hs.map(h=>`<div class="entry">
+    <div class="t">${esc(h.timestamp)} · <b>${esc(h.agent)}</b></div>
+    <div style="margin-top:4px">${esc(h.summary)}</div>
+  </div>`).join('')||'<p class="dim">Chưa có dòng bàn giao.</p>';
+}).catch(()=>{
+  document.getElementById('jr').innerHTML='<p class="dim">Mở qua http://100.77.193.96/04_Kho_Chung_Dung_Chung/DEAN_OS_Dashboard.html để hiển thị JSON feed trực tiếp.</p>';
+});
+</script>
+</body>
+</html>

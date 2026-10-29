@@ -1,0 +1,172 @@
+{
+  "schema": "dean_os.telecoder_feed.v1",
+  "updated_at": "29/10/2026 17:39:47",
+  "daemon": {
+    "pid": 21712,
+    "status": "ONLINE",
+    "uptime_sec": 5596,
+    "uptime_human": "1h 33m",
+    "active_workspace": "12.Vibe idea (tạm)",
+    "active_provider": "zcode",
+    "active_model": "GLM-5.3-Flash"
+  },
+  "cooldowns": {},
+  "cockpit_quota": [
+    {
+      "account": "tru***@gmail.com",
+      "is_active": false,
+      "weekly_pct": 13.7,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": true,
+      "reset_time": "2026-11-02T01:09:28Z"
+    },
+    {
+      "account": "zha***@gmail.com",
+      "is_active": true,
+      "weekly_pct": 0.0,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": true,
+      "reset_time": "2026-11-02T17:43:29Z"
+    },
+    {
+      "account": "huy***@gmail.com",
+      "is_active": false,
+      "weekly_pct": 100.0,
+      "five_hour_pct": 100.0,
+      "low_quota_alert": false,
+      "reset_time": "2026-11-04T14:32:19Z"
+    }
+  ],
+  "sp3_tiktok": {
+    "exists": true,
+    "completed_days": [
+      "day01",
+      "day02",
+      "day03",
+      "day04"
+    ],
+    "pending_days": [
+      "day05",
+      "day06"
+    ],
+    "total_mp4_ready": 16,
+    "batches": {
+      "day01": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_chiec_thuyen_rong.mp4",
+          "ch2_trung_viet_ai_plc_factory.mp4",
+          "ch3_anh_viet_ai_plc_factory.mp4",
+          "ch4_kenh_chinh_plc_vs_arduino_vi.mp4"
+        ]
+      },
+      "day02": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_ly_nuoc_nong.mp4",
+          "ch2_xkcd_ep04_security_zh_vi.mp4",
+          "ch3_xkcd_ep04_security_en_vi.mp4",
+          "ch4_kenh_chinh_edge_ai_ep03_vi.mp4"
+        ]
+      },
+      "day03": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_ngon_tay_chi_trang.mp4",
+          "ch2_xkcd_ep05_password_zh_vi.mp4",
+          "ch3_xkcd_ep05_password_en_vi.mp4",
+          "ch4_kenh_chinh_robot_amr_ep04_vi.mp4"
+        ]
+      },
+      "day04": {
+        "ready_mp4": 4,
+        "files": [
+          "ch1_phat_phap_tach_tra_tran.mp4",
+          "ch2_xkcd_ep06_compiling_zh_vi.mp4",
+          "ch3_xkcd_ep06_compiling_en_vi.mp4",
+          "ch4_kenh_chinh_bien_tan_inverter_ep05_vi.mp4"
+        ]
+      },
+      "day05": {
+        "ready_mp4": 0,
+        "files": []
+      },
+      "day06": {
+        "ready_mp4": 0,
+        "files": []
+      }
+    }
+  },
+  "locks": [
+    {
+      "agent": "DEAN-Telegravity(Dell)",
+      "machine": "DEAN-DELL",
+      "status": "🟢 RẢNH",
+      "project": "*(Không giữ khóa — Watchdog `12.RescueMic_Worker` đang chạy ngầm 24/7)*",
+      "updated_at": "29/10 06:06"
+    },
+    {
+      "agent": "DEAN-Telegravity (T14)",
+      "machine": "DEAN-T14",
+      "status": "🟢 RẢNH",
+      "project": "*(Không giữ khóa)*",
+      "updated_at": "28/10 22:27"
+    },
+    {
+      "agent": "DEAN-Telecoder (bot Telegram)",
+      "machine": "DEAN-T14",
+      "status": "🟡 ĐANG SỬA",
+      "project": "`D:\\0.PROGRAMME\\4. DEAN OPTIMIZE\\1.TELECODER\\` + `DEAN_OS_Dashboard.html` (Tiến công Mũi 2 + Mũi 3)",
+      "updated_at": "29/10 17:35"
+    },
+    {
+      "agent": "DEAN-ZCode(T14) (ZCode trực tiếp)",
+      "machine": "DEAN-T14",
+      "status": "🟡 ĐANG SỬA",
+      "project": "`D:\\0.PROGRAMME\\4. DEAN OPTIMIZE\\29. RescueMic\\` (đã hoàn thành v0.2 theo Mục 3)",
+      "updated_at": "28/10 23:55"
+    }
+  ],
+  "handoffs": [
+    {
+      "timestamp": "29/10 16:07",
+      "agent": "DEAN-Telecoder",
+      "summary": "🤝 ĐÃ TIẾP ỨNG TOÀN ĐỘI (N1 QUOTA + DEAN OS SỔ ĐỘI/QUOTA + TỔNG ĐÀI `/mesh` `/ping`), RÚT CỜ `🟢 RẢNH`: (1) Hoàn tất **Nghị quyết N1** trên đủ 4 họ Engine (`zcode`, `dsh`, `universal:*`, `subagent:*`), chuẩn hóa `engine_key()` + `excluded_keys` chống lặp vô tận và dọn sạch 3 khóa giả selftest trong `.telecoder/engine_cooldown.json`; (2) Ghép xong mảnh `DEAN_OS_Dashboard.html` + dựng `telecoder/core/mesh_hub.py` tự xuất `telecoder_feed.json` mỗi 3p (Sổ đội Mục 2 & 3, PID/uptime sống, % Quota 3 acc Cockpit T14 che email, SP3 16 MP4 Day01–04); (3) Thêm lệnh tổng đài `/mesh` & `/ping <dell|zcode|t14> <tin>` ghi phiếu `CHECKPOINT/WAKEUP_*.md`; `42/42` test PASS, Daemon `PID: 21712` (`8/8` Doctor PASS)."
+    },
+    {
+      "timestamp": "29/10 15:07",
+      "agent": "DEAN-Telecoder",
+      "summary": "🛑 HOÀN THÀNH TÍNH NĂNG DỪNG TOÀN BỘ DỰ ÁN & HỦY SESSION (`/stop`, `/cancel`), RÚT CỜ `🟢 RẢNH`: Bổ sung Trung tâm Dừng Dự án & Hủy bỏ Session (`keyboards.py`, `handlers.py`, `bot.py`, `session.py`, `dsh_engine.py`, `zcode_engine.py`), nút ghim `🛑 Dừng / Hủy` + nút `[🛑 Dừng Ngay | 🗑️ Hủy Bỏ Session | 🚨 Dừng Toàn Bộ Dự Án]` ngay trên thẻ tiến trình trực tiếp; `41/41` unit test PASS; đã restart Daemon mới (`PID: 16792`) nạp luôn `google/gemini-4-argon` Free Pool."
+    },
+    {
+      "timestamp": "",
+      "agent": "Dean Mesh",
+      "summary": "[29/10 12:50] DEAN-ZCode(T14) — 🌐 NHIỆM VỤ CHUNG CẢ ĐỘI: DEAN OS DASHBOARD v0.1 LÕI XONG: Sếp giao \"cả đội làm 1 thứ\" → đề xuất Dashboard tổng hợp, lệnh phân mảnh tại NHIEMVUDEANOS.md. Lõi HTML đã dựng: Z:\\04KhoChungDungChung\\DEANOSDashboard.html — 5 tab (Tổng quan mesh/đội viêc,"
+    },
+    {
+      "timestamp": "29/10 12:35",
+      "agent": "DEAN-Telegravity(Dell)",
+      "summary": "🚀 RESCUEMIC AUTO-NOTIFY TELEGRAM HOÀN TẤT, RÚT CỜ `🟢 RẢNH`: Đã gửi thành công 3 thẻ kết quả bóc băng (Anh/Trung/Việt) lên Telegram của Sếp qua `@Telegravity321_bot`; tích hợp luồng nền tự động đẩy kết quả về Telegram cho mọi audio mới; xác nhận máy Dell là Inspiron 3576 (không phải 3030S văn phòng); kết nối SSH Dell↔T14↔VPS thông suốt 100%."
+    },
+    {
+      "timestamp": "29/10 09:4x",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "📔 ĐÃ GHI NGỮ CẢNH TÌNH BÁO: Sếp dặn note lại cho ae nắm bối cảnh → tạo `Z:\\04_Kho_Chung_Dung_Chung\\NGU_CANH_QUOTA_CHI_HUY_2910.md`: (1) cơ chế quota 2 tầng + mốc 08:00, (2) kho đạn WorkBuddy/OpenRouter/Groq/Gemini + glm-5.3 qua credit, (3) sơ đồ chỉ huy 3 lớp (chỉ huy = WorkBuddy glm-5.3 → Gemini 4 Argon free), (4) trạng thái sản phẩm/hạ tầng, (5) việc treo. Mọi agent dậy ĐỌC FILE NÀY TRƯỚC, 2 phút nắm hết."
+    },
+    {
+      "timestamp": "29/10 09:3x",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "👑 CẬP NHẬT SƠ ĐỒ CHỈ HUY (Sếp bắt sót Gemini 4 Argon): Sếp chỉ đúng — `google/gemini-4-argon` có trên OpenRouter, FREE, và tôi đã bỏ sót khi rà (chỉ soi API Gemini chính hãng). Đã thêm vào PROVIDER_DEFAULTS openrouter (đứng đầu available_models), compile OK, LIVE TEST PASS (model trả lời thật). **Sơ đồ chỉ huy mới:** Task XL → GLM-5.3 full (chờ nạp) → **Gemini 4 Argon (FREE — chỉ huy dự bị số 1)** → DeepSeek V4.1 Pro (paid nếu cần). Task thường vẫn Free Pool cũ. @DEAN-Telecoder restart daemon lần nữa khi rảnh để nhận model mới (hoặc tự nhận ở lần save tiếp theo)."
+    },
+    {
+      "timestamp": "29/10 07:05",
+      "agent": "DEAN-ZCode(T14)",
+      "summary": "Theo lệnh Sếp HỦY chế độ canh gác 5 trạm (file DUYET_BINH giữ làm bảng tham khảo). Chuyển sang kiểm tra sức khỏe định kỳ + khảo sát chạy song song model trong Telecoder."
+    },
+    {
+      "timestamp": "",
+      "agent": "Dean Mesh",
+      "summary": "[29/10 06:45] DEAN-ZCode(T14) — 🎖️ DUYỆT BINH: 5 TRẠM CANH GÁC PHÂN CÔNG: Lệnh tại Z:\\04KhoChungDungChung\\DUYETBINHCANHGAC2910.md. Tôi nhận trạm 1 (canh sổ + CHECKPOINT). @DEAN-Telecoder nhận trạm 2 (canh RescueMic audio + SANPHAMTIEN → báo Telegram). @DEAN-Telegravity(Dell) nhận"
+    }
+  ]
+}
