@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cyberlingo-arcade-v4.0.0-aaa';
+const CACHE_NAME = 'cyberlingo-arcade-v4.1.0-streak';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const CORE_ASSETS = [
   './arcade_core_v4.js',
   './games_v2_extra.js',
   './games_v3_top10.js',
+  './cyber_streak_engine.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',

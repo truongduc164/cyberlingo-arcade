@@ -11,6 +11,62 @@
 let minerState = null;
 let minerRafId = null;
 
+// =========================================================
+// CYBER STREAK BRIDGE — single source of truth for streak & tier
+// ---------------------------------------------------------
+// cyber_streak_engine.js loads AFTER this file (index.html:3532),
+// so the engine must be instantiated lazily, never at parse time.
+// Scoring is intentionally left on the original formula: the engine
+// owns streak state, tier and the HUD label only. This keeps every
+// existing score value byte-identical to before the integration.
+// =========================================================
+const STREAK_COMBO_CAP = 10;
+let _streakEngine = null;
+
+function streakEngine() {
+  if (_streakEngine) return _streakEngine;
+  if (typeof window !== 'undefined' && typeof window.CyberStreakEngine === 'function') {
+    _streakEngine = new window.CyberStreakEngine();
+  }
+  return _streakEngine;
+}
+
+// Registers a hit. `isPerfect` is only true when the game can actually prove
+// it (e.g. first-try catch) — never hardcoded, or the bonus becomes permanent.
+// NOTE: legacy combo starts at 1 and increments on hit, so the visible combo is
+// always engineStreak + 1. Mapping it any other way would silently cost points.
+function streakHit(isPerfect) {
+  const e = streakEngine();
+  if (!e) {
+    combo = Math.min(STREAK_COMBO_CAP, combo + 1);
+    return { streak: combo, comboTier: 'NORMAL' };
+  }
+  const r = e.recordHit(!!isPerfect);
+  combo = Math.min(STREAK_COMBO_CAP, r.streak + 1);
+  return r;
+}
+
+function streakMiss() {
+  const e = streakEngine();
+  if (e) e.recordMiss();
+  combo = 1;
+}
+
+function streakTier() {
+  const e = streakEngine();
+  return e ? e.getStats().comboTier : 'NORMAL';
+}
+
+function streakReset() {
+  const e = streakEngine();
+  if (e) {
+    e.streak = 0;
+    e.maxStreak = 0;
+    e.multiplier = 1.0;
+  }
+  combo = 1;
+}
+
 function initMinerGame() {
   const cvs = document.getElementById('canvas-miner');
   const { W, H } = setupRetinaCanvas(cvs);
@@ -310,7 +366,7 @@ function loopMiner() {
 
       if (caught) {
         if (caught.isTarget) {
-          combo = Math.min(10, combo + 1);
+          streakHit(!caught.revealedWrong);
           incrementDailyProgress('combo', combo);
           sound.sfxCombo(combo);
           sound.speakChinese(caught.vocab.zh, caught.vocab.audio);
@@ -327,7 +383,7 @@ function loopMiner() {
           S.popups.push({ x: S.originX, y: 66, txt: `💰 +$${pts} VÀNG 24K!`, color: '#fde047', life: 1.0 });
           spawnMinerStage();
         } else {
-          combo = 1;
+          streakMiss();
           spawnComboBanner(1, 0);
           lives--;
           updateHUD();
@@ -665,7 +721,8 @@ function resolveBubbleHit(hitBubble) {
     });
 
     hapticPulse(22);
-    combo = Math.min(10, combo + 1);
+    // Perfect = hit the intended target egg directly, with no wrong egg touched.
+    streakHit(!hitBubble || hitBubble.vocab.zh === S.targetVocab.zh);
     incrementDailyProgress('combo', combo);
     sound.sfxCombo(combo);
     sound.speakChinese(S.targetVocab.zh, S.targetVocab.audio);
@@ -684,7 +741,7 @@ function resolveBubbleHit(hitBubble) {
     triggerScreenShake();
     recordSrsOutcome(S.targetVocab, false);
     if (hitBubble) recordSrsOutcome(hitBubble.vocab, false);
-    combo = 1;
+    streakMiss();
     spawnComboBanner(1, 0);
     lives--;
     updateHUD();

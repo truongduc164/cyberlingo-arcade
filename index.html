@@ -2088,7 +2088,10 @@
 
     function updateHUD() {
       document.getElementById('hud-score').textContent = `🏆 ${score}`;
-      document.getElementById('hud-combo').textContent = `🔥 x${combo}`;
+      // Tier badge comes from CyberStreakEngine when available; falls back to plain combo.
+      const tier = (typeof streakTier === 'function') ? streakTier() : 'NORMAL';
+      const tierIcon = tier === 'GODLIKE' ? '💀' : tier === 'HYPER' ? '⚡' : tier === 'SUPER' ? '✨' : '';
+      document.getElementById('hud-combo').textContent = tierIcon ? `🔥 x${combo} ${tierIcon}${tier}` : `🔥 x${combo}`;
       document.getElementById('hud-lives').textContent = activeGame === 'tetris'
         ? '🧱x5'
         : (lives > 0 ? '❤️'.repeat(lives) : '💔');
@@ -2143,6 +2146,7 @@
       activeGame = mode;
       score = 0;
       combo = 1;
+      if (typeof streakReset === 'function') streakReset();
       lives = 3;
       stageNum = 1;
       encounteredWords = [];
