@@ -133,7 +133,7 @@ function checkNinjaSliceAt(px, py) {
         hapticPulse(45);
         sound.sfxWrong();
         triggerScreenShake();
-        combo = 1;
+        streakMiss();
         spawnComboBanner(1, 0);
         lives--;
         updateHUD();
@@ -149,7 +149,7 @@ function checkNinjaSliceAt(px, py) {
       if (o.isCorrect) {
         S.waveResolved = true;
         hapticPulse(22);
-        combo = Math.min(10, combo + 1);
+        streakHit(false);
         incrementDailyProgress('combo', combo);
         sound.sfxCombo(combo);
         sound.speakChinese(o.vocab.zh, o.vocab.audio);
@@ -171,7 +171,7 @@ function checkNinjaSliceAt(px, py) {
         sound.sfxWrong();
         recordSrsOutcome(S.targetVocab, false);
         recordSrsOutcome(o.vocab, false);
-        combo = 1;
+        streakMiss();
         spawnComboBanner(1, 0);
         lives--;
         updateHUD();
@@ -325,7 +325,7 @@ function loopNinja() {
     if (missedCorrect) {
       sound.sfxWrong();
       recordSrsOutcome(S.targetVocab, false);
-      combo = 1;
+      streakMiss();
       spawnComboBanner(1, 0);
       lives--;
       updateHUD();
@@ -535,7 +535,7 @@ function resolveTetrisLanding() {
 
   if (dockVocab.zh === v.zh) {
     hapticPulse(20);
-    combo = Math.min(10, combo + 1);
+    streakHit(false);
     incrementDailyProgress('combo', combo);
     sound.sfxCombo(combo);
     sound.speakChinese(v.zh, v.audio);
@@ -562,7 +562,7 @@ function resolveTetrisLanding() {
     sound.sfxWrong();
     triggerScreenShake();
     recordSrsOutcome(v, false);
-    combo = 1;
+    streakMiss();
     spawnComboBanner(1, 0);
     S.garbage[c]++;
     S.flashes.push({ col: c, color: '#f43f5e', life: 1.0 });
@@ -876,7 +876,7 @@ function stepPacman() {
     const gm = S.gems[gIdx];
     if (gm.isTarget) {
       hapticPulse(25);
-      combo = Math.min(10, combo + 1);
+      streakHit(false);
       incrementDailyProgress('combo', combo);
       sound.sfxFanfare();
       sound.speakChinese(gm.vocab.zh, gm.vocab.audio);
@@ -899,7 +899,7 @@ function stepPacman() {
       sound.sfxWrong();
       recordSrsOutcome(gm.vocab, false);
       S.gems.splice(gIdx, 1);
-      combo = 1;
+      streakMiss();
       spawnComboBanner(1, 0);
       lives--;
       updateHUD();
@@ -952,7 +952,7 @@ function stepPacman() {
         sound.sfxWrong();
         triggerScreenShake();
         S.shieldTicks = 8;
-        combo = 1;
+        streakMiss();
         spawnComboBanner(1, 0);
         lives--;
         updateHUD();
@@ -1270,7 +1270,7 @@ function loopArkanoid() {
     hapticPulse(35);
     sound.sfxWrong();
     triggerScreenShake();
-    combo = 1;
+    streakMiss();
     spawnComboBanner(1, 0);
     lives--;
     updateHUD();
@@ -1290,7 +1290,7 @@ function loopArkanoid() {
       br.alive = false;
       B.vy *= -1;
       hapticPulse(18);
-      combo = Math.min(10, combo + 1);
+      streakHit(false);
       incrementDailyProgress('combo', combo);
       sound.sfxCombo(combo);
       sound.speakChinese(br.vocab.zh, br.vocab.audio);

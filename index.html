@@ -2475,7 +2475,7 @@
         if (path) {
           drawOnetLightning(path);
           hapticPulse(22);
-          combo = Math.min(10, combo + 1);
+          streakHit(false);
           incrementDailyProgress('combo', combo);
           sound.sfxCombo(combo);
           recordLearnedWord(cell.vocab);
@@ -2521,7 +2521,7 @@
       } else {
         if (prevCell) recordSrsOutcome(prevCell.vocab, false);
         recordSrsOutcome(cell.vocab, false);
-        combo = 1;
+        streakMiss();
         spawnComboBanner(1, 0);
         sound.sfxWrong();
         updateHUD();
@@ -2662,7 +2662,7 @@
         mole.classList.add('hit-ok');
         document.getElementById(`mole-zh-${idx}`).textContent = `⚡🔨 ${whacTarget.zh}`;
         document.getElementById('whac-reveal').textContent = `🎯 ${whacTarget.zh} (${whacTarget.pinyin || ''}) = ${whacTarget.vi}`;
-        combo = Math.min(10, combo + 1);
+        streakHit(false);
         incrementDailyProgress('combo', combo);
         sound.sfxCombo(combo);
         recordLearnedWord(whacTarget);
@@ -2691,7 +2691,7 @@
       sound.sfxWrong();
       triggerScreenShake();
       if (whacTarget) recordSrsOutcome(whacTarget, false);
-      combo = 1;
+      streakMiss();
       spawnComboBanner(1, 0);
       lives--;
       updateHUD();
@@ -2930,7 +2930,7 @@
         const orb = snakeOrbs[hitOrbIdx];
         if (orb.isNext) {
           hapticPulse(20);
-          combo = Math.min(10, combo + 1);
+          streakHit(false);
           incrementDailyProgress('combo', combo);
           sound.sfxCombo(combo);
           snakeEatenHistory.push(orb.text);
@@ -2973,7 +2973,7 @@
           sound.sfxWrong();
           triggerScreenShake();
           if (snakeSentenceObj) recordSrsOutcome(snakeSentenceObj, false);
-          combo = 1;
+          streakMiss();
           spawnComboBanner(1, 0);
           lives--;
           updateHUD();
@@ -3366,7 +3366,7 @@
               if (tg.isCorrect) {
                 S.waveTransition = true;
                 hapticPulse(24);
-                combo = Math.min(10, combo + 1);
+                streakHit(false);
                 incrementDailyProgress('combo', combo);
                 sound.sfxCombo(combo);
                 sound.speakChinese(tg.zh, tg.audio);
@@ -3390,7 +3390,7 @@
                 recordSrsOutcome(tg, false);
                 spawnBurst(tg.x, tg.y, '#f43f5e');
                 S.targets.splice(tIdx, 1);
-                combo = 1;
+                streakMiss();
                 spawnComboBanner(1, 0);
                 lives--;
                 updateHUD();
@@ -3413,7 +3413,7 @@
             sound.sfxWrong();
             triggerScreenShake();
             recordSrsOutcome(tg, false);
-            combo = 1;
+            streakMiss();
             spawnComboBanner(1, 0);
             lives--;
             updateHUD();
