@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'cyberlingo-arcade-';
-const CACHE_NAME = CACHE_PREFIX + 'v4.1.1-streak';
+const CACHE_NAME = CACHE_PREFIX + 'v4.2.0-all-games';
 const CORE_ASSETS = [
   './',
   './index.html',
