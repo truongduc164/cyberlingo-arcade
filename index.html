@@ -1667,6 +1667,7 @@
   <script src="daily_timeline_data.js"></script>
   <script src="core_lingo_bank.js"></script>
   <script src="arcade_core_v4.js"></script>
+  <script src="arcade_upgrade_v41.js"></script>
   <script>
     if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
       CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2222,6 +2223,10 @@
         });
       }
       document.getElementById('modal-result').classList.remove('hidden');
+
+      // v4.1: Award Freeze Token on high score + update streak fire
+      if (typeof awardFreezeTokenOnHighScore === 'function') awardFreezeTokenOnHighScore(score, activeGame);
+      if (typeof renderStreakFireUI === 'function') renderStreakFireUI();
     }
 
     // =========================================================

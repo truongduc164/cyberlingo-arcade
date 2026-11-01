@@ -111,10 +111,12 @@ function recordSrsOutcome(vocabItem, isCorrect) {
 
   if (isCorrect) {
     prev.ok = (prev.ok || 0) + 1;
+    if (typeof recordAdaptiveAnswer === 'function') recordAdaptiveAnswer(true);
     prev.box = Math.min(3, (prev.box === 0 ? 1 : prev.box + 1));
     incrementDailyProgress('words', 1);
   } else {
     prev.bad = (prev.bad || 0) + 1;
+    if (typeof recordAdaptiveAnswer === 'function') recordAdaptiveAnswer(false);
     prev.box = 0; // Enters Mistake Vault for priority review!
   }
   map[vocabItem.zh] = prev;

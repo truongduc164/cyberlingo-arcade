@@ -1,11 +1,12 @@
 const CACHE_PREFIX = 'cyberlingo-arcade-';
-const CACHE_NAME = CACHE_PREFIX + 'v4.2.0-all-games';
+const CACHE_NAME = CACHE_PREFIX + 'v4.1.0-streak-juice-radical';
 const CORE_ASSETS = [
   './',
   './index.html',
   './core_lingo_bank.js',
   './daily_timeline_data.js',
   './arcade_core_v4.js',
+  './arcade_upgrade_v41.js',
   './games_v2_extra.js',
   './games_v3_top10.js',
   './cyber_streak_engine.js',
