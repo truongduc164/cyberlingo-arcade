@@ -114,6 +114,10 @@ body{display:flex;flex-direction:column}
 .toast{position:fixed;top:56px;left:50%;transform:translateX(-50%);padding:8px 18px;border-radius:16px;font-size:12px;font-weight:600;z-index:200;opacity:0;transition:opacity .3s;background:var(--card);border:1px solid rgba(168,85,247,.3);color:var(--bright);box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .toast.show{opacity:1}
 
+/* PARTICLES */
+.particle{position:fixed;pointer-events:none;z-index:300;font-size:22px;animation:particleFly 1.2s ease-out forwards;opacity:1}
+@keyframes particleFly{0%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}50%{opacity:.9;transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(180deg)}100%{opacity:0;transform:translate(calc(var(--dx)*2),calc(var(--dy)*2.5)) scale(.5) rotate(360deg)}}
+
 @media(min-width:640px){.main{max-width:480px;margin:0 auto}}
 </style>
 </head>
@@ -232,6 +236,15 @@ const BANK={
     {type:'GHÉP CÂU 造句',narr:'Sắp xếp thành câu đúng:',text:'Sắp xếp: 很 / 今天 / 冷 / 天气',answer:'今天天气很冷',hint:'Hôm nay (今天) + thời tiết (天气) + rất (很) + lạnh (冷)',choices:['今天天气很冷','很冷今天天气','天气今天很冷','冷很天气今天']},
     {type:'DỊCH 翻译',narr:'Dịch sang tiếng Việt:',zh:'大学',py:'dà xué',text:'大学 nghĩa là gì?',answer:'Đại học',hint:'大 = lớn/đại, 学 = học',choices:['Đại học','Trung học','Tiểu học','Học viện']},
     {type:'THÀNH NGỮ 成语',narr:'Giải nghĩa thành ngữ Trung Quốc:',zh:'一石二鸟',py:'yī shí èr niǎo',text:'一石二鸟 nghĩa là gì?',answer:'Một mũi tên trúng hai đích',hint:'一=1, 石=đá, 二=2, 鸟=chim → ném 1 viên đá trúng 2 con chim',choices:['Một mũi tên trúng hai đích','Có chí thì nên','Nước chảy đá mòn','Ăn quả nhớ kẻ trồng cây']},
+    // === 8 CÂU MỚI (01/11) ===
+    {type:'DỊCH 翻译',narr:'Dịch từ tiếng Trung sang tiếng Việt:',zh:'早上好',py:'zǎo shang hǎo',text:'早上好 nghĩa là gì?',answer:'Chào buổi sáng',hint:'早上 = buổi sáng, 好 = tốt/chào',choices:['Chào buổi sáng','Chúc ngủ ngon','Tạm biệt','Buổi chiều vui vẻ']},
+    {type:'DỊCH 翻译',narr:'Dịch từ tiếng Trung sang tiếng Việt:',zh:'再见',py:'zài jiàn',text:'再见 nghĩa là gì?',answer:'Tạm biệt',hint:'再 = lại, 见 = gặp → gặp lại = tạm biệt',choices:['Tạm biệt','Xin chào','Xin lỗi','Hẹn gặp lại']},
+    {type:'PINYIN 拼音',narr:'Chọn pinyin đúng cho chữ Hán:',zh:'水',py:'?',text:'Chữ 水 (nước) đọc là gì?',answer:'shuǐ',hint:'Âm bắt đầu bằng "sh", thanh 3 (dấu hỏi)',choices:['shuǐ','suǐ','shuì','shǔi']},
+    {type:'PINYIN 拼音',narr:'Chọn pinyin đúng cho chữ Hán:',zh:'火',py:'?',text:'Chữ 火 (lửa) đọc là gì?',answer:'huǒ',hint:'Âm bắt đầu bằng "h", thanh 3 (dấu hỏi)',choices:['huǒ','hǒu','huò','hǔo']},
+    {type:'BỘ THỦ 部首',narr:'Phân tích bộ thủ chữ Hán:',zh:'休',py:'xiū',text:'Chữ 休 (nghỉ ngơi) gồm 2 bộ phận nào?',answer:'人 + 木',hint:'Người (人) tựa vào cây (木) = nghỉ ngơi',choices:['人 + 木','人 + 本','大 + 木','人 + 休']},
+    {type:'BỘ THỦ 部首',narr:'Phân tích cấu tạo chữ Hán:',zh:'林',py:'lín',text:'Chữ 林 (rừng) được ghép từ?',answer:'木 + 木',hint:'Hai cây (木木) đứng cạnh nhau = rừng',choices:['木 + 木','森 + 木','林 + 木','木 + 本']},
+    {type:'THÀNH NGỮ 成语',narr:'Giải nghĩa thành ngữ Trung Quốc:',zh:'画蛇添足',py:'huà shé tiān zú',text:'画蛇添足 nghĩa là gì?',answer:'Vẽ rắn thêm chân',hint:'画=vẽ, 蛇=rắn, 添=thêm, 足=chân → làm thừa, không cần thiết',choices:['Vẽ rắn thêm chân','Cưỡi ngựa xem hoa','Ếch ngồi đáy giếng','Mèo mù vớ cá rán']},
+    {type:'THÀNH NGỮ 成语',narr:'Giải nghĩa thành ngữ Trung Quốc:',zh:'对牛弹琴',py:'duì niú tán qín',text:'对牛弹琴 nghĩa là gì?',answer:'Đàn gảy tai trâu',hint:'对=đối, 牛=trâu, 弹=gảy, 琴=đàn → nói với người không hiểu',choices:['Đàn gảy tai trâu','Cá chậu chim lồng','Nước đổ đầu vịt','Ếch ngồi đáy giếng']},
   ],
   cyber:[
     {type:'GIẢI MÃ',narr:'Terminal hiện tin nhắn mã hóa:',text:'Giải mã nhị phân: 01001000 01000101 01001100 01010000',answer:'HELP',hint:'Chuyển nhị phân → ASCII: H=72, E=69, L=76, P=80',choices:['HELP','HACK','EXIT','OPEN']},
@@ -315,10 +328,28 @@ function showPuz(i){
 function checkC(c,btn){
   const p=S.puzzles[S.cur],ok=c.trim()===p.answer.trim();
   document.querySelectorAll('.cb').forEach(b=>{b.style.pointerEvents='none';if(b.textContent.trim()===p.answer.trim())b.classList.add('ok')});
-  if(ok){btn.classList.add('ok');onOK()}else{btn.classList.add('no');onNO()}
+  if(ok){btn.classList.add('ok');spawnParticles(btn);onOK()}else{btn.classList.add('no');onNO()}
+}
+function spawnParticles(el){
+  const emojis=['🎉','✨','🌟','💫','⭐','🎊','🏆','💥','🔥','✅'];
+  const rect=el.getBoundingClientRect();
+  const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+  for(let i=0;i<12;i++){
+    const span=document.createElement('span');
+    span.className='particle';
+    span.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    const angle=Math.random()*Math.PI*2;
+    const dist=60+Math.random()*80;
+    span.style.left=cx+'px';span.style.top=cy+'px';
+    span.style.setProperty('--dx',(Math.cos(angle)*dist)+'px');
+    span.style.setProperty('--dy',(Math.sin(angle)*dist)+'px');
+    span.style.animationDelay=(Math.random()*0.15)+'s';
+    document.body.appendChild(span);
+    span.addEventListener('animationend',()=>span.remove());
+  }
 }
 function submit(){const v=document.getElementById('a-input').value.trim();if(!v)return;
-  const p=S.puzzles[S.cur];v.toUpperCase()===p.answer.toUpperCase()?onOK():onNO()}
+  const p=S.puzzles[S.cur];if(v.toUpperCase()===p.answer.toUpperCase()){const sbtn=document.querySelector('.tia .sbtn');if(sbtn)spawnParticles(sbtn);onOK()}else{onNO()}}
 
 function onOK(){
   S.streak++;const base=100,tb=Math.floor(S.tLeft/S.tTotal*50),sb=Math.min(S.streak*10,50),pts=Math.floor((base+tb+sb)*DIFF[S.diff].m);
