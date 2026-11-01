@@ -1,0 +1,18 @@
+{
+  "name": "AI Escape Room — Infinite Puzzle Chambers",
+  "short_name": "AI Escape Room",
+  "description": "Solve AI-generated puzzles to escape infinite rooms! 4 themes, 3 difficulties, endless fun.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0a1a",
+  "theme_color": "#a855f7",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["games", "puzzle"]
+}
