@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'cyberlingo-arcade-';
-const CACHE_NAME = CACHE_PREFIX + 'v4.1.1-radical-onclick';
+const CACHE_NAME = CACHE_PREFIX + 'v4.2.0-dojo-fortress-league';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -10,6 +10,8 @@ const CORE_ASSETS = [
   './games_v2_extra.js',
   './games_v3_top10.js',
   './cyber_streak_engine.js',
+  './radical_db_v42.js',
+  './arcade_upgrade_v42.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
