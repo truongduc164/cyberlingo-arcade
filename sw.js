@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'cyberlingo-arcade-';
-const CACHE_NAME = CACHE_PREFIX + 'v4.1.0-streak-juice-radical';
+const CACHE_NAME = CACHE_PREFIX + 'v4.1.1-radical-onclick';
 const CORE_ASSETS = [
   './',
   './index.html',

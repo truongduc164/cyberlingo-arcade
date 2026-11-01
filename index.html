@@ -2217,7 +2217,7 @@
         list.forEach((w) => {
           const row = document.createElement('div');
           row.className = 'learned-item';
-          row.innerHTML = `<span><b style="color:#38bdf8;font-size:14px">${w.zh}</b> <span style="color:#94a3b8;font-size:11px">${w.pinyin}</span></span><span style="color:#a7f3d0">${w.vi} 🔊</span>`;
+          row.innerHTML = `<span><b style="color:#38bdf8;font-size:14px;cursor:pointer" onclick="event.stopPropagation();if(typeof showRadicalBreakdown==='function')showRadicalBreakdown('${w.zh}')">${w.zh}</b> <span style="color:#94a3b8;font-size:11px">${w.pinyin}</span></span><span style="color:#a7f3d0">${w.vi} 🔊</span>`;
           row.onclick = () => sound.speakChinese(w.zh, w.audio);
           box.appendChild(row);
         });
