@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="CyberArcade" />
   <meta name="theme-color" content="#060b18" />
-  <title>CyberLingo Arcade PRO v4.2 — Top 11 Game Kinh Điển + Võ Đài Bộ Thủ & Giải Đấu (AAA Retina + SRS)</title>
+  <title>CyberLingo Arcade PRO v4.3 — Top 12 Game Kinh Điển + Nhà Máy EON G179 & Võ Đài Bộ Thủ (AAA Retina + SRS)</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="icon-192.png" />
@@ -1488,6 +1488,7 @@
         </div>
       </div>
 
+      <a class="switch-bird-link" style="border-color:rgba(52,211,153,0.65);background:linear-gradient(135deg,rgba(5,150,105,0.28),rgba(15,23,42,0.95));color:#a7f3d0;" href="https://truongduc164.github.io/factory-eon/">🏭 Vào <b>Game Nhà Máy EON (Factory G179)</b> — RPG 7 Sàn • 17 Khu QA/QC</a>
       <a class="switch-bird-link" href="https://truongduc164.github.io/cyberbird-lingo/">
         🦅 Chuyển sang bản chính <b>CyberBird Lingo PRO</b> (Bay Vượt Cổng)
       </a>
@@ -1686,7 +1687,7 @@
 
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').then((reg) => reg.update().catch(() => {})).catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=4.3.0').then((reg) => reg.update().catch(() => {})).catch(() => {});
       });
     }
 
@@ -3545,7 +3546,7 @@
   <script src="games_v3_top10.js"></script>
   <script src="cyber_streak_engine.js"></script>
   <script src="radical_db_v42.js"></script>
-  <script src="arcade_upgrade_v42.js"></script>
+  <script src="arcade_upgrade_v42.js?v=4.3.0"></script>
   <script>
     refreshHighScoresUI();
     updateLobbyDigest();

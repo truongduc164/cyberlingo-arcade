@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'cyberlingo-arcade-';
-const CACHE_NAME = CACHE_PREFIX + 'v4.2.0-dojo-fortress-league';
+const CACHE_NAME = CACHE_PREFIX + 'v4.3.0-eon-factory-top12';
 const CORE_ASSETS = [
   './',
   './index.html',

@@ -1301,6 +1301,37 @@
           background: linear-gradient(135deg, rgba(88, 28, 135, 0.42), rgba(15, 23, 42, 0.94));
           border-color: rgba(192, 132, 252, 0.55);
         }
+        .game-card.c-eon-factory {
+          grid-column: span 2;
+          background: linear-gradient(135deg, rgba(6, 78, 59, 0.72), rgba(15, 23, 42, 0.96));
+          border: 1.5px solid rgba(52, 211, 153, 0.75);
+          box-shadow: 0 0 22px rgba(16, 185, 129, 0.28);
+        }
+        .v43-eon-top-banner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 9px;
+          padding: 9px 12px;
+          border-radius: 15px;
+          background: linear-gradient(135deg, rgba(5, 150, 105, 0.34), rgba(15, 23, 42, 0.96));
+          border: 1.5px solid #34d399;
+          box-shadow: 0 6px 18px rgba(16, 185, 129, 0.28);
+          text-decoration: none;
+          color: #f8fafc;
+        }
+        .v43-eon-top-cta {
+          flex-shrink: 0;
+          padding: 7px 11px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #10b981, #059669);
+          border: 1px solid #a7f3d0;
+          color: #fff;
+          font-size: 11.5px;
+          font-weight: 900;
+          box-shadow: 0 3px 10px rgba(16, 185, 129, 0.45);
+          white-space: nowrap;
+        }
         #view-dojo {
           width: 100%;
           height: 100%;
@@ -1379,13 +1410,33 @@
       document.head.appendChild(st);
     }
 
-    // 8.1 Update Header Pill & Title to v4.2 TOP 11
+    // 8.1 Update Header Pill & Title to v4.3 TOP 12 (+ Nhà Máy EON G179)
     const pill = document.querySelector('.brand-pill');
-    if (pill) pill.textContent = '🏆 DEAN OPTIMIZE • AAA RETINA + HANZI DOJO v4.2';
+    if (pill) pill.textContent = '🏆 DEAN OPTIMIZE • AAA RETINA + NHÀ MÁY EON v4.3';
     const title = document.querySelector('.lobby-title');
-    if (title) title.textContent = 'TOP 11 GAME KINH ĐIỂN';
+    if (title) title.textContent = 'TOP 12 GAME KINH ĐIỂN';
     const fltAll = document.getElementById('flt-all');
-    if (fltAll) fltAll.textContent = '🏆 Top 11 Đầy Đủ';
+    if (fltAll) fltAll.textContent = '🏆 Top 12 Đầy Đủ';
+
+    // 8.1b Inject Top 1-Tap Quick-Launch Banner for Game Nhà Máy EON (G179) right below .lobby-header
+    const lobbyHeader = document.querySelector('.lobby-header');
+    if (lobbyHeader && !document.getElementById('v43-eon-top-banner')) {
+      const eonBanner = document.createElement('a');
+      eonBanner.id = 'v43-eon-top-banner';
+      eonBanner.className = 'v43-eon-top-banner';
+      eonBanner.href = 'https://truongduc164.github.io/factory-eon/';
+      eonBanner.innerHTML = `
+        <div style="display:flex;align-items:center;gap:9px;min-width:0;">
+          <span style="font-size:26px;line-height:1;">🏭</span>
+          <div style="min-width:0;">
+            <div style="font-size:12.5px;font-weight:900;color:#fde047;line-height:1.2;">GAME NHÀ MÁY EON (G179)</div>
+            <div style="font-size:10.5px;color:#d1fae5;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">RPG 7 Sàn • 17 Khu QA/QC Anh–Trung</div>
+          </div>
+        </div>
+        <span class="v43-eon-top-cta">VÀO XƯỞNG ➜</span>
+      `;
+      lobbyHeader.parentNode.insertBefore(eonBanner, lobbyHeader.nextSibling);
+    }
 
     // Make Streak pill open Sacred Fire modal on tap
     const streakPill = document.querySelector('.streak-pill');
@@ -1404,7 +1455,7 @@
       rankCard.parentNode.insertBefore(hub, rankCard.nextSibling);
     }
 
-    // 8.3 Inject Game #11 Card into .arcade-grid
+    // 8.3 Inject Game #11 (Hanzi Dojo) & Featured Game #12 (Nhà Máy EON G179) into .arcade-grid
     const grid = document.querySelector('.arcade-grid');
     if (grid && !document.getElementById('card-dojo')) {
       const card = document.createElement('div');
@@ -1424,6 +1475,39 @@
         <div class="gc-play-btn" style="background:linear-gradient(135deg,#7e22ce,#2563eb);">▶ VÀO VÕ ĐÀI NGAY</div>
       `;
       grid.insertBefore(card, grid.firstChild);
+    }
+
+    if (grid && !document.getElementById('card-eon-factory')) {
+      const eonCard = document.createElement('div');
+      eonCard.id = 'card-eon-factory';
+      eonCard.className = 'game-card c-eon-factory';
+      eonCard.dataset.genre = 'featured';
+      eonCard.onclick = () => {
+        window.location.href = 'https://truongduc164.github.io/factory-eon/';
+      };
+      eonCard.innerHTML = `
+        <span class="new-ribbon" style="background:linear-gradient(90deg,#059669,#f59e0b);">🔥 GAME MỚI #12 • RPG 17 KHU</span>
+        <div class="gc-top">
+          <span class="gc-icon">🏭</span>
+          <span class="gc-best" style="color:#6ee7b7;border-color:rgba(52,211,153,0.45);">7 Sàn • 17 Khu</span>
+        </div>
+        <div class="gc-title">12. Nhà Máy EON (Factory G179)</div>
+        <div class="gc-skill">👷 Nhập Vai Kỹ Sư QA/QC • Anh – Trung Thực Chiến</div>
+        <div class="gc-desc">Đi tuần 17 khu xưởng mũ bảo hiểm (IQC, Ép Nhựa, Sơn, EPS, Lắp Ráp, Lab Test), giải quyết sự cố & hội thoại song ngữ!</div>
+        <div class="gc-play-btn" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;">▶ VÀO NHÀ MÁY EON NGAY</div>
+      `;
+      grid.insertBefore(eonCard, grid.firstChild);
+    }
+
+    if (typeof window.filterGames === 'function' && !window.filterGames._v43Patched) {
+      const origFilter = window.filterGames;
+      const wrappedFilter = function (genre) {
+        origFilter(genre);
+        const eonCard = document.getElementById('card-eon-factory');
+        if (eonCard) eonCard.classList.remove('hidden');
+      };
+      wrappedFilter._v43Patched = true;
+      window.filterGames = wrappedFilter;
     }
 
     // 8.4 Inject #view-dojo into #game-arena
