@@ -1,924 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="description" content="AI Escape Room - Solve AI-generated puzzles to escape! Infinite rooms, endless fun.">
+<meta name="description" content="Phòng Thoát Hiểm AI - Giải đố tiếng Trung-Anh-Việt để thoát!">
 <meta name="theme-color" content="#0f0a1a">
-<title>🧩 AI Escape Room — Infinite Puzzle Chambers</title>
+<title>🧩 Phòng Thoát Hiểm AI — Giải Đố Vô Hạn</title>
 <link rel="manifest" href="manifest.json">
 <style>
-/* ========= RESET & GLOBALS ========= */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg-deep: #0f0a1a;
-  --bg-card: #1a1230;
-  --bg-input: #241c3d;
-  --accent: #a855f7;
-  --accent-glow: #c084fc;
-  --accent2: #06b6d4;
-  --success: #22c55e;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-  --text: #e2e8f0;
-  --text-dim: #94a3b8;
-  --text-bright: #f8fafc;
-  --gold: #fbbf24;
-  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
-  --radius: 12px;
-  --shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-html, body { 
-  width: 100%; height: 100%; overflow: hidden;
-  font-family: var(--font); background: var(--bg-deep); color: var(--text);
-}
-body { display: flex; flex-direction: column; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0a1a;--card:#1a1230;--input:#241c3d;--accent:#a855f7;--glow:#c084fc;--cyan:#06b6d4;--ok:#22c55e;--err:#ef4444;--warn:#f59e0b;--txt:#e2e8f0;--dim:#94a3b8;--bright:#f8fafc;--gold:#fbbf24;--r:12px}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt)}
+body{display:flex;flex-direction:column}
 
-/* ========= ANIMATED BACKGROUND ========= */
-.bg-particles {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: 
-    radial-gradient(ellipse at 20% 50%, rgba(168,85,247,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(239,68,68,0.04) 0%, transparent 50%);
-}
-.floating-glyph {
-  position: fixed; font-size: 24px; opacity: 0.06; pointer-events: none; z-index: 0;
-  animation: floatGlyph 20s linear infinite;
-}
-@keyframes floatGlyph {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.06; }
-  90% { opacity: 0.06; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-}
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 20% 50%,rgba(168,85,247,.08) 0%,transparent 60%),
+  radial-gradient(ellipse at 80% 20%,rgba(6,182,212,.06) 0%,transparent 50%)}
 
-/* ========= TOP BAR ========= */
-.top-bar {
-  position: relative; z-index: 10;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 16px; background: rgba(15,10,26,0.9);
-  border-bottom: 1px solid rgba(168,85,247,0.2);
-  backdrop-filter: blur(10px);
-}
-.top-bar .logo { font-size: 18px; font-weight: 700; }
-.top-bar .logo span { color: var(--accent); }
-.stats-row { display: flex; gap: 14px; font-size: 13px; }
-.stat-badge {
-  display: flex; align-items: center; gap: 4px;
-  padding: 3px 10px; border-radius: 20px;
-  background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.2);
-}
-.stat-badge .icon { font-size: 14px; }
-.stat-badge .val { font-weight: 600; color: var(--text-bright); }
+/* TOP BAR */
+.top{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:rgba(15,10,26,.92);border-bottom:1px solid rgba(168,85,247,.2);backdrop-filter:blur(10px)}
+.top .logo{font-size:17px;font-weight:700}.top .logo span{color:var(--accent)}
+.stats{display:flex;gap:10px;font-size:12px}
+.sb{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:16px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2)}
+.sb .v{font-weight:700;color:var(--bright)}
 
-/* ========= MAIN CONTAINER ========= */
-.main-container {
-  position: relative; z-index: 5;
-  flex: 1; overflow-y: auto; padding: 16px;
-  display: flex; flex-direction: column; gap: 12px;
-  scroll-behavior: smooth;
-}
-.main-container::-webkit-scrollbar { width: 4px; }
-.main-container::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+/* MAIN */
+.main{position:relative;z-index:5;flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.main::-webkit-scrollbar{width:3px}.main::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
 
-/* ========= SCREENS ========= */
-.screen { display: none; flex-direction: column; gap: 16px; animation: fadeIn 0.4s ease; }
-.screen.active { display: flex; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+/* SCREENS */
+.scr{display:none;flex-direction:column;gap:14px;animation:fi .35s ease}.scr.on{display:flex}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* ========= WELCOME SCREEN ========= */
-.welcome-hero {
-  text-align: center; padding: 30px 10px;
-}
-.welcome-hero .big-icon { font-size: 72px; margin-bottom: 12px; animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-.welcome-hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
-.welcome-hero h1 span { color: var(--accent); }
-.welcome-hero .tagline { color: var(--text-dim); font-size: 14px; margin-bottom: 20px; }
+/* WELCOME */
+.hero{text-align:center;padding:24px 8px}
+.hero .icon{font-size:64px;margin-bottom:10px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.hero h1{font-size:24px;font-weight:800;margin-bottom:4px}.hero h1 span{color:var(--accent)}
+.hero .tag{color:var(--dim);font-size:13px;margin-bottom:16px}
 
-.theme-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  max-width: 400px; margin: 0 auto; width: 100%;
-}
-.theme-card {
-  background: var(--bg-card); border: 2px solid rgba(168,85,247,0.15);
-  border-radius: var(--radius); padding: 16px 12px; text-align: center;
-  cursor: pointer; transition: all 0.2s;
-}
-.theme-card:hover, .theme-card:active {
-  border-color: var(--accent); transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(168,85,247,0.2);
-}
-.theme-card .emoji { font-size: 36px; margin-bottom: 6px; }
-.theme-card .name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
-.theme-card .desc { font-size: 11px; color: var(--text-dim); }
-.theme-card.locked { opacity: 0.5; pointer-events: none; }
-.theme-card.locked::after { content: '🔒'; position: absolute; top: 8px; right: 8px; }
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:400px;margin:0 auto;width:100%}
+.tc{background:var(--card);border:2px solid rgba(168,85,247,.15);border-radius:var(--r);padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.tc:hover,.tc:active{border-color:var(--accent);transform:scale(1.03);box-shadow:0 0 16px rgba(168,85,247,.2)}
+.tc .em{font-size:32px;margin-bottom:4px}.tc .nm{font-weight:700;font-size:13px;margin-bottom:2px}.tc .ds{font-size:11px;color:var(--dim)}
 
-.diff-selector {
-  display: flex; gap: 8px; justify-content: center; margin-top: 10px;
-}
-.diff-btn {
-  padding: 8px 18px; border-radius: 20px; border: 2px solid rgba(168,85,247,0.3);
-  background: transparent; color: var(--text); font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s;
-}
-.diff-btn:hover, .diff-btn.selected {
-  background: var(--accent); border-color: var(--accent); color: #fff;
-}
+.dsel{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.db{padding:7px 16px;border-radius:16px;border:2px solid rgba(168,85,247,.3);background:transparent;color:var(--txt);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.db:hover,.db.sel{background:var(--accent);border-color:var(--accent);color:#fff}
 
-/* ========= ROOM SCREEN ========= */
-.room-header {
-  background: var(--bg-card); border-radius: var(--radius); padding: 14px 16px;
-  border: 1px solid rgba(168,85,247,0.15);
-}
-.room-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.room-title h2 { font-size: 16px; font-weight: 700; }
-.room-progress { display: flex; gap: 6px; }
-.room-progress .step {
-  width: 28px; height: 28px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700;
-  background: var(--bg-input); border: 2px solid rgba(168,85,247,0.2);
-  transition: all 0.3s;
-}
-.room-progress .step.done { background: var(--success); border-color: var(--success); color: #fff; }
-.room-progress .step.current { background: var(--accent); border-color: var(--accent-glow); color: #fff; box-shadow: 0 0 12px rgba(168,85,247,0.4); }
-.room-progress .step.locked { opacity: 0.4; }
+/* ROOM */
+.rh{background:var(--card);border-radius:var(--r);padding:12px 14px;border:1px solid rgba(168,85,247,.15)}
+.rt{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.rt h2{font-size:15px;font-weight:700}
+.rp{display:flex;gap:5px}
+.rp .st{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--input);border:2px solid rgba(168,85,247,.2);transition:all .3s}
+.rp .st.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.rp .st.cur{background:var(--accent);border-color:var(--glow);color:#fff;box-shadow:0 0 10px rgba(168,85,247,.4)}
+.rp .st.lk{opacity:.4}
+.tb{height:4px;border-radius:2px;background:var(--input);overflow:hidden}
+.tb .fl{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--cyan));transition:width 1s linear}
+.tb .fl.dng{background:linear-gradient(90deg,var(--err),var(--warn))}
 
-.timer-bar {
-  height: 4px; border-radius: 2px; background: var(--bg-input); overflow: hidden;
-}
-.timer-bar .fill {
-  height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
-  transition: width 1s linear;
-}
-.timer-bar .fill.danger { background: linear-gradient(90deg, var(--danger), var(--warning)); }
+/* PUZZLE */
+.pc{background:var(--card);border-radius:var(--r);padding:16px 14px;border:1px solid rgba(168,85,247,.15);min-height:120px}
+.pc .pt{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);font-weight:700;margin-bottom:6px}
+.pc .pn{font-size:13px;color:var(--dim);font-style:italic;margin-bottom:8px;line-height:1.5}
+.pc .px{font-size:15px;line-height:1.6;color:var(--bright);white-space:pre-wrap}
+.pc .zh{font-size:28px;font-weight:700;color:var(--cyan);text-align:center;margin:8px 0}
+.pc .py{font-size:14px;color:var(--warn);text-align:center;margin-bottom:4px}
 
-/* ========= PUZZLE CARD ========= */
-.puzzle-card {
-  background: var(--bg-card); border-radius: var(--radius); padding: 20px 16px;
-  border: 1px solid rgba(168,85,247,0.15);
-  min-height: 140px;
-}
-.puzzle-card .puzzle-type { 
-  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
-  color: var(--accent); font-weight: 700; margin-bottom: 8px;
-}
-.puzzle-card .puzzle-text {
-  font-size: 15px; line-height: 1.6; color: var(--text-bright);
-  white-space: pre-wrap;
-}
-.puzzle-card .puzzle-narrative {
-  font-size: 13px; color: var(--text-dim); font-style: italic;
-  margin-bottom: 10px; line-height: 1.5;
-}
+/* CHOICES */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cb{background:var(--input);border:2px solid rgba(168,85,247,.15);border-radius:var(--r);padding:11px;text-align:center;color:var(--txt);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+.cb:hover{border-color:var(--accent);background:rgba(168,85,247,.1)}
+.cb.ok{border-color:var(--ok);background:rgba(34,197,94,.15);color:var(--ok)}
+.cb.no{border-color:var(--err);background:rgba(239,68,68,.15);color:var(--err)}
 
-/* ========= CHOICES / INPUT ========= */
-.choices-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-}
-.choice-btn {
-  background: var(--bg-input); border: 2px solid rgba(168,85,247,0.15);
-  border-radius: var(--radius); padding: 12px; text-align: center;
-  color: var(--text); font-size: 14px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s;
-}
-.choice-btn:hover { border-color: var(--accent); background: rgba(168,85,247,0.1); }
-.choice-btn.correct { border-color: var(--success); background: rgba(34,197,94,0.15); color: var(--success); }
-.choice-btn.wrong { border-color: var(--danger); background: rgba(239,68,68,0.15); color: var(--danger); }
+/* INPUT */
+.tia{display:flex;gap:8px}
+.tia input{flex:1;padding:11px 14px;border-radius:var(--r);background:var(--input);border:2px solid rgba(168,85,247,.2);color:var(--bright);font-size:15px;outline:none;font-family:inherit}
+.tia input:focus{border-color:var(--accent)}
+.tia input::placeholder{color:var(--dim)}
+.sbtn{padding:11px 18px;border-radius:var(--r);background:var(--accent);border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+.sbtn:hover{background:var(--glow)}
 
-.text-input-area {
-  display: flex; gap: 8px;
-}
-.text-input-area input {
-  flex: 1; padding: 12px 16px; border-radius: var(--radius);
-  background: var(--bg-input); border: 2px solid rgba(168,85,247,0.2);
-  color: var(--text-bright); font-size: 15px; outline: none;
-  font-family: var(--font);
-}
-.text-input-area input:focus { border-color: var(--accent); }
-.text-input-area input::placeholder { color: var(--text-dim); }
-.submit-btn {
-  padding: 12px 20px; border-radius: var(--radius);
-  background: var(--accent); border: none; color: #fff;
-  font-size: 15px; font-weight: 700; cursor: pointer;
-  transition: all 0.2s;
-}
-.submit-btn:hover { background: var(--accent-glow); transform: scale(1.03); }
-.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+/* HINT */
+.hr{display:flex;align-items:center;gap:8px}
+.hb{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:16px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--warn);font-size:12px;font-weight:600;cursor:pointer}
+.hb:disabled{opacity:.4;cursor:not-allowed}
+.ht{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:var(--r);padding:10px 12px;font-size:13px;color:var(--warn);line-height:1.5;animation:fi .3s}
 
-/* ========= HINT BUTTON ========= */
-.hint-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-}
-.hint-btn {
-  display: flex; align-items: center; gap: 6px;
-  padding: 8px 16px; border-radius: 20px;
-  background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3);
-  color: var(--warning); font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s;
-}
-.hint-btn:hover { background: rgba(245,158,11,0.2); }
-.hint-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.hint-text {
-  background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
-  border-radius: var(--radius); padding: 10px 14px;
-  font-size: 13px; color: var(--warning); line-height: 1.5;
-  animation: fadeIn 0.3s ease;
-}
+/* FEEDBACK */
+.fb{padding:10px 14px;border-radius:var(--r);text-align:center;font-size:14px;font-weight:600;animation:fi .3s}
+.fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:var(--ok)}
+.fb.no{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:var(--err)}
 
-/* ========= FEEDBACK BANNER ========= */
-.feedback-banner {
-  padding: 12px 16px; border-radius: var(--radius); text-align: center;
-  font-size: 14px; font-weight: 600; animation: fadeIn 0.3s ease;
-}
-.feedback-banner.correct { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: var(--success); }
-.feedback-banner.wrong { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); }
+/* RESULT */
+.rc{background:var(--card);border-radius:16px;padding:24px 18px;border:1px solid rgba(168,85,247,.2);text-align:center}
+.rc .tr{font-size:56px;margin-bottom:8px}.rc h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.rc .sub{color:var(--dim);font-size:13px;margin-bottom:14px}
+.rs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.rsi{background:var(--input);border-radius:var(--r);padding:10px 6px}
+.rsi .l{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}.rsi .vl{font-size:18px;font-weight:800;color:var(--accent);margin-top:2px}
+.stars{font-size:24px;margin:8px 0}
+.abs{display:flex;gap:8px;margin-top:8px}
+.ab{flex:1;padding:12px;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.ab.p{background:var(--accent);color:#fff}.ab.p:hover{background:var(--glow)}
+.ab.s{background:var(--input);color:var(--txt);border:2px solid rgba(168,85,247,.2)}
 
-/* ========= RESULT SCREEN ========= */
-.result-card {
-  background: var(--bg-card); border-radius: 16px; padding: 28px 20px;
-  border: 1px solid rgba(168,85,247,0.2); text-align: center;
-}
-.result-card .big-trophy { font-size: 64px; margin-bottom: 10px; }
-.result-card h2 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
-.result-card .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 16px; }
-.result-stats {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px;
-}
-.result-stat {
-  background: var(--bg-input); border-radius: var(--radius); padding: 12px 8px;
-}
-.result-stat .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-.result-stat .value { font-size: 20px; font-weight: 800; color: var(--accent); margin-top: 2px; }
-.result-stars { font-size: 28px; margin: 10px 0; }
+/* TOAST */
+.toast{position:fixed;top:56px;left:50%;transform:translateX(-50%);padding:8px 18px;border-radius:16px;font-size:12px;font-weight:600;z-index:200;opacity:0;transition:opacity .3s;background:var(--card);border:1px solid rgba(168,85,247,.3);color:var(--bright);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.toast.show{opacity:1}
 
-.action-buttons { display: flex; gap: 8px; margin-top: 10px; }
-.action-btn {
-  flex: 1; padding: 14px; border-radius: var(--radius);
-  font-size: 15px; font-weight: 700; cursor: pointer;
-  border: none; transition: all 0.2s;
-}
-.action-btn.primary { background: var(--accent); color: #fff; }
-.action-btn.primary:hover { background: var(--accent-glow); transform: scale(1.02); }
-.action-btn.secondary { background: var(--bg-input); color: var(--text); border: 2px solid rgba(168,85,247,0.2); }
-.action-btn.secondary:hover { border-color: var(--accent); }
-
-/* ========= LEADERBOARD ========= */
-.leaderboard-card {
-  background: var(--bg-card); border-radius: var(--radius); padding: 16px;
-  border: 1px solid rgba(168,85,247,0.15);
-}
-.leaderboard-card h3 { font-size: 15px; margin-bottom: 10px; }
-.lb-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 8px 10px; border-radius: 8px; margin-bottom: 4px;
-}
-.lb-row.me { background: rgba(168,85,247,0.1); }
-.lb-rank { width: 24px; font-weight: 700; font-size: 14px; text-align: center; }
-.lb-name { flex: 1; font-size: 13px; }
-.lb-score { font-weight: 700; color: var(--gold); font-size: 13px; }
-
-/* ========= LOADING ========= */
-.loading-overlay {
-  position: fixed; inset: 0; z-index: 100;
-  background: rgba(15,10,26,0.95);
-  display: none; align-items: center; justify-content: center;
-  flex-direction: column; gap: 16px;
-}
-.loading-overlay.show { display: flex; }
-.spinner {
-  width: 40px; height: 40px;
-  border: 3px solid rgba(168,85,247,0.2);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { color: var(--text-dim); font-size: 14px; }
-
-/* ========= TOAST ========= */
-.toast {
-  position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
-  padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 600;
-  z-index: 200; opacity: 0; transition: opacity 0.3s;
-  background: var(--bg-card); border: 1px solid rgba(168,85,247,0.3);
-  color: var(--text-bright); box-shadow: var(--shadow);
-}
-.toast.show { opacity: 1; }
-
-/* ========= RESPONSIVE ========= */
-@media (min-width: 640px) {
-  .main-container { max-width: 480px; margin: 0 auto; }
-  .theme-grid { max-width: 440px; }
-}
+@media(min-width:640px){.main{max-width:480px;margin:0 auto}}
 </style>
 </head>
 <body>
+<div class="bg"></div>
 
-<div class="bg-particles"></div>
-
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="logo">🧩 <span>Escape</span>Room</div>
-  <div class="stats-row">
-    <div class="stat-badge"><span class="icon">⭐</span><span class="val" id="stat-score">0</span></div>
-    <div class="stat-badge"><span class="icon">🔥</span><span class="val" id="stat-streak">0</span></div>
-    <div class="stat-badge"><span class="icon">💡</span><span class="val" id="stat-hints">3</span></div>
-    <div class="stat-badge"><span class="icon">⏱️</span><span class="val" id="stat-timer">5:00</span></div>
+<div class="top">
+  <div class="logo">🧩 <span>Thoát</span>Hiểm</div>
+  <div class="stats">
+    <div class="sb">⭐<span class="v" id="s-score">0</span></div>
+    <div class="sb">🔥<span class="v" id="s-streak">0</span></div>
+    <div class="sb">💡<span class="v" id="s-hints">3</span></div>
+    <div class="sb">⏱️<span class="v" id="s-timer">5:00</span></div>
   </div>
 </div>
 
-<!-- MAIN -->
-<div class="main-container" id="main">
-
-  <!-- ===== WELCOME SCREEN ===== -->
-  <div class="screen active" id="screen-welcome">
-    <div class="welcome-hero">
-      <div class="big-icon">🏛️</div>
-      <h1>AI <span>Escape</span> Room</h1>
-      <p class="tagline">Infinite AI-generated puzzles. Can you escape?</p>
+<div class="main" id="main">
+  <!-- WELCOME -->
+  <div class="scr on" id="scr-home">
+    <div class="hero">
+      <div class="icon">🏛️</div>
+      <h1>Phòng <span>Thoát Hiểm</span> AI</h1>
+      <p class="tag">Giải đố Trung-Anh-Việt · Vô hạn phòng · Bạn có thoát được?</p>
     </div>
-
-    <h3 style="text-align:center;font-size:14px;color:var(--text-dim);margin-bottom:4px;">Choose Your Chamber</h3>
-    <div class="theme-grid" id="theme-grid">
-      <div class="theme-card" onclick="selectTheme('cyber')">
-        <div class="emoji">🌃</div>
-        <div class="name">Cyberpunk Lab</div>
-        <div class="desc">Hack terminals, decode signals</div>
-      </div>
-      <div class="theme-card" onclick="selectTheme('ancient')">
-        <div class="emoji">🏯</div>
-        <div class="name">Ancient Temple</div>
-        <div class="desc">Decipher scrolls, solve riddles</div>
-      </div>
-      <div class="theme-card" onclick="selectTheme('space')">
-        <div class="emoji">🚀</div>
-        <div class="name">Space Station</div>
-        <div class="desc">Fix systems, navigate stars</div>
-      </div>
-      <div class="theme-card" onclick="selectTheme('detective')">
-        <div class="emoji">🔍</div>
-        <div class="name">Detective Office</div>
-        <div class="desc">Find clues, crack the case</div>
-      </div>
+    <p style="text-align:center;font-size:13px;color:var(--dim)">🎯 Chọn chủ đề phòng</p>
+    <div class="tgrid" id="tgrid">
+      <div class="tc" onclick="pickTheme('chinese')"><div class="em">🏯</div><div class="nm">Tiếng Trung 中文</div><div class="ds">Dịch, pinyin, chữ Hán</div></div>
+      <div class="tc" onclick="pickTheme('cyber')"><div class="em">🌃</div><div class="nm">Cyberpunk 赛博</div><div class="ds">Giải mã, logic, cipher</div></div>
+      <div class="tc" onclick="pickTheme('space')"><div class="em">🚀</div><div class="nm">Trạm Vũ Trụ 太空</div><div class="ds">Toán, khoa học, mật mã</div></div>
+      <div class="tc" onclick="pickTheme('detective')"><div class="em">🔍</div><div class="nm">Thám Tử 侦探</div><div class="ds">Suy luận, phân tích</div></div>
     </div>
-
-    <h3 style="text-align:center;font-size:14px;color:var(--text-dim);margin-top:10px;">Difficulty</h3>
-    <div class="diff-selector">
-      <button class="diff-btn selected" onclick="selectDiff('easy',this)">🟢 Easy</button>
-      <button class="diff-btn" onclick="selectDiff('medium',this)">🟡 Medium</button>
-      <button class="diff-btn" onclick="selectDiff('hard',this)">🔴 Hard</button>
+    <p style="text-align:center;font-size:13px;color:var(--dim);margin-top:6px">⚙️ Độ khó</p>
+    <div class="dsel">
+      <button class="db sel" onclick="pickDiff('easy',this)">🟢 Dễ</button>
+      <button class="db" onclick="pickDiff('medium',this)">🟡 Vừa</button>
+      <button class="db" onclick="pickDiff('hard',this)">🔴 Khó</button>
     </div>
   </div>
 
-  <!-- ===== ROOM / PUZZLE SCREEN ===== -->
-  <div class="screen" id="screen-room">
-    <div class="room-header">
-      <div class="room-title">
-        <h2 id="room-theme-title">🌃 Cyberpunk Lab</h2>
-        <div class="room-progress" id="room-progress"></div>
-      </div>
-      <div class="timer-bar"><div class="fill" id="timer-fill" style="width:100%"></div></div>
+  <!-- ROOM -->
+  <div class="scr" id="scr-room">
+    <div class="rh">
+      <div class="rt"><h2 id="r-title">🏯 Tiếng Trung</h2><div class="rp" id="r-prog"></div></div>
+      <div class="tb"><div class="fl" id="t-fill" style="width:100%"></div></div>
     </div>
-
-    <div class="puzzle-card" id="puzzle-card">
-      <div class="puzzle-narrative" id="puzzle-narrative"></div>
-      <div class="puzzle-type" id="puzzle-type">RIDDLE</div>
-      <div class="puzzle-text" id="puzzle-text"></div>
+    <div class="pc" id="p-card">
+      <div class="pn" id="p-narr"></div>
+      <div class="pt" id="p-type">CÂU 1 — DỊCH</div>
+      <div class="zh" id="p-zh" style="display:none"></div>
+      <div class="py" id="p-py" style="display:none"></div>
+      <div class="px" id="p-text"></div>
     </div>
-
-    <!-- Choices (for MCQ puzzles) -->
-    <div class="choices-grid" id="choices-grid" style="display:none;"></div>
-
-    <!-- Text Input (for open puzzles) -->
-    <div class="text-input-area" id="text-input-area" style="display:none;">
-      <input type="text" id="answer-input" placeholder="Type your answer..." autocomplete="off">
-      <button class="submit-btn" id="submit-btn" onclick="submitAnswer()">→</button>
+    <div class="cg" id="c-grid" style="display:none"></div>
+    <div class="tia" id="t-input" style="display:none">
+      <input type="text" id="a-input" placeholder="Nhập đáp án..." autocomplete="off">
+      <button class="sbtn" onclick="submit()">→</button>
     </div>
-
-    <!-- Hint -->
-    <div class="hint-row">
-      <button class="hint-btn" id="hint-btn" onclick="useHint()">
-        💡 Hint (<span id="hints-left">3</span>)
-      </button>
+    <div class="hr">
+      <button class="hb" id="h-btn" onclick="useHint()">💡 Gợi ý (<span id="h-left">3</span>)</button>
     </div>
-    <div class="hint-text" id="hint-text" style="display:none;"></div>
-
-    <!-- Feedback -->
-    <div id="feedback-area"></div>
+    <div class="ht" id="h-text" style="display:none"></div>
+    <div id="fb-area"></div>
   </div>
 
-  <!-- ===== RESULT SCREEN ===== -->
-  <div class="screen" id="screen-result">
-    <div class="result-card">
-      <div class="big-trophy" id="result-trophy">🏆</div>
-      <h2 id="result-title">Room Escaped!</h2>
-      <p class="subtitle" id="result-subtitle">You cracked all 5 puzzles</p>
-      <div class="result-stars" id="result-stars">⭐⭐⭐</div>
-      <div class="result-stats">
-        <div class="result-stat">
-          <div class="label">Score</div>
-          <div class="value" id="result-score">2450</div>
-        </div>
-        <div class="result-stat">
-          <div class="label">Time</div>
-          <div class="value" id="result-time">3:42</div>
-        </div>
-        <div class="result-stat">
-          <div class="label">Hints</div>
-          <div class="value" id="result-hints">1</div>
-        </div>
+  <!-- RESULT -->
+  <div class="scr" id="scr-result">
+    <div class="rc">
+      <div class="tr" id="res-trophy">🏆</div>
+      <h2 id="res-title">Thoát Hiểm Thành Công!</h2>
+      <p class="sub" id="res-sub">Giải được 5/5 câu đố</p>
+      <div class="stars" id="res-stars">⭐⭐⭐</div>
+      <div class="rs">
+        <div class="rsi"><div class="l">Điểm</div><div class="vl" id="res-score">0</div></div>
+        <div class="rsi"><div class="l">Thời gian</div><div class="vl" id="res-time">3:42</div></div>
+        <div class="rsi"><div class="l">Gợi ý</div><div class="vl" id="res-hints">1</div></div>
       </div>
-      <div class="action-buttons">
-        <button class="action-btn secondary" onclick="goHome()">🏠 Home</button>
-        <button class="action-btn primary" onclick="playAgain()">🔄 Next Room</button>
+      <div class="abs">
+        <button class="ab s" onclick="goHome()">🏠 Về</button>
+        <button class="ab p" onclick="playAgain()">🔄 Phòng tiếp</button>
       </div>
-    </div>
-
-    <div class="leaderboard-card">
-      <h3>🏅 Your Best Scores</h3>
-      <div id="leaderboard-list"></div>
     </div>
   </div>
-
 </div>
 
-<!-- Loading Overlay -->
-<div class="loading-overlay" id="loading">
-  <div class="spinner"></div>
-  <div class="loading-text" id="loading-text">Generating puzzles...</div>
-</div>
-
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ================================================================
-// AI ESCAPE ROOM — Game Engine
-// ================================================================
+// ========== AI ESCAPE ROOM v2.0 — Vietnamese + Chinese ==========
+const S={theme:'chinese',diff:'easy',puzzles:[],cur:0,score:0,streak:0,hTotal:3,hUsed:0,tTotal:300,tLeft:300,tInt:null,t0:0};
 
-// -------- STATE --------
-const STATE = {
-  theme: 'cyber',
-  difficulty: 'easy',
-  puzzles: [],
-  currentPuzzle: 0,
-  score: 0,
-  streak: 0,
-  hintsTotal: 3,
-  hintsUsed: 0,
-  timerTotal: 300, // 5 min
-  timerLeft: 300,
-  timerInterval: null,
-  startTime: 0,
-  totalRoomsCleared: 0,
-  bestScores: JSON.parse(localStorage.getItem('er_bestScores') || '[]'),
+const THEMES={
+  chinese:{emoji:'🏯',name:'Tiếng Trung 中文',color:'#f59e0b',
+    narr:'Bạn bị nhốt trong một ngôi đền cổ đại Trung Hoa. Trên tường khắc đầy chữ Hán bí ẩn. Giải mã từng câu đố tiếng Trung để mở các cánh cửa đá và thoát ra ngoài!'},
+  cyber:{emoji:'🌃',name:'Cyberpunk 赛博',color:'#a855f7',
+    narr:'Bạn tỉnh dậy trong phòng thí nghiệm ngầm đầy ánh neon. Hệ thống AI bảo mật đã khóa mọi lối thoát. Giải các câu đố logic để vượt qua từng lớp tường lửa!'},
+  space:{emoji:'🚀',name:'Trạm Vũ Trụ 太空',color:'#06b6d4',
+    narr:'Cảnh báo! Trạm vũ trụ bị thiên thạch va trúng. Hệ thống hỗ trợ sự sống đang hỏng. Giải câu đố khoa học để sửa chữa con tàu trước khi hết oxy!'},
+  detective:{emoji:'🔍',name:'Thám Tử 侦探',color:'#22c55e',
+    narr:'Một lá thư bí ẩn xuất hiện trên bàn làm việc lúc nửa đêm. Ai đó đã khóa bạn trong chính văn phòng mình. Dùng kỹ năng thám tử để tìm manh mối thoát ra!'},
 };
 
-// -------- THEME CONFIG --------
-const THEMES = {
-  cyber: { 
-    emoji: '🌃', name: 'Cyberpunk Lab', color: '#a855f7',
-    narrative: 'You wake up in a neon-lit underground lab. Flickering screens surround you. The AI security system has locked all exits. Solve the terminal puzzles to override the locks and escape before the system purges all data — including you.',
-  },
-  ancient: { 
-    emoji: '🏯', name: 'Ancient Temple', color: '#f59e0b',
-    narrative: 'Deep within an ancient temple, stone doors sealed for centuries block your path. The walls are covered in mysterious glyphs and riddles left by a forgotten civilization. Decode their wisdom to unlock each chamber and find the exit.',
-  },
-  space: { 
-    emoji: '🚀', name: 'Space Station', color: '#06b6d4',
-    narrative: 'Alarms blare aboard the Orbital Station Helios. A meteor strike has damaged critical systems. You must solve engineering puzzles and recalibrate the navigation computer before life support fails. Time is running out.',
-  },
-  detective: { 
-    emoji: '🔍', name: 'Detective Office', color: '#22c55e',
-    narrative: 'A mysterious letter has been left on your desk at midnight. Someone has locked you inside your own office with a series of clever traps. Use your detective skills to find clues hidden in plain sight and unlock the door.',
-  },
-};
+const DIFF={easy:{n:5,t:360,h:3,m:1},medium:{n:6,t:300,h:2,m:1.5},hard:{n:7,t:240,h:1,m:2}};
 
-const DIFF_CONFIG = {
-  easy: { puzzleCount: 5, timeLimit: 360, hintCount: 3, scoreMultiplier: 1 },
-  medium: { puzzleCount: 6, timeLimit: 300, hintCount: 2, scoreMultiplier: 1.5 },
-  hard: { puzzleCount: 7, timeLimit: 240, hintCount: 1, scoreMultiplier: 2 },
-};
-
-// -------- PUZZLE GENERATOR (Offline/Fallback) --------
-// Pre-built puzzle banks per theme — used when no AI API is available
-const PUZZLE_BANK = {
-  cyber: [
-    { type: 'DECODE', narrative: 'A terminal displays an encrypted message:', text: 'Decode: 01001000 01000101 01001100 01010000', answer: 'HELP', hint: 'Convert binary to ASCII characters', choices: ['HELP', 'HACK', 'EXIT', 'OPEN'] },
-    { type: 'LOGIC', narrative: 'The firewall shows a pattern lock:', text: 'Complete the sequence: 2, 6, 18, 54, ?', answer: '162', hint: 'Each number is multiplied by 3', choices: ['108', '162', '148', '216'] },
-    { type: 'RIDDLE', narrative: 'The AI security system asks:', text: 'I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?', answer: 'MAP', hint: 'Think about representations of the world', choices: ['MAP', 'GLOBE', 'DREAM', 'PAINTING'] },
-    { type: 'CIPHER', narrative: 'An encoded file flashes on screen:', text: 'Caesar cipher (shift 3): HVFDSH', answer: 'ESCAPE', hint: 'Shift each letter back by 3 positions in the alphabet', choices: ['ESCAPE', 'DECODE', 'CIPHER', 'ENIGMA'] },
-    { type: 'MATH', narrative: 'The power grid requires a code:', text: 'If 🔴=3, 🔵=7, 🟢=5, what is 🔴×🔵-🟢?', answer: '16', hint: '3 × 7 = 21, then 21 - 5 = ?', choices: ['16', '15', '21', '18'] },
-    { type: 'LOGIC', narrative: 'Access control terminal:', text: 'You have 3 switches and 3 light bulbs in separate rooms. You can only enter the bulb room once. How do you figure out which switch controls which bulb?', answer: 'HEAT', hint: 'Turn one on for a while, turn it off, turn another on, then check — one is on, one is warm, one is cold', choices: ['HEAT', 'SOUND', 'COLOR', 'TIMER'] },
-    { type: 'PATTERN', narrative: 'The neural network shows:', text: 'What comes next? ◆◇◇ ◆◆◇ ◆◆◆ ?', answer: '◇◇◇', hint: 'The pattern fills then resets', choices: ['◇◇◇', '◆◇◆', '◇◆◇', '◆◆◆'] },
-    { type: 'DECODE', narrative: 'A corrupted file reads:', text: 'Reverse: MOOR EPACSE', answer: 'ESCAPE ROOM', hint: 'Read it backwards', choices: ['ESCAPE ROOM', 'ROOM ESCAPE', 'SPACE ROOM', 'DOOM SPACE'] },
+// ========== PUZZLE BANKS ==========
+const BANK={
+  chinese:[
+    {type:'DỊCH 翻译',narr:'Dịch từ tiếng Trung sang tiếng Việt:',zh:'你好',py:'nǐ hǎo',text:'Từ này nghĩa là gì?',answer:'Xin chào',hint:'Lời chào cơ bản nhất trong tiếng Trung',choices:['Xin chào','Tạm biệt','Cảm ơn','Xin lỗi']},
+    {type:'DỊCH 翻译',narr:'Dịch từ tiếng Trung sang tiếng Việt:',zh:'谢谢',py:'xiè xie',text:'Từ này nghĩa là gì?',answer:'Cảm ơn',hint:'Dùng khi ai đó giúp bạn',choices:['Cảm ơn','Xin chào','Tạm biệt','Không có gì']},
+    {type:'DỊCH 翻译',narr:'Dịch câu tiếng Trung:',zh:'我爱你',py:'wǒ ài nǐ',text:'Câu này có nghĩa gì?',answer:'Tôi yêu bạn',hint:'3 chữ: Tôi + yêu + bạn',choices:['Tôi yêu bạn','Tôi ghét bạn','Tôi nhớ bạn','Tôi hiểu bạn']},
+    {type:'PINYIN 拼音',narr:'Chọn pinyin đúng cho chữ Hán:',zh:'学',py:'?',text:'Chữ 学 (học) đọc là gì?',answer:'xué',hint:'Âm bắt đầu bằng "x", thanh 2 (dấu sắc)',choices:['xué','xuè','shué','xǐ']},
+    {type:'PINYIN 拼音',narr:'Chọn pinyin đúng:',zh:'吃',py:'?',text:'Chữ 吃 (ăn) đọc là gì?',answer:'chī',hint:'Âm bắt đầu bằng "ch", thanh 1 (không dấu)',choices:['chī','chì','qī','cī']},
+    {type:'BỘ THỦ 部首',narr:'Phân tích bộ thủ chữ Hán:',zh:'好',py:'hǎo',text:'Chữ 好 (tốt/hay) gồm 2 bộ phận nào?',answer:'女 + 子',hint:'Phụ nữ (女) + con trai (子) = tốt đẹp',choices:['女 + 子','大 + 小','日 + 月','人 + 口']},
+    {type:'BỘ THỦ 部首',narr:'Phân tích cấu tạo chữ Hán:',zh:'明',py:'míng',text:'Chữ 明 (sáng) được ghép từ?',answer:'日 + 月',hint:'Mặt trời (日) + Mặt trăng (月) = sáng',choices:['日 + 月','火 + 光','大 + 明','目 + 月']},
+    {type:'ĐẾM SỐ 数字',narr:'Đếm số tiếng Trung:',zh:'九十九',py:'jiǔ shí jiǔ',text:'九十九 bằng bao nhiêu?',answer:'99',hint:'九=9, 十=10 → 9×10+9',choices:['99','89','91','109']},
+    {type:'ĐẾM SỐ 数字',narr:'Đếm số tiếng Trung:',zh:'二百五十',py:'èr bǎi wǔ shí',text:'二百五十 bằng bao nhiêu?',answer:'250',hint:'二=2, 百=100, 五=5, 十=10 → 2×100+5×10',choices:['250','205','520','25']},
+    {type:'GHÉP CÂU 造句',narr:'Sắp xếp thành câu đúng:',text:'Sắp xếp: 很 / 今天 / 冷 / 天气',answer:'今天天气很冷',hint:'Hôm nay (今天) + thời tiết (天气) + rất (很) + lạnh (冷)',choices:['今天天气很冷','很冷今天天气','天气今天很冷','冷很天气今天']},
+    {type:'DỊCH 翻译',narr:'Dịch sang tiếng Việt:',zh:'大学',py:'dà xué',text:'大学 nghĩa là gì?',answer:'Đại học',hint:'大 = lớn/đại, 学 = học',choices:['Đại học','Trung học','Tiểu học','Học viện']},
+    {type:'THÀNH NGỮ 成语',narr:'Giải nghĩa thành ngữ Trung Quốc:',zh:'一石二鸟',py:'yī shí èr niǎo',text:'一石二鸟 nghĩa là gì?',answer:'Một mũi tên trúng hai đích',hint:'一=1, 石=đá, 二=2, 鸟=chim → ném 1 viên đá trúng 2 con chim',choices:['Một mũi tên trúng hai đích','Có chí thì nên','Nước chảy đá mòn','Ăn quả nhớ kẻ trồng cây']},
   ],
-  ancient: [
-    { type: 'RIDDLE', narrative: 'Ancient scroll reads:', text: 'The more you take, the more you leave behind. What am I?', answer: 'FOOTSTEPS', hint: 'Think about walking', choices: ['FOOTSTEPS', 'MEMORIES', 'BREATHS', 'SHADOWS'] },
-    { type: 'MATH', narrative: 'Stone tablets show:', text: 'A pharaoh has 100 gold coins. He gives ½ to the temple, ¼ of the rest to the priest. How many coins does the priest get?', answer: '12', hint: 'Half of 100 = 50 remain, then ¼ of 50', choices: ['12', '25', '13', '50'] },
-    { type: 'CIPHER', narrative: 'Wall hieroglyphics:', text: 'Each symbol = a number: ☀=1, 🌙=2, ⭐=3. Solve: ⭐☀🌙 + 🌙⭐☀ = ?', answer: '543', hint: '312 + 231 = ?', choices: ['543', '432', '555', '612'] },
-    { type: 'LOGIC', narrative: 'The guardian sphinx asks:', text: 'I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?', answer: 'ECHO', hint: 'Sound that bounces back', choices: ['ECHO', 'GHOST', 'WIND', 'SPIRIT'] },
-    { type: 'PATTERN', narrative: 'Stone floor tiles:', text: 'Step on the safe tiles: 1, 1, 2, 3, 5, 8, ?', answer: '13', hint: 'Each number is the sum of the two before it (Fibonacci)', choices: ['13', '11', '10', '15'] },
-    { type: 'RIDDLE', narrative: 'The oracle speaks:', text: 'What has a head and a tail but no body?', answer: 'COIN', hint: 'You might flip me for a decision', choices: ['COIN', 'SNAKE', 'ARROW', 'COMET'] },
-    { type: 'DECODE', narrative: 'Carved into the altar:', text: 'Rearrange: LOEDK NOGE = _ _', answer: 'GOLDEN KEY', hint: 'Two words: something shiny + something that opens locks', choices: ['GOLDEN KEY', 'LOCKED GEN', 'DONKEY LEG', 'LEGEND OK'] },
+  cyber:[
+    {type:'GIẢI MÃ',narr:'Terminal hiện tin nhắn mã hóa:',text:'Giải mã nhị phân: 01001000 01000101 01001100 01010000',answer:'HELP',hint:'Chuyển nhị phân → ASCII: H=72, E=69, L=76, P=80',choices:['HELP','HACK','EXIT','OPEN']},
+    {type:'LOGIC',narr:'Tường lửa hiện khóa pattern:',text:'Tìm số tiếp theo: 2, 6, 18, 54, ?',answer:'162',hint:'Mỗi số nhân 3',choices:['108','162','148','216']},
+    {type:'CÂU ĐỐ',narr:'Hệ thống AI hỏi:',text:'Tôi có thành phố nhưng không có nhà. Có núi nhưng không cây. Có nước nhưng không cá. Tôi là gì?',answer:'Bản đồ',hint:'Hình ảnh thu nhỏ của thế giới',choices:['Bản đồ','Quả địa cầu','Giấc mơ','Bức tranh']},
+    {type:'CIPHER',narr:'File mã hóa trên màn hình:',text:'Caesar cipher (dịch 3): HVFDSH → ?',answer:'ESCAPE',hint:'Dịch mỗi chữ lùi 3 vị trí: H→E, V→S, F→C...',choices:['ESCAPE','DECODE','CIPHER','ENIGMA']},
+    {type:'TOÁN',narr:'Bảng điều khiển năng lượng:',text:'Nếu 🔴=3, 🔵=7, 🟢=5 thì 🔴×🔵−🟢 = ?',answer:'16',hint:'3 × 7 = 21, rồi 21 − 5 = ?',choices:['16','15','21','18']},
+    {type:'PATTERN',narr:'Mạng nơ-ron hiển thị:',text:'Tiếp theo là gì? ◆◇◇ ◆◆◇ ◆◆◆ ?',answer:'◇◇◇',hint:'Pattern lấp đầy rồi reset về rỗng',choices:['◇◇◇','◆◇◆','◇◆◇','◆◆◆']},
+    {type:'ĐẢO NGƯỢC',narr:'File bị hỏng:',text:'Đọc ngược: MOOR EPACSE',answer:'ESCAPE ROOM',hint:'Đọc từ phải sang trái',choices:['ESCAPE ROOM','ROOM ESCAPE','SPACE ROOM','DOOM SPACE']},
+    {type:'TOÁN',narr:'Mật khẩu hệ thống:',text:'2⁴ + 3² − 1 = ?',answer:'24',hint:'2⁴=16, 3²=9, 16+9−1=?',choices:['24','25','22','26']},
   ],
-  space: [
-    { type: 'MATH', narrative: 'Navigation computer:', text: 'Speed = 30,000 km/h. Distance = 120,000 km. How many hours to arrival?', answer: '4', hint: 'Time = Distance ÷ Speed', choices: ['4', '3', '5', '6'] },
-    { type: 'LOGIC', narrative: 'Life support diagnostic:', text: 'Tank A fills in 6 hours, Tank B fills in 3 hours. How long to fill together?', answer: '2', hint: 'Add the rates: 1/6 + 1/3 = 1/2, so 2 hours', choices: ['2', '3', '4', '1.5'] },
-    { type: 'PATTERN', narrative: 'Star map sequence:', text: 'Mercury, Venus, Earth, Mars, ?', answer: 'JUPITER', hint: 'The 5th planet from the Sun', choices: ['JUPITER', 'SATURN', 'NEPTUNE', 'URANUS'] },
-    { type: 'CIPHER', narrative: 'Encrypted distress signal:', text: 'NATO alphabet: Sierra Oscar Sierra → ?', answer: 'SOS', hint: 'Each word represents a letter', choices: ['SOS', 'SAS', 'SOL', 'SOP'] },
-    { type: 'RIDDLE', narrative: 'The AI asks a security question:', text: 'I am not alive, but I grow; I do not have lungs, but I need air; I do not have a mouth, but water kills me. What am I?', answer: 'FIRE', hint: 'Something hot and dangerous', choices: ['FIRE', 'RUST', 'MOLD', 'CRYSTAL'] },
-    { type: 'MATH', narrative: 'Reactor calibration:', text: 'If the reactor temp doubles every hour starting at 100°C, what is it after 3 hours?', answer: '800', hint: '100 → 200 → 400 → ?', choices: ['800', '600', '900', '1000'] },
-    { type: 'DECODE', narrative: 'Morse code received:', text: '... --- ... = ?', answer: 'SOS', hint: '3 dots = S, 3 dashes = O', choices: ['SOS', 'SAS', 'OSO', 'SOL'] },
+  space:[
+    {type:'TOÁN',narr:'Máy tính điều hướng:',text:'Tốc độ 30.000 km/h. Khoảng cách 120.000 km. Bao lâu tới nơi?',answer:'4 giờ',hint:'Thời gian = Khoảng cách ÷ Tốc độ',choices:['4 giờ','3 giờ','5 giờ','6 giờ']},
+    {type:'LOGIC',narr:'Chẩn đoán hỗ trợ sống:',text:'Bể A đầy trong 6 giờ, Bể B đầy trong 3 giờ. Cả hai cùng bơm thì bao lâu đầy?',answer:'2 giờ',hint:'1/6 + 1/3 = 1/2 → 2 giờ',choices:['2 giờ','3 giờ','4 giờ','1.5 giờ']},
+    {type:'KIẾN THỨC',narr:'Bản đồ sao:',text:'Sao Thủy, Sao Kim, Trái Đất, Sao Hỏa, ?',answer:'Sao Mộc',hint:'Hành tinh thứ 5 tính từ Mặt Trời',choices:['Sao Mộc','Sao Thổ','Sao Hải Vương','Sao Thiên Vương']},
+    {type:'CÂU ĐỐ',narr:'AI hỏi câu bảo mật:',text:'Tôi không sống nhưng phát triển. Không có phổi nhưng cần không khí. Nước giết tôi. Tôi là gì?',answer:'Lửa',hint:'Nóng và nguy hiểm',choices:['Lửa','Rỉ sét','Nấm mốc','Pha lê']},
+    {type:'TOÁN',narr:'Hiệu chỉnh lò phản ứng:',text:'Nhiệt lò tăng gấp đôi mỗi giờ, bắt đầu 100°C. Sau 3 giờ là bao nhiêu?',answer:'800°C',hint:'100→200→400→?',choices:['800°C','600°C','900°C','1000°C']},
+    {type:'MÃ MORSE',narr:'Tín hiệu cầu cứu:',text:'... --- ... = ?',answer:'SOS',hint:'3 chấm=S, 3 gạch=O, 3 chấm=S',choices:['SOS','SAS','OSO','SOL']},
+    {type:'TIẾNG TRUNG',narr:'Bảng điều khiển tiếng Trung:',zh:'太空站',py:'tài kōng zhàn',text:'太空站 nghĩa là gì?',answer:'Trạm vũ trụ',hint:'太空=vũ trụ, 站=trạm',choices:['Trạm vũ trụ','Phi thuyền','Tên lửa','Vệ tinh']},
   ],
-  detective: [
-    { type: 'LOGIC', narrative: 'Crime scene note:', text: 'The suspect says: "I was sleeping at midnight." The neighbor says: "I saw his lights on at midnight." Who is lying?', answer: 'SUSPECT', hint: 'If sleeping, why are lights on?', choices: ['SUSPECT', 'NEIGHBOR', 'BOTH', 'NEITHER'] },
-    { type: 'CIPHER', narrative: 'A coded letter found:', text: 'A=1, B=2, C=3... Decode: 3-12-21-5', answer: 'CLUE', hint: 'Convert each number to a letter of the alphabet', choices: ['CLUE', 'BLUE', 'GLUE', 'CURE'] },
-    { type: 'RIDDLE', narrative: 'Written on the mirror:', text: 'A man is found dead with 53 bicycles around him. How did he die?', answer: 'CHEATING', hint: 'Bicycles is a slang term used in card games (a brand of playing cards)', choices: ['CHEATING', 'ACCIDENT', 'EXERCISE', 'RACING'] },
-    { type: 'MATH', narrative: 'Safe combination:', text: 'The combination is: the square root of 144, followed by the cube of 3, followed by 7²-40', answer: '12-27-9', hint: '√144=12, 3³=27, 49-40=9', choices: ['12-27-9', '12-9-27', '14-27-9', '12-27-7'] },
-    { type: 'PATTERN', narrative: 'Photos on the wall:', text: 'Suspect ages: 25, 30, 35, 40. Suspect heights: 170, 175, 180, ?', answer: '185', hint: 'The pattern increases by 5', choices: ['185', '190', '180', '175'] },
-    { type: 'LOGIC', narrative: 'Three witnesses give statements:', text: 'Alice: "Bob did it." Bob: "Carol did it." Carol: "Bob is lying." If exactly ONE is telling the truth, who did it?', answer: 'BOB', hint: 'If Carol is telling truth, Bob lies, but then Alice must also lie...', choices: ['BOB', 'ALICE', 'CAROL', 'UNKNOWN'] },
-    { type: 'DECODE', narrative: 'Hidden under the desk:', text: 'Mirror text: ƎƧAC ƎHT ႶƎႶO', answer: 'OPEN THE CASE', hint: 'Read it as if reflected in a mirror', choices: ['OPEN THE CASE', 'CLOSE THE CASE', 'OPEN THE DOOR', 'FIND THE CASE'] },
+  detective:[
+    {type:'SUY LUẬN',narr:'Ghi chú hiện trường:',text:'Nghi phạm nói: "Tôi đang ngủ lúc nửa đêm." Hàng xóm nói: "Tôi thấy đèn nhà anh ta sáng lúc nửa đêm." Ai nói dối?',answer:'Nghi phạm',hint:'Nếu đang ngủ, sao đèn lại sáng?',choices:['Nghi phạm','Hàng xóm','Cả hai','Không ai']},
+    {type:'CIPHER',narr:'Thư mật được tìm thấy:',text:'A=1, B=2, C=3... Giải mã: 3-12-21-5',answer:'CLUE',hint:'Chuyển số→chữ cái: 3=C, 12=L, 21=U, 5=E',choices:['CLUE','BLUE','GLUE','CURE']},
+    {type:'TOÁN',narr:'Mã két sắt:',text:'√144 rồi 3³ rồi 7²−40. Mã là?',answer:'12-27-9',hint:'√144=12, 3³=27, 49−40=9',choices:['12-27-9','12-9-27','14-27-9','12-27-7']},
+    {type:'LOGIC',narr:'3 nhân chứng khai:',text:'An: "Bình làm." Bình: "Cúc làm." Cúc: "Bình nói dối." Nếu đúng 1 người nói thật, ai là thủ phạm?',answer:'Bình',hint:'Nếu Cúc nói thật → Bình dối → An cũng phải dối...',choices:['Bình','An','Cúc','Không rõ']},
+    {type:'PATTERN',narr:'Ảnh trên tường:',text:'Tuổi: 25, 30, 35, 40. Cao: 170, 175, 180, ?',answer:'185',hint:'Mỗi lần tăng 5',choices:['185','190','180','175']},
+    {type:'TIẾNG TRUNG',narr:'Ghi chú bằng tiếng Trung:',zh:'警察',py:'jǐng chá',text:'警察 nghĩa là gì?',answer:'Cảnh sát',hint:'Người thi hành pháp luật',choices:['Cảnh sát','Thám tử','Luật sư','Thẩm phán']},
+    {type:'CÂU ĐỐ',narr:'Viết trên gương:',text:'Có đầu có đuôi nhưng không có thân. Là gì?',answer:'Đồng xu',hint:'Bạn hay tung nó lên để quyết định',choices:['Đồng xu','Con rắn','Mũi tên','Sao chổi']},
   ],
 };
 
-// -------- FLOATING GLYPHS --------
-function spawnGlyphs() {
-  const glyphs = ['🧩','🔐','🗝️','💎','⚡','🔮','🎯','✨','🌀','🧬'];
-  for (let i = 0; i < 8; i++) {
-    const el = document.createElement('div');
-    el.className = 'floating-glyph';
-    el.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
-    el.style.left = (Math.random() * 90 + 5) + '%';
-    el.style.animationDelay = (Math.random() * 20) + 's';
-    el.style.animationDuration = (15 + Math.random() * 10) + 's';
-    document.body.appendChild(el);
-  }
-}
-spawnGlyphs();
+// ========== ENGINE ==========
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');document.getElementById('main').scrollTop=0}
+function goHome(){stopT();show('scr-home')}
 
-// -------- NAVIGATION --------
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('main').scrollTop = 0;
-}
-
-function goHome() { 
-  stopTimer();
-  showScreen('screen-welcome'); 
-}
-
-// -------- THEME & DIFFICULTY --------
-function selectTheme(theme) {
-  STATE.theme = theme;
-  document.querySelectorAll('.theme-card').forEach(c => c.style.borderColor = '');
-  event.currentTarget.style.borderColor = THEMES[theme].color;
+function pickTheme(t){
+  S.theme=t;
+  document.querySelectorAll('.tc').forEach(c=>c.style.borderColor='');
+  event.currentTarget.style.borderColor=THEMES[t].color;
   startRoom();
 }
+function pickDiff(d,btn){S.diff=d;document.querySelectorAll('.db').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel')}
 
-function selectDiff(diff, btn) {
-  STATE.difficulty = diff;
-  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
+function startRoom(){
+  const th=THEMES[S.theme],df=DIFF[S.diff];
+  S.score=0;S.cur=0;S.hUsed=0;S.hTotal=df.h;S.tTotal=df.t;S.tLeft=df.t;S.streak=0;S.t0=Date.now();
+  const bank=[...BANK[S.theme]];shuffle(bank);S.puzzles=bank.slice(0,df.n);
+  document.getElementById('r-title').textContent=th.emoji+' '+th.name;
+  document.getElementById('s-hints').textContent=S.hTotal;
+  updScore();buildDots();show('scr-room');showPuz(0);startT();
 }
+function playAgain(){startRoom()}
 
-// -------- START ROOM --------
-function startRoom() {
-  const theme = THEMES[STATE.theme];
-  const diff = DIFF_CONFIG[STATE.difficulty];
-
-  // Reset state
-  STATE.score = 0;
-  STATE.currentPuzzle = 0;
-  STATE.hintsUsed = 0;
-  STATE.hintsTotal = diff.hintCount;
-  STATE.timerTotal = diff.timeLimit;
-  STATE.timerLeft = diff.timeLimit;
-  STATE.startTime = Date.now();
-
-  // Pick random puzzles from bank
-  const bank = [...PUZZLE_BANK[STATE.theme]];
-  shuffleArray(bank);
-  STATE.puzzles = bank.slice(0, diff.puzzleCount);
-
-  // Update UI
-  document.getElementById('room-theme-title').textContent = `${theme.emoji} ${theme.name}`;
-  document.getElementById('stat-hints').textContent = STATE.hintsTotal;
-  updateScoreUI();
-  buildProgressDots();
-  showScreen('screen-room');
-  showPuzzle(0);
-  startTimer();
-}
-
-function playAgain() {
-  startRoom();
-}
-
-// -------- PUZZLE DISPLAY --------
-function showPuzzle(index) {
-  const puzzle = STATE.puzzles[index];
-  if (!puzzle) return showResult();
-
-  STATE.currentPuzzle = index;
-  updateProgressDots();
-
-  // Clear previous
-  document.getElementById('feedback-area').innerHTML = '';
-  document.getElementById('hint-text').style.display = 'none';
-  document.getElementById('hints-left').textContent = STATE.hintsTotal - STATE.hintsUsed;
-
-  // Set narrative & puzzle
-  document.getElementById('puzzle-narrative').textContent = puzzle.narrative;
-  document.getElementById('puzzle-type').textContent = `PUZZLE ${index+1} — ${puzzle.type}`;
-  document.getElementById('puzzle-text').textContent = puzzle.text;
-
-  // Show choices (MCQ mode)
-  if (puzzle.choices && puzzle.choices.length > 0) {
-    const grid = document.getElementById('choices-grid');
-    grid.innerHTML = '';
-    grid.style.display = 'grid';
-    document.getElementById('text-input-area').style.display = 'none';
-
-    const shuffled = [...puzzle.choices];
-    shuffleArray(shuffled);
-    shuffled.forEach(choice => {
-      const btn = document.createElement('button');
-      btn.className = 'choice-btn';
-      btn.textContent = choice;
-      btn.onclick = () => checkChoice(choice, btn);
-      grid.appendChild(btn);
-    });
-  } else {
-    // Open text input
-    document.getElementById('choices-grid').style.display = 'none';
-    document.getElementById('text-input-area').style.display = 'flex';
-    const input = document.getElementById('answer-input');
-    input.value = '';
-    input.focus();
+function showPuz(i){
+  const p=S.puzzles[i];if(!p)return showResult();
+  S.cur=i;updDots();
+  document.getElementById('fb-area').innerHTML='';
+  document.getElementById('h-text').style.display='none';
+  document.getElementById('h-left').textContent=S.hTotal-S.hUsed;
+  document.getElementById('p-narr').textContent=p.narr;
+  document.getElementById('p-type').textContent='CÂU '+(i+1)+' — '+p.type;
+  document.getElementById('p-text').textContent=p.text;
+  // Chinese display
+  const zhEl=document.getElementById('p-zh'),pyEl=document.getElementById('p-py');
+  if(p.zh){zhEl.textContent=p.zh;zhEl.style.display='block';pyEl.textContent=p.py||'';pyEl.style.display=p.py&&p.py!=='?'?'block':'none'}
+  else{zhEl.style.display='none';pyEl.style.display='none'}
+  // Choices
+  if(p.choices&&p.choices.length){
+    const g=document.getElementById('c-grid');g.innerHTML='';g.style.display='grid';
+    document.getElementById('t-input').style.display='none';
+    const sh=[...p.choices];shuffle(sh);
+    sh.forEach(c=>{const b=document.createElement('button');b.className='cb';b.textContent=c;b.onclick=()=>checkC(c,b);g.appendChild(b)});
+  }else{
+    document.getElementById('c-grid').style.display='none';
+    document.getElementById('t-input').style.display='flex';
+    const inp=document.getElementById('a-input');inp.value='';inp.focus();
   }
-
-  // Enable hint
-  document.getElementById('hint-btn').disabled = (STATE.hintsUsed >= STATE.hintsTotal);
+  document.getElementById('h-btn').disabled=(S.hUsed>=S.hTotal);
 }
 
-// -------- ANSWER CHECKING --------
-function checkChoice(choice, btnEl) {
-  const puzzle = STATE.puzzles[STATE.currentPuzzle];
-  const isCorrect = choice.toUpperCase().trim() === puzzle.answer.toUpperCase().trim();
+function checkC(c,btn){
+  const p=S.puzzles[S.cur],ok=c.trim()===p.answer.trim();
+  document.querySelectorAll('.cb').forEach(b=>{b.style.pointerEvents='none';if(b.textContent.trim()===p.answer.trim())b.classList.add('ok')});
+  if(ok){btn.classList.add('ok');onOK()}else{btn.classList.add('no');onNO()}
+}
+function submit(){const v=document.getElementById('a-input').value.trim();if(!v)return;
+  const p=S.puzzles[S.cur];v.toUpperCase()===p.answer.toUpperCase()?onOK():onNO()}
 
-  // Disable all choices
-  document.querySelectorAll('.choice-btn').forEach(b => {
-    b.style.pointerEvents = 'none';
-    if (b.textContent.toUpperCase().trim() === puzzle.answer.toUpperCase().trim()) {
-      b.classList.add('correct');
-    }
-  });
+function onOK(){
+  S.streak++;const base=100,tb=Math.floor(S.tLeft/S.tTotal*50),sb=Math.min(S.streak*10,50),pts=Math.floor((base+tb+sb)*DIFF[S.diff].m);
+  S.score+=pts;updScore();
+  showFB(true,'✅ Đúng rồi! +'+pts+' điểm'+(S.streak>1?' (🔥 '+S.streak+' combo!)':''));
+  hap([30]);setTimeout(()=>showPuz(S.cur+1),1100);
+}
+function onNO(){
+  S.streak=0;S.score=Math.max(0,S.score-25);updScore();
+  const p=S.puzzles[S.cur];
+  showFB(false,'❌ Sai! Đáp án: '+p.answer+' · -25 điểm');
+  hap([50,30,50]);setTimeout(()=>showPuz(S.cur+1),1500);
+}
+function showFB(ok,t){document.getElementById('fb-area').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+t+'</div>'}
 
-  if (isCorrect) {
-    btnEl.classList.add('correct');
-    onCorrect();
-  } else {
-    btnEl.classList.add('wrong');
-    onWrong();
-  }
+function useHint(){
+  if(S.hUsed>=S.hTotal)return;S.hUsed++;
+  document.getElementById('h-text').textContent='💡 '+S.puzzles[S.cur].hint;
+  document.getElementById('h-text').style.display='block';
+  document.getElementById('h-left').textContent=S.hTotal-S.hUsed;
+  document.getElementById('s-hints').textContent=S.hTotal-S.hUsed;
+  document.getElementById('h-btn').disabled=(S.hUsed>=S.hTotal);
+  S.score=Math.max(0,S.score-15);updScore();toast('💡 Dùng gợi ý! -15 điểm');
 }
 
-function submitAnswer() {
-  const input = document.getElementById('answer-input');
-  const val = input.value.trim();
-  if (!val) return;
-
-  const puzzle = STATE.puzzles[STATE.currentPuzzle];
-  const isCorrect = val.toUpperCase() === puzzle.answer.toUpperCase();
-
-  if (isCorrect) {
-    onCorrect();
-  } else {
-    onWrong();
-  }
+function startT(){stopT();updT();S.tInt=setInterval(()=>{S.tLeft--;updT();if(S.tLeft<=0){stopT();showResult(true)}},1000)}
+function stopT(){if(S.tInt){clearInterval(S.tInt);S.tInt=null}}
+function updT(){
+  const m=Math.floor(S.tLeft/60),s=S.tLeft%60;
+  document.getElementById('s-timer').textContent=m+':'+String(s).padStart(2,'0');
+  const pct=S.tLeft/S.tTotal*100,fl=document.getElementById('t-fill');
+  fl.style.width=pct+'%';fl.className='fl'+(pct<20?' dng':'');
 }
 
-function onCorrect() {
-  STATE.streak++;
-  const baseScore = 100;
-  const timeBonus = Math.floor(STATE.timerLeft / STATE.timerTotal * 50);
-  const streakBonus = Math.min(STATE.streak * 10, 50);
-  const diffMulti = DIFF_CONFIG[STATE.difficulty].scoreMultiplier;
-  const points = Math.floor((baseScore + timeBonus + streakBonus) * diffMulti);
-  STATE.score += points;
+function buildDots(){const c=document.getElementById('r-prog');c.innerHTML='';S.puzzles.forEach((_,i)=>{const d=document.createElement('div');d.className='st'+(i===0?' cur':' lk');d.textContent=i+1;c.appendChild(d)})}
+function updDots(){document.querySelectorAll('.rp .st').forEach((d,i)=>{d.className='st';if(i<S.cur)d.classList.add('done');else if(i===S.cur)d.classList.add('cur');else d.classList.add('lk')})}
+function updScore(){document.getElementById('s-score').textContent=S.score;document.getElementById('s-streak').textContent=S.streak}
 
-  updateScoreUI();
-  showFeedback(true, `✅ Correct! +${points} points ${STATE.streak > 1 ? `(🔥 ${STATE.streak} streak!)` : ''}`);
-  haptic('correct');
-
-  setTimeout(() => {
-    showPuzzle(STATE.currentPuzzle + 1);
-  }, 1200);
+function showResult(timeout=false){
+  stopT();const el=Math.floor((Date.now()-S.t0)/1000),m=Math.floor(el/60),s=el%60;
+  const solved=S.cur,total=S.puzzles.length,pct=solved/total;
+  let stars=0;if(pct>=.4)stars=1;if(pct>=.7)stars=2;if(pct>=.9&&S.hUsed<=1)stars=3;
+  document.getElementById('res-trophy').textContent=['😢','🥉','🥈','🏆'][stars];
+  document.getElementById('res-title').textContent=timeout?'⏰ Hết giờ!':(pct>=.9?'🎉 Thoát Hiểm Thành Công!':'Gần thoát rồi!');
+  document.getElementById('res-sub').textContent='Giải được '+solved+'/'+total+' câu trong '+m+':'+String(s).padStart(2,'0');
+  document.getElementById('res-stars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
+  document.getElementById('res-score').textContent=S.score;
+  document.getElementById('res-time').textContent=m+':'+String(s).padStart(2,'0');
+  document.getElementById('res-hints').textContent=S.hUsed;
+  show('scr-result');
 }
 
-function onWrong() {
-  STATE.streak = 0;
-  STATE.score = Math.max(0, STATE.score - 25);
-  updateScoreUI();
-  showFeedback(false, '❌ Wrong! -25 points. Try the next puzzle...');
-  haptic('wrong');
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+function hap(p){if(navigator.vibrate)navigator.vibrate(p)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}}
 
-  setTimeout(() => {
-    showPuzzle(STATE.currentPuzzle + 1);
-  }, 1500);
-}
-
-function showFeedback(isCorrect, text) {
-  const area = document.getElementById('feedback-area');
-  area.innerHTML = `<div class="feedback-banner ${isCorrect ? 'correct' : 'wrong'}">${text}</div>`;
-}
-
-// -------- HINTS --------
-function useHint() {
-  if (STATE.hintsUsed >= STATE.hintsTotal) return;
-  STATE.hintsUsed++;
-  const puzzle = STATE.puzzles[STATE.currentPuzzle];
-  document.getElementById('hint-text').textContent = '💡 ' + puzzle.hint;
-  document.getElementById('hint-text').style.display = 'block';
-  document.getElementById('hints-left').textContent = STATE.hintsTotal - STATE.hintsUsed;
-  document.getElementById('stat-hints').textContent = STATE.hintsTotal - STATE.hintsUsed;
-  document.getElementById('hint-btn').disabled = (STATE.hintsUsed >= STATE.hintsTotal);
-  STATE.score = Math.max(0, STATE.score - 15);
-  updateScoreUI();
-  showToast('💡 Hint used! -15 points');
-}
-
-// -------- TIMER --------
-function startTimer() {
-  stopTimer();
-  updateTimerUI();
-  STATE.timerInterval = setInterval(() => {
-    STATE.timerLeft--;
-    updateTimerUI();
-    if (STATE.timerLeft <= 0) {
-      stopTimer();
-      showResult(true);
-    }
-  }, 1000);
-}
-
-function stopTimer() {
-  if (STATE.timerInterval) {
-    clearInterval(STATE.timerInterval);
-    STATE.timerInterval = null;
-  }
-}
-
-function updateTimerUI() {
-  const min = Math.floor(STATE.timerLeft / 60);
-  const sec = STATE.timerLeft % 60;
-  document.getElementById('stat-timer').textContent = `${min}:${sec.toString().padStart(2,'0')}`;
-  const pct = (STATE.timerLeft / STATE.timerTotal * 100);
-  const fill = document.getElementById('timer-fill');
-  fill.style.width = pct + '%';
-  fill.className = 'fill' + (pct < 20 ? ' danger' : '');
-}
-
-// -------- PROGRESS DOTS --------
-function buildProgressDots() {
-  const container = document.getElementById('room-progress');
-  container.innerHTML = '';
-  STATE.puzzles.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'step' + (i === 0 ? ' current' : ' locked');
-    dot.textContent = i + 1;
-    container.appendChild(dot);
-  });
-}
-
-function updateProgressDots() {
-  const dots = document.querySelectorAll('.room-progress .step');
-  dots.forEach((dot, i) => {
-    dot.className = 'step';
-    if (i < STATE.currentPuzzle) dot.classList.add('done');
-    else if (i === STATE.currentPuzzle) dot.classList.add('current');
-    else dot.classList.add('locked');
-  });
-}
-
-// -------- RESULT --------
-function showResult(timedOut = false) {
-  stopTimer();
-  const elapsed = Math.floor((Date.now() - STATE.startTime) / 1000);
-  const min = Math.floor(elapsed / 60);
-  const sec = elapsed % 60;
-
-  const solved = STATE.currentPuzzle;
-  const total = STATE.puzzles.length;
-  const pct = solved / total;
-
-  let stars = 0;
-  if (pct >= 0.4) stars = 1;
-  if (pct >= 0.7) stars = 2;
-  if (pct >= 0.9 && STATE.hintsUsed <= 1) stars = 3;
-
-  // Trophy
-  const trophies = ['😢', '🥉', '🥈', '🏆'];
-  document.getElementById('result-trophy').textContent = trophies[stars];
-  document.getElementById('result-title').textContent = timedOut ? 'Time\'s Up!' : (pct >= 0.9 ? 'Room Escaped! 🎉' : 'Almost There!');
-  document.getElementById('result-subtitle').textContent = `Solved ${solved}/${total} puzzles in ${min}:${sec.toString().padStart(2,'0')}`;
-  document.getElementById('result-stars').textContent = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
-  document.getElementById('result-score').textContent = STATE.score;
-  document.getElementById('result-time').textContent = `${min}:${sec.toString().padStart(2,'0')}`;
-  document.getElementById('result-hints').textContent = STATE.hintsUsed;
-
-  // Save best score
-  STATE.totalRoomsCleared++;
-  const entry = {
-    theme: STATE.theme,
-    difficulty: STATE.difficulty,
-    score: STATE.score,
-    time: `${min}:${sec.toString().padStart(2,'0')}`,
-    stars,
-    date: new Date().toLocaleDateString(),
-  };
-  STATE.bestScores.unshift(entry);
-  STATE.bestScores = STATE.bestScores.slice(0, 10);
-  localStorage.setItem('er_bestScores', JSON.stringify(STATE.bestScores));
-  renderLeaderboard();
-
-  showScreen('screen-result');
-}
-
-function renderLeaderboard() {
-  const list = document.getElementById('leaderboard-list');
-  list.innerHTML = '';
-  STATE.bestScores.forEach((s, i) => {
-    const theme = THEMES[s.theme];
-    const row = document.createElement('div');
-    row.className = 'lb-row' + (i === 0 ? ' me' : '');
-    row.innerHTML = `
-      <div class="lb-rank">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#'+(i+1)}</div>
-      <div class="lb-name">${theme ? theme.emoji : '🧩'} ${s.difficulty} · ${s.time} · ${'⭐'.repeat(s.stars)}</div>
-      <div class="lb-score">${s.score}</div>
-    `;
-    list.appendChild(row);
-  });
-}
-
-// -------- UI HELPERS --------
-function updateScoreUI() {
-  document.getElementById('stat-score').textContent = STATE.score;
-  document.getElementById('stat-streak').textContent = STATE.streak;
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
-}
-
-function haptic(type) {
-  if (!navigator.vibrate) return;
-  const patterns = {
-    correct: [30],
-    wrong: [50, 30, 50],
-    hint: [20],
-  };
-  navigator.vibrate(patterns[type] || [10]);
-}
-
-function shuffleArray(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-}
-
-// -------- KEYBOARD SHORTCUT --------
-document.getElementById('answer-input')?.addEventListener('keydown', e => {
-  if (e.key === 'Enter') submitAnswer();
-});
-
-// -------- PWA INSTALL --------
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  showToast('📱 Install as app for the best experience!');
-});
-
-// -------- INIT --------
-renderLeaderboard();
-// -------- SERVICE WORKER --------
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(() => {});
-}
-
-console.log('🧩 AI Escape Room v1.0 loaded!');
+document.getElementById('a-input').addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script>
 </body>
 </html>
